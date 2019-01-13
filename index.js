@@ -1,8 +1,8 @@
 import { Navigation } from "react-native-navigation";
 import { registerScreens } from "./src/ui";
-import App from './App';
 
 registerScreens();
+console.disableYellowBox = true; 
 
 Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({
