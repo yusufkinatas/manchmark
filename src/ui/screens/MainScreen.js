@@ -12,69 +12,35 @@ import {
   Linking
 } from 'react-native';
 import { store, _APP_SETTINGS, _SCREEN, ram } from "../../core";
-// import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class MainScreen extends Component {
 
   constructor(props) {
     super(props);
+
+    //for animations on androidw
     UIManager.setLayoutAnimationEnabledExperimental(true);
   }
 
   render() {
-    return(
-      <View style={{flex:1, alignItems: "center", justifyContent: "center"}} >
-        <Text>MAIN SCREEN</Text>
+    return (
+      <View style={styles.container} >
+        <Icon name="heart" color="red" size={30} />
+        <Text style={{ fontSize: 30, color: "black" }} >MAIN SCREEN</Text>
+        <Icon name="heart" color="red" size={30} />
       </View>
     )
   }
 }
-
-
 
 const colors = _APP_SETTINGS.colors;
 
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  cardContainer: {
-    flex: 1,
-    padding: 5,
-  },
-  cardTouchable: {
-    flex: 1,
-    backgroundColor: "#0008",
-    justifyContent: "center",
-    borderRadius: 15,
-  },
-  cardTitle: {
-    fontSize: 25,
-    color: "#ddd",
-    fontWeight: "bold",
-    zIndex: 5,
-    paddingLeft: 20,
-    paddingRight: 20,
-    textShadowColor: "black",
-    textShadowOffset: { height: 1, width: 1 },
-    textShadowRadius: 3,
-  },
-  cardIconContainer: {
-    width: 50,
-    height: 50,
-    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#0005",
-    marginRight: 10,
-    padding: 5,
-    borderRadius: 5,
+    justifyContent: "center"
   },
-  cardGradient: {
-    position: "absolute",
-    width: "100%",
-    height: "100%",
-    zIndex: 4,
-    borderRadius: 15
-  }
 
 })
