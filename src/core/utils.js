@@ -24,21 +24,6 @@ export const utils = {
     return array;
   },
 
-  increaseSavedNumbers: (pressTry = 0, quizTry = 0, pressCount = 0, answerCount = 0, trueAnswerCount = 0) => {
-    store.getItem("savedData").then(res => {
-      let parsedData = JSON.parse(res);
-      parsedData.numbers = {
-        pressTry: parsedData.numbers.pressTry + pressTry,
-        quizTry: parsedData.numbers.quizTry + quizTry,
-        pressCount: parsedData.numbers.pressCount + pressCount,
-        answerCount: parsedData.numbers.answerCount + answerCount,
-        trueAnswerCount: parsedData.numbers.trueAnswerCount + trueAnswerCount,
-      }
-      store.setItem("savedData", parsedData);
-    });
-
-  },
-
   alert: (title, message) => {
     Alert.alert(title, message);
   },
@@ -48,4 +33,4 @@ export const utils = {
     imageURL: (width, height) => `https://loremflickr.com/${width}/${height}/smile`,
   },
 
-}
+};

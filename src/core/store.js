@@ -7,26 +7,26 @@ const prefix = "STORE";
 export const store = {
 
   getItem: (key: string, cloneRam?: boolean = true) => {
-    
+
     if (typeof cloneRam == "undefined") cloneRam = true;
-    
+
     return new Promise((resolve, reject) => {
       AsyncStorage.getItem('@' + prefix + key)
-      .then(val => {
-        if (cloneRam) {           
-          ram.set(key, val);
-        }
-        if (!val) {
-          val = null;
-        }
-        resolve(val)
-      })
-      .catch(err => {             
-        resolve();
-      })
-      .finally(() => {
-        resolve();
-      });
+        .then(val => {
+          if (cloneRam) {
+            ram.set(key, val);
+          }
+          if (!val) {
+            val = null;
+          }
+          resolve(val)
+        })
+        .catch(err => {
+          resolve();
+        })
+        .finally(() => {
+          resolve();
+        });
     });
   },
 
@@ -37,7 +37,7 @@ export const store = {
     if (!val) {
       val = '';
     }
-    
+
     if (cloneRam) {
       ram.set(key, val);
     }

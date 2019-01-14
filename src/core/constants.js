@@ -10,16 +10,12 @@ export const _SCREEN = {
 }
 
 export const _APP_SETTINGS = {
-      colors: {
-        Primary: '#ecf0f1',
-        PrimaryDark: '#aaa',
-        Blue: '#007AFF',
-        LightBlue: '#5ac8fa',
-        Red: "#ff3b30",
-        Orange: "#ff9500",
-        Yellow: "#ffcc00",
-        Green: "#4cd964",
-        Purple: "#5856d6",  
-        Pink: "#ff2d55",
+    colors: {
+        primary: '#1db954',
+        secondary: '#212121',
+        secondaryDark: '#121212',
+        secondaryLight: '#535353',
+        secondaryLight2: '#b3b3b3',
+        secondaryLight3: "#ffffff"
     },
 };
