@@ -3,13 +3,17 @@ import { Navigation } from 'react-native-navigation';
 import MainScreen from './screens/MainScreen';
 
 //GAMES
-import ReactionSpeedScreen from './screens/Games/ReactionSpeedScreen';
+import ReactionSpeedGame from './screens/Games/ReactionSpeedGame';
+import NumberMemoryGame from './screens/Games/NumberMemoryGame';
+import TouchSpeedGame from './screens/Games/TouchSpeedGame';
 
 export function registerScreens() {
 
   Navigation.registerComponent('MainScreen', () => MainScreen);
 
   //GAMES
-  Navigation.registerComponent('ReactionSpeedScreen', () => ReactionSpeedScreen);
+  Navigation.registerComponent('ReactionSpeedGame', () => ReactionSpeedGame);
+  Navigation.registerComponent('ReactionSpeedGame', () => ReactionSpeedGame);
+  Navigation.registerComponent('TouchSpeedGame', () => TouchSpeedGame);
 
 }

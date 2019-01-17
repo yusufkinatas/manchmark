@@ -27,10 +27,13 @@ Navigation.events().registerAppLaunchedListener(() => {
     }
   });
 
-  Navigation.setDefaultOptions({
+  Navigation.setDefaultOptions({    
     topBar: {
       background: {
         color: colors.secondary,
+      },
+      title: {
+        color: colors.secondaryLight3,     
       },
       backButton: {
         color: colors.secondaryLight3,

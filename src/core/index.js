@@ -3,3 +3,4 @@ export { store } from './store';
 export { initialization } from './initialization';
 export { ram } from './ram';
 export { utils } from "./utils";
+export { nav } from "./nav";

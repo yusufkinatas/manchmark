@@ -12,10 +12,11 @@ import {
   UIManager,
   Linking
 } from 'react-native';
-import { store, _APP_SETTINGS, _SCREEN, ram } from "../../../core";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default class ReactionSpeedScreen extends Component {
+import { store, _APP_SETTINGS, _SCREEN, ram } from "../../../core";
+
+export default class NumberMemoryGame extends Component {
 
   constructor(props) {
     super(props);   
@@ -33,7 +34,7 @@ export default class ReactionSpeedScreen extends Component {
     return (
       <View style={styles.container} >
         <Icon name="heart" color="red" size={30} />
-        <Text style={{ fontSize: 20, color: colors.primary }} >REACTION SPEED SCREEN</Text>
+        <Text style={{ fontSize: 20, color: colors.primary }} >NUMBER MEMORY</Text>
         <Icon name="heart" color="red" size={30} />
       </View>
     );
