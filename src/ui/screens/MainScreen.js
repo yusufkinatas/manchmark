@@ -9,7 +9,6 @@ import {
   ImageBackground,
   Image,
   Alert,
-  UIManager,
   Linking
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -21,9 +20,6 @@ export default class MainScreen extends Component {
 
   constructor(props) {
     super(props);
-    //for animations on android
-    UIManager.setLayoutAnimationEnabledExperimental(true);
-
   }
 
   pushScreen = (screen) => {
@@ -35,7 +31,6 @@ export default class MainScreen extends Component {
       <View style={styles.container} >
         <CustomButton text="Reaction Speed" onPress={() => this.pushScreen("ReactionSpeedGame")} />
         <CustomButton text="Touch Speed" onPress={() => this.pushScreen("TouchSpeedGame")} />
-        <CustomButton text="Number Memory" onPress={() => this.pushScreen("NumberMemoryGame")} />
       </View>
     )
   }

@@ -9,7 +9,6 @@ import {
   ImageBackground,
   Image,
   Alert,
-  UIManager,
   Linking
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';

@@ -9,7 +9,6 @@ import {
   ImageBackground,
   Image,
   Alert,
-  UIManager,
   Linking,
   LayoutAnimation,
 } from 'react-native';
@@ -17,16 +16,20 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { store, _APP_SETTINGS, _SCREEN, ram } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
+import CounterBar from "../../../components/CounterBar";
+import ProgressBar from "../../../components/ProgressBar";
 
-const TIMEOUT_SECONDS = 5;
 
-export default class NumberMemoryGame extends Component {
+const TIMEOUT_MS = 10000;
+const TICK_FREQUENCY_MS = 1000;
+
+export default class TouchSpeedGame extends Component {
 
   static options(passProps) {
     return {
       topBar: {
         title: {
-          text: 'Number Memory',
+          text: 'Touch Speed',
         },
       }
     };
@@ -37,8 +40,9 @@ export default class NumberMemoryGame extends Component {
 
     this.state = {
       pressCounter: 0,
-      gameStatus: "paused", // active - completed - paused
-      remainingSeconds: TIMEOUT_SECONDS,
+      gameStatus: "paused", // active - finished - paused
+      remainingTime: TIMEOUT_MS,
+      progress: 1,
     };
   }
 
@@ -47,6 +51,9 @@ export default class NumberMemoryGame extends Component {
   }
 
   componentWillMount() {
+    setInterval(() => {
+      this.setState({ remainingTime: this.state.remainingTime - TICK_FREQUENCY_MS })
+    }, TICK_FREQUENCY_MS);
   }
 
   componentWillUnmount() {
@@ -59,16 +66,10 @@ export default class NumberMemoryGame extends Component {
 
   startGame = () => {
     this.setState({ gameStatus: "active" });
-    setInterval(this.tick, 1000);
-  }
+    setTimeout(() => {
+      this.setState({gameStatus: "finished"})
+    }, TIMEOUT_MS)
 
-  tick = () => {
-    this.setState({ remainingSeconds: this.state.remainingSeconds - 1 }, () => {
-      if (this.state.remainingSeconds == 0 && this.state.gameStatus == "active") {
-        clearInterval(this.tick);
-        this.setState({ gameStatus: "completed" });
-      }
-    });
   }
 
   pressed = () => {
@@ -77,12 +78,13 @@ export default class NumberMemoryGame extends Component {
   }
 
   render() {
-    let timePercentage = this.state.remainingSeconds / TIMEOUT_SECONDS;
+    let timePercentage = this.state.remainingTime / TIMEOUT_MS;
     return (
       <View style={styles.container} >
         {
           this.state.gameStatus == "paused" &&
           <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
+
             <View style={{ paddingBottom: 20 }} >
               <Text style={styles.bigText} >Press the screen as fast as you can</Text>
             </View>
@@ -92,34 +94,18 @@ export default class NumberMemoryGame extends Component {
 
         {
           this.state.gameStatus == "active" &&
-          <View style={{ flex: 1 }}>
+          <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
             <TouchableOpacity activeOpacity={1} onPressIn={this.pressed} style={styles.touchableArea} />
-
-            <View style={{ backgroundColor: "#0006", alignSelf: "center", width: "90%", borderRadius: 15, overflow: "hidden" }} >
-              <Text style={[styles.bigText, { fontSize: 20, paddingVertical: 10 }]} >{`Kalan Süre: ${this.state.remainingSeconds} sn`}</Text>
-              <View
-                style={{
-                  position: "absolute",
-                  zIndex: -1,
-                  height: "100%",
-                  width: `${(timePercentage) * 100}%`,
-                  backgroundColor: `rgba(${255 - (timePercentage * 255)},${timePercentage * 255},0,0.5)`,
-                }}
-              />
-            </View>
-
-            <View style={{ flex: 1, justifyContent: "center" }} >
-              <Text style={styles.bigText} >{this.state.pressCounter}</Text>
-            </View>
-
+            <Text style={{ fontSize: 70, color: colors.primary, fontWeight: "bold" }} >{this.state.pressCounter}</Text>
+            <CounterBar time={TIMEOUT_MS} width={_SCREEN.width / 2} color={colors.primary} />
           </View>
         }
 
         {
-          this.state.gameStatus == "completed" &&
+          this.state.gameStatus == "finished" &&
           <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
-            <Text style={styles.bigText} >Tebrikler!</Text>
-            <Text style={styles.bigText} >{`${TIMEOUT_SECONDS} saniyede ${this.state.pressCounter} defa dokundunuz`}</Text>
+            <Text style={styles.bigText} >Congratulations!</Text>
+            <Text style={styles.bigText} >{`You have pressed the screen ${this.state.pressCounter} times in ${TIMEOUT_MS/1000} seconds`}</Text>
           </View>
         }
       </View>
@@ -153,5 +139,6 @@ var styles = StyleSheet.create({
     fontSize: 20,
     color: colors.secondaryLight3,
     textAlign: "center",
+    paddingHorizontal: 20
   }
 })

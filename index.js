@@ -1,10 +1,13 @@
 import { Navigation } from "react-native-navigation";
+import {UIManager} from "react-native";
+
 import { registerScreens } from "./src/ui";
 import { _APP_SETTINGS } from "./src/core";
 
 var colors = _APP_SETTINGS.colors;
 
 registerScreens();
+UIManager.setLayoutAnimationEnabledExperimental(true);
 console.disableYellowBox = true;
 
 Navigation.events().registerAppLaunchedListener(() => {
@@ -15,6 +18,7 @@ Navigation.events().registerAppLaunchedListener(() => {
           {
             component: {
               name: "MainScreen",
+              // name: "TouchSpeedGame",
               options: {
                 topBar: {
                   height: 0
