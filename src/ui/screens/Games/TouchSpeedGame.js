@@ -11,6 +11,7 @@ import {
   Alert,
   Linking,
   LayoutAnimation,
+  PanResponder
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -37,6 +38,13 @@ export default class TouchSpeedGame extends Component {
 
   constructor(props) {
     super(props);
+
+    this.panResponder = PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderStart: (e, gestureState) => {
+        this.pressed();
+      }
+    });
 
     this.state = {
       pressCounter: 0,
@@ -67,7 +75,7 @@ export default class TouchSpeedGame extends Component {
   startGame = () => {
     this.setState({ gameStatus: "active" });
     setTimeout(() => {
-      this.setState({gameStatus: "finished"})
+      this.setState({ gameStatus: "finished" })
     }, TIMEOUT_MS)
 
   }
@@ -94,9 +102,18 @@ export default class TouchSpeedGame extends Component {
 
         {
           this.state.gameStatus == "active" &&
-          <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-            <TouchableOpacity activeOpacity={1} onPressIn={this.pressed} style={styles.touchableArea} />
-            <Text style={{ fontSize: 70, color: colors.primary, fontWeight: "bold" }} >{this.state.pressCounter}</Text>
+          <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
+            <View
+              {...this.panResponder.panHandlers}
+              style={styles.touchableArea}
+            />
+            <Text style={{
+              fontSize: 70,
+              color: colors.primary,
+              fontWeight: "bold",
+              width: _SCREEN.width,
+              textAlign: "center"
+            }} >{this.state.pressCounter}</Text>
             <CounterBar time={TIMEOUT_MS} width={_SCREEN.width / 2} color={colors.primary} />
           </View>
         }
@@ -104,10 +121,10 @@ export default class TouchSpeedGame extends Component {
         {
           this.state.gameStatus == "finished" &&
           <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
-            <Text style={styles.bigText} >Congratulations!</Text>
-            <Text style={styles.bigText} >{`You have pressed the screen ${this.state.pressCounter} times in ${TIMEOUT_MS/1000} seconds`}</Text>
+            <Text style={styles.bigText} >{`You have pressed the screen ${this.state.pressCounter} times in ${TIMEOUT_MS / 1000} seconds`}</Text>
           </View>
         }
+
       </View>
     );
   }
@@ -129,7 +146,6 @@ var styles = StyleSheet.create({
     top: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "transparent"
   },
   text: {
     fontSize: 15,

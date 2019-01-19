@@ -18,7 +18,7 @@ Navigation.events().registerAppLaunchedListener(() => {
           {
             component: {
               name: "MainScreen",
-              // name: "TouchSpeedGame",
+              // name: "PlaygroundScreen",
               options: {
                 topBar: {
                   height: 0

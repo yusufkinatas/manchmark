@@ -23,7 +23,8 @@ export default class CounterBar extends Component {
     Animated.timing(this.width, {
       duration: this.props.time,
       toValue: 1,
-      useNativeDriver: true
+      useNativeDriver: true,
+      easing: Easing.linear,
     }).start();
   }
 
