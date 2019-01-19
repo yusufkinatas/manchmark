@@ -34,7 +34,7 @@ export default class MainScreen extends Component {
         <CustomButton text="Reaction Speed" onPress={() => this.pushScreen("ReactionSpeedGame")} />
         <CustomButton text="√ Touch Speed √" onPress={() => this.pushScreen("TouchSpeedGame")} />
         <CustomButton text="Typing Speed" onPress={() => this.pushScreen("TypingSpeedGame")} />
-        <CustomButton text="Verbal Memory" onPress={() => this.pushScreen("VerbalMemoryGame")} />
+        <CustomButton text="√ Verbal Memory √" onPress={() => this.pushScreen("VerbalMemoryGame")} />
         <CustomButton text="Visual Memory" onPress={() => this.pushScreen("VisualMemoryGame")} />
       </View>
     )

@@ -15,7 +15,7 @@ import VisualMemoryGame from './screens/Games/VisualMemoryGame';
 export function registerScreens() {
 
   Navigation.registerComponent('MainScreen', () => MainScreen);
-  Navigation.registerComponent('PlaygroundScreen', () => PlaygroundScreen);
+  Navigation.registerComponent('Playground', () => PlaygroundScreen);
 
   //GAMES
   Navigation.registerComponent('CalculationSpeedGame', () => CalculationSpeedGame);

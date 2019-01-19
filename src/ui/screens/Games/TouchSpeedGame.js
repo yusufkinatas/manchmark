@@ -22,7 +22,6 @@ import ProgressBar from "../../../components/ProgressBar";
 
 
 const TIMEOUT_MS = 10000;
-const TICK_FREQUENCY_MS = 1000;
 
 export default class TouchSpeedGame extends Component {
 
@@ -48,7 +47,7 @@ export default class TouchSpeedGame extends Component {
 
     this.state = {
       pressCounter: 0,
-      gameStatus: "paused", // active - finished - paused
+      gameStatus: "info", // info - active - finished
       remainingTime: TIMEOUT_MS,
       progress: 1,
     };
@@ -59,9 +58,6 @@ export default class TouchSpeedGame extends Component {
   }
 
   componentWillMount() {
-    setInterval(() => {
-      this.setState({ remainingTime: this.state.remainingTime - TICK_FREQUENCY_MS })
-    }, TICK_FREQUENCY_MS);
   }
 
   componentWillUnmount() {
@@ -75,9 +71,48 @@ export default class TouchSpeedGame extends Component {
   startGame = () => {
     this.setState({ gameStatus: "active" });
     setTimeout(() => {
-      this.setState({ gameStatus: "finished" })
+      this.setState({ gameStatus: "finished" });
     }, TIMEOUT_MS)
 
+  }
+
+  renderInfo = () => {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
+
+        <View style={{ paddingBottom: 20 }} >
+          <Text style={styles.bigText} >Press the screen as fast as you can</Text>
+        </View>
+        <CustomButton text="Start" onPress={this.startGame} />
+      </View>
+    );
+  }
+
+  renderGame = () => {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
+        <View
+          {...this.panResponder.panHandlers}
+          style={styles.touchableArea}
+        />
+        <Text style={{
+          fontSize: 70,
+          color: colors.primary,
+          fontWeight: "bold",
+          width: _SCREEN.width,
+          textAlign: "center"
+        }} >{this.state.pressCounter}</Text>
+        <CounterBar time={TIMEOUT_MS} width={_SCREEN.width / 2} color={colors.primary} />
+      </View>
+    );
+  }
+
+  renderFinish = () => {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
+        <Text style={styles.bigText} >{`You have pressed the screen ${this.state.pressCounter} times in ${TIMEOUT_MS / 1000} seconds`}</Text>
+      </View>
+    );
   }
 
   pressed = () => {
@@ -86,44 +121,14 @@ export default class TouchSpeedGame extends Component {
   }
 
   render() {
-    let timePercentage = this.state.remainingTime / TIMEOUT_MS;
     return (
       <View style={styles.container} >
-        {
-          this.state.gameStatus == "paused" &&
-          <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
 
-            <View style={{ paddingBottom: 20 }} >
-              <Text style={styles.bigText} >Press the screen as fast as you can</Text>
-            </View>
-            <CustomButton text="Start" onPress={(this.startGame)} />
-          </View>
-        }
+        {this.state.gameStatus == "info" && this.renderInfo()}
 
-        {
-          this.state.gameStatus == "active" &&
-          <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
-            <View
-              {...this.panResponder.panHandlers}
-              style={styles.touchableArea}
-            />
-            <Text style={{
-              fontSize: 70,
-              color: colors.primary,
-              fontWeight: "bold",
-              width: _SCREEN.width,
-              textAlign: "center"
-            }} >{this.state.pressCounter}</Text>
-            <CounterBar time={TIMEOUT_MS} width={_SCREEN.width / 2} color={colors.primary} />
-          </View>
-        }
+        {this.state.gameStatus == "active" && this.renderGame()}
 
-        {
-          this.state.gameStatus == "finished" &&
-          <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
-            <Text style={styles.bigText} >{`You have pressed the screen ${this.state.pressCounter} times in ${TIMEOUT_MS / 1000} seconds`}</Text>
-          </View>
-        }
+        {this.state.gameStatus == "finished" && this.renderFinish()}
 
       </View>
     );
