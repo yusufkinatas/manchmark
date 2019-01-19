@@ -1,0 +1,5 @@
+VERBAL MEMORY GAME
+* kelimelerin değişmesi animasyonlu olmalı
+
+TOUCH SPEED GAME
+* progressbar tasarımı değişmeli
