@@ -56,23 +56,15 @@ Navigation.events().registerAppLaunchedListener(() => {
           alpha: {
             from: 0,
             to: 1,
-            duration: 500,
+            duration: 250,
             interpolation: 'accelerate'
-          }
-        },
-        bottomTabs: {
-          alpha: {
-            from: 0,
-            to: 1,
-            duration: 500,
-            interpolation: 'decelerate'
           }
         },
         content: {
           alpha: {
             from: 0,
             to: 1,
-            duration: 500,
+            duration: 250,
             interpolation: 'accelerate'
           }
         }
@@ -82,31 +74,15 @@ Navigation.events().registerAppLaunchedListener(() => {
           alpha: {
             from: 1,
             to: 0,
-            duration: 500,
+            duration: 250,
             interpolation: 'accelerate'
-          }
-        },
-        bottomTabs: {
-          alpha: {
-            from: 1,
-            to: 0,
-            duration: 500,
-            interpolation: 'accelerate'
-          }
-        },
-        bottomTabs: {
-          alpha: {
-            from: 1,
-            to: 0,
-            duration: 500,
-            interpolation: 'decelerate'
           }
         },
         content: {
           alpha: {
             from: 1,
             to: 0,
-            duration: 500,
+            duration: 250,
             interpolation: 'decelerate'
           }
         }

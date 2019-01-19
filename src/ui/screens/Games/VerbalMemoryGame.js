@@ -15,13 +15,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { store, _APP_SETTINGS, _SCREEN, ram } from "../../../core";
 
-export default class ReactionSpeedGame extends Component {
+export default class VerbalMemoryGame extends Component {
 
   static options(passProps) {
     return {
       topBar: {
         title: {
-          text: 'Reaction Speed',
+          text: 'Verbal Memory',
         },
       }
     };
@@ -43,7 +43,7 @@ export default class ReactionSpeedGame extends Component {
     return (
       <View style={styles.container} >
         <Icon name="heart" color="red" size={30} />
-        <Text style={{ fontSize: 20, color: colors.primary }} >REACTION SPEED SCREEN</Text>
+        <Text style={{ fontSize: 20, color: colors.primary }} >Verbal Memory</Text>
         <Icon name="heart" color="red" size={30} />
       </View>
     );

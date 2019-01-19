@@ -55,7 +55,7 @@ export default class TouchSpeedGame extends Component {
   }
 
   componentWillUpdate() {
-    LayoutAnimation.spring();
+    // LayoutAnimation.spring();
   }
 
   componentWillMount() {
