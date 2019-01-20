@@ -7,12 +7,13 @@ import {
   Animated,
   Easing,
 } from "react-native";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { store, _APP_SETTINGS, _SCREEN, ram, nav } from "../core"
 
 export default class CounterBar extends Component {
+
 
   constructor(props) {
     super(props);
@@ -47,18 +48,21 @@ export default class CounterBar extends Component {
   }
 }
 
-CounterBar.propTypes = {
-  time: PropTypes.number.isRequired,
+CounterBar.propsTypes = {
+  time: PropTypes.number,
   width: PropTypes.number,
   height: PropTypes.number,
   color: PropTypes.string,
-};
+}
+
+
 CounterBar.defaultProps = {
   time: 5000,
   width: 200,
   height: 40,
   color: "gray",
-};
+}
+
 
 const colors = _APP_SETTINGS.colors;
 var styles = StyleSheet.create({

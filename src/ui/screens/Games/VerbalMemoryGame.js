@@ -16,6 +16,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { store, _APP_SETTINGS, _SCREEN, ram, utils } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
+import SwappingText from "../../../components/SwappingText";
 const WORDS = require("../../../res/wordsEn.json").wordsEn;
 
 export default class VerbalMemoryGame extends Component {
@@ -75,8 +76,6 @@ export default class VerbalMemoryGame extends Component {
 
   onAnswer = (answer) => {
     let usedBefore = this.state.score == 0 ? false : this.usedWords.indexOf(this.state.word) != -1;
-    console.log("usedWords", this.usedWords);
-    console.log("usedBefore", usedBefore);
     if ((answer == "seen" && !usedBefore) || (answer == "new" && usedBefore)) {
       this.setState({ gameStatus: "finished" });
     }
@@ -104,7 +103,9 @@ export default class VerbalMemoryGame extends Component {
   renderGame = () => {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text style={styles.wordText} >{this.state.word && this.state.word[0].toUpperCase()}{this.state.word.slice(1)}</Text>
+        <SwappingText style={styles.wordText}  >
+          {this.state.word && this.state.word[0].toUpperCase()}{this.state.word.slice(1)}
+        </SwappingText>
         <View style={styles.answerButtonsContainer} >
           <TouchableOpacity onPress={() => this.onAnswer("seen")} style={styles.answerButton} >
             <Text style={styles.answerText} >SEEN</Text>

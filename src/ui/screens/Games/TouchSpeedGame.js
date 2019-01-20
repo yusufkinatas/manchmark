@@ -18,7 +18,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { store, _APP_SETTINGS, _SCREEN, ram } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
 import CounterBar from "../../../components/CounterBar";
-import ProgressBar from "../../../components/ProgressBar";
+import BouncingText from "../../../components/BouncingText";
 
 
 const TIMEOUT_MS = 10000;
@@ -95,13 +95,7 @@ export default class TouchSpeedGame extends Component {
           {...this.panResponder.panHandlers}
           style={styles.touchableArea}
         />
-        <Text style={{
-          fontSize: 70,
-          color: colors.primary,
-          fontWeight: "bold",
-          width: _SCREEN.width,
-          textAlign: "center"
-        }} >{this.state.pressCounter}</Text>
+        <BouncingText style={styles.pressCountText} >{this.state.pressCounter}</BouncingText>
         <CounterBar time={TIMEOUT_MS} width={_SCREEN.width / 2} color={colors.primary} />
       </View>
     );
@@ -161,5 +155,12 @@ var styles = StyleSheet.create({
     color: colors.secondaryLight3,
     textAlign: "center",
     paddingHorizontal: 20
+  },
+  pressCountText: {
+    fontSize: 70,
+    color: colors.primary,
+    fontWeight: "bold",
+    width: _SCREEN.width,
+    textAlign: "center"
   }
 })
