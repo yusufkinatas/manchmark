@@ -61,18 +61,18 @@ export default class NumberMemoryGame extends Component {
     for (let i = 0; i < this.numberLength; i++) {
       number += utils.randomBetween(1, 9);
     }
-    this.setState({ number });
+    this.setState({ number, isGuessing: false, userAnswer: "" });
     setTimeout(() => {
       this.setState({ isGuessing: true });
-    }, 1000);
+    }, (this.numberLength + 1) * 1000);
   }
 
   onAnswer = () => {
-    if(this.state.userAnswer == this.state.number) {
-      alert("correct")
+    if (this.state.userAnswer == this.state.number) {
+      this.showNewNumber();
     }
     else {
-      alert("wrong")
+      this.setState({ gameStatus: "finished" });
     }
   }
 
@@ -126,15 +126,12 @@ export default class NumberMemoryGame extends Component {
               keyboardType="numeric"
               value={this.state.userAnswer}
             />
-
-
-
             <CustomButton text="GUESS" onPress={this.onAnswer} />
           </View>
           :
           <View style={{ justifyContent: "center", alignItems: "center" }} >
             <Text style={styles.numberText} >{this.state.number}</Text>
-            <CounterBar time={1000} width={_SCREEN.width / 2} color={colors.primary} />
+            <CounterBar time={(this.numberLength + 1) * 1000} width={_SCREEN.width / 2} color={colors.primary} />
           </View>
         }
 
