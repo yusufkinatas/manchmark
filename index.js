@@ -18,7 +18,7 @@ Navigation.events().registerAppLaunchedListener(() => {
           {
             component: {
               name: "MainScreen",
-              // name: "Playground",
+              // name: "NumberMemoryGame",
               options: {
                 topBar: {
                   height: 0
