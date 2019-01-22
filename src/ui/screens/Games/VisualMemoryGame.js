@@ -143,7 +143,7 @@ export default class VisualMemoryGame extends Component {
   }
 
   onSquarePress = (index) => {
-    if (this.isAnimating || this.state.squares[index].pushed) {
+    if (this.isAnimating || this.state.squares[index].pushed || this.state.lives <= 0) {
       return;
     }
     this.state.squares[index].pushed = true;
@@ -232,7 +232,6 @@ export default class VisualMemoryGame extends Component {
         >
           {this.renderSquares()}
         </View>
-        <CustomButton text="TEST" onPress={() => { this.startNextLevel() }} />
       </View>
     );
   }
