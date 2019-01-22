@@ -29,13 +29,13 @@ export default class MainScreen extends Component {
   render() {
     return (
       <View style={styles.container} >
-        <CustomButton text="Calculation Speed" onPress={() => this.pushScreen("CalculationSpeedGame")} />
+        <CustomButton text="Calculation Speed -> WIP" onPress={() => this.pushScreen("CalculationSpeedGame")} />
         <CustomButton text="√ Number Memory √" onPress={() => this.pushScreen("NumberMemoryGame")} />
         <CustomButton text="Reaction Speed" onPress={() => this.pushScreen("ReactionSpeedGame")} />
         <CustomButton text="√ Touch Speed √" onPress={() => this.pushScreen("TouchSpeedGame")} />
         <CustomButton text="Typing Speed" onPress={() => this.pushScreen("TypingSpeedGame")} />
         <CustomButton text="√ Verbal Memory √" onPress={() => this.pushScreen("VerbalMemoryGame")} />
-        <CustomButton text="Visual Memory" onPress={() => this.pushScreen("VisualMemoryGame")} />
+        <CustomButton text="√ Visual Memory √" onPress={() => this.pushScreen("VisualMemoryGame")} />
       </View>
     )
   }

@@ -6,6 +6,7 @@ import {
   Easing,
 } from "react-native";
 import PropTypes from "prop-types";
+import _ from "lodash";
 
 export default class BouncingText extends Component {
 
@@ -16,7 +17,7 @@ export default class BouncingText extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.children != this.props.children) {
+    if (!_.isEqual(nextProps.children, this.props.children)) {
       this.bounceText();
     }
   }

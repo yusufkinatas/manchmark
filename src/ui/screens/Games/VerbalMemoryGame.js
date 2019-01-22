@@ -69,6 +69,10 @@ export default class VerbalMemoryGame extends Component {
     this.setState({ word });
   }
 
+  endGame = () => {
+    this.setState({ gameStatus: "finished" });
+  }
+
   startGame = () => {
     this.setState({ gameStatus: "active" });
     this.showAWord();
@@ -77,7 +81,7 @@ export default class VerbalMemoryGame extends Component {
   onAnswer = (answer) => {
     let usedBefore = this.state.score == 0 ? false : this.usedWords.indexOf(this.state.word) != -1;
     if ((answer == "seen" && !usedBefore) || (answer == "new" && usedBefore)) {
-      this.setState({ gameStatus: "finished" });
+      this.endGame();
     }
     else {
       if (!usedBefore) {

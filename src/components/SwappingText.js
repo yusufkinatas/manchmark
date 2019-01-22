@@ -5,6 +5,7 @@ import {
   Animated,
   Easing,
 } from "react-native";
+import _ from "lodash";
 import PropTypes from "prop-types";
 
 export default class SwappingText extends Component {
@@ -22,7 +23,7 @@ export default class SwappingText extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.children != this.props.children) {
+    if (!_.isEqual(nextProps.children, this.props.children)) {
       this.popText(nextProps.children);
     }
   }
@@ -40,7 +41,6 @@ export default class SwappingText extends Component {
       isAnimating: true
     }, () => {
       if (this.state.floatingTexts.length > 0) {
-        console.log(this.state.floatingTexts.find(t => t.id == id));
         Animated.timing(this.state.floatingTexts.find(t => t.id == id).anim, {
           duration: this.props.animationDuration,
           toValue: 1,
@@ -56,7 +56,6 @@ export default class SwappingText extends Component {
   }
 
   render() {
-    console.log(this.state.floatingTexts);
     var textStyle = { fontSize: 70, color: "black", fontWeight: "bold" };
     return (
       this.state.isAnimating ?

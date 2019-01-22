@@ -55,6 +55,10 @@ export default class NumberMemoryGame extends Component {
     this.showNewNumber();
   }
 
+  endGame = () => {
+    this.setState({ gameStatus: "finished" });
+  }
+
   showNewNumber = () => {
     this.numberLength++;
     var number = "";
@@ -72,7 +76,7 @@ export default class NumberMemoryGame extends Component {
       this.showNewNumber();
     }
     else {
-      this.setState({ gameStatus: "finished" });
+      this.endGame();
     }
   }
 

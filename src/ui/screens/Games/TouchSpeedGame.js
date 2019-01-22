@@ -68,10 +68,14 @@ export default class TouchSpeedGame extends Component {
     return this.state.gameStatus == "active" ? true : false;
   }
 
+  endGame = () => {
+    this.setState({ gameStatus: "finished" });
+  }
+
   startGame = () => {
     this.setState({ gameStatus: "active" });
     setTimeout(() => {
-      this.setState({ gameStatus: "finished" });
+      this.endGame();
     }, TIMEOUT_MS)
 
   }

@@ -11,7 +11,8 @@ import {
   Alert,
   Linking,
   Animated,
-  Easing
+  Easing,
+  FlatList
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -32,10 +33,10 @@ export default class PlaygroundScreen extends Component {
   pressed = () => {
     this.setState({ pressCounter: this.state.pressCounter + 1 });
     Animated.timing(this.textAnim, {
-      duration: 500,
+      duration: 250,
       toValue: 1,
       useNativeDriver: true,
-      easing: Easing.ease,
+      // easing: Easing.ease,
     }).start(() => {
       setTimeout(() => { this.textAnim.setValue(0) }, 250);
     });
@@ -47,26 +48,25 @@ export default class PlaygroundScreen extends Component {
         <TouchableOpacity activeOpacity={1} style={styles.touchableArea} onPress={this.pressed} />
         <Animated.View
           style={{
-            scaleX: this.textAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [1, 0.5]
-            }),
-            scaleY: this.textAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [1, 0.5]
-            }),
-            translateY: this.textAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [0, -100]
-            }),
-            opacity: this.textAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [1, 0]
-            })
+            width: 100,
+            heigth: 100,
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 25,
+            transform: [{
+              rotateX: this.textAnim.interpolate({
+                inputRange: [0,1],
+                outputRange: ["0deg", "360deg"]
+              })
+            }],
+            backgroundColor: "#9b59b6",
+            borderWidth: 5,
+            borderColor: "#8e44ad",
           }}
         >
           <Text style={{ fontSize: 70, color: "black", fontWeight: "bold" }} >{this.state.pressCounter}</Text>
         </Animated.View>
+
       </View>
     );
   }
