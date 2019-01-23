@@ -3,11 +3,15 @@ import { store } from "./store";
 export const utils = {
 
   randomBetween: (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1) + min)
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  },
+
+  randomDoubleBetween: (min, max) => {
+    return Math.round((Math.random() * (max - min) + min) * 1000 ) / 1000;
   },
 
   increaseOrDecrease: (number, max) => {
-    return (Math.random() < 0.5) ? (number + utils.randomBetween(1, max)) : (number - utils.randomBetween(1, max))
+    return (Math.random() < 0.5) ? (number + utils.randomBetween(1, max)) : (number - utils.randomBetween(1, max));
   },
 
   shuffleArray: (array) => {
