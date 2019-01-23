@@ -11,7 +11,6 @@ import {
   Alert,
   Linking,
   LayoutAnimation,
-  PanResponder
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -37,13 +36,6 @@ export default class TouchSpeedGame extends Component {
 
   constructor(props) {
     super(props);
-
-    this.panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onPanResponderStart: (e, gestureState) => {
-        this.pressed();
-      }
-    });
 
     this.state = {
       pressCounter: 0,
@@ -95,10 +87,7 @@ export default class TouchSpeedGame extends Component {
   renderGame = () => {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
-        <View
-          {...this.panResponder.panHandlers}
-          style={styles.touchableArea}
-        />
+        <TouchableOpacity activeOpacity={1} onPressIn={this.pressed} style={styles.touchableArea} />
         <BouncingText style={styles.pressCountText} >{this.state.pressCounter}</BouncingText>
         <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={colors.primary} />
       </View>
