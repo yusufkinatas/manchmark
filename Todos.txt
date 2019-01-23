@@ -1,5 +1,2 @@
-VERBAL MEMORY GAME
-* aynı kelime iki kere art arda çıkmamalı
-
 TOUCH SPEED GAME
 * progressbar tasarımı değişmeli

@@ -17,6 +17,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { store, _APP_SETTINGS, _SCREEN, ram } from "../../core";
+import CounterBar from "../../components/CounterBar";
 
 export default class PlaygroundScreen extends Component {
 
@@ -44,28 +45,9 @@ export default class PlaygroundScreen extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={styles.container}>
         <TouchableOpacity activeOpacity={1} style={styles.touchableArea} onPress={this.pressed} />
-        <Animated.View
-          style={{
-            width: 100,
-            heigth: 100,
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 25,
-            transform: [{
-              rotateX: this.textAnim.interpolate({
-                inputRange: [0,1],
-                outputRange: ["0deg", "360deg"]
-              })
-            }],
-            backgroundColor: "#9b59b6",
-            borderWidth: 5,
-            borderColor: "#8e44ad",
-          }}
-        >
-          <Text style={{ fontSize: 70, color: "black", fontWeight: "bold" }} >{this.state.pressCounter}</Text>
-        </Animated.View>
+        <CounterBar time={5000} width={_SCREEN.width / 2} color={colors.primary} />
 
       </View>
     );
@@ -88,6 +70,5 @@ var styles = StyleSheet.create({
     top: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "gray"
   },
 })

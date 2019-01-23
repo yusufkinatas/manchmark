@@ -60,11 +60,13 @@ export default class VerbalMemoryGame extends Component {
 
   showAWord = () => {
     let word;
-    if (this.state.score == 0 || (this.usedWords.length > 7 ? Math.random() > 0.5 : Math.random() > 0.35)) {
+    if (this.state.score < 1 || (this.usedWords.length > 7 ? Math.random() > 0.5 : Math.random() > 0.35)) {
       word = this.generateNewWord();
     }
     else {
-      word = this.usedWords[utils.randomBetween(0, this.usedWords.length - 1)];
+      do {
+        word = this.usedWords[utils.randomBetween(0, this.usedWords.length - 1)];
+      } while (word == this.state.word);
     }
     this.setState({ word });
   }

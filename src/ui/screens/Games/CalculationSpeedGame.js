@@ -21,7 +21,7 @@ import CustomButton from "../../../components/CustomButton";
 import SwappingText from "../../../components/SwappingText";
 import BouncingText from "../../../components/BouncingText";
 
-const TIMEOUT_MS = 20000;
+const TIMEOUT_MS = 30000;
 const QUESTION_FUNCTIONS = [
   (x, y, z) => ({
     text: `${x} + ${y} - ${z} = ?`,
@@ -70,7 +70,6 @@ export default class CalculationSpeedGame extends Component {
 
   componentWillMount() {
     console.log("componentWillMount");
-    this.startGame();
   }
 
   componentWillUnmount() {
@@ -103,14 +102,17 @@ export default class CalculationSpeedGame extends Component {
 
   showNewQuestion = () => {
     let x, y, z;
-    x = utils.randomBetween(1, 20);
-    y = utils.randomBetween(1, 20);
-    z = utils.randomBetween(1, 20);
-    let randomQuestion = QUESTION_FUNCTIONS[Math.floor(Math.random() * QUESTION_FUNCTIONS.length)](x, y, z);
-    if (this.textInputRef) {
-      this.textInputRef.clear();
-    }
-    this.trueAnswer = randomQuestion.answer;
+    let randomQuestion;
+    do {
+      x = utils.randomBetween(1, 20);
+      y = utils.randomBetween(1, 20);
+      z = utils.randomBetween(1, 20);
+      randomQuestion = QUESTION_FUNCTIONS[Math.floor(Math.random() * QUESTION_FUNCTIONS.length)](x, y, z);
+      if (this.textInputRef) {
+        this.textInputRef.clear();
+      }
+      this.trueAnswer = randomQuestion.answer;
+    } while (this.trueAnswer < 0);
     this.setState({ question: randomQuestion.text });
   }
 
@@ -160,7 +162,7 @@ export default class CalculationSpeedGame extends Component {
           justifyContent: "center",
         }}
       >
-        <CounterBar time={TIMEOUT_MS} width={_SCREEN.width / 2} color={colors.primary} />
+        <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={colors.primary} />
         <BouncingText style={styles.bigText} >Score: {this.state.score}</BouncingText>
         <View style={{ height: 10 }} />
         <SwappingText style={styles.questionText} >{this.state.question}</SwappingText>
