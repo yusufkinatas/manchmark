@@ -181,7 +181,7 @@ export default class CalculationSpeedGame extends Component {
             marginBottom: 20
           }}
           underlineColorAndroid={"transparent"}
-          keyboardType="numeric"
+          keyboardType="phone-pad"
         />
         <TouchableOpacity style={styles.button} onPress={this.onAnswer} >
           <Animated.View style={{

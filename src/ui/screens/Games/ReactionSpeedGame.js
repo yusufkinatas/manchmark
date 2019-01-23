@@ -77,9 +77,10 @@ export default class ReactionSpeedGame extends Component {
 
   betweenPhases = () => {
     return(
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text style={styles.bigText}>{this.reactionTime[this.phase-1]}</Text>
-        <CustomButton text="yeni phase" onPress={() =>  this.setState({playingState:"waiting"})}/>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" , width: _SCREEN.width}}>
+        <TouchableOpacity style={{...styles.touchableArea}} onPressIn={() =>  this.setState({playingState:"waiting"})}>
+        <Text style={styles.bigText}>{this.reactionTime[this.phase-1]} ms</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -89,7 +90,9 @@ export default class ReactionSpeedGame extends Component {
     this.startTime = (new Date()).getTime();
     return(
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
-        <TouchableOpacity style={styles.touchableArea} text='tikla' onPressIn={this.onAnswer}/>
+        <TouchableOpacity style={{...styles.touchableArea, backgroundColor: colors.primary}} text='tikla' onPressIn={this.onAnswer}>
+        <Text style={styles.bigText}>Press Now!</Text>
+        </TouchableOpacity>
       </View>
       );
     }
@@ -161,5 +164,6 @@ var styles = StyleSheet.create({
     top: 0,
     right: 0,
     bottom: 0,
+    justifyContent: "center"
   }
 })
