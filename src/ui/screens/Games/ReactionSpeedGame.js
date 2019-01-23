@@ -34,10 +34,12 @@ export default class ReactionSpeedGame extends Component {
 
     this.phase = 0;
     this.randomDelay = 0;
+    this.startTime;
+    this.endTime;
+    this.reactionTime = [];
 
     this.state = { 
-      gameStatus: "info", // info - active - finished 
-      reactionTime: [0, 0, 0, 0, 0],
+      gameStatus: "info", // info - active - finished
       playingState: "waiting",
       isPlaying: false
     };
@@ -49,6 +51,12 @@ export default class ReactionSpeedGame extends Component {
 
   componentWillUnmount() {
     console.log('componentWillUnmount');
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.gameStatus == "info" && this.state.gameStatus == "active") {
+      //alert("jej");
+    }
   }
 
   startGame = () => {
@@ -70,7 +78,7 @@ export default class ReactionSpeedGame extends Component {
   betweenPhases = () => {
     return(
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text style={styles.bigText}>Between the Phases</Text>
+        <Text style={styles.bigText}>{this.reactionTime[this.phase-1]}</Text>
         <CustomButton text="yeni phase" onPress={() =>  this.setState({playingState:"waiting"})}/>
       </View>
     );
@@ -78,9 +86,11 @@ export default class ReactionSpeedGame extends Component {
 
   renderAnswerPhase = () => {
     // Ekran griyken x saniye sonra yesil olacak
-
+    this.startTime = (new Date()).getTime();
     return(
-      <CustomButton text='tikla' onPress={this.onAnswer}/>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
+        <TouchableOpacity style={styles.touchableArea} text='tikla' onPressIn={this.onAnswer}/>
+      </View>
       );
     }
   
@@ -89,18 +99,19 @@ export default class ReactionSpeedGame extends Component {
     setTimeout(() => {
       this.setState({ playingState: "answering" });
     }, randomDelay * 1000);
-    console.log('renderwaiting phase', randomDelay);
     return (<Text style={styles.bigText}>Wait for it</Text>);
   }
 
   onAnswer = () => {
-    console.log('onAnswer');
+    this.endTime = (new Date()).getTime();
+    this.reactionTime.push(this.endTime - this.startTime);
+    this.phase++;
     this.setState({playingState:"betweenPhases"});
   }
 
   renderGame = () => {
 
-      let randomDelay = utils.randomDoubleBetween(4,5);
+      let randomDelay = utils.randomDoubleBetween(1.25, 2.5);
 
       switch(this.state.playingState) {
         case "waiting":
@@ -142,5 +153,13 @@ var styles = StyleSheet.create({
     color: colors.secondaryLight3,
     textAlign: "center",
     paddingHorizontal: 20
+  },
+  touchableArea: {
+    position: "absolute",
+    zIndex: 99,
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
   }
 })
