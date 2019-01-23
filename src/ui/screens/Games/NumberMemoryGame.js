@@ -127,7 +127,7 @@ export default class NumberMemoryGame extends Component {
               }}
               returnKeyType={'done'}
               underlineColorAndroid={"transparent"}
-              keyboardType="numeric"
+              keyboardType="phone-pad"
               value={this.state.userAnswer}
             />
             <CustomButton text="GUESS" onPress={this.onAnswer} />
