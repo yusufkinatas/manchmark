@@ -46,12 +46,12 @@ export default class VisualMemoryGame extends Component {
   }
 
   componentWillMount() {
-    console.log("componentWillMount");
-    clearTimeout(this.animationTimeout);
+    console.log("componentWillMount");    
   }
 
   componentWillUnmount() {
     console.log('componentWillUnmount');
+    clearTimeout(this.animationTimeout);
   }
 
   endGame = () => {

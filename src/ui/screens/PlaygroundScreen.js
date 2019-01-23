@@ -18,6 +18,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { store, _APP_SETTINGS, _SCREEN, ram } from "../../core";
 import CounterBar from "../../components/CounterBar";
+import DelayedText from "../../components/DelayedText";
 
 export default class PlaygroundScreen extends Component {
 
@@ -46,8 +47,10 @@ export default class PlaygroundScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity activeOpacity={1} style={styles.touchableArea} onPress={this.pressed} />
-        <CounterBar time={5000} width={_SCREEN.width / 2} color={colors.primary} />
+
+        <DelayedText delay={1000} style={styles.bigText} >Your score is 50</DelayedText>
+        <DelayedText delay={2000} style={styles.bigText} >Your score is 50</DelayedText>
+        <DelayedText delay={3000} style={styles.bigText} >Your score is 50</DelayedText>
 
       </View>
     );
@@ -70,5 +73,11 @@ var styles = StyleSheet.create({
     top: 0,
     right: 0,
     bottom: 0,
+  },
+  bigText: {
+    fontSize: 20,
+    color: colors.secondaryLight3,
+    textAlign: "center",
+    paddingHorizontal: 20
   },
 })
