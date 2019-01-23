@@ -135,7 +135,7 @@ export default class NumberMemoryGame extends Component {
           :
           <View style={{ justifyContent: "center", alignItems: "center" }} >
             <Text style={styles.numberText} >{this.state.number}</Text>
-            <CounterBar time={(this.numberLength + 1) * 1000} width={_SCREEN.width / 2} color={colors.primary} />
+            <CounterBar time={(this.numberLength + 1) * 1000} width={_SCREEN.width * 0.8} color={colors.primary} />
           </View>
         }
 

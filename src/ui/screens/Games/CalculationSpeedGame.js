@@ -70,7 +70,6 @@ export default class CalculationSpeedGame extends Component {
 
   componentWillMount() {
     console.log("componentWillMount");
-    this.startGame();
   }
 
   componentWillUnmount() {
@@ -163,7 +162,7 @@ export default class CalculationSpeedGame extends Component {
           justifyContent: "center",
         }}
       >
-        <CounterBar time={TIMEOUT_MS} width={_SCREEN.width / 2} color={colors.primary} />
+        <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={colors.primary} />
         <BouncingText style={styles.bigText} >Score: {this.state.score}</BouncingText>
         <View style={{ height: 10 }} />
         <SwappingText style={styles.questionText} >{this.state.question}</SwappingText>

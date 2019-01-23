@@ -32,7 +32,12 @@ export default class CounterBar extends Component {
   render() {
     const { width, height, color, increasing } = this.props;
     return (
-      <View style={{ ...styles.container, width, height }} >
+      <View
+        style={{
+          ...styles.container,
+          width,
+          height,
+        }} >
         <Animated.View style={{
           flex: 1,
           backgroundColor: color,
@@ -68,9 +73,9 @@ const colors = _APP_SETTINGS.colors;
 var styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: colors.primary,
-    borderRadius: 50,
+    borderRadius: 10,
     marginBottom: 10,
     overflow: "hidden"
   }

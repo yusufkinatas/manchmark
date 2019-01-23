@@ -100,7 +100,7 @@ export default class TouchSpeedGame extends Component {
           style={styles.touchableArea}
         />
         <BouncingText style={styles.pressCountText} >{this.state.pressCounter}</BouncingText>
-        <CounterBar time={TIMEOUT_MS} width={_SCREEN.width / 2} color={colors.primary} />
+        <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={colors.primary} />
       </View>
     );
   }
