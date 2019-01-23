@@ -18,7 +18,7 @@ Navigation.events().registerAppLaunchedListener(() => {
           {
             component: {
               name: "MainScreen",
-              // name: "Playground",
+              //name: "Playground",
               options: {
                 topBar: {
                   height: 0

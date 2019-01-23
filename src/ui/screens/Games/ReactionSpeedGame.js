@@ -5,6 +5,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  LayoutAnimation,
   ActivityIndicator,
   ImageBackground,
   Image,
@@ -15,9 +16,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { store, _APP_SETTINGS, _SCREEN, ram, utils } from "../../../core";
 import CustomButton from '../../../components/CustomButton';
+import DelayedText from '../../../components/DelayedText';
 
 export default class ReactionSpeedGame extends Component {
-
 
   static options(passProps) {
     return {
@@ -32,6 +33,7 @@ export default class ReactionSpeedGame extends Component {
   constructor(props) {
     super(props); 
 
+    this.answer;
     this.phase = 0;
     this.randomDelay = 0;
     this.startTime;
@@ -45,12 +47,15 @@ export default class ReactionSpeedGame extends Component {
     };
   }
 
+  componentWillUpdate() {
+  }
+
   componentWillMount() {
     console.log("componentWillMount");
   }
 
   componentWillUnmount() {
-    console.log('componentWillUnmount');
+    clearTimeout(this.timer);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -76,13 +81,24 @@ export default class ReactionSpeedGame extends Component {
   }
 
   betweenPhases = () => {
-    return(
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" , width: _SCREEN.width}}>
-        <TouchableOpacity style={{...styles.touchableArea}} onPressIn={() =>  this.setState({playingState:"waiting"})}>
-        <Text style={styles.bigText}>{this.reactionTime[this.phase-1]} ms</Text>
-        </TouchableOpacity>
-      </View>
-    );
+    if(this.answer){
+      return(
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" , width: _SCREEN.width}}>
+          <TouchableOpacity style={{...styles.touchableArea}} onPressIn={() =>  this.setState({playingState:"waiting"})}>
+          <Text style={styles.bigText}>{this.reactionTime[this.phase-1]} ms</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+    else {
+      return(
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" , width: _SCREEN.width}}>
+          <TouchableOpacity style={{...styles.touchableArea, backgroundColor: colors.failure}} activeOpacity={1} onPressIn={() =>  this.setState({playingState:"waiting"})}>
+          <Text style={styles.bigText}>Erken boşaldın</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
   }
 
   renderAnswerPhase = () => {
@@ -90,52 +106,101 @@ export default class ReactionSpeedGame extends Component {
     this.startTime = (new Date()).getTime();
     return(
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
-        <TouchableOpacity style={{...styles.touchableArea, backgroundColor: colors.primary}} text='tikla' onPressIn={this.onAnswer}>
+        <TouchableOpacity style={{...styles.touchableArea, backgroundColor: colors.primary}} onPressIn={this.onAnswer}>
         <Text style={styles.bigText}>Press Now!</Text>
         </TouchableOpacity>
       </View>
       );
     }
   
-
   renderWaitingPhase = (randomDelay) => {
-    setTimeout(() => {
+    this.timer = setTimeout(() => {
       this.setState({ playingState: "answering" });
     }, randomDelay * 1000);
-    return (<Text style={styles.bigText}>Wait for it</Text>);
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
+      <TouchableOpacity style={styles.touchableArea} text='tikla' onPressIn={this.onWrongAnswer}>
+      <Text style={styles.bigText}>Wait for it</Text>
+      </TouchableOpacity>
+    </View>
+    );
   }
 
   onAnswer = () => {
+    this.answer = true;
     this.endTime = (new Date()).getTime();
     this.reactionTime.push(this.endTime - this.startTime);
     this.phase++;
     this.setState({playingState:"betweenPhases"});
   }
 
+  onWrongAnswer = () => {
+    this.answer = false;
+    this.reactionTime.push(0);
+    clearTimeout(this.timer);
+    this.phase++
+    this.setState({playingState: "betweenPhases"});
+  }
+
   renderGame = () => {
 
       let randomDelay = utils.randomDoubleBetween(1.25, 2.5);
-
-      switch(this.state.playingState) {
-        case "waiting":
-          return (this.renderWaitingPhase(randomDelay));
-          break;
-        case "answering":
-          return(this.renderAnswerPhase());  
-          break;
-        case "betweenPhases":
-          return(this.betweenPhases());
-          break;
-          // code block
-        default:
+      if(this.phase < 5){
+        switch(this.state.playingState) {
+          case "waiting":
+            return (this.renderWaitingPhase(randomDelay));
+            break;
+          case "answering":
+            return(this.renderAnswerPhase());  
+            break;
+          case "betweenPhases":
+            return(this.betweenPhases());
+            break;
+            // code block
+          default:
+        }
       }
+    else {
+      console.log("geldim");
+      this.setState({gameStatus: "finished"});
+    }
   }
  
+  renderFinish() {
+    return(
+      <View>
+        <DelayedText style={{...styles.bigText, fontSize: 50}} delay={500}>Average: {this.findAverage()}ms</DelayedText>
+        <DelayedText style={styles.bigText} delay={1000}>Phase 1: {this.reactionTime[0]}ms</DelayedText>
+        <DelayedText style={styles.bigText} delay={1500}>Phase 2: {this.reactionTime[1]}ms</DelayedText>
+        <DelayedText style={styles.bigText} delay={2000}>Phase 3: {this.reactionTime[2]}ms</DelayedText>
+        <DelayedText style={styles.bigText} delay={2500}>Phase 4: {this.reactionTime[3]}ms</DelayedText>
+        <DelayedText style={styles.bigText} delay={3000}>Phase 5: {this.reactionTime[4]}ms</DelayedText>
+      </View>
+    );
+  }
+
+  findAverage = () => {
+    let index;
+    let average = 0;
+    let count = 0;
+    for (index = 0; index < this.reactionTime.length; index++) {
+        if (this.reactionTime[index] != 0){
+          average += this.reactionTime[index];
+          count++
+        }
+    }
+    if(count != 0){
+      average = average / count;
+    }
+    return average;
+  }
+
   render() {
     return (
       <View style={styles.container}>
         {this.state.gameStatus == "info" && this.renderInfo()}
         {this.state.gameStatus == "active" && this.renderGame()}
+        {this.state.gameStatus == "finished" && this.renderFinish()}
       </View>
     );
   }
