@@ -94,7 +94,7 @@ export default class ReactionSpeedGame extends Component {
       return(
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" , width: _SCREEN.width}}>
           <TouchableOpacity style={{...styles.touchableArea, backgroundColor: colors.failure}} activeOpacity={1} onPressIn={() =>  this.setState({playingState:"waiting"})}>
-          <Text style={styles.bigText}>Erken boşaldın</Text>
+          <Text style={styles.bigText}>You pressed early!</Text>
           </TouchableOpacity>
         </View>
       );
@@ -161,7 +161,6 @@ export default class ReactionSpeedGame extends Component {
         }
       }
     else {
-      console.log("geldim");
       this.setState({gameStatus: "finished"});
     }
   }
