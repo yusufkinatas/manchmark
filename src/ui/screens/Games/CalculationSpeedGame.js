@@ -116,8 +116,8 @@ export default class CalculationSpeedGame extends Component {
     this.setState({ question: randomQuestion.text });
   }
 
-  animateBackground = (color) => {
-    this.setState({ backgroundColor: color == "red" ? "#c0392b" : colors.primary });
+  animateBackground = (status) => {
+    this.setState({ backgroundColor: status == "failure" ? colors.failure : colors.primary });
     Animated.timing(this.backgroundAnim, {
       toValue: 1,
       duration: 100,
@@ -144,7 +144,7 @@ export default class CalculationSpeedGame extends Component {
     else {
       this.setState({ score: this.state.score - 20 });
       this.textInputRef.clear();
-      this.animateBackground("red");
+      this.animateBackground("failure");
     }
   }
 

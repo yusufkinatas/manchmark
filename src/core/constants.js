@@ -16,6 +16,7 @@ export const _APP_SETTINGS = {
         secondaryDark: '#121212',
         secondaryLight: '#535353',
         secondaryLight2: '#b3b3b3',
-        secondaryLight3: "#ffffff"
+        secondaryLight3: "#ffffff",
+        failure: "#c0392b",
     },
 };

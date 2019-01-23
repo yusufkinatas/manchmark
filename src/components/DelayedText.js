@@ -53,6 +53,6 @@ DelayedText.propsTypes = {
 }
 
 DelayedText.defaultProps = {
-  delay: 200,
+  delay: 1000,
   animationDuration: 200
 }
