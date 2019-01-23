@@ -70,6 +70,7 @@ export default class VisualMemoryGame extends Component {
     this.specialSquireRequired = this.state.level > 13 ? 15 : this.state.level + 2;
     this.specialSquirePushed = 0;
     let specialSquireCount = 0;
+    
     if (this.state.level <= 2) {
       sideLengthOfBoard = 3;
     }
@@ -85,6 +86,7 @@ export default class VisualMemoryGame extends Component {
     else {
       sideLengthOfBoard = 7;
     }
+
     for (let i = 0; i < sideLengthOfBoard * sideLengthOfBoard; i++) {
       this.state.squares.push({ special: false, pushed: false, animation: new Animated.Value(0) });
     }

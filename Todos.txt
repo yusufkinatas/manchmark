@@ -1,5 +1,5 @@
 VERBAL MEMORY GAME
-* kelimelerin değişmesi animasyonlu olmalı
+* aynı kelime iki kere art arda çıkmamalı
 
 TOUCH SPEED GAME
 * progressbar tasarımı değişmeli
