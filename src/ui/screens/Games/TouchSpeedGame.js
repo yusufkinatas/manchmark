@@ -46,15 +46,13 @@ export default class TouchSpeedGame extends Component {
     };
   }
 
-  componentWillUpdate() {
-    // LayoutAnimation.spring();
-  }
-
   componentWillMount() {
+
   }
 
   componentWillUnmount() {
     clearInterval(this.tick);
+    clearTimeout(this.endGameTimeout);
   }
 
   handleBackPress = () => {
@@ -67,7 +65,7 @@ export default class TouchSpeedGame extends Component {
 
   startGame = () => {
     this.setState({ gameStatus: "active" });
-    setTimeout(() => {
+    this.endGameTimeout = setTimeout(() => {
       this.endGame();
     }, TIMEOUT_MS)
 

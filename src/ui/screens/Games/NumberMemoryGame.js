@@ -48,6 +48,7 @@ export default class NumberMemoryGame extends Component {
 
   componentWillUnmount() {
     console.log('componentWillUnmount');
+    clearTimeout(this.numberTimeout);
   }
 
   startGame = () => {
@@ -66,7 +67,7 @@ export default class NumberMemoryGame extends Component {
       number += utils.randomBetween(1, 9);
     }
     this.setState({ number, isGuessing: false, userAnswer: "" });
-    setTimeout(() => {
+    this.numberTimeout = setTimeout(() => {
       this.setState({ isGuessing: true });
     }, (this.numberLength + 1) * 1000);
   }

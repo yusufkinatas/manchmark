@@ -74,11 +74,12 @@ export default class CalculationSpeedGame extends Component {
 
   componentWillUnmount() {
     console.log('componentWillUnmount');
+    clearTimeout(endGameTimeout);
   }
 
   startGame = () => {
     this.setState({ gameStatus: "active" });
-    setTimeout(() => {
+    this.endGameTimeout = setTimeout(() => {
       this.endGame();
     }, TIMEOUT_MS);
     this.showNewQuestion();
