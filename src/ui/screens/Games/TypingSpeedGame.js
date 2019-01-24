@@ -121,8 +121,6 @@ export default class TypingSpeedGame extends Component {
   onAnswer = () => {
     let newWord; 
     let tmpArray = this.state.word;
-    console.log(this.userAnswer);
-    console.log(this.state);
 
     switch(this.userAnswer) {
         case this.state.word[0]:
@@ -143,8 +141,7 @@ export default class TypingSpeedGame extends Component {
           this.setState({word: tmpArray, score: this.state.score + 50});
           break;
 
-        default:
-          console.log('buraya nasi geldim amk');
+          default:
           this.setState({ score: this.state.score - 20 });
           this.animateBackground("failure");
     }
@@ -231,7 +228,7 @@ var styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: colors.secondaryDark
+    backgroundColor: colors.secondary
   },
   text: {
     fontSize: 15,
@@ -253,9 +250,8 @@ var styles = StyleSheet.create({
     paddingHorizontal: 20
   },
   questionText: {
-    fontSize: 35,
+    fontSize: 30,
     color: colors.secondaryLight3,
-    fontWeight: "bold",
     textAlign: "center"
   },
   button: {
