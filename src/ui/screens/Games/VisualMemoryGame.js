@@ -36,8 +36,9 @@ export default class VisualMemoryGame extends Component {
   constructor(props) {
     super(props);
     this.isAnimating = false;
+    this.levelAnim = new Animated.Value(0);
     this.state = {
-      gameStatus: "info", //info - active - finished
+      gameStatus: "info",
       score: 0,
       level: 0,
       lives: 5,
@@ -46,12 +47,13 @@ export default class VisualMemoryGame extends Component {
   }
 
   componentWillMount() {
-    console.log("componentWillMount");    
+    this.startGame()
   }
 
+
   componentWillUnmount() {
-    console.log('componentWillUnmount');
     clearTimeout(this.animationTimeout);
+    clearTimeout(this.levelAnimationTimer);
   }
 
   endGame = () => {
@@ -63,6 +65,28 @@ export default class VisualMemoryGame extends Component {
     this.startNextLevel();
   }
 
+  showNewLevelAnimation = () => {
+    return new Promise((resolve, reject) => {
+      this.setState({ isAnimating: true });
+      Animated.timing(this.levelAnim, {
+        toValue: 1,
+        duration: 250,
+        useNativeDriver: true
+      }).start(() => {
+        this.levelAnimationTimer = setTimeout(() => {
+          Animated.timing(this.levelAnim, {
+            toValue: 0,
+            duration: 250,
+            useNativeDriver: true
+          }).start(() => {
+            this.setState({ isAnimating: false });
+            resolve();
+          });
+        }, 1000);
+      });
+    })
+  }
+
   startNextLevel = () => {
     this.state.squares = [];
     this.state.level++;
@@ -70,7 +94,7 @@ export default class VisualMemoryGame extends Component {
     this.specialSquireRequired = this.state.level > 13 ? 15 : this.state.level + 2;
     this.specialSquirePushed = 0;
     let specialSquireCount = 0;
-    
+
     if (this.state.level <= 2) {
       sideLengthOfBoard = 3;
     }
@@ -99,7 +123,8 @@ export default class VisualMemoryGame extends Component {
       }
     }
     this.forceUpdate();
-    this.showSpecialSquares();
+    this.showNewLevelAnimation()
+      .then(() => this.showSpecialSquares());
   }
 
   showSpecialSquares = () => {
@@ -211,6 +236,27 @@ export default class VisualMemoryGame extends Component {
   renderGame = () => {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        {
+          this.state.isAnimating &&
+          <Animated.View
+            style={{
+              backgroundColor: "rgba(0,0,0,0.5)",
+              ...StyleSheet.absoluteFill,
+              zIndex: 2,
+              justifyContent: "center",
+              alignItems: "center",
+              opacity: this.levelAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 1],
+              }),
+            }}
+          >
+            <View style={{ width: _SCREEN.width, paddingVertical: 20, justifyContent: "center", alignItems: "center", backgroundColor: colors.secondaryDark }} >
+              <Text style={styles.bigText} >LEVEL {this.state.level}</Text>
+            </View>
+          </Animated.View>
+        }
+
         <View style={{
           paddingBottom: 10,
           width: _SCREEN.width,

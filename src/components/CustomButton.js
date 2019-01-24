@@ -45,7 +45,7 @@ var styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: colors.primary,
+    borderColor: colors.secondaryLight3,
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 50,

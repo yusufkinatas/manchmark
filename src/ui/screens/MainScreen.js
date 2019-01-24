@@ -54,6 +54,4 @@ var styles = StyleSheet.create({
     fontSize: 15,
     color: colors.secondaryLight3
   },
-
-
 });

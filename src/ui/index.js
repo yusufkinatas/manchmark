@@ -3,6 +3,7 @@ import { Navigation } from 'react-native-navigation';
 import MainScreen from './screens/MainScreen';
 import PlaygroundScreen from './screens/PlaygroundScreen';
 
+
 //GAMES
 import CalculationSpeedGame from './screens/Games/CalculationSpeedGame';
 import NumberMemoryGame from './screens/Games/NumberMemoryGame';
@@ -25,5 +26,6 @@ export function registerScreens() {
   Navigation.registerComponent('TypingSpeedGame', () => TypingSpeedGame);
   Navigation.registerComponent('VerbalMemoryGame', () => VerbalMemoryGame);
   Navigation.registerComponent('VisualMemoryGame', () => VisualMemoryGame);
+
 
 }
