@@ -26,6 +26,32 @@ export default class MainScreen extends Component {
     nav.pushScreen(this.props.componentId, screen);
   }
 
+  showModal = (screen) => {
+    Navigation.showModal({
+      component: {
+        name: screen,
+        options: {
+          animations: {
+            showModal: {
+              alpha: {
+                from: 0,
+                to: 1,
+                duration: 250,
+              },              
+            },
+            dismissModal: {
+              alpha: {
+                from: 1,
+                to: 0,
+                duration: 250,
+              },              
+            }
+          }
+        }
+      }
+    });
+  }
+
   render() {
     return (
       <View style={styles.container} >
@@ -40,10 +66,10 @@ export default class MainScreen extends Component {
         </View>
 
         <View style={styles.bottomBarContainer} >
-          <TouchableOpacity style={styles.smallButtonContainer} onPress={() => {}} >
+          <TouchableOpacity style={styles.smallButtonContainer} onPress={() => { }} >
             <Icon name="list" size={20} color={colors.secondaryLight3} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.smallButtonContainer} >
+          <TouchableOpacity style={styles.smallButtonContainer} onPress={() => this.showModal("AboutUs")} >
             <Icon name="info" size={20} color={colors.secondaryLight3} />
           </TouchableOpacity>
         </View>
