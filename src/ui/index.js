@@ -3,6 +3,8 @@ import { Navigation } from 'react-native-navigation';
 import MainScreen from './screens/MainScreen';
 import PlaygroundScreen from './screens/PlaygroundScreen';
 
+//MODALS
+import AboutUs from './modals/AboutUs';
 
 //GAMES
 import CalculationSpeedGame from './screens/Games/CalculationSpeedGame';
@@ -17,6 +19,9 @@ export function registerScreens() {
 
   Navigation.registerComponent('MainScreen', () => MainScreen);
   Navigation.registerComponent('Playground', () => PlaygroundScreen);
+
+  //MODALS
+  Navigation.registerComponent('AboutUs', () => AboutUs);
 
   //GAMES
   Navigation.registerComponent('CalculationSpeedGame', () => CalculationSpeedGame);
