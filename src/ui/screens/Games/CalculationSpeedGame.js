@@ -92,9 +92,9 @@ export default class CalculationSpeedGame extends Component {
   renderInfo = () => {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
-
+ 
         <View style={{ paddingBottom: 20 }} >
-          <Text style={styles.bigText} >Try to answer as much as possible in {TIMEOUT_MS / 1000} seconds</Text>
+          <Text style={styles.bigText} >Answer as much as possible in {TIMEOUT_MS / 1000} seconds</Text>
         </View>
         <CustomButton text="Start" onPress={this.startGame} />
       </View>

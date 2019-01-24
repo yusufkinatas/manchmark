@@ -73,7 +73,7 @@ export default class ReactionSpeedGame extends Component {
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
 
         <View style={{ paddingBottom: 20 }} >
-          <Text style={styles.bigText} >Press the screen as soon as you saw green</Text>
+          <Text style={styles.bigText} >Press the screen as soon as you saw the green</Text>
         </View>
         <CustomButton text="Start" onPress={this.startGame} />
       </View>

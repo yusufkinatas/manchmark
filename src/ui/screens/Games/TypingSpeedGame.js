@@ -87,7 +87,7 @@ export default class TypingSpeedGame extends Component {
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
         <Text style={styles.bigText} >Write as much word as possible in {TIMEOUT_MS / 1000} seconds</Text>
         <CustomButton text="Start" onPress={this.startGame} />
-        <Text style={styles.hintText} >Hint: You can write any of the 3 words in any order!</Text>
+        <Text style={styles.hintText} >Hint: You can write any one of the 3 words in any order!</Text>
       </View>
     );
   }

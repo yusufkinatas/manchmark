@@ -98,7 +98,7 @@ export default class NumberMemoryGame extends Component {
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
 
         <View style={{ paddingBottom: 20 }} >
-          <Text style={styles.bigText} >Try to remember all numbers</Text>
+          <Text style={styles.bigText} >Remember the numbers</Text>
         </View>
         <CustomButton text="Start" onPress={this.startGame} />
       </View>

@@ -157,7 +157,7 @@ export default class VisualMemoryGame extends Component {
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
 
         <Animated.View style={{ paddingBottom: 20 }} >
-          <Text style={styles.bigText} >Try to remember special tiles</Text>
+          <Text style={styles.bigText} >Try to remember the special tiles</Text>
         </Animated.View>
         <CustomButton text="Start" onPress={this.startGame} />
       </View>
