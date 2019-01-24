@@ -97,7 +97,6 @@ export default class VerbalMemoryGame extends Component {
   renderInfo = () => {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
-
         <View style={{ paddingBottom: 20 }} >
           <Text style={styles.bigText} >Try to remember all words</Text>
         </View>
@@ -152,7 +151,7 @@ var styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.secondaryDark
+    backgroundColor: colors.secondary
   },
   text: {
     fontSize: 15,

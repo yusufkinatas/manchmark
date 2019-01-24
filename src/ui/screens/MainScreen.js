@@ -11,7 +11,7 @@ import {
   Alert,
   Linking
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Feather';
 
 import { store, _APP_SETTINGS, _SCREEN, ram, nav } from "../../core";
 import CustomButton from "../../components/CustomButton";
@@ -29,13 +29,25 @@ export default class MainScreen extends Component {
   render() {
     return (
       <View style={styles.container} >
-        <CustomButton text="√ Calculation Speed √" onPress={() => this.pushScreen("CalculationSpeedGame")} />
-        <CustomButton text="√ Number Memory √" onPress={() => this.pushScreen("NumberMemoryGame")} />
-        <CustomButton text="√ Reaction Speed √" onPress={() => this.pushScreen("ReactionSpeedGame")} />
-        <CustomButton text="√ Touch Speed √" onPress={() => this.pushScreen("TouchSpeedGame")} />
-        <CustomButton text="Typing Speed -> WIP" onPress={() => this.pushScreen("TypingSpeedGame")} />
-        <CustomButton text="√ Verbal Memory √" onPress={() => this.pushScreen("VerbalMemoryGame")} />
-        <CustomButton text="√ Visual Memory √" onPress={() => this.pushScreen("VisualMemoryGame")} />
+        <View style={{ flex: 1, justifyContent: "center" }} >
+          <CustomButton icon="superscript" text="Calculation Speed" onPress={() => this.pushScreen("CalculationSpeedGame")} />
+          <CustomButton icon="list-ol" text="Number Memory" onPress={() => this.pushScreen("NumberMemoryGame")} />
+          <CustomButton icon="bolt" text="Reaction Speed" onPress={() => this.pushScreen("ReactionSpeedGame")} />
+          <CustomButton icon="hand-o-down" text="Touch Speed" onPress={() => this.pushScreen("TouchSpeedGame")} />
+          <CustomButton icon="keyboard-o" text="Typing Speed" onPress={() => this.pushScreen("TypingSpeedGame")} />
+          <CustomButton icon="font" text="Verbal Memory" onPress={() => this.pushScreen("VerbalMemoryGame")} />
+          <CustomButton icon="image" text="Visual Memory" onPress={() => this.pushScreen("VisualMemoryGame")} />
+        </View>
+
+        <View style={styles.bottomBarContainer} >
+          <TouchableOpacity style={styles.smallButtonContainer} onPress={() => {}} >
+            <Icon name="list" size={20} color={colors.secondaryLight3} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.smallButtonContainer} >
+            <Icon name="info" size={20} color={colors.secondaryLight3} />
+          </TouchableOpacity>
+        </View>
+
       </View>
     )
   }
@@ -48,10 +60,22 @@ var styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.secondaryDark
+    backgroundColor: colors.secondary
   },
   text: {
     fontSize: 15,
     color: colors.secondaryLight3
   },
+  bottomBarContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: _SCREEN.width * 0.4,
+    paddingBottom: 10,
+  },
+  smallButtonContainer: {
+    width: 30,
+    height: 30,
+    alignItems: "center",
+    justifyContent: "center"
+  }
 });
