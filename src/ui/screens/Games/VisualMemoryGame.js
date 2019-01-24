@@ -46,11 +46,6 @@ export default class VisualMemoryGame extends Component {
     };
   }
 
-  componentWillMount() {
-    this.startGame()
-  }
-
-
   componentWillUnmount() {
     clearTimeout(this.animationTimeout);
     clearTimeout(this.levelAnimationTimer);
@@ -70,19 +65,19 @@ export default class VisualMemoryGame extends Component {
       this.setState({ isAnimating: true });
       Animated.timing(this.levelAnim, {
         toValue: 1,
-        duration: 250,
+        duration: 200,
         useNativeDriver: true
       }).start(() => {
         this.levelAnimationTimer = setTimeout(() => {
           Animated.timing(this.levelAnim, {
             toValue: 0,
-            duration: 250,
+            duration: 200,
             useNativeDriver: true
           }).start(() => {
             this.setState({ isAnimating: false });
             resolve();
           });
-        }, 1000);
+        }, 500);
       });
     })
   }
