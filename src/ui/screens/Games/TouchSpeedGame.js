@@ -130,7 +130,7 @@ var styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.secondaryDark,
+    backgroundColor: colors.secondary,
   },
   touchableArea: {
     position: "absolute",

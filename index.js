@@ -21,7 +21,7 @@ Navigation.events().registerAppLaunchedListener(() => {
               // name: "VisualMemoryGame",
               options: {
                 topBar: {
-                  height: 0
+                  height: 0,
                 }
               }
             }
@@ -34,7 +34,7 @@ Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setDefaultOptions({    
     topBar: {
       background: {
-        color: colors.secondary,
+        color: colors.secondaryDark,
       },
       title: {
         color: colors.secondaryLight3,     
@@ -48,42 +48,26 @@ Navigation.events().registerAppLaunchedListener(() => {
         alpha: {
           from: 0,
           to: 1,
-          duration: 300
+          duration: 250
         }
       },
       push: {
-        topBar: {
-          alpha: {
-            from: 0,
-            to: 1,
-            duration: 250,
-            interpolation: 'accelerate'
-          }
-        },
         content: {
           alpha: {
             from: 0,
             to: 1,
-            duration: 250,
+            duration: 500,
             interpolation: 'accelerate'
           }
         }
       },
       pop: {
-        topBar: {
-          alpha: {
-            from: 1,
-            to: 0,
-            duration: 250,
-            interpolation: 'accelerate'
-          }
-        },
         content: {
           alpha: {
             from: 1,
             to: 0,
-            duration: 250,
-            interpolation: 'decelerate'
+            duration: 500,
+            interpolation: 'accelerate'
           }
         }
       }

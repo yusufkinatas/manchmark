@@ -22,7 +22,9 @@ const CustomButton = ({ onPress, text, icon }) => {
     >
       {
         icon &&
-        <Icon name={icon} size={20} color={colors.secondaryLight3} style={{ marginRight: 10 }} />
+        <View style={{ width: 45, justifyContent: "center", alignItems: "center" }} >
+          <Icon name={icon} size={20} color={colors.secondaryLight3} style={{ marginRight: 10 }} />
+        </View>
       }
       <Text style={styles.text} >{text}</Text>
     </TouchableOpacity>
@@ -49,7 +51,7 @@ var styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 50,
-    width: _SCREEN.width * 0.65,
+    width: _SCREEN.width * 0.60,
     marginBottom: 10
   },
   text: {
