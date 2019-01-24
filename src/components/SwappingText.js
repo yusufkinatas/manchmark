@@ -75,8 +75,8 @@ export default class SwappingText extends Component {
                       outputRange: [1, 0.6]
                     }),
                     translateY: floatingText.anim.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [0, -100]
+                      inputRange: [0, 0.3, 1],
+                      outputRange: [0, -40, -50]
                     }),
                     opacity: floatingText.anim.interpolate({
                       inputRange: [0, 0.3, 1],
