@@ -12,7 +12,8 @@ import {
   Linking,
   Animated,
   Easing,
-  FlatList
+  FlatList,
+  TextInput
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -48,10 +49,13 @@ export default class PlaygroundScreen extends Component {
     return (
       <View style={styles.container}>
 
-        <DelayedText delay={1000} style={styles.bigText} >Your score is 50</DelayedText>
-        <DelayedText delay={2000} style={styles.bigText} >Your score is 50</DelayedText>
-        <DelayedText delay={3000} style={styles.bigText} >Your score is 50</DelayedText>
-
+        <TextInput
+          style={{
+            color: colors.secondaryLight3,
+          }}
+          autoCorrect={false}
+          underlineColorAndroid="transparent"
+        />
       </View>
     );
   }

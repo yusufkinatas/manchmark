@@ -66,10 +66,10 @@ export default class MainScreen extends Component {
         </View>
 
         <View style={styles.bottomBarContainer} >
-          <TouchableOpacity style={styles.smallButtonContainer} onPress={() => { }} >
+          <TouchableOpacity style={styles.smallButtonContainer} onPress={() => this.showModal("StatsModal")} >
             <Icon name="list" size={20} color={colors.secondaryLight3} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.smallButtonContainer} onPress={() => this.showModal("AboutUs")} >
+          <TouchableOpacity style={styles.smallButtonContainer} onPress={() => this.showModal("AboutUsModal")} >
             <Icon name="info" size={20} color={colors.secondaryLight3} />
           </TouchableOpacity>
         </View>

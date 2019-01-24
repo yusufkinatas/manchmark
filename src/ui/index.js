@@ -4,7 +4,8 @@ import MainScreen from './screens/MainScreen';
 import PlaygroundScreen from './screens/PlaygroundScreen';
 
 //MODALS
-import AboutUs from './modals/AboutUs';
+import AboutUsModal from './modals/AboutUsModal';
+import StatsModal from './modals/StatsModal';
 
 //GAMES
 import CalculationSpeedGame from './screens/Games/CalculationSpeedGame';
@@ -21,7 +22,8 @@ export function registerScreens() {
   Navigation.registerComponent('Playground', () => PlaygroundScreen);
 
   //MODALS
-  Navigation.registerComponent('AboutUs', () => AboutUs);
+  Navigation.registerComponent('AboutUsModal', () => AboutUsModal);
+  Navigation.registerComponent('StatsModal', () => StatsModal);
 
   //GAMES
   Navigation.registerComponent('CalculationSpeedGame', () => CalculationSpeedGame);

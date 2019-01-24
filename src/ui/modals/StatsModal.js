@@ -20,7 +20,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { store, _APP_SETTINGS, _SCREEN, ram } from "../../core";
 import CustomButton from '../../components/CustomButton';
 
-export default class AboutUs extends Component {
+export default class StatsModal extends Component {
 
   constructor(props) {
     super(props);
@@ -30,22 +30,20 @@ export default class AboutUs extends Component {
     return {
       screenBackgroundColor: 'transparent',
       modalPresentationStyle: 'overCurrentContext',
-      animations: {
-        showModal: {
-
-        },
-        dismissModal: {
-        },
-      },
     };
   }
 
   render() {
     return (
       <View style={styles.container} >
+        <TouchableOpacity
+          style={styles.touchableArea}
+          activeOpacity={1}
+          onPressIn={() => Navigation.dismissModal(this.props.componentId)}
+        />
         <View style={styles.innerContainer} >
-          <Text style={styles.bigText} >Yusuf Emin Kınataş</Text>
-          <Text style={styles.bigText} >Yağız Akyüz</Text>
+          <Text style={styles.bigText} >Calculation Speed: %12.10</Text>
+          <Text style={styles.bigText} >Personal Best: %20.25</Text>
           <CustomButton text="Close" onPress={() => Navigation.dismissModal(this.props.componentId)} />
         </View>
       </View>
@@ -73,7 +71,12 @@ var styles = StyleSheet.create({
     borderColor: colors.primary
   },
   touchableArea: {
-
+    zIndex: -1,
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    position: "absolute"
   },
   closeButton: {
     paddingVertical: 5,

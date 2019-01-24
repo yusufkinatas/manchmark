@@ -47,7 +47,6 @@ export default class TypingSpeedGame extends Component {
       word: ["", "", ""],
       trueAnswer: 0
     };
-    this.backgroundAnim = new Animated.Value(0);
   }
 
   componentWillMount() {
@@ -85,32 +84,17 @@ export default class TypingSpeedGame extends Component {
 
   renderInfo = () => {
     return (
-        <View style={{flex: 1, alignItems: "center", justifyContent: "center"}} >
-          <Text style={styles.bigText} >Write as much word as possible in {TIMEOUT_MS / 1000} seconds</Text>
-          <CustomButton text="Start" onPress={this.startGame} /> 
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
+        <Text style={styles.bigText} >Write as much word as possible in {TIMEOUT_MS / 1000} seconds</Text>
+        <CustomButton text="Start" onPress={this.startGame} />
         <Text style={styles.hintText} >Hint: You can write any of the 3 words in any order!</Text>
-        </View>
+      </View>
     );
   }
 
-  animateBackground = (status) => {
-    this.setState({ backgroundColor: status == "failure" ? colors.failure : colors.primary });
-    Animated.timing(this.backgroundAnim, {
-      toValue: 1,
-      duration: 100,
-      useNativeDriver: true
-    }).start(() => {
-      Animated.timing(this.backgroundAnim, {
-        toValue: 0,
-        duration: 250,
-        useNativeDriver: true
-      }).start();
-    });
-  }
-
   onChangeText = (text) => {
-    if (text[text.length - 1] != ' '){
-    this.userAnswer = text;
+    if (text[text.length - 1] != ' ') {
+      this.userAnswer = text;
     }
     else {
       this.onAnswer(this.userAnswer);
@@ -119,46 +103,41 @@ export default class TypingSpeedGame extends Component {
   }
 
   onAnswer = () => {
-    let newWord; 
+    let newWord;
     let tmpArray = this.state.word;
 
-    switch(this.userAnswer) {
-        case this.state.word[0]:
-          this.usedWords.push(this.userAnswer);
-          tmpArray[0] = this.generateNewWord();
-          this.setState({word: tmpArray, score: this.state.score + 50});
-          break;
+    switch (this.userAnswer) {
+      case this.state.word[0]:
+        this.usedWords.push(this.userAnswer);
+        tmpArray[0] = this.generateNewWord();
+        this.setState({ word: tmpArray, score: this.state.score + 50 });
+        break;
 
-          case this.state.word[1]:
-          this.usedWords.push(this.userAnswer);
-          tmpArray[1] = this.generateNewWord();
-          this.setState({word: tmpArray, score: this.state.score + 50});
-          break;
+      case this.state.word[1]:
+        this.usedWords.push(this.userAnswer);
+        tmpArray[1] = this.generateNewWord();
+        this.setState({ word: tmpArray, score: this.state.score + 50 });
+        break;
 
-          case this.state.word[2]:
-          this.usedWords.push(this.userAnswer);
-          tmpArray[2] = this.generateNewWord();
-          this.setState({word: tmpArray, score: this.state.score + 50});
-          break;
+      case this.state.word[2]:
+        this.usedWords.push(this.userAnswer);
+        tmpArray[2] = this.generateNewWord();
+        this.setState({ word: tmpArray, score: this.state.score + 50 });
+        break;
 
-          default:
-          this.setState({ score: this.state.score - 20 });
-          this.animateBackground("failure");
+      default:
+        this.setState({ score: this.state.score - 20 });
     }
   }
 
   renderGame = () => {
-    const backgroundOpacity = this.backgroundAnim.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, 1]
-    });
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center"}}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={colors.primary} />
         <BouncingText style={styles.bigText}>Score: {this.state.score}</BouncingText>
         <View style={{ height: 10 }} />
 
-        <View style={{ flexDirection: "row", backgroundColor: "#164e2b"}} >
+        <View style={{ flexDirection: "row", backgroundColor: "#164e2b" }} >
           <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }} >
             <SwappingText style={styles.questionText} >{this.state.word[0]}</SwappingText>
           </View>
@@ -189,15 +168,7 @@ export default class TypingSpeedGame extends Component {
             marginBottom: 20
           }}
           underlineColorAndroid={"transparent"}
-          keyboardType="default"
         />
-        <TouchableOpacity style={styles.button} onPress={this.onAnswer} >
-          <Animated.View style={{
-            ...StyleSheet.absoluteFill,
-            backgroundColor: this.state.backgroundColor,
-            opacity: backgroundOpacity }}/>
-          <Text style={styles.text} >ANSWER</Text>
-        </TouchableOpacity>
       </View>
     );
   }
@@ -247,12 +218,13 @@ var styles = StyleSheet.create({
     fontSize: 20,
     color: colors.secondaryLight3,
     textAlign: "center",
-    paddingHorizontal: 20
+    paddingHorizontal: 10
   },
   questionText: {
-    fontSize: 30,
+    fontSize: 25,
     color: colors.secondaryLight3,
-    textAlign: "center"
+    textAlign: "center",
+    paddingVertical: 10
   },
   button: {
     flexDirection: "row",
