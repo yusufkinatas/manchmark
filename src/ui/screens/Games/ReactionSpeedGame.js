@@ -31,7 +31,7 @@ export default class ReactionSpeedGame extends Component {
   }
 
   constructor(props) {
-    super(props); 
+    super(props);
 
     this.answer;
     this.phase = 0;
@@ -40,7 +40,7 @@ export default class ReactionSpeedGame extends Component {
     this.endTime;
     this.reactionTime = [];
 
-    this.state = { 
+    this.state = {
       gameStatus: "info", // info - active - finished
       playingState: "waiting",
       isPlaying: false
@@ -56,12 +56,6 @@ export default class ReactionSpeedGame extends Component {
 
   componentWillUnmount() {
     clearTimeout(this.timer);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if(prevState.gameStatus == "info" && this.state.gameStatus == "active") {
-      //alert("jej");
-    }
   }
 
   startGame = () => {
@@ -81,20 +75,20 @@ export default class ReactionSpeedGame extends Component {
   }
 
   betweenPhases = () => {
-    if(this.answer){
-      return(
-        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" , width: _SCREEN.width}}>
-          <TouchableOpacity style={{...styles.touchableArea}} onPressIn={() =>  this.setState({playingState:"waiting"})}>
-          <Text style={styles.bigText}>{this.reactionTime[this.phase-1]} ms</Text>
+    if (this.answer) {
+      return (
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
+          <TouchableOpacity style={{ ...styles.touchableArea }} onPressIn={() => this.setState({ playingState: "waiting" })}>
+            <Text style={styles.bigText}>{this.reactionTime[this.phase - 1]} ms</Text>
           </TouchableOpacity>
         </View>
       );
     }
     else {
-      return(
-        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" , width: _SCREEN.width}}>
-          <TouchableOpacity style={{...styles.touchableArea, backgroundColor: colors.failure}} activeOpacity={1} onPressIn={() =>  this.setState({playingState:"waiting"})}>
-          <Text style={styles.bigText}>You pressed early!</Text>
+      return (
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
+          <TouchableOpacity style={{ ...styles.touchableArea, backgroundColor: colors.failure }} activeOpacity={1} onPressIn={() => this.setState({ playingState: "waiting" })}>
+            <Text style={styles.bigText}>You pressed early!</Text>
           </TouchableOpacity>
         </View>
       );
@@ -104,25 +98,25 @@ export default class ReactionSpeedGame extends Component {
   renderAnswerPhase = () => {
     // Ekran griyken x saniye sonra yesil olacak
     this.startTime = (new Date()).getTime();
-    return(
+    return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
-        <TouchableOpacity style={{...styles.touchableArea, backgroundColor: colors.primary}} onPressIn={this.onAnswer}>
-        <Text style={styles.bigText}>Press Now!</Text>
+        <TouchableOpacity style={{ ...styles.touchableArea, backgroundColor: colors.primary }} onPressIn={this.onAnswer}>
+          <Text style={styles.bigText}>Press Now!</Text>
         </TouchableOpacity>
       </View>
-      );
-    }
-  
+    );
+  }
+
   renderWaitingPhase = (randomDelay) => {
     this.timer = setTimeout(() => {
       this.setState({ playingState: "answering" });
     }, randomDelay * 1000);
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
-      <TouchableOpacity style={styles.touchableArea} text='tikla' onPressIn={this.onWrongAnswer}>
-      <Text style={styles.bigText}>Wait for it</Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity style={styles.touchableArea} text='tikla' onPressIn={this.onWrongAnswer}>
+          <Text style={styles.bigText}>Wait for it</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
 
@@ -131,7 +125,7 @@ export default class ReactionSpeedGame extends Component {
     this.endTime = (new Date()).getTime();
     this.reactionTime.push(this.endTime - this.startTime);
     this.phase++;
-    this.setState({playingState:"betweenPhases"});
+    this.setState({ playingState: "betweenPhases" });
   }
 
   onWrongAnswer = () => {
@@ -139,36 +133,36 @@ export default class ReactionSpeedGame extends Component {
     this.reactionTime.push(0);
     clearTimeout(this.timer);
     this.phase++
-    this.setState({playingState: "betweenPhases"});
+    this.setState({ playingState: "betweenPhases" });
   }
 
   renderGame = () => {
 
-      let randomDelay = utils.randomDoubleBetween(1.25, 2.5);
-      if(this.phase < 5){
-        switch(this.state.playingState) {
-          case "waiting":
-            return (this.renderWaitingPhase(randomDelay));
-            break;
-          case "answering":
-            return(this.renderAnswerPhase());  
-            break;
-          case "betweenPhases":
-            return(this.betweenPhases());
-            break;
-            // code block
-          default:
-        }
+    let randomDelay = utils.randomDoubleBetween(1.25, 2.5);
+    if (this.phase < 5) {
+      switch (this.state.playingState) {
+        case "waiting":
+          return (this.renderWaitingPhase(randomDelay));
+          break;
+        case "answering":
+          return (this.renderAnswerPhase());
+          break;
+        case "betweenPhases":
+          return (this.betweenPhases());
+          break;
+        // code block
+        default:
       }
+    }
     else {
-      this.setState({gameStatus: "finished"});
+      this.setState({ gameStatus: "finished" });
     }
   }
- 
+
   renderFinish() {
-    return(
+    return (
       <View>
-        <DelayedText style={{...styles.bigText, fontSize: 50}} delay={500}>Average: {this.findAverage()}ms</DelayedText>
+        <DelayedText style={{ ...styles.bigText, fontSize: 35 }} delay={500}>Average: {this.findAverage()}ms</DelayedText>
         <DelayedText style={styles.bigText} delay={1000}>Phase 1: {this.reactionTime[0]}ms</DelayedText>
         <DelayedText style={styles.bigText} delay={1500}>Phase 2: {this.reactionTime[1]}ms</DelayedText>
         <DelayedText style={styles.bigText} delay={2000}>Phase 3: {this.reactionTime[2]}ms</DelayedText>
@@ -183,13 +177,13 @@ export default class ReactionSpeedGame extends Component {
     let average = 0;
     let count = 0;
     for (index = 0; index < this.reactionTime.length; index++) {
-        if (this.reactionTime[index] != 0){
-          average += this.reactionTime[index];
-          count++
-        }
+      if (this.reactionTime[index] != 0) {
+        average += this.reactionTime[index];
+        count++
+      }
     }
-    if(count != 0){
-      average = average / count;
+    if (count != 0) {
+      average = Math.round((average / count * 100)) / 100
     }
     return average;
   }
