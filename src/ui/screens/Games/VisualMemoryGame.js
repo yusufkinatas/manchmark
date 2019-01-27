@@ -10,7 +10,8 @@ import {
   Image,
   Alert,
   Linking,
-  Animated
+  Animated,
+  TouchableWithoutFeedback
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -44,6 +45,7 @@ export default class VisualMemoryGame extends Component {
       lives: 5,
       squares: []
     };
+    this.buttonsEnabled = true;
   }
 
   componentWillUnmount() {
@@ -147,6 +149,7 @@ export default class VisualMemoryGame extends Component {
         }
       }));
       this.isAnimating = false;
+      this.buttonsEnabled = true;
       this.forceUpdate();
     }, SHOW_DURATION);
 
@@ -165,9 +168,11 @@ export default class VisualMemoryGame extends Component {
   }
 
   onSquarePress = (index) => {
-    if (this.isAnimating || this.state.squares[index].pushed || this.state.lives <= 0) {
+
+    if (this.isAnimating || this.state.squares[index].pushed || !this.buttonsEnabled || this.state.lives <= 0) {
       return;
     }
+    this.buttonsEnabled = false;
     this.state.squares[index].pushed = true;
     if (this.state.squares[index].special) {
       this.specialSquirePushed++;
@@ -177,6 +182,10 @@ export default class VisualMemoryGame extends Component {
       this.state.lives--;
     }
     this.forceUpdate();
+
+    if (this.specialSquirePushed != this.specialSquireRequired && this.state.lives > 0) {
+      this.buttonsEnabled = true;
+    }
 
     Animated.timing(this.state.squares[index].animation, {
       toValue: 1,
@@ -198,32 +207,28 @@ export default class VisualMemoryGame extends Component {
     var squareWidth = _SCREEN.width / Math.sqrt(this.state.squares.length);
     return this.state.squares.map((square, index) => {
       return (
-        <Animated.View
+        <TouchableWithoutFeedback
           key={index}
-          style={{
-            width: squareWidth,
-            height: squareWidth,
-            padding: 4,
-            transform: [{
-              rotateX: square.animation.interpolate({
-                inputRange: [0, 1],
-                outputRange: ["0deg", "180deg"]
-              })
-            }],
+          onPressIn={() => {
+            this.onSquarePress(index);
           }}
         >
-          <TouchableOpacity
+          <Animated.View
             style={{
-              flex: 1,
+              width: squareWidth - 8,
+              height: squareWidth - 8,
+              margin: 4,
+              transform: [{
+                rotateX: square.animation.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: ["0deg", "180deg"]
+                })
+              }],
               borderRadius: squareWidth / 4,
               backgroundColor: square.pushed ? (square.special ? colors.primary : colors.secondaryLight) : colors.secondaryLight2,
             }}
-            activeOpacity={1}
-            onPressIn={() => {
-              this.onSquarePress(index);
-            }}
           />
-        </Animated.View>
+        </TouchableWithoutFeedback>
       )
     });
   }
