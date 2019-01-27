@@ -11,7 +11,8 @@ import {
   Alert,
   Linking,
   Animated,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  PanResponder
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -21,6 +22,7 @@ import BouncingText from '../../../components/BouncingText';
 import SwappingText from '../../../components/SwappingText';
 
 const SHOW_DURATION = 2000;
+const TOP_BAR_HEIGHT = 100
 
 export default class VisualMemoryGame extends Component {
 
@@ -46,6 +48,21 @@ export default class VisualMemoryGame extends Component {
       squares: []
     };
     this.buttonsEnabled = true;
+
+    this.panResponder = PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderStart: (e, gestureState) => {
+        console.log("x:", gestureState.x0);
+        console.log("y:", gestureState.y0);
+
+        let indexX, indexY;
+        let numberOfColumns = this.sideLengthOfBoard;
+        indexX = Math.floor(gestureState.x0 / _SCREEN.width * numberOfColumns);
+        indexY = Math.floor((gestureState.y0 - TOP_BAR_HEIGHT) / _SCREEN.width * numberOfColumns);
+        console.log("[", indexX, ",", indexY, "]");
+        this.onSquarePress(indexX + indexY * this.sideLengthOfBoard)
+      }
+    });
   }
 
   componentWillUnmount() {
@@ -87,28 +104,28 @@ export default class VisualMemoryGame extends Component {
   startNextLevel = () => {
     this.state.squares = [];
     this.state.level++;
-    let sideLengthOfBoard;
+    this.sideLengthOfBoard;
     this.specialSquireRequired = this.state.level > 13 ? 15 : this.state.level + 2;
     this.specialSquirePushed = 0;
     let specialSquireCount = 0;
 
     if (this.state.level <= 2) {
-      sideLengthOfBoard = 3;
+      this.sideLengthOfBoard = 3;
     }
     else if (this.state.level <= 5) {
-      sideLengthOfBoard = 4;
+      this.sideLengthOfBoard = 4;
     }
     else if (this.state.level <= 8) {
-      sideLengthOfBoard = 5;
+      this.sideLengthOfBoard = 5;
     }
     else if (this.state.level <= 13) {
-      sideLengthOfBoard = 6;
+      this.sideLengthOfBoard = 6;
     }
     else {
-      sideLengthOfBoard = 7;
+      this.sideLengthOfBoard = 7;
     }
 
-    for (let i = 0; i < sideLengthOfBoard * sideLengthOfBoard; i++) {
+    for (let i = 0; i < this.sideLengthOfBoard * this.sideLengthOfBoard; i++) {
       this.state.squares.push({ special: false, pushed: false, animation: new Animated.Value(0) });
     }
 
@@ -207,35 +224,29 @@ export default class VisualMemoryGame extends Component {
     var squareWidth = _SCREEN.width / Math.sqrt(this.state.squares.length);
     return this.state.squares.map((square, index) => {
       return (
-        <TouchableWithoutFeedback
+        <Animated.View
           key={index}
-          onPressIn={() => {
-            this.onSquarePress(index);
+          style={{
+            width: squareWidth - 8,
+            height: squareWidth - 8,
+            margin: 4,
+            transform: [{
+              rotateX: square.animation.interpolate({
+                inputRange: [0, 1],
+                outputRange: ["0deg", "180deg"]
+              })
+            }],
+            borderRadius: squareWidth / 4,
+            backgroundColor: square.pushed ? (square.special ? colors.primary : colors.secondaryLight) : colors.secondaryLight2,
           }}
-        >
-          <Animated.View
-            style={{
-              width: squareWidth - 8,
-              height: squareWidth - 8,
-              margin: 4,
-              transform: [{
-                rotateX: square.animation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: ["0deg", "180deg"]
-                })
-              }],
-              borderRadius: squareWidth / 4,
-              backgroundColor: square.pushed ? (square.special ? colors.primary : colors.secondaryLight) : colors.secondaryLight2,
-            }}
-          />
-        </TouchableWithoutFeedback>
+        />
       )
     });
   }
 
   renderGame = () => {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ flex: 1 }}>
         {
           this.state.isAnimating &&
           <Animated.View
@@ -260,8 +271,9 @@ export default class VisualMemoryGame extends Component {
         <View style={{
           paddingBottom: 10,
           width: _SCREEN.width,
+          height: TOP_BAR_HEIGHT,
           flexDirection: "row",
-          alignItems: "center",
+          alignItems: "flex-end",
           justifyContent: "space-between",
           paddingHorizontal: 20
         }} >
@@ -271,6 +283,7 @@ export default class VisualMemoryGame extends Component {
         </View>
 
         <View
+          {...this.panResponder.panHandlers}
           style={{
             width: _SCREEN.width,
             height: _SCREEN.width,
