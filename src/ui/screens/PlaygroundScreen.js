@@ -27,22 +27,21 @@ export default class PlaygroundScreen extends Component {
     super(props);
 
     this.state = {
-      pressCounter: 0,
+      text: ""
     };
-
-    this.textAnim = new Animated.Value(0);
   }
 
-  pressed = () => {
-    this.setState({ pressCounter: this.state.pressCounter + 1 });
-    Animated.timing(this.textAnim, {
-      duration: 250,
-      toValue: 1,
-      useNativeDriver: true,
-      // easing: Easing.ease,
-    }).start(() => {
-      setTimeout(() => { this.textAnim.setValue(0) }, 250);
-    });
+  onChangeText = (text) => {
+
+    console.log("before if", this.state.text);
+
+    if (text.search("aaa") != -1) {
+      console.log("if 1");
+      this.textInputRef.clear();
+    }
+    else {
+      console.log("if 2");
+    }
   }
 
   render() {
@@ -50,10 +49,18 @@ export default class PlaygroundScreen extends Component {
       <View style={styles.container}>
 
         <TextInput
+          ref={r => this.textInputRef = r}
           style={{
             color: colors.secondaryLight3,
+            borderBottomWidth: 1,
+            borderBottomColor: colors.primary,
+            width: _SCREEN.width * 0.5,
+            fontSize: 20
           }}
+          autoCapitalize={"none"}
+          onChangeText={this.onChangeText}
           autoCorrect={false}
+          autoFocus={true}
           underlineColorAndroid="transparent"
         />
       </View>

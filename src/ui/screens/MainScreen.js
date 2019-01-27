@@ -12,6 +12,7 @@ import {
   Linking
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import { setRootViewBackgroundColor } from 'react-native-root-view-background';
 
 import { store, _APP_SETTINGS, _SCREEN, ram, nav } from "../../core";
 import CustomButton from "../../components/CustomButton";
@@ -20,6 +21,10 @@ export default class MainScreen extends Component {
 
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    setRootViewBackgroundColor(colors.secondary);
   }
 
   pushScreen = (screen) => {
@@ -37,14 +42,14 @@ export default class MainScreen extends Component {
                 from: 0,
                 to: 1,
                 duration: 250,
-              },              
+              },
             },
             dismissModal: {
               alpha: {
                 from: 1,
                 to: 0,
                 duration: 250,
-              },              
+              },
             }
           }
         }

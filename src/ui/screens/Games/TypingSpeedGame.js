@@ -45,7 +45,7 @@ export default class TypingSpeedGame extends Component {
       score: 0,
       question: "",
       word: ["", "", ""],
-      trueAnswer: 0
+      trueAnswer: 0,
     };
   }
 
@@ -93,40 +93,35 @@ export default class TypingSpeedGame extends Component {
   }
 
   onChangeText = (text) => {
-    if (text[text.length - 1] != ' ') {
-      this.userAnswer = text;
-    }
-    else {
-      this.onAnswer(this.userAnswer);
-      this.textInputRef.clear();
-    }
+    // if (text[text.length - 1] != ' ') {
+    //   this.userAnswer = text;
+    // }
+    // else {
+    //   this.onAnswer(this.userAnswer);
+    //   this.textInputRef.clear();
+    // }
+    this.onAnswer(text);
   }
 
-  onAnswer = () => {
-    let newWord;
+  onAnswer = (answer) => {
+    let newWord, index = -1;
     let tmpArray = this.state.word;
-
-    switch (this.userAnswer) {
+    switch (answer) {
       case this.state.word[0]:
-        this.usedWords.push(this.userAnswer);
-        tmpArray[0] = this.generateNewWord();
-        this.setState({ word: tmpArray, score: this.state.score + 50 });
+        index = 0;
         break;
-
       case this.state.word[1]:
-        this.usedWords.push(this.userAnswer);
-        tmpArray[1] = this.generateNewWord();
-        this.setState({ word: tmpArray, score: this.state.score + 50 });
+        index = 1;
         break;
-
       case this.state.word[2]:
-        this.usedWords.push(this.userAnswer);
-        tmpArray[2] = this.generateNewWord();
-        this.setState({ word: tmpArray, score: this.state.score + 50 });
+        index = 2;
         break;
-
-      default:
-        this.setState({ score: this.state.score - 20 });
+    }
+    if (index != -1) {
+      this.usedWords.push(answer);
+      tmpArray[index] = this.generateNewWord();
+      this.setState({ word: tmpArray, score: this.state.score + 50, });
+      this.textInputRef.clear();
     }
   }
 
@@ -152,10 +147,12 @@ export default class TypingSpeedGame extends Component {
         </View>
 
         <TextInput
-          ref={ref => (this.textInputRef = ref)}
+          ref={r => this.textInputRef = r}
           onChangeText={this.onChangeText}
           autoCapitalize={"none"}
           autoCorrect={false}
+          spellCheck={false}
+          textContentType={"none"}
           autoFocus={true}
           style={{
             width: _SCREEN.width / 3,
