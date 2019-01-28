@@ -33,18 +33,30 @@ export default class ReactionSpeedGame extends Component {
   constructor(props) {
     super(props);
 
-    this.answer;
+    this.answer = false;
     this.phase = 0;
     this.randomDelay = 0;
-    this.startTime;
-    this.endTime;
+    this.startTime = 0;
+    this.endTime = 0;
     this.reactionTime = [];
 
     this.state = {
       gameStatus: "info", // info - active - finished
-      playingState: "waiting",
-      isPlaying: false
+      playingState: "waiting"
     };
+  }
+
+  reinitialize = () => {
+    this.answer = false;
+    this.phase = 0;
+    this.randomDelay = 0;
+    this.startTime = 0;
+    this.endTime = 0;
+    this.reactionTime = [];
+
+    clearTimeout(this.timer);
+
+    this.setState({gameStatus: "info", playingState: "waiting"});
   }
 
   componentWillUpdate() {
@@ -65,10 +77,10 @@ export default class ReactionSpeedGame extends Component {
   renderInfo = () => {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
-
         <View style={{ paddingBottom: 20 }} >
-          <Text style={styles.bigText} >Press the screen as soon as you saw the green</Text>
+          <Text style={styles.bigText} >Press the screen as soon as the color changes!</Text>
         </View>
+        <Text style={styles.hintText} >There are 5 phases!</Text>
         <CustomButton text="Start" onPress={this.startGame} />
       </View>
     );
@@ -78,8 +90,9 @@ export default class ReactionSpeedGame extends Component {
     if (this.answer) {
       return (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
-          <TouchableOpacity style={{ ...styles.touchableArea }} onPressIn={() => this.setState({ playingState: "waiting" })}>
+          <TouchableOpacity style={styles.touchableArea} onPressIn={() => this.setState({ playingState: "waiting" })}>
             <Text style={styles.bigText}>{this.reactionTime[this.phase - 1]} ms</Text>
+            <Text style={styles.hintText} >Press the screen for the next phase!</Text>
           </TouchableOpacity>
         </View>
       );
@@ -89,6 +102,7 @@ export default class ReactionSpeedGame extends Component {
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
           <TouchableOpacity style={{ ...styles.touchableArea, backgroundColor: colors.failure }} activeOpacity={1} onPressIn={() => this.setState({ playingState: "waiting" })}>
             <Text style={styles.bigText}>You pressed early!</Text>
+            <Text style={styles.hintText} >Press the screen for the next phase!</Text>
           </TouchableOpacity>
         </View>
       );
@@ -161,13 +175,16 @@ export default class ReactionSpeedGame extends Component {
 
   renderFinish() {
     return (
-      <View>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
         <DelayedText style={{ ...styles.bigText, fontSize: 35 }} delay={500}>Average: {this.findAverage()}ms</DelayedText>
         <DelayedText style={styles.bigText} delay={1000}>Phase 1: {this.reactionTime[0]}ms</DelayedText>
         <DelayedText style={styles.bigText} delay={1500}>Phase 2: {this.reactionTime[1]}ms</DelayedText>
         <DelayedText style={styles.bigText} delay={2000}>Phase 3: {this.reactionTime[2]}ms</DelayedText>
         <DelayedText style={styles.bigText} delay={2500}>Phase 4: {this.reactionTime[3]}ms</DelayedText>
         <DelayedText style={styles.bigText} delay={3000}>Phase 5: {this.reactionTime[4]}ms</DelayedText>
+        <View style={{ paddingTop: 20}}>
+        <CustomButton style={{ flex: 1, alignItems: "center", justifyContent: "center" }} text="Restart" onPress={this.reinitialize}/>
+        </View>
       </View>
     );
   }
@@ -215,7 +232,20 @@ var styles = StyleSheet.create({
     textAlign: "center",
     paddingHorizontal: 20
   },
+
+  hintText: {
+    fontSize: 14,
+    position: "absolute",
+    color: colors.secondaryLight2,
+    textAlign: "center",
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+    bottom: 20
+  },
+
   touchableArea: {
+    alignItems: "center", 
+    justifyContent: "center",
     position: "absolute",
     zIndex: 99,
     left: 0,
