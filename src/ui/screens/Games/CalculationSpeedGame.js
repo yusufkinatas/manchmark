@@ -68,6 +68,18 @@ export default class CalculationSpeedGame extends Component {
     this.backgroundAnim = new Animated.Value(0);
   }
 
+  reinitialize = () => {
+    this.setState({
+      gameStatus: "info",
+      score: 0,
+      question: "",
+      trueAnswer: 0
+    });
+    
+    this.backgroundAnim = new Animated.Value(0);
+    clearTimeout(this.endGameTimeout);
+  }
+
   componentWillMount() {
     console.log("componentWillMount");
   }
@@ -92,7 +104,6 @@ export default class CalculationSpeedGame extends Component {
   renderInfo = () => {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
- 
         <View style={{ paddingBottom: 20 }} >
           <Text style={styles.bigText} >Answer as much as possible in {TIMEOUT_MS / 1000} seconds</Text>
         </View>
@@ -160,9 +171,8 @@ export default class CalculationSpeedGame extends Component {
         style={{
           flex: 1,
           alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+          justifyContent: "center"
+        }}>
         <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={colors.primary} />
         <BouncingText style={styles.bigText} >Score: {this.state.score}</BouncingText>
         <View style={{ height: 10 }} />
@@ -181,18 +191,14 @@ export default class CalculationSpeedGame extends Component {
             textAlign: 'center',
             fontSize: 25,
             color: colors.secondaryLight3,
-            marginBottom: 20
-          }}
+            marginBottom: 20}}
           underlineColorAndroid={"transparent"}
-          keyboardType="phone-pad"
-        />
+          keyboardType="phone-pad"/>
         <TouchableOpacity style={styles.button} onPress={this.onAnswer} >
           <Animated.View style={{
             ...StyleSheet.absoluteFill,
             backgroundColor: this.state.backgroundColor,
-            opacity: backgroundOpacity
-          }}
-          />
+            opacity: backgroundOpacity}} />
           <Text style={styles.text} >ANSWER</Text>
         </TouchableOpacity>
       </View>
@@ -203,6 +209,9 @@ export default class CalculationSpeedGame extends Component {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
         <Text style={styles.bigText} >{`Your score is ${this.state.score}`}</Text>
+        <View style={{ paddingTop: 20}}>
+        <CustomButton style={{ flex: 1, alignItems: "center", justifyContent: "center" }} text="Restart" onPress={this.reinitialize}/>
+        </View>
       </View>
     );
   }

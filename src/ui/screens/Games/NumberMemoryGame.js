@@ -42,6 +42,17 @@ export default class NumberMemoryGame extends Component {
     };
   }
 
+  reinitialize = () => {
+    this.numberLength = 0;
+    this.setState({
+      gameStatus: "info", //info - active - finished
+      isGuessing: false,
+      number: "",
+      userAnswer: ""
+    });
+    clearTimeout(this.numberTimeout);
+  }
+
   componentWillMount() {
     console.log("componentWillMount");
   }
@@ -148,6 +159,9 @@ export default class NumberMemoryGame extends Component {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
         <Text style={styles.bigText} >{`You answered correctly ${this.numberLength - 1} times`}</Text>
+        <View style={{ paddingTop: 20}}>
+        <CustomButton style={{ flex: 1, alignItems: "center", justifyContent: "center" }} text="Restart" onPress={this.reinitialize}/>
+        </View>
       </View>
     );
   }
