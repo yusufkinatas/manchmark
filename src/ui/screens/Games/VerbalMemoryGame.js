@@ -42,6 +42,16 @@ export default class VerbalMemoryGame extends Component {
     };
   }
 
+  reinitialize = () => {
+    this.usedWords = [];
+
+    this.setState({
+      word: "",
+      gameStatus: "info",
+      score: 0
+    });
+  }
+
   componentWillMount() {
     console.log("componentWillMount");
   }
@@ -127,6 +137,9 @@ export default class VerbalMemoryGame extends Component {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
         <Text style={styles.bigText} >{`You answered correctly ${this.state.score} times`}</Text>
+        <View style={{ paddingTop: 20}}>
+          <CustomButton style={{ flex: 1, alignItems: "center", justifyContent: "center" }} text="Restart" onPress={this.reinitialize}/>
+        </View>
       </View>
     );
   }

@@ -60,7 +60,8 @@ export default class MainScreen extends Component {
   render() {
     return (
       <View style={styles.container} >
-        <View style={{ flex: 1, justifyContent: "center" }} >
+      <Text style={styles.header}>Manchmark</Text>
+        <View style={{ flex: 1, justifyContent: "center", marginBottom: 60 }} >
           <CustomButton icon="superscript" text="Calculation Speed" onPress={() => this.pushScreen("CalculationSpeedGame")} />
           <CustomButton icon="list-ol" text="Number Memory" onPress={() => this.pushScreen("NumberMemoryGame")} />
           <CustomButton icon="bolt" text="Reaction Speed" onPress={() => this.pushScreen("ReactionSpeedGame")} />
@@ -108,5 +109,11 @@ var styles = StyleSheet.create({
     height: 30,
     alignItems: "center",
     justifyContent: "center"
+  },
+  header: {
+    fontFamily: "Roboto",
+    fontSize: 50,
+    paddingTop: 50,
+    color: colors.secondaryLight3
   }
 });

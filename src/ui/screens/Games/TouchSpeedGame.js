@@ -42,8 +42,19 @@ export default class TouchSpeedGame extends Component {
       pressCounter: 0,
       gameStatus: "info", // info - active - finished
       remainingTime: TIMEOUT_MS,
-      progress: 1,
+      progress: 1
     };
+  }
+
+  reinitialize = () => {
+    this.setState({
+      pressCounter: 0,
+      gameStatus: "info", // info - active - finished
+      remainingTime: TIMEOUT_MS,
+      progress: 1
+    });
+    clearInterval(this.tick);
+    clearTimeout(this.endGameTimeout);
   }
 
   componentWillMount() {
@@ -99,6 +110,9 @@ export default class TouchSpeedGame extends Component {
         <DelayedText delay={300} style={styles.bigText} >
           {`You have pressed the screen ${this.state.pressCounter} times in ${TIMEOUT_MS / 1000} seconds`}
         </DelayedText>
+        <View style={{ paddingTop: 20}}>
+          <CustomButton style={{ flex: 1, alignItems: "center", justifyContent: "center" }} text="Restart" onPress={this.reinitialize}/>
+        </View>
       </View>
     );
   }
