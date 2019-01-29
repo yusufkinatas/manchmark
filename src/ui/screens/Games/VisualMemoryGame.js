@@ -21,7 +21,7 @@ import CustomButton from "../../../components/CustomButton";
 import BouncingText from '../../../components/BouncingText';
 import SwappingText from '../../../components/SwappingText';
 
-const SHOW_DURATION = 2000;
+const SHOW_DURATION = 1000;
 const TOP_BAR_HEIGHT = 100
 
 export default class VisualMemoryGame extends Component {
@@ -96,7 +96,7 @@ export default class VisualMemoryGame extends Component {
             this.setState({ isAnimating: false });
             resolve();
           });
-        }, 500);
+        }, 300);
       });
     })
   }
