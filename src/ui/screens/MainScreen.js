@@ -129,9 +129,9 @@ var styles = StyleSheet.create({
     fontSize: 40,
     textShadowColor: colors.secondaryDark,
     textShadowOffset: { width: 3, height: 3 },
+    textShadowRadius: 3,
     width: _SCREEN.width,
     textAlign: "center",
-    textShadowRadius: 3,
     color: colors.secondaryLight3
   }
 });

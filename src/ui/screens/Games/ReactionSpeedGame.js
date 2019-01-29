@@ -56,7 +56,7 @@ export default class ReactionSpeedGame extends Component {
 
     clearTimeout(this.timer);
 
-    this.setState({gameStatus: "info", playingState: "waiting"});
+    this.setState({ gameStatus: "info", playingState: "waiting" });
   }
 
   componentWillUpdate() {
@@ -91,7 +91,7 @@ export default class ReactionSpeedGame extends Component {
       return (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
           <TouchableOpacity style={styles.touchableArea} onPressIn={() => this.setState({ playingState: "waiting" })}>
-            <Text style={styles.bigText}>{this.reactionTime[this.phase - 1]} ms</Text>
+            <Text style={styles.hugeText}>{this.reactionTime[this.phase - 1]} ms</Text>
             <Text style={styles.hintText} >Press the screen for the next phase!</Text>
           </TouchableOpacity>
         </View>
@@ -101,7 +101,7 @@ export default class ReactionSpeedGame extends Component {
       return (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
           <TouchableOpacity style={{ ...styles.touchableArea, backgroundColor: colors.failure }} activeOpacity={1} onPressIn={() => this.setState({ playingState: "waiting" })}>
-            <Text style={styles.bigText}>You pressed early!</Text>
+            <Text style={styles.hugeText}>TOO EARLY!</Text>
             <Text style={styles.hintText} >Press the screen for the next phase!</Text>
           </TouchableOpacity>
         </View>
@@ -115,7 +115,7 @@ export default class ReactionSpeedGame extends Component {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
         <TouchableOpacity style={{ ...styles.touchableArea, backgroundColor: colors.primary }} onPressIn={this.onAnswer}>
-          <Text style={styles.bigText}>Press Now!</Text>
+          <Text style={styles.hugeText}>PRESS</Text>
         </TouchableOpacity>
       </View>
     );
@@ -128,7 +128,7 @@ export default class ReactionSpeedGame extends Component {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
         <TouchableOpacity style={styles.touchableArea} text='tikla' onPressIn={this.onWrongAnswer}>
-          <Text style={styles.bigText}>Wait for it</Text>
+          <Text style={styles.hugeText}>WAIT</Text>
         </TouchableOpacity>
       </View>
     );
@@ -182,8 +182,8 @@ export default class ReactionSpeedGame extends Component {
         <DelayedText style={styles.bigText} delay={2000}>Phase 3: {this.reactionTime[2]}ms</DelayedText>
         <DelayedText style={styles.bigText} delay={2500}>Phase 4: {this.reactionTime[3]}ms</DelayedText>
         <DelayedText style={styles.bigText} delay={3000}>Phase 5: {this.reactionTime[4]}ms</DelayedText>
-        <View style={{ paddingTop: 20}}>
-        <CustomButton style={{ flex: 1, alignItems: "center", justifyContent: "center" }} text="Restart" onPress={this.reinitialize}/>
+        <View style={{ paddingTop: 20 }}>
+          <CustomButton style={{ flex: 1, alignItems: "center", justifyContent: "center" }} text="Restart" onPress={this.reinitialize} />
         </View>
       </View>
     );
@@ -225,14 +225,20 @@ var styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: colors.secondary
   },
-
+  hugeText: {
+    fontSize: 50,
+    fontWeight: "bold",
+    textShadowColor: colors.secondaryDark,
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
+    color: colors.secondaryLight3,
+  },
   bigText: {
     fontSize: 20,
     color: colors.secondaryLight3,
     textAlign: "center",
     paddingHorizontal: 20
   },
-
   hintText: {
     fontSize: 14,
     position: "absolute",
@@ -242,9 +248,8 @@ var styles = StyleSheet.create({
     paddingBottom: 20,
     bottom: 20
   },
-
   touchableArea: {
-    alignItems: "center", 
+    alignItems: "center",
     justifyContent: "center",
     position: "absolute",
     zIndex: 99,
