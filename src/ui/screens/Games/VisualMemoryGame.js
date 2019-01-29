@@ -65,6 +65,23 @@ export default class VisualMemoryGame extends Component {
     });
   }
 
+  reinitialize = () => {
+    this.isAnimating = false;
+    this.levelAnim = new Animated.Value(0);
+    
+    clearTimeout(this.animationTimeout);
+    clearTimeout(this.levelAnimationTimer);
+
+    this.setState({
+      gameStatus: "info",
+      score: 0,
+      level: 0,
+      lives: 5,
+      squares: []
+    });
+    this.buttonsEnabled = true;
+  }
+
   componentWillUnmount() {
     clearTimeout(this.animationTimeout);
     clearTimeout(this.levelAnimationTimer);
@@ -301,6 +318,9 @@ export default class VisualMemoryGame extends Component {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
         <Text style={styles.bigText} >{`Your score is ${this.state.score}`}</Text>
+        <View style={{ paddingTop: 20}}>
+          <CustomButton style={{ flex: 1, alignItems: "center", justifyContent: "center" }} text="Restart" onPress={this.reinitialize}/>
+        </View>
       </View>
     );
   }

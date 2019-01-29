@@ -49,6 +49,19 @@ export default class TypingSpeedGame extends Component {
     };
   }
 
+  reinitialize = () => {
+    this.usedWords = [];
+    clearTimeout(this.endGameTimeout);
+
+    this.setState( {
+      gameStatus: "info",
+      score: 0,
+      question: "",
+      word: ["", "", ""],
+      trueAnswer: 0,
+    });
+  }
+
   componentWillMount() {
     console.log("componentWillMount");
   }
@@ -174,6 +187,9 @@ export default class TypingSpeedGame extends Component {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
         <Text style={styles.bigText} >{`Your score is ${this.state.score}`}</Text>
+        <View style={{ paddingTop: 20}}>
+          <CustomButton style={{ flex: 1, alignItems: "center", justifyContent: "center" }} text="Restart" onPress={this.reinitialize}/>
+        </View>
       </View>
     );
   }
