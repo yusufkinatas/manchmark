@@ -60,8 +60,12 @@ export default class MainScreen extends Component {
   render() {
     return (
       <View style={styles.container} >
-      <Text style={styles.header}>Manchmark</Text>
-        <View style={{ flex: 1, justifyContent: "center", marginBottom: 60 }} >
+
+        <View style={styles.topBarContainer} >
+          <Text style={styles.header}>Manchmark</Text>
+        </View>
+
+        <View style={styles.mainButtonsContainer} >
           <CustomButton icon="superscript" text="Calculation Speed" onPress={() => this.pushScreen("CalculationSpeedGame")} />
           <CustomButton icon="list-ol" text="Number Memory" onPress={() => this.pushScreen("NumberMemoryGame")} />
           <CustomButton icon="bolt" text="Reaction Speed" onPress={() => this.pushScreen("ReactionSpeedGame")} />
@@ -98,6 +102,16 @@ var styles = StyleSheet.create({
     fontSize: 15,
     color: colors.secondaryLight3
   },
+  topBarContainer: {
+    height: 56,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  mainButtonsContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
   bottomBarContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -112,8 +126,12 @@ var styles = StyleSheet.create({
   },
   header: {
     fontFamily: "Roboto",
-    fontSize: 50,
-    paddingTop: 50,
+    fontSize: 40,
+    textShadowColor: colors.secondaryDark,
+    textShadowOffset: { width: 3, height: 3 },
+    width: _SCREEN.width,
+    textAlign: "center",
+    textShadowRadius: 3,
     color: colors.secondaryLight3
   }
 });
