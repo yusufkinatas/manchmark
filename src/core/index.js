@@ -4,3 +4,4 @@ export { initialization } from './initialization';
 export { ram } from './ram';
 export { utils } from "./utils";
 export { nav } from "./nav";
+export { api } from "./api";

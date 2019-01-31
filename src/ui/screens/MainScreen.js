@@ -12,20 +12,11 @@ import {
   Linking
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import { setRootViewBackgroundColor } from 'react-native-root-view-background';
 
 import { store, _APP_SETTINGS, _SCREEN, ram, nav } from "../../core";
 import CustomButton from "../../components/CustomButton";
 
 export default class MainScreen extends Component {
-
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    setRootViewBackgroundColor(colors.secondary);
-  }
 
   pushScreen = (screen) => {
     nav.pushScreen(this.props.componentId, screen);

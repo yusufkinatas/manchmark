@@ -1,5 +1,6 @@
 import { Navigation } from 'react-native-navigation';
 
+import LoginScreen from './screens/LoginScreen';
 import MainScreen from './screens/MainScreen';
 import PlaygroundScreen from './screens/PlaygroundScreen';
 
@@ -18,6 +19,7 @@ import VisualMemoryGame from './screens/Games/VisualMemoryGame';
 
 export function registerScreens() {
 
+  Navigation.registerComponent('LoginScreen', () => LoginScreen);
   Navigation.registerComponent('MainScreen', () => MainScreen);
   Navigation.registerComponent('Playground', () => PlaygroundScreen);
 

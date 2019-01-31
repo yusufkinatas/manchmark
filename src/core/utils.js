@@ -1,4 +1,5 @@
 import { store } from "./store";
+import { Alert } from "react-native";
 
 export const utils = {
 
@@ -7,7 +8,7 @@ export const utils = {
   },
 
   randomDoubleBetween: (min, max) => {
-    return Math.round((Math.random() * (max - min) + min) * 1000 ) / 1000;
+    return Math.round((Math.random() * (max - min) + min) * 1000) / 1000;
   },
 
   increaseOrDecrease: (number, max) => {
