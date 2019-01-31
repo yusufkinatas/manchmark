@@ -3,6 +3,7 @@ package com.manchmark;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.reactlibrary.RNRootViewBackgroundPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -42,6 +43,7 @@ public class MainApplication extends NavigationApplication {
         return Arrays.<ReactPackage>asList(
             // eg. new VectorIconsPackage()
             new VectorIconsPackage(),
+            new RNDeviceInfo(),
             new RNRootViewBackgroundPackage()
         );
     }
