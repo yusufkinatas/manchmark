@@ -35,7 +35,6 @@ export const nav = {
           }
         }
       });
-
       Navigation.setDefaultOptions({
         topBar: {
           background: {
@@ -47,6 +46,10 @@ export const nav = {
           backButton: {
             color: colors.secondaryLight3,
           }
+        },
+        layout: {
+          orientation: ["portrait"],
+          backgroundColor: colors.secondary
         },
         animations: {
           setRoot: {
@@ -61,7 +64,7 @@ export const nav = {
               alpha: {
                 from: 0,
                 to: 1,
-                duration: 500,
+                duration: 350,
                 interpolation: 'accelerate'
               }
             }
@@ -71,8 +74,7 @@ export const nav = {
               alpha: {
                 from: 1,
                 to: 0,
-                duration: 500,
-                interpolation: 'accelerate'
+                duration: 250,
               }
             }
           }

@@ -53,7 +53,7 @@ export default class TypingSpeedGame extends Component {
     this.usedWords = [];
     clearTimeout(this.endGameTimeout);
 
-    this.setState( {
+    this.setState({
       gameStatus: "info",
       score: 0,
       question: "",
@@ -107,14 +107,7 @@ export default class TypingSpeedGame extends Component {
   }
 
   onChangeText = (text) => {
-    // if (text[text.length - 1] != ' ') {
-    //   this.userAnswer = text;
-    // }
-    // else {
-    //   this.onAnswer(this.userAnswer);
-    //   this.textInputRef.clear();
-    // }
-    this.onAnswer(text);
+    this.onAnswer(text.toLowerCase());
   }
 
   onAnswer = (answer) => {
@@ -134,7 +127,7 @@ export default class TypingSpeedGame extends Component {
     if (index != -1) {
       this.usedWords.push(answer);
       tmpArray[index] = this.generateNewWord();
-      this.setState({ word: tmpArray, score: this.state.score + 50, });
+      this.setState({ word: tmpArray, score: this.state.score + answer.length * 5, });
       this.textInputRef.clear();
     }
   }
@@ -186,10 +179,17 @@ export default class TypingSpeedGame extends Component {
 
   renderFinish = () => {
     return (
+<<<<<<< HEAD
       <View style={Generics.container} >
         <Text style={Generics.bigText} >{`Your score is ${this.state.score}`}</Text>
         <View style={{ paddingTop: 20}}>
           <CustomButton style={Generics.container} text="Restart" onPress={this.reinitialize}/>
+=======
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
+        <Text style={styles.bigText} >{`Your score is ${this.state.score}`}</Text>
+        <View style={{ paddingTop: 20 }}>
+          <CustomButton style={{ flex: 1, alignItems: "center", justifyContent: "center" }} text="Restart" onPress={this.reinitialize} />
+>>>>>>> 6eb5174f045013728bb40f53f60dc4e0f7ae0df0
         </View>
       </View>
     );

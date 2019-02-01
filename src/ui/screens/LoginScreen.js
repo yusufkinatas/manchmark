@@ -57,10 +57,6 @@ export default class MainScreen extends Component {
     nav.showGame();
   }
 
-  pushScreen = (screen) => {
-    nav.pushScreen(this.props.componentId, screen);
-  }
-
   onChooseNickname = () => {
     if (this.state.nickname.trim().length < 3 || this.state.nickname.trim().length > 20) {
       this.setState({ warningText: "Nickname must contain between 3 and 20 characters" });
