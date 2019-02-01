@@ -18,7 +18,7 @@ import { setRootViewBackgroundColor } from 'react-native-root-view-background';
 import validator from "validator";
 import _ from "lodash";
 
-import { store, _APP_SETTINGS, _SCREEN, ram, nav, api, utils } from "../../core";
+import { store, _APP_SETTINGS, _SCREEN, nav, api, utils, user } from "../../core";
 import CustomButton from "../../components/CustomButton";
 
 export default class MainScreen extends Component {
@@ -31,29 +31,45 @@ export default class MainScreen extends Component {
       warningText: "",
       nickname: ""
     }
+
+    NetInfo.addEventListener("connectionChange", (res) => {
+      console.log("connectionChange", res.type);
+      if (res && res.type != "none") {
+        console.log("isConnected", true);
+        user.set({ isConnected: true });
+      }
+      else {
+        user.set({ isConnected: false });
+        console.log("isConnected", false);
+      }
+    })
   }
 
   componentDidMount() {
     setRootViewBackgroundColor(colors.secondary);
-    if (ram.get("isConnected")) {
-      api.login().then((res) => {
-        var user = _.omit(res.data, ["tokens", "__v", "_id"]);
-        user.authToken = res.headers["x-auth"];
-        this.startGame(user);
-      }).catch(err => {
-        //login olamazsa yeni bir cihaz demektir, yeni kayıt aç
-        this.setState({ isLoading: false });
-      });
-    }
-    else {
-      this.startGame({nickname: "User"});
-    }
+
+    NetInfo.isConnected.fetch().then(isConnected => {
+      user.set({ isConnected });
+      if (user.get().isConnected) {
+        api.login().then((res) => {
+          var userData = _.omit(res.data, ["tokens", "__v", "_id"]);
+          userData.authToken = res.headers["x-auth"];
+          user.set(userData);
+          this.startGame();
+        }).catch(err => {
+          //login olamazsa yeni bir cihaz demektir, yeni kayıt aç
+          this.setState({ isLoading: false });
+        });
+      }
+      else {
+        this.startGame();
+      }
+
+    })
 
   }
 
-  startGame = (user) => {
-    console.log("user", user);
-    ram.set("user", user);
+  startGame = () => {
     nav.showGame();
   }
 

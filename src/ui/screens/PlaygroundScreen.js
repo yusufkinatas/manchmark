@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, ram } from "../../core";
+import { store, _APP_SETTINGS, _SCREEN } from "../../core";
 import CounterBar from "../../components/CounterBar";
 import DelayedText from "../../components/DelayedText";
 

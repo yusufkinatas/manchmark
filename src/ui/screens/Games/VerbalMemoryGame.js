@@ -14,7 +14,11 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, ram, utils, Generics } from "../../../core";
+<<<<<<< HEAD
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics } from "../../../core";
+=======
+import { store, _APP_SETTINGS, _SCREEN, utils } from "../../../core";
+>>>>>>> dcf61eb986f047a80706d4a9c84fc2ef2ebb68e4
 import CustomButton from "../../../components/CustomButton";
 import SwappingText from "../../../components/SwappingText";
 const WORDS = require("../../../res/wordsEn.json").wordsEn;

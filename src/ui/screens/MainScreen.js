@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
-import { store, _APP_SETTINGS, _SCREEN, ram, nav } from "../../core";
+import { store, _APP_SETTINGS, _SCREEN, nav } from "../../core";
 import CustomButton from "../../components/CustomButton";
 
 export default class MainScreen extends Component {

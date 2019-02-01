@@ -15,7 +15,11 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, ram, utils, Generics } from "../../../core";
+<<<<<<< HEAD
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics } from "../../../core";
+=======
+import { store, _APP_SETTINGS, _SCREEN, utils } from "../../../core";
+>>>>>>> dcf61eb986f047a80706d4a9c84fc2ef2ebb68e4
 import CounterBar from "../../../components/CounterBar";
 import CustomButton from "../../../components/CustomButton";
 import SwappingText from "../../../components/SwappingText";
@@ -179,17 +183,10 @@ export default class TypingSpeedGame extends Component {
 
   renderFinish = () => {
     return (
-<<<<<<< HEAD
       <View style={Generics.container} >
         <Text style={Generics.bigText} >{`Your score is ${this.state.score}`}</Text>
         <View style={{ paddingTop: 20}}>
           <CustomButton style={Generics.container} text="Restart" onPress={this.reinitialize}/>
-=======
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
-        <Text style={styles.bigText} >{`Your score is ${this.state.score}`}</Text>
-        <View style={{ paddingTop: 20 }}>
-          <CustomButton style={{ flex: 1, alignItems: "center", justifyContent: "center" }} text="Restart" onPress={this.reinitialize} />
->>>>>>> 6eb5174f045013728bb40f53f60dc4e0f7ae0df0
         </View>
       </View>
     );
