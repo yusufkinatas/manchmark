@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, ram, utils } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, utils } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
 import BouncingText from '../../../components/BouncingText';
 import SwappingText from '../../../components/SwappingText';

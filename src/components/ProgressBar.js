@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, ram, nav } from "../core"
+import { store, _APP_SETTINGS, _SCREEN, nav } from "../core"
 
 export default class ProgressBar extends Component {
 
