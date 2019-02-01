@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, ram, utils } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, ram, utils, Generics } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
 import BouncingText from '../../../components/BouncingText';
 import SwappingText from '../../../components/SwappingText';
@@ -191,10 +191,10 @@ export default class VisualMemoryGame extends Component {
 
   renderInfo = () => {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
+      <View style={Generics.container} >
 
         <Animated.View style={{ paddingBottom: 20 }} >
-          <Text style={styles.bigText} >Try to remember the special tiles</Text>
+          <Text style={Generics.bigText} >Try to remember the special tiles</Text>
         </Animated.View>
         <CustomButton text="Start" onPress={this.startGame} />
       </View>
@@ -280,7 +280,7 @@ export default class VisualMemoryGame extends Component {
             }}
           >
             <View style={{ width: _SCREEN.width, paddingVertical: 20, justifyContent: "center", alignItems: "center", backgroundColor: colors.secondaryDark }} >
-              <Text style={styles.bigText} >LEVEL {this.state.level}</Text>
+              <Text style={Generics.bigText} >LEVEL {this.state.level}</Text>
             </View>
           </Animated.View>
         }
@@ -294,9 +294,9 @@ export default class VisualMemoryGame extends Component {
           justifyContent: "space-between",
           paddingHorizontal: 20
         }} >
-          <BouncingText style={{ ...styles.text, textAlign: "center" }} >Level: {this.state.level}</BouncingText>
-          <BouncingText style={{ ...styles.bigText, fontWeight: "bold" }} >Score: {this.state.score}</BouncingText>
-          <SwappingText style={{ ...styles.text, textAlign: "center" }} >Lives: {this.state.lives}</SwappingText>
+          <BouncingText style={{ ...Generics.text, textAlign: "center" }} >Level: {this.state.level}</BouncingText>
+          <BouncingText style={{ ...Generics.bigText, fontWeight: "bold" }} >Score: {this.state.score}</BouncingText>
+          <SwappingText style={{ ...Generics.text, textAlign: "center" }} >Lives: {this.state.lives}</SwappingText>
         </View>
 
         <View
@@ -316,10 +316,10 @@ export default class VisualMemoryGame extends Component {
 
   renderFinish = () => {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
-        <Text style={styles.bigText} >{`Your score is ${this.state.score}`}</Text>
+      <View style={Generics.container} >
+        <Text style={Generics.bigText} >{`Your score is ${this.state.score}`}</Text>
         <View style={{ paddingTop: 20}}>
-          <CustomButton style={{ flex: 1, alignItems: "center", justifyContent: "center" }} text="Restart" onPress={this.reinitialize}/>
+          <CustomButton style={Generics.container} text="Restart" onPress={this.reinitialize}/>
         </View>
       </View>
     );
@@ -327,7 +327,7 @@ export default class VisualMemoryGame extends Component {
 
   render() {
     return (
-      <View style={styles.container} >
+      <View style={Generics.container} >
         {this.state.gameStatus == "info" && this.renderInfo()}
 
         {this.state.gameStatus == "active" && this.renderGame()}
@@ -339,22 +339,3 @@ export default class VisualMemoryGame extends Component {
 }
 
 const colors = _APP_SETTINGS.colors;
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.secondary
-  },
-  text: {
-    fontSize: 15,
-    color: colors.secondaryLight3
-  },
-  bigText: {
-    fontSize: 20,
-    color: colors.secondaryLight3,
-    textAlign: "center",
-    paddingHorizontal: 20
-  },
-})

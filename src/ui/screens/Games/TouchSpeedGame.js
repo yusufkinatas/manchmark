@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, ram } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, ram, Generics } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
 import CounterBar from "../../../components/CounterBar";
 import BouncingText from "../../../components/BouncingText";
@@ -84,10 +84,10 @@ export default class TouchSpeedGame extends Component {
 
   renderInfo = () => {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
+      <View style={Generics.container} >
 
         <View style={{ paddingBottom: 20 }} >
-          <Text style={styles.bigText} >Press the screen as fast as you can</Text>
+          <Text style={Generics.bigText} >Press the screen as fast as you can</Text>
         </View>
         <CustomButton text="Start" onPress={this.startGame} />
       </View>
@@ -96,8 +96,8 @@ export default class TouchSpeedGame extends Component {
 
   renderGame = () => {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", width: _SCREEN.width }}>
-        <TouchableOpacity activeOpacity={1} onPressIn={this.pressed} style={styles.touchableArea} />
+      <View style={{ ...Generics.container, width: _SCREEN.width }}>
+        <TouchableOpacity activeOpacity={1} onPressIn={this.pressed} style={Generics.touchableArea} />
         <BouncingText style={styles.pressCountText} >{this.state.pressCounter}</BouncingText>
         <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={colors.primary} />
       </View>
@@ -106,12 +106,12 @@ export default class TouchSpeedGame extends Component {
 
   renderFinish = () => {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
-        <DelayedText delay={300} style={styles.bigText} >
+      <View style={Generics.container} >
+        <DelayedText delay={300} style={Generics.bigText} >
           {`You have pressed the screen ${this.state.pressCounter} times in ${TIMEOUT_MS / 1000} seconds`}
         </DelayedText>
         <View style={{ paddingTop: 20}}>
-          <CustomButton style={{ flex: 1, alignItems: "center", justifyContent: "center" }} text="Restart" onPress={this.reinitialize}/>
+          <CustomButton style={Generics.container} text="Restart" onPress={this.reinitialize}/>
         </View>
       </View>
     );
@@ -124,7 +124,7 @@ export default class TouchSpeedGame extends Component {
 
   render() {
     return (
-      <View style={styles.container} >
+      <View style={Generics.container} >
 
         {this.state.gameStatus == "info" && this.renderInfo()}
 
@@ -140,30 +140,6 @@ export default class TouchSpeedGame extends Component {
 const colors = _APP_SETTINGS.colors;
 
 var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.secondary,
-  },
-  touchableArea: {
-    position: "absolute",
-    zIndex: 99,
-    left: 0,
-    top: 0,
-    right: 0,
-    bottom: 0,
-  },
-  text: {
-    fontSize: 15,
-    color: colors.secondaryLight3
-  },
-  bigText: {
-    fontSize: 20,
-    color: colors.secondaryLight3,
-    textAlign: "center",
-    paddingHorizontal: 20
-  },
   pressCountText: {
     fontSize: 70,
     color: colors.primary,

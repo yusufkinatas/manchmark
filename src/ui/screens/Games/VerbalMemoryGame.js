@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, ram, utils } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, ram, utils, Generics } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
 import SwappingText from "../../../components/SwappingText";
 const WORDS = require("../../../res/wordsEn.json").wordsEn;
@@ -106,9 +106,9 @@ export default class VerbalMemoryGame extends Component {
 
   renderInfo = () => {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
+      <View style={Generics.container} >
         <View style={{ paddingBottom: 20 }} >
-          <Text style={styles.bigText} >Try to remember all words</Text>
+          <Text style={Generics.bigText} >Try to remember all words</Text>
         </View>
         <CustomButton text="Start" onPress={this.startGame} />
       </View>
@@ -117,16 +117,16 @@ export default class VerbalMemoryGame extends Component {
 
   renderGame = () => {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <SwappingText style={styles.wordText}  >
+      <View style={Generics.container}>
+        <SwappingText style={Generics.hugeText} >
           {this.state.word && this.state.word[0].toUpperCase()}{this.state.word.slice(1)}
         </SwappingText>
         <View style={styles.answerButtonsContainer} >
           <TouchableOpacity onPress={() => this.onAnswer("seen")} style={styles.answerButton} >
-            <Text style={styles.answerText} >SEEN</Text>
+            <Text style={{...Generics.bigText, fontWeight: "bold"}} >SEEN</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.onAnswer("new")} style={{ ...styles.answerButton, marginLeft: 0 }} >
-            <Text style={styles.answerText} >NEW</Text>
+            <Text style={{...Generics.bigText, fontWeight: "bold"}} >NEW</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -135,10 +135,10 @@ export default class VerbalMemoryGame extends Component {
 
   renderFinish = () => {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
-        <Text style={styles.bigText} >{`You answered correctly ${this.state.score} times`}</Text>
+      <View style={Generics.container}>
+        <Text style={Generics.bigText} >{`You answered correctly ${this.state.score} times`}</Text>
         <View style={{ paddingTop: 20}}>
-          <CustomButton style={{ flex: 1, alignItems: "center", justifyContent: "center" }} text="Restart" onPress={this.reinitialize}/>
+          <CustomButton style={Generics.container} text="Restart" onPress={this.reinitialize}/>
         </View>
       </View>
     );
@@ -146,7 +146,7 @@ export default class VerbalMemoryGame extends Component {
 
   render() {
     return (
-      <View style={styles.container} >
+      <View style={Generics.container} >
         {this.state.gameStatus == "info" && this.renderInfo()}
 
         {this.state.gameStatus == "active" && this.renderGame()}
@@ -160,29 +160,6 @@ export default class VerbalMemoryGame extends Component {
 const colors = _APP_SETTINGS.colors;
 
 var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.secondary
-  },
-  text: {
-    fontSize: 15,
-    color: colors.secondaryLight3
-  },
-  bigText: {
-    fontSize: 20,
-    color: colors.secondaryLight3,
-    textAlign: "center",
-    paddingHorizontal: 20
-  },
-  wordText: {
-    fontSize: 35,
-    color: colors.secondaryLight3,
-    fontWeight: "bold",
-    width: _SCREEN.width,
-    textAlign: "center"
-  },
   answerButtonsContainer: {
     flexDirection: "row",
     width: _SCREEN.width,
@@ -197,11 +174,5 @@ var styles = StyleSheet.create({
     borderRadius: 50,
     alignItems: "center",
     justifyContent: "center"
-  },
-  answerText: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: colors.secondaryLight3
-  },
-
+  }
 })

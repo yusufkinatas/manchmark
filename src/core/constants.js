@@ -47,6 +47,7 @@ export const Generics = StyleSheet.create({
       paddingHorizontal: 10
     },
     touchableArea: {
+      width: _SCREEN.width,
       alignItems: "center",
       justifyContent: "center",
       position: "absolute",
@@ -94,6 +95,10 @@ export const Generics = StyleSheet.create({
         fontWeight: "bold",
         width: _SCREEN.width,
         textAlign: "center"
+      },
+      text: {
+        fontSize: 15,
+        color: colors.secondaryLight3
       }
   });
 

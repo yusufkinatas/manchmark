@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, ram, utils } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, ram, utils, Generics } from "../../../core";
 import CounterBar from "../../../components/CounterBar";
 import CustomButton from "../../../components/CustomButton";
 import SwappingText from "../../../components/SwappingText";
@@ -97,10 +97,11 @@ export default class TypingSpeedGame extends Component {
 
   renderInfo = () => {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
-        <Text style={styles.bigText} >Write as much word as possible in {TIMEOUT_MS / 1000} seconds</Text>
+      <View style={Generics.container} >
+        <Text style={Generics.bigText} >Write as much word as possible in {TIMEOUT_MS / 1000} seconds</Text>
+        <View style={{height: 20}}></View>
         <CustomButton text="Start" onPress={this.startGame} />
-        <Text style={styles.hintText} >Hint: You can write any one of the 3 words in any order!</Text>
+        <Text style={Generics.hintText} >Hint: You can write any one of the 3 words in any order!</Text>
       </View>
     );
   }
@@ -140,22 +141,22 @@ export default class TypingSpeedGame extends Component {
 
   renderGame = () => {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={Generics.container}>
         <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={colors.primary} />
-        <BouncingText style={styles.bigText}>Score: {this.state.score}</BouncingText>
+        <BouncingText style={Generics.bigText}>Score: {this.state.score}</BouncingText>
         <View style={{ height: 10 }} />
 
         <View style={{ flexDirection: "row", backgroundColor: "#164e2b" }} >
-          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }} >
-            <SwappingText style={styles.questionText} >{this.state.word[0]}</SwappingText>
+          <View style={Generics.container} >
+            <SwappingText style={Generics.questionText} >{this.state.word[0]}</SwappingText>
           </View>
 
-          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }} >
-            <SwappingText style={styles.questionText} >{this.state.word[1]}</SwappingText>
+          <View style={Generics.container} >
+            <SwappingText style={Generics.questionText} >{this.state.word[1]}</SwappingText>
           </View>
 
-          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }} >
-            <SwappingText style={styles.questionText} >{this.state.word[2]}</SwappingText>
+          <View style={Generics.container} >
+            <SwappingText style={Generics.questionText} >{this.state.word[2]}</SwappingText>
           </View>
         </View>
 
@@ -185,10 +186,10 @@ export default class TypingSpeedGame extends Component {
 
   renderFinish = () => {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
-        <Text style={styles.bigText} >{`Your score is ${this.state.score}`}</Text>
+      <View style={Generics.container} >
+        <Text style={Generics.bigText} >{`Your score is ${this.state.score}`}</Text>
         <View style={{ paddingTop: 20}}>
-          <CustomButton style={{ flex: 1, alignItems: "center", justifyContent: "center" }} text="Restart" onPress={this.reinitialize}/>
+          <CustomButton style={Generics.container} text="Restart" onPress={this.reinitialize}/>
         </View>
       </View>
     );
@@ -196,7 +197,7 @@ export default class TypingSpeedGame extends Component {
 
   render() {
     return (
-      <View style={styles.container} >
+      <View style={Generics.container} >
         {this.state.gameStatus == "info" && this.renderInfo()}
         {this.state.gameStatus == "active" && this.renderGame()}
         {this.state.gameStatus == "finished" && this.renderFinish()}
@@ -206,50 +207,3 @@ export default class TypingSpeedGame extends Component {
 }
 
 const colors = _APP_SETTINGS.colors;
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: colors.secondary
-  },
-  text: {
-    fontSize: 15,
-    color: colors.secondaryLight3
-  },
-  hintText: {
-    fontSize: 14,
-    position: "absolute",
-    color: colors.secondaryLight2,
-    textAlign: "center",
-    paddingHorizontal: 20,
-    paddingBottom: 20,
-    bottom: 20
-  },
-  bigText: {
-    fontSize: 20,
-    color: colors.secondaryLight3,
-    textAlign: "center",
-    paddingHorizontal: 10
-  },
-  questionText: {
-    fontSize: 25,
-    color: colors.secondaryLight3,
-    textAlign: "center",
-    paddingVertical: 10
-  },
-  button: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    borderWidth: 1,
-    borderColor: colors.primary,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderRadius: 50,
-    width: _SCREEN.width * 0.65,
-    marginBottom: 10,
-  },
-})
