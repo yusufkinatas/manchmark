@@ -15,7 +15,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import _ from "lodash";
 
-import { store, _APP_SETTINGS, _SCREEN, ram, utils } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, ram, utils, Generics } from "../../../core";
 import CounterBar from "../../../components/CounterBar";
 import CustomButton from "../../../components/CustomButton";
 
@@ -106,10 +106,10 @@ export default class NumberMemoryGame extends Component {
 
   renderInfo = () => {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
+      <View style={Generics.container} >
 
         <View style={{ paddingBottom: 20 }} >
-          <Text style={styles.bigText} >Remember the numbers</Text>
+          <Text style={Generics.bigText} >Remember the numbers</Text>
         </View>
         <CustomButton text="Start" onPress={this.startGame} />
       </View>
@@ -118,10 +118,10 @@ export default class NumberMemoryGame extends Component {
 
   renderGame = () => {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={Generics.container}>
         {this.state.isGuessing ?
           <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <Text style={styles.bigText} >What was the number?</Text>
+            <Text style={Generics.bigText} >What was the number?</Text>
             <TextInput
               onChangeText={this.onChangeText}
               autoCapitalize={"none"}
@@ -146,7 +146,8 @@ export default class NumberMemoryGame extends Component {
           </View>
           :
           <View style={{ justifyContent: "center", alignItems: "center" }} >
-            <Text style={styles.numberText} >{this.state.number}</Text>
+            <Text style={Generics.hugeText} >{this.state.number}</Text>
+            <View style={{height:10}}></View>
             <CounterBar time={(this.numberLength + 1) * 1000} width={_SCREEN.width * 0.8} color={colors.primary} />
           </View>
         }
@@ -157,10 +158,10 @@ export default class NumberMemoryGame extends Component {
 
   renderFinish = () => {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
-        <Text style={styles.bigText} >{`You answered correctly ${this.numberLength - 1} times`}</Text>
+      <View style={Generics.container} >
+        <Text style={Generics.bigText} >{`You answered correctly ${this.numberLength - 1} times`}</Text>
         <View style={{ paddingTop: 20}}>
-        <CustomButton style={{ flex: 1, alignItems: "center", justifyContent: "center" }} text="Restart" onPress={this.reinitialize}/>
+        <CustomButton style={Generics.container} text="Restart" onPress={this.reinitialize}/>
         </View>
       </View>
     );
@@ -168,7 +169,7 @@ export default class NumberMemoryGame extends Component {
 
   render() {
     return (
-      <View style={styles.container} >
+      <View style={Generics.container} >
         {this.state.gameStatus == "info" && this.renderInfo()}
 
         {this.state.gameStatus == "active" && this.renderGame()}
@@ -180,29 +181,3 @@ export default class NumberMemoryGame extends Component {
 }
 
 const colors = _APP_SETTINGS.colors;
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.secondary
-  },
-  numberText: {
-    fontSize: 35,
-    color: colors.secondaryLight3,
-    fontWeight: "bold",
-    width: _SCREEN.width,
-    textAlign: "center"
-  },
-  text: {
-    fontSize: 15,
-    color: colors.secondaryLight3
-  },
-  bigText: {
-    fontSize: 20,
-    color: colors.secondaryLight3,
-    textAlign: "center",
-    paddingHorizontal: 20
-  },
-})
