@@ -14,11 +14,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-<<<<<<< HEAD
 import { store, _APP_SETTINGS, _SCREEN, Generics } from "../../../core";
-=======
-import { store, _APP_SETTINGS, _SCREEN } from "../../../core";
->>>>>>> dcf61eb986f047a80706d4a9c84fc2ef2ebb68e4
 import CustomButton from "../../../components/CustomButton";
 import CounterBar from "../../../components/CounterBar";
 import BouncingText from "../../../components/BouncingText";
