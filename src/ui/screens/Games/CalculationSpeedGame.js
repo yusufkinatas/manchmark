@@ -24,18 +24,6 @@ import BouncingText from "../../../components/BouncingText";
 const TIMEOUT_MS = 30000;
 const QUESTION_FUNCTIONS = [
   (x, y, z) => ({
-    text: `${x} + ${y} - ${z} = ?`,
-    answer: x + y - z
-  }),
-  (x, y, z) => ({
-    text: `${x} + ${y} + ${z} = ?`,
-    answer: x + y + z
-  }),
-  (x, y, z) => ({
-    text: `${x} + ${y % 10 + 1} X ${z % 10 + 1} = ?`,
-    answer: x + (y % 10 + 1) * (z % 10 + 1)
-  }),
-  (x, y, z) => ({
     text: `${x} + ${y} = ?`,
     answer: x + y
   }),
@@ -43,6 +31,24 @@ const QUESTION_FUNCTIONS = [
     text: `${x} - ${y} = ?`,
     answer: x - y
   }),
+  (x, y, z) => {
+    if (x > 1 && y > 1 && y < 10 && x < 10) {
+      return {
+        text: `${x} X ${y} = ?`,
+        answer: x * y
+      }
+    }
+    return { answer: -1 }
+  },
+  (x, y, z) => {
+    if (y != 1 && x != y && x <= 30) {
+      return {
+        text: `${x} ÷ ${y} = ?`,
+        answer: x / y
+      }
+    }
+    return { answer: -1 }
+  },
 ]
 
 export default class CalculationSpeedGame extends Component {
@@ -75,7 +81,7 @@ export default class CalculationSpeedGame extends Component {
       question: "",
       trueAnswer: 0
     });
-    
+
     this.backgroundAnim = new Animated.Value(0);
     clearTimeout(this.endGameTimeout);
   }
@@ -116,15 +122,15 @@ export default class CalculationSpeedGame extends Component {
     let x, y, z;
     let randomQuestion;
     do {
-      x = utils.randomBetween(1, 20);
-      y = utils.randomBetween(1, 20);
-      z = utils.randomBetween(1, 20);
+      x = utils.randomBetween(1, 50);
+      y = utils.randomBetween(1, 50);
+      z = utils.randomBetween(1, 50);
       randomQuestion = QUESTION_FUNCTIONS[Math.floor(Math.random() * QUESTION_FUNCTIONS.length)](x, y, z);
       if (this.textInputRef) {
         this.textInputRef.clear();
       }
       this.trueAnswer = randomQuestion.answer;
-    } while (this.trueAnswer < 0);
+    } while (this.trueAnswer < 0 || (this.trueAnswer - Math.floor(this.trueAnswer)) != 0);
     this.setState({ question: randomQuestion.text });
   }
 
@@ -187,14 +193,16 @@ export default class CalculationSpeedGame extends Component {
             textAlign: 'center',
             fontSize: 25,
             color: colors.secondaryLight3,
-            marginBottom: 20}}
+            marginBottom: 20
+          }}
           underlineColorAndroid={"transparent"}
-          keyboardType="phone-pad"/>
+          keyboardType="phone-pad" />
         <TouchableOpacity style={Generics.button} onPress={this.onAnswer} >
           <Animated.View style={{
             ...StyleSheet.absoluteFill,
             backgroundColor: this.state.backgroundColor,
-            opacity: backgroundOpacity}} />
+            opacity: backgroundOpacity
+          }} />
           <Text style={styles.text} >ANSWER</Text>
         </TouchableOpacity>
       </View>
@@ -205,8 +213,8 @@ export default class CalculationSpeedGame extends Component {
     return (
       <View style={Generics.container} >
         <Text style={Generics.bigText} >{`Your score is ${this.state.score}`}</Text>
-        <View style={{ paddingTop: 20}}>
-        <CustomButton style={Generics.container} text="Restart" onPress={this.reinitialize}/>
+        <View style={{ paddingTop: 20 }}>
+          <CustomButton style={Generics.container} text="Restart" onPress={this.reinitialize} />
         </View>
       </View>
     );
