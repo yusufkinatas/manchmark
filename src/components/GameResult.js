@@ -58,7 +58,7 @@ export default class GameResult extends Component {
 
   componentDidMount() {
     console.log(this.state)
-    if (this.state.highScore == null || (this.props.game == "ReactionSpeedGame" && this.state.highScore > this.state.currentScore) || (this.props.game != "ReactionSpeedGame" && this.state.highScore < this.state.currentScore)) {
+    if (this.state.highScore == null || this.state.highScore < this.state.currentScore) {
 
       if (user.get().isConnected) {
 
@@ -88,13 +88,13 @@ export default class GameResult extends Component {
       <View style={Generics.container}>
 
         <DelayedText delay={0} style={Generics.bigText} >{`Your Score: ${this.state.currentScore}`}</DelayedText>
-        <DelayedText delay={400} style={Generics.bigText} >{`Your Highscore: ${this.state.highScore ? this.state.highScore : "-"}`}</DelayedText>
+        <DelayedText delay={200} style={Generics.bigText} >{`Your Highscore: ${this.state.highScore ? this.state.highScore : "-"}`}</DelayedText>
         <View style={{ height: 20 }} />
-        <DelayedText delay={800} style={Generics.bigText} >{this.state.text}</DelayedText>
-        <DelayedText delay={1200} style={Generics.errorText} >{this.state.errorText}</DelayedText>
+        <DelayedText delay={400} style={Generics.bigText} >{this.state.text}</DelayedText>
+        <DelayedText delay={600} style={Generics.errorText} >{this.state.errorText}</DelayedText>
         {
           this.props.onRestart &&
-          <DelayedView delay={this.state.errorText ? 1600 : 1200} style={{ paddingTop: 20 }}>
+          <DelayedView delay={this.state.errorText ? 800 : 600} style={{ paddingTop: 20 }}>
             <CustomButton style={Generics.container} text="Restart" onPress={this.props.onRestart} />
           </DelayedView>
         }

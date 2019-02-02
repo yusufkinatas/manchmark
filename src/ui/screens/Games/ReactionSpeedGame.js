@@ -177,15 +177,18 @@ export default class ReactionSpeedGame extends Component {
   renderFinish() {
     return (
       <View style={Generics.container}>
-        <DelayedText style={Generics.bigText} delay={1000}>Phase 1: {this.reactionTime[0]}ms</DelayedText>
-        <DelayedText style={Generics.bigText} delay={1500}>Phase 2: {this.reactionTime[1]}ms</DelayedText>
-        <DelayedText style={Generics.bigText} delay={2000}>Phase 3: {this.reactionTime[2]}ms</DelayedText>
-        <DelayedText style={Generics.bigText} delay={2500}>Phase 4: {this.reactionTime[3]}ms</DelayedText>
-        <DelayedText style={Generics.bigText} delay={3000}>Phase 5: {this.reactionTime[4]}ms</DelayedText>
+        <View style={{ paddingTop: 20 }} >
+          <DelayedText style={Generics.bigText} delay={0}>Your average reaction time : {this.findAverage()}</DelayedText>
+          <DelayedText style={Generics.bigText} delay={100}>Phase 1: {this.reactionTime[0]}ms</DelayedText>
+          <DelayedText style={Generics.bigText} delay={200}>Phase 2: {this.reactionTime[1]}ms</DelayedText>
+          <DelayedText style={Generics.bigText} delay={300}>Phase 3: {this.reactionTime[2]}ms</DelayedText>
+          <DelayedText style={Generics.bigText} delay={400}>Phase 4: {this.reactionTime[3]}ms</DelayedText>
+          <DelayedText style={Generics.bigText} delay={500}>Phase 5: {this.reactionTime[4]}ms</DelayedText>
+        </View>
         <GameResult
           onRestart={this.reinitialize}
           game="ReactionSpeedGame"
-          score={this.findAverage()}
+          score={this.findSum()}
         />
       </View>
     );
@@ -204,7 +207,19 @@ export default class ReactionSpeedGame extends Component {
     if (count != 0) {
       average = Math.round((average / count * 100)) / 100
     }
-    return average;
+    return average ? average + "ms" : "-";
+  }
+
+  findSum = () => {
+    let index;
+    let sum = 0;
+    for (index = 0; index < this.reactionTime.length; index++) {
+      if (this.reactionTime[index] != 0) {
+        sum += 10000 / this.reactionTime[index];
+      }
+    }
+    sum = Math.round((sum * 100)) / 100;
+    return sum;
   }
 
   render() {
