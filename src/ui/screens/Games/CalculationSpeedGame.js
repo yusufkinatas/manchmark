@@ -121,14 +121,15 @@ export default class CalculationSpeedGame extends Component {
   showNewQuestion = () => {
     let x, y, z;
     let randomQuestion;
+    let randomIndex = Math.floor(Math.random() * QUESTION_FUNCTIONS.length);
+    if (this.textInputRef) {
+      this.textInputRef.clear();
+    }
     do {
       x = utils.randomBetween(1, 50);
       y = utils.randomBetween(1, 50);
       z = utils.randomBetween(1, 50);
-      randomQuestion = QUESTION_FUNCTIONS[Math.floor(Math.random() * QUESTION_FUNCTIONS.length)](x, y, z);
-      if (this.textInputRef) {
-        this.textInputRef.clear();
-      }
+      randomQuestion = QUESTION_FUNCTIONS[randomIndex](x, y, z);
       this.trueAnswer = randomQuestion.answer;
     } while (this.trueAnswer < 0 || (this.trueAnswer - Math.floor(this.trueAnswer)) != 0);
     this.setState({ question: randomQuestion.text });
