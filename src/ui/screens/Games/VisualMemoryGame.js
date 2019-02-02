@@ -20,6 +20,7 @@ import { store, _APP_SETTINGS, _SCREEN, utils, Generics } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
 import BouncingText from '../../../components/BouncingText';
 import SwappingText from '../../../components/SwappingText';
+import GameResult from '../../../components/GameResult';
 
 const SHOW_DURATION = 1000;
 const TOP_BAR_HEIGHT = 100
@@ -316,12 +317,11 @@ export default class VisualMemoryGame extends Component {
 
   renderFinish = () => {
     return (
-      <View style={Generics.container} >
-        <Text style={Generics.bigText} >{`Your score is ${this.state.score}`}</Text>
-        <View style={{ paddingTop: 20}}>
-          <CustomButton style={Generics.container} text="Restart" onPress={this.reinitialize}/>
-        </View>
-      </View>
+      <GameResult
+        onRestart={this.reinitialize}
+        game="VisualMemoryGame"
+        score={this.state.score}
+      />
     );
   }
 

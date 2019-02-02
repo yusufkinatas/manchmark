@@ -18,6 +18,7 @@ import _ from "lodash";
 import { store, _APP_SETTINGS, _SCREEN, utils, Generics } from "../../../core";
 import CounterBar from "../../../components/CounterBar";
 import CustomButton from "../../../components/CustomButton";
+import GameResult from '../../../components/GameResult';
 
 export default class NumberMemoryGame extends Component {
 
@@ -147,7 +148,7 @@ export default class NumberMemoryGame extends Component {
           :
           <View style={{ justifyContent: "center", alignItems: "center" }} >
             <Text style={Generics.hugeText} >{this.state.number}</Text>
-            <View style={{height:10}}></View>
+            <View style={{ height: 10 }}></View>
             <CounterBar time={(this.numberLength + 1) * 1000} width={_SCREEN.width * 0.8} color={colors.primary} />
           </View>
         }
@@ -158,12 +159,11 @@ export default class NumberMemoryGame extends Component {
 
   renderFinish = () => {
     return (
-      <View style={Generics.container} >
-        <Text style={Generics.bigText} >{`You answered correctly ${this.numberLength - 1} times`}</Text>
-        <View style={{ paddingTop: 20}}>
-        <CustomButton style={Generics.container} text="Restart" onPress={this.reinitialize}/>
-        </View>
-      </View>
+      <GameResult
+        onRestart={this.reinitialize}
+        game="NumberMemoryGame"
+        score={this.numberLength - 1}
+      />
     );
   }
 

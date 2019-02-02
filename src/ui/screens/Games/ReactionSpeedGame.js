@@ -17,6 +17,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { store, _APP_SETTINGS, _SCREEN, utils, Generics } from "../../../core";
 import CustomButton from '../../../components/CustomButton';
 import DelayedText from '../../../components/DelayedText';
+import GameResult from '../../../components/GameResult';
 
 export default class ReactionSpeedGame extends Component {
 
@@ -176,15 +177,16 @@ export default class ReactionSpeedGame extends Component {
   renderFinish() {
     return (
       <View style={Generics.container}>
-        <DelayedText style={Generics.hugeText} delay={500}>Average: {this.findAverage()}ms</DelayedText>
         <DelayedText style={Generics.bigText} delay={1000}>Phase 1: {this.reactionTime[0]}ms</DelayedText>
         <DelayedText style={Generics.bigText} delay={1500}>Phase 2: {this.reactionTime[1]}ms</DelayedText>
         <DelayedText style={Generics.bigText} delay={2000}>Phase 3: {this.reactionTime[2]}ms</DelayedText>
         <DelayedText style={Generics.bigText} delay={2500}>Phase 4: {this.reactionTime[3]}ms</DelayedText>
         <DelayedText style={Generics.bigText} delay={3000}>Phase 5: {this.reactionTime[4]}ms</DelayedText>
-        <View style={{ paddingTop: 20 }}>
-          <CustomButton style={Generics.container} text="Restart" onPress={this.reinitialize} />
-        </View>
+        <GameResult
+          onRestart={this.reinitialize}
+          game="ReactionSpeedGame"
+          score={this.findAverage()}
+        />
       </View>
     );
   }

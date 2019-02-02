@@ -17,6 +17,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { store, _APP_SETTINGS, _SCREEN, utils, Generics } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
 import SwappingText from "../../../components/SwappingText";
+import DelayedView from "../../../components/DelayedView";
+import GameResult from '../../../components/GameResult';
 const WORDS = require("../../../res/wordsEn.json").wordsEn;
 
 export default class VerbalMemoryGame extends Component {
@@ -123,10 +125,10 @@ export default class VerbalMemoryGame extends Component {
         </SwappingText>
         <View style={styles.answerButtonsContainer} >
           <TouchableOpacity onPress={() => this.onAnswer("seen")} style={styles.answerButton} >
-            <Text style={{...Generics.bigText, fontWeight: "bold"}} >SEEN</Text>
+            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >SEEN</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.onAnswer("new")} style={{ ...styles.answerButton, marginLeft: 0 }} >
-            <Text style={{...Generics.bigText, fontWeight: "bold"}} >NEW</Text>
+            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >NEW</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -135,12 +137,11 @@ export default class VerbalMemoryGame extends Component {
 
   renderFinish = () => {
     return (
-      <View style={Generics.container}>
-        <Text style={Generics.bigText} >{`You answered correctly ${this.state.score} times`}</Text>
-        <View style={{ paddingTop: 20}}>
-          <CustomButton style={Generics.container} text="Restart" onPress={this.reinitialize}/>
-        </View>
-      </View>
+      <GameResult
+        onRestart={this.reinitialize}
+        game="VerbalMemoryGame"
+        score={this.state.score}
+      />
     );
   }
 

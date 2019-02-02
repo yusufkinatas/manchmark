@@ -18,8 +18,9 @@ import { setRootViewBackgroundColor } from 'react-native-root-view-background';
 import validator from "validator";
 import _ from "lodash";
 
-import { store, _APP_SETTINGS, _SCREEN, nav, api, utils, user } from "../../core";
+import { store, _APP_SETTINGS, _SCREEN, nav, api, utils, user, Generics } from "../../core";
 import CustomButton from "../../components/CustomButton";
+import LoadingIndicator from "../../components/LoadingIndicator";
 
 export default class MainScreen extends Component {
 
@@ -27,8 +28,7 @@ export default class MainScreen extends Component {
     super(props);
     this.state = {
       isLoading: true,
-      loadingText: "Loading...",
-      warningText: "",
+      errorText: "",
       nickname: ""
     }
 
@@ -51,13 +51,14 @@ export default class MainScreen extends Component {
     NetInfo.isConnected.fetch().then(isConnected => {
       user.set({ isConnected });
       if (user.get().isConnected) {
-        api.login().then((res) => {
+        api.login(user.get().deviceID).then((res) => {
           var userData = _.omit(res.data, ["tokens", "__v", "_id"]);
           userData.authToken = res.headers["x-auth"];
           user.set(userData);
           this.startGame();
         }).catch(err => {
           //login olamazsa yeni bir cihaz demektir, yeni kayıt aç
+          console.log(user.get().deviceID, err)
           this.setState({ isLoading: false });
         });
       }
@@ -70,19 +71,20 @@ export default class MainScreen extends Component {
   }
 
   startGame = () => {
+    console.log("USER", user.get())
     nav.showGame();
   }
 
   onChooseNickname = () => {
     if (this.state.nickname.trim().length < 3 || this.state.nickname.trim().length > 20) {
-      this.setState({ warningText: "Nickname must contain between 3 and 20 characters" });
+      this.setState({ errorText: "Nickname must contain between 3 and 20 characters" });
     }
     else if (!validator.isAlphanumeric(this.state.nickname.trim())) {
-      this.setState({ warningText: "Nickname can contain only english letters and numbers" });
+      this.setState({ errorText: "Nickname can contain only english letters and numbers" });
     }
     else {
       this.setState({ isLoading: true });
-      api.signup(this.state.nickname)
+      api.signup(this.state.nickname, user.get().deviceID)
         .then((res) => {
           var user = _.omit(res.data, ["tokens", "__v", "_id"]);
           user.authToken = res.headers["x-auth"];
@@ -91,7 +93,7 @@ export default class MainScreen extends Component {
         .catch(err => {
           console.log("err", JSON.stringify(err, undefined, 2));
           console.log("err", err);
-          this.setState({ warningText: "This nickname is already in use", isLoading: false });
+          this.setState({ errorText: "This nickname is already in use", isLoading: false });
         });
     }
 
@@ -99,10 +101,7 @@ export default class MainScreen extends Component {
 
   renderLoading = () => {
     return (
-      <View>
-        <ActivityIndicator size="large" color={colors.primary} />
-        <Text style={styles.bigText} >{this.state.loadingText}</Text>
-      </View>
+      <LoadingIndicator />
     );
   }
 
@@ -127,7 +126,7 @@ export default class MainScreen extends Component {
           placeholderTextColor={colors.secondaryLight2}
           underlineColorAndroid={"transparent"}
         />
-        <Text style={styles.warningText} >{this.state.warningText}</Text>
+        <Text style={Generics.errorText} >{this.state.errorText}</Text>
         <CustomButton text="CHOOSE" onPress={this.onChooseNickname} />
         <CustomButton text="Temporarybutton" onPress={() => {
           alert("test")
@@ -175,13 +174,6 @@ var styles = StyleSheet.create({
   bigText: {
     fontSize: 25,
     color: colors.secondaryLight3
-  },
-  warningText: {
-    fontSize: 14,
-    paddingHorizontal: 10,
-    textAlign: "center",
-    color: colors.failure,
-    marginBottom: 5,
   },
   header: {
     fontFamily: "Roboto",

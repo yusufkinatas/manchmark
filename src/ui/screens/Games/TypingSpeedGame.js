@@ -20,6 +20,7 @@ import CounterBar from "../../../components/CounterBar";
 import CustomButton from "../../../components/CustomButton";
 import SwappingText from "../../../components/SwappingText";
 import BouncingText from "../../../components/BouncingText";
+import GameResult from '../../../components/GameResult';
 
 const TIMEOUT_MS = 30000;
 const WORDS = require("../../../res/wordsEn.json").wordsEn;
@@ -179,12 +180,11 @@ export default class TypingSpeedGame extends Component {
 
   renderFinish = () => {
     return (
-      <View style={Generics.container} >
-        <Text style={Generics.bigText} >{`Your score is ${this.state.score}`}</Text>
-        <View style={{ paddingTop: 20}}>
-          <CustomButton style={Generics.container} text="Restart" onPress={this.reinitialize}/>
-        </View>
-      </View>
+      <GameResult
+        onRestart={this.reinitialize}
+        game="TypingSpeedGame"
+        score={this.state.score}
+      />
     );
   }
 

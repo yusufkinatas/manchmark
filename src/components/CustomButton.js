@@ -46,17 +46,17 @@ var styles = StyleSheet.create({
   button: {
     flexDirection: "row",
     alignItems: "center",
-    borderWidth: 1,
-    borderColor: colors.primary,
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 50,
     width: _SCREEN.width * 0.60,
-    marginBottom: 10
+    marginBottom: 10,
+    backgroundColor: colors.primary
   },
   text: {
     fontSize: 15,
     color: colors.secondaryLight3,
+    fontWeight: "bold",
   },
 
 });

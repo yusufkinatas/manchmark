@@ -19,6 +19,7 @@ import CustomButton from "../../../components/CustomButton";
 import CounterBar from "../../../components/CounterBar";
 import BouncingText from "../../../components/BouncingText";
 import DelayedText from "../../../components/DelayedText";
+import GameResult from '../../../components/GameResult';
 
 
 const TIMEOUT_MS = 10000;
@@ -106,14 +107,11 @@ export default class TouchSpeedGame extends Component {
 
   renderFinish = () => {
     return (
-      <View style={Generics.container} >
-        <DelayedText delay={300} style={Generics.bigText} >
-          {`You have pressed the screen ${this.state.pressCounter} times in ${TIMEOUT_MS / 1000} seconds`}
-        </DelayedText>
-        <View style={{ paddingTop: 20}}>
-          <CustomButton style={Generics.container} text="Restart" onPress={this.reinitialize}/>
-        </View>
-      </View>
+      <GameResult
+        onRestart={this.reinitialize}
+        game="TouchSpeedGame"
+        score={this.state.pressCounter}
+      />
     );
   }
 
