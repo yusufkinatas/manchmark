@@ -49,7 +49,6 @@ export const nav = {
         },
         layout: {
           orientation: ["portrait"],
-          backgroundColor: colors.secondary
         },
         animations: {
           setRoot: {

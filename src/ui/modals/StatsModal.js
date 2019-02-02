@@ -17,14 +17,10 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN } from "../../core";
+import { store, _APP_SETTINGS, _SCREEN, user } from "../../core";
 import CustomButton from '../../components/CustomButton';
 
 export default class StatsModal extends Component {
-
-  constructor(props) {
-    super(props);
-  }
 
   static options(passProps) {
     return {
@@ -33,19 +29,49 @@ export default class StatsModal extends Component {
     };
   }
 
+  constructor(props) {
+    super(props);
+    this.anim = new Animated.Value(0);
+  }
+
+  componentWillMount() {
+    Animated.timing(this.anim, {
+      duration: 250,
+      toValue: 1,
+      useNativeDriver: true
+    }).start();
+  }
+
+  dissmissModal = () => {
+    Animated.timing(this.anim, {
+      duration: 250,
+      toValue: 0,
+      useNativeDriver: true
+    }).start();
+    Navigation.dismissModal(this.props.componentId);
+  }
+
   render() {
     return (
       <View style={styles.container} >
         <TouchableOpacity
           style={styles.touchableArea}
           activeOpacity={1}
-          onPressIn={() => Navigation.dismissModal(this.props.componentId)}
+          onPressIn={this.dissmissModal}
         />
-        <View style={styles.innerContainer} >
+        <Animated.View
+          style={{
+            ...styles.innerContainer,
+            translateY: this.anim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [_SCREEN.height * 0.15, 0]
+            })
+          }}
+        >
           <Text style={styles.bigText} >Calculation Speed: %12.10</Text>
           <Text style={styles.bigText} >Personal Best: %20.25</Text>
-          <CustomButton text="Close" onPress={() => Navigation.dismissModal(this.props.componentId)} />
-        </View>
+          <CustomButton text="Close" onPress={this.dissmissModal} />
+        </Animated.View>
       </View>
     );
   }
@@ -58,7 +84,7 @@ var styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(0,0,0,0.5)"
+    backgroundColor: "rgba(0,0,0,0.6)"
   },
   innerContainer: {
     width: _SCREEN.width * 0.8,

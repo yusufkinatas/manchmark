@@ -22,15 +22,33 @@ import CustomButton from '../../components/CustomButton';
 
 export default class AboutUsModal extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   static options(passProps) {
     return {
       screenBackgroundColor: 'transparent',
       modalPresentationStyle: 'overCurrentContext',
     };
+  }
+
+  constructor(props) {
+    super(props);
+    this.anim = new Animated.Value(0);
+  }
+
+  componentWillMount() {
+    Animated.timing(this.anim, {
+      duration: 250,
+      toValue: 1,
+      useNativeDriver: true
+    }).start();
+  }
+
+  dissmissModal = () => {
+    Animated.timing(this.anim, {
+      duration: 250,
+      toValue: 0,
+      useNativeDriver: true
+    }).start();
+    Navigation.dismissModal(this.props.componentId);
   }
 
   render() {
@@ -39,13 +57,21 @@ export default class AboutUsModal extends Component {
         <TouchableOpacity
           style={styles.touchableArea}
           activeOpacity={1}
-          onPressIn={() => Navigation.dismissModal(this.props.componentId)}
+          onPressIn={this.dissmissModal}
         />
-        <View style={styles.innerContainer} >
+        <Animated.View
+          style={{
+            ...styles.innerContainer,
+            translateY: this.anim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [_SCREEN.height * 0.15, 0]
+            })
+          }}
+        >
           <Text style={styles.bigText} >Yusuf Emin Kınataş</Text>
           <Text style={styles.bigText} >Yağız Akyüz</Text>
-          <CustomButton text="Close" onPress={() => Navigation.dismissModal(this.props.componentId)} />
-        </View>
+          <CustomButton text="Close" onPress={this.dissmissModal} />
+        </Animated.View>
       </View>
     );
   }
@@ -58,7 +84,7 @@ var styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(0,0,0,0.5)"
+    backgroundColor: "rgba(0,0,0,0.6)"
   },
   innerContainer: {
     width: _SCREEN.width * 0.8,
