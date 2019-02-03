@@ -1,2 +1,0 @@
-TOUCH SPEED GAME
-* progressbar tasarımı değişmeli

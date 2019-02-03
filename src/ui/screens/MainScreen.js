@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
-import { store, _APP_SETTINGS, _SCREEN, nav } from "../../core";
+import { store, _APP_SETTINGS, _SCREEN, nav, Generics } from "../../core";
 import CustomButton from "../../components/CustomButton";
 
 export default class MainScreen extends Component {
@@ -50,13 +50,13 @@ export default class MainScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container} >
+      <View style={Generics.container} >
 
         <View style={styles.topBarContainer} >
-          <Text style={styles.header}>Manchmark</Text>
+          <Text style={Generics.header}>Manchmark</Text>
         </View>
 
-        <View style={styles.mainButtonsContainer} >
+        <View style={Generics.container} >
           <CustomButton icon="superscript" text="Calculation Speed" onPress={() => this.pushScreen("CalculationSpeedGame")} />
           <CustomButton icon="list-ol" text="Number Memory" onPress={() => this.pushScreen("NumberMemoryGame")} />
           <CustomButton icon="bolt" text="Reaction Speed" onPress={() => this.pushScreen("ReactionSpeedGame")} />
@@ -83,25 +83,11 @@ export default class MainScreen extends Component {
 const colors = _APP_SETTINGS.colors;
 
 var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.secondary
-  },
-  text: {
-    fontSize: 15,
-    color: colors.secondaryLight3
-  },
   topBarContainer: {
-    height: 56,
+    marginTop: 70,
+    height: 60,
     justifyContent: "center",
     alignItems: "center",
-  },
-  mainButtonsContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
   },
   bottomBarContainer: {
     flexDirection: "row",
@@ -114,15 +100,5 @@ var styles = StyleSheet.create({
     height: 30,
     alignItems: "center",
     justifyContent: "center"
-  },
-  header: {
-    fontFamily: "Roboto",
-    fontSize: 40,
-    textShadowColor: colors.secondaryDark,
-    textShadowOffset: { width: 3, height: 3 },
-    textShadowRadius: 3,
-    width: _SCREEN.width,
-    textAlign: "center",
-    color: colors.secondaryLight3
   }
 });

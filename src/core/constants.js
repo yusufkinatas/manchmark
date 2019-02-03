@@ -60,7 +60,7 @@ export const Generics = StyleSheet.create({
   },
   header: {
     fontFamily: "Roboto",
-    fontSize: 40,
+    fontSize: 50,
     textShadowColor: colors.secondaryDark,
     textShadowOffset: { width: 3, height: 3 },
     textShadowRadius: 3,
