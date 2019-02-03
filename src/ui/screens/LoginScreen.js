@@ -66,7 +66,7 @@ export default class MainScreen extends Component {
         this.startGame();
       }
 
-    })
+    });
 
   }
 
@@ -86,7 +86,7 @@ export default class MainScreen extends Component {
       this.setState({ isLoading: true });
       api.signup(this.state.nickname, user.get().deviceID)
         .then((res) => {
-          var user = _.omit(res.data, ["tokens", "__v", "_id"]);
+          var user = _.omit(res, ["tokens", "__v", "_id"]);
           user.authToken = res.headers["x-auth"];
           this.startGame(user);
         })

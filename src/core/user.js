@@ -26,15 +26,27 @@ export const user = {
 
       api.updateHighscores(user.get().authToken, { [highScoreName]: score })
         .then(res => {
-          console.log("updateHighscore res", res);
           _user[highScoreName] = score;
           resolve();
         })
         .catch(err => {
-          console.log("updateHighscore err", err);
           reject();
         })
     });
-  }
+  },
+
+  getRank: (game) => {
+
+    return new Promise((resolve, reject) => {
+
+      api.getRank(_user.nickname, game)
+        .then(res => {
+          resolve(res.data);
+        })
+        .catch(err => {
+          reject(err);
+        })
+    });
+  },
 
 };
