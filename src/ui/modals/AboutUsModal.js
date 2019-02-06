@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN } from "../../core";
+import { store, _APP_SETTINGS, _SCREEN, Generics } from "../../core";
 import CustomButton from '../../components/CustomButton';
 
 export default class AboutUsModal extends Component {
@@ -53,9 +53,9 @@ export default class AboutUsModal extends Component {
 
   render() {
     return (
-      <View style={styles.container} >
+    <View style={{...Generics.container, backgroundColor: "rgba(0,0,0,0.6)"}} >
         <TouchableOpacity
-          style={styles.touchableArea}
+          style={Generics.touchableArea}
           activeOpacity={1}
           onPressIn={this.dissmissModal}
         />
@@ -66,10 +66,27 @@ export default class AboutUsModal extends Component {
               inputRange: [0, 1],
               outputRange: [_SCREEN.height * 0.15, 0]
             })
-          }}
-        >
-          <Text style={styles.bigText} >Yusuf Emin Kınataş</Text>
-          <Text style={styles.bigText} >Yağız Akyüz</Text>
+          }}>
+          <View style={{flexDirection: "row"}}>
+            <View style={{overflow: "hidden", borderColor: colors.secondaryLight, borderRadius: 50, borderWidth: 1, elevation: 20}}>
+              <Image
+              source={require('../../res/icon-flat.png')}
+              style={styles.imageStyle}
+              />
+            </View>
+            <View>
+              <Text style={styles.bigText}>Manchmark</Text>
+              <Text style={styles.smallText}>{_APP_SETTINGS.versionString}</Text>
+            </View>
+          </View>
+          <View style={{paddingTop: 20}}>
+            <View style={{marginBottom:5, flexDirection: "row"}}>
+              <Text style={styles.smallText} >Yusuf Kınataş</Text>
+              <Text style={styles.smallText} >&</Text>
+              <Text style={styles.smallText} >Yağız Akyüz</Text>
+            </View>
+            <Text style={styles.copyRightText}>© Copyright 2018, All Rights Reserved.</Text>
+          </View>
           <CustomButton text="Close" onPress={this.dissmissModal} />
         </Animated.View>
       </View>
@@ -80,12 +97,6 @@ export default class AboutUsModal extends Component {
 const colors = _APP_SETTINGS.colors;
 
 var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "rgba(0,0,0,0.6)"
-  },
   innerContainer: {
     width: _SCREEN.width * 0.8,
     paddingVertical: 10,
@@ -96,22 +107,32 @@ var styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.primary
   },
-  touchableArea: {
-    zIndex: -1,
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    position: "absolute"
-  },
   closeButton: {
     paddingVertical: 5,
     paddingHorizontal: 10,
   },
   bigText: {
-    fontSize: 20,
+    fontSize: 25,
     color: colors.secondaryLight3,
     textAlign: "center",
-    marginBottom: 10
+    paddingTop: 5,
+    paddingLeft: 5
   },
+  imageStyle: {
+    height:50,
+    width: 50
+  },
+  smallText: {
+    fontSize: 12,
+    color: colors.secondaryLight2,
+    textAlign: "left",
+    paddingLeft: 5
+  },
+  copyRightText: {
+    fontSize: 10,
+    color: colors.secondaryLight,
+    textAlign: "left",
+    paddingLeft: 5,
+    marginBottom: 10
+  }
 })

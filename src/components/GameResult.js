@@ -75,7 +75,7 @@ export default class GameResult extends Component {
 
     }
     else {
-      this.setState({ isLoading: false, text: "Repetition is the mother of skill" });
+      this.setState({ isLoading: false, text: "Repetition is the key to success!" });
     }
   }
 

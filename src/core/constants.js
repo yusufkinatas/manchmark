@@ -11,6 +11,7 @@ export const _SCREEN = {
 }
 
 export const _APP_SETTINGS = {
+  versionString: "Version 0.1.0",
   colors: {
     primary: '#1db954',
     secondary: '#212121',
