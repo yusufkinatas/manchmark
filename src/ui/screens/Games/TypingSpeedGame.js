@@ -82,9 +82,12 @@ export default class TypingSpeedGame extends Component {
 
   startGame = () => {
     let tmpArray = ["", "", ""];
-    tmpArray[0] = this.generateNewWord();
-    tmpArray[1] = this.generateNewWord();
-    tmpArray[2] = this.generateNewWord();
+    // tmpArray[0] = this.generateNewWord();
+    // tmpArray[1] = this.generateNewWord();
+    // tmpArray[2] = this.generateNewWord();
+    tmpArray[0] = "workout";
+    tmpArray[1] = "hek";
+    tmpArray[2] = "jejimsi";
 
     this.setState({ gameStatus: "active", word: tmpArray });
     this.endGameTimeout = setTimeout(() => {
@@ -100,7 +103,7 @@ export default class TypingSpeedGame extends Component {
     return (
       <View style={Generics.container} >
         <Text style={Generics.bigText} >Write as much word as possible in {TIMEOUT_MS / 1000} seconds</Text>
-        <View style={{height: 20}}></View>
+        <View style={{ height: 20 }}></View>
         <CustomButton text="Start" onPress={this.startGame} />
         <Text style={Generics.hintText} >Hint: You can write any one of the 3 words in any order!</Text>
       </View>
@@ -140,16 +143,16 @@ export default class TypingSpeedGame extends Component {
         <BouncingText style={Generics.bigText}>Score: {this.state.score}</BouncingText>
         <View style={{ height: 10 }} />
 
-        <View style={{ flexDirection: "row", backgroundColor: "#164e2b" }} >
-          <View style={Generics.container} >
+        <View style={{ flexDirection: "row", }} >
+          <View style={styles.wordContainer} >
             <SwappingText style={Generics.questionText} >{this.state.word[0]}</SwappingText>
           </View>
 
-          <View style={Generics.container} >
+          <View style={styles.wordContainer} >
             <SwappingText style={Generics.questionText} >{this.state.word[1]}</SwappingText>
           </View>
 
-          <View style={Generics.container} >
+          <View style={styles.wordContainer} >
             <SwappingText style={Generics.questionText} >{this.state.word[2]}</SwappingText>
           </View>
         </View>
@@ -200,3 +203,16 @@ export default class TypingSpeedGame extends Component {
 }
 
 const colors = _APP_SETTINGS.colors;
+const styles = StyleSheet.create({
+  wordContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 5,
+    borderWidth: 2,
+    borderColor: "#164e2b",
+    paddingVertical: 5,
+    backgroundColor: colors.primary,
+    borderRadius: 10,
+    flex: 1
+  },
+});

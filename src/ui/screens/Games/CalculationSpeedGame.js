@@ -143,7 +143,7 @@ export default class CalculationSpeedGame extends Component {
     }).start(() => {
       Animated.timing(this.backgroundAnim, {
         toValue: 0,
-        duration: 250,
+        duration: 300,
         useNativeDriver: true
       }).start();
     });
@@ -185,14 +185,17 @@ export default class CalculationSpeedGame extends Component {
 
     return (
       <View style={Generics.container}>
-        <Animated.View style={{
-          ...StyleSheet.absoluteFill,
-          backgroundColor: this.state.backgroundColor,
-          opacity: backgroundOpacity
-        }} />
+
         <View style={Generics.container} >
           <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={colors.primary} />
-          <BouncingText style={Generics.bigText} >Score: {this.state.score}</BouncingText>
+          <View style={{paddingVertical: 5, paddingHorizontal: 10, borderRadius: 10, overflow:"hidden" }} >
+            <Animated.View style={{
+              ...StyleSheet.absoluteFill,
+              backgroundColor: this.state.backgroundColor,
+              opacity: backgroundOpacity
+            }} />
+            <BouncingText style={Generics.bigText} >Score: {this.state.score}</BouncingText>
+          </View>
           <View style={{ height: 10 }} />
           <SwappingText style={Generics.questionText} >{this.state.question}</SwappingText>
 
@@ -207,7 +210,6 @@ export default class CalculationSpeedGame extends Component {
               color: colors.secondaryLight3,
               marginBottom: 20
             }}
-            numberOfLines={1}
           >{this.state.text}</Text>
         </View>
 

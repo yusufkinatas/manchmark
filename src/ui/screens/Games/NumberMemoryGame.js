@@ -140,7 +140,6 @@ export default class NumberMemoryGame extends Component {
                   color: colors.secondaryLight3,
                   marginBottom: 20
                 }}
-                numberOfLines={1}
               >{this.state.userAnswer}</Text>
             </View>
 
@@ -150,7 +149,7 @@ export default class NumberMemoryGame extends Component {
           </View>
           :
           <View style={{ justifyContent: "center", alignItems: "center" }} >
-            <Text style={Generics.hugeText} >{this.state.number}</Text>
+            <Text style={{ ...Generics.hugeText, textAlign: "center" }} >{this.state.number}</Text>
             <View style={{ height: 10 }}></View>
             <CounterBar time={(this.numberLength + 1) * 1000} width={_SCREEN.width * 0.8} color={colors.primary} />
           </View>

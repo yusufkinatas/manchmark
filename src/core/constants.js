@@ -91,7 +91,7 @@ export const Generics = StyleSheet.create({
     marginBottom: 10,
   },
   questionText: {
-    fontSize: 35,
+    fontSize: 25,
     color: colors.secondaryLight3,
     fontWeight: "bold",
     width: _SCREEN.width,
