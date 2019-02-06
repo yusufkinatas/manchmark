@@ -143,7 +143,7 @@ export default class TypingSpeedGame extends Component {
         <BouncingText style={Generics.bigText}>Score: {this.state.score}</BouncingText>
         <View style={{ height: 10 }} />
 
-        <View style={{ flexDirection: "row", }} >
+        <View style={{ flexDirection: "row", backgroundColor: colors.primary }} >
           <View style={styles.wordContainer} >
             <SwappingText style={Generics.questionText} >{this.state.word[0]}</SwappingText>
           </View>
@@ -208,10 +208,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginHorizontal: 5,
-    borderWidth: 2,
-    borderColor: "#164e2b",
     paddingVertical: 5,
-    backgroundColor: colors.primary,
     borderRadius: 10,
     flex: 1
   },

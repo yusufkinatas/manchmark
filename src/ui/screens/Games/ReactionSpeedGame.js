@@ -19,6 +19,27 @@ import CustomButton from '../../../components/CustomButton';
 import DelayedText from '../../../components/DelayedText';
 import GameResult from '../../../components/GameResult';
 
+const CalculatePoint = [
+  () => {
+    return 150;
+  },
+  (x) => {
+    let a = (x * x) / 392;
+    let b = - (55 / 49) * x;
+    let c = 223.4693;
+    return (Math.round((a + b + c) * 1000) / 1000);
+  },
+  (x) => {
+    let a = (x * x) / 3364;
+    let b = - (400 / 841) * x;
+    let c = 190.2497;
+    return (Math.round((a + b + c) * 1000) / 1000);
+  },
+  () => {
+    return 0;
+  }
+];
+
 export default class ReactionSpeedGame extends Component {
 
   static options(passProps) {
@@ -175,6 +196,7 @@ export default class ReactionSpeedGame extends Component {
   }
 
   renderFinish() {
+    console.log()
     return (
       <View style={Generics.container}>
         <View style={{ paddingTop: 20 }} >
@@ -188,7 +210,7 @@ export default class ReactionSpeedGame extends Component {
         <GameResult
           onRestart={this.reinitialize}
           game="ReactionSpeedGame"
-          score={this.findSum()}
+          score={this.findTotalPoint()}
         />
       </View>
     );
@@ -201,25 +223,37 @@ export default class ReactionSpeedGame extends Component {
     for (index = 0; index < this.reactionTime.length; index++) {
       if (this.reactionTime[index] != 0) {
         average += this.reactionTime[index];
-        count++
+        count++;
       }
     }
     if (count != 0) {
-      average = Math.round((average / count * 100)) / 100
+      average = Math.round((average / count * 100)) / 100;
     }
     return average ? average + "ms" : "-";
   }
 
-  findSum = () => {
-    let index;
+  findTotalPoint = () => {
+    let i;
     let sum = 0;
-    for (index = 0; index < this.reactionTime.length; index++) {
-      if (this.reactionTime[index] != 0) {
-        sum += 10000 / this.reactionTime[index];
-      }
-    }
-    sum = Math.round((sum * 100)) / 100;
+    for (i = 0; i < this.reactionTime.length; i++) {
+      sum += this.findScore(this.reactionTime[i]);
+    } 
     return sum;
+  }
+
+  findScore = (reactionTime) => {
+    switch (true) {
+      case (reactionTime == 0):
+        return CalculatePoint[3]();
+      case (reactionTime < 80):
+        return (CalculatePoint[0]());
+      case (reactionTime < 220):
+        return (CalculatePoint[1](reactionTime));
+      case (reactionTime < 800):
+        return (CalculatePoint[2](reactionTime));
+      default:
+        return (CalculatePoint[3]());
+    }
   }
 
   render() {
