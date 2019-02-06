@@ -53,14 +53,13 @@ export default class VisualMemoryGame extends Component {
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onPanResponderStart: (e, gestureState) => {
-        console.log("x:", gestureState.x0);
-        console.log("y:", gestureState.y0);
-
         let indexX, indexY;
         let numberOfColumns = this.sideLengthOfBoard;
-        indexX = Math.floor(gestureState.x0 / _SCREEN.width * numberOfColumns);
-        indexY = Math.floor((gestureState.y0 - TOP_BAR_HEIGHT) / _SCREEN.width * numberOfColumns);
-        console.log("[", indexX, ",", indexY, "]");
+        e.nativeEvent.touches.forEach(touch => {
+          indexX = Math.floor(touch.pageX / _SCREEN.width * numberOfColumns);
+          indexY = Math.floor((touch.pageY - TOP_BAR_HEIGHT) / _SCREEN.width * numberOfColumns);
+          console.log("[", indexX, ",", indexY, "]");
+        })
         this.onSquarePress(indexX + indexY * this.sideLengthOfBoard)
       }
     });
@@ -69,7 +68,7 @@ export default class VisualMemoryGame extends Component {
   reinitialize = () => {
     this.isAnimating = false;
     this.levelAnim = new Animated.Value(0);
-    
+
     clearTimeout(this.animationTimeout);
     clearTimeout(this.levelAnimationTimer);
 
