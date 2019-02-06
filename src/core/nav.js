@@ -1,6 +1,6 @@
 import { Navigation } from "react-native-navigation";
 
-import { _APP_SETTINGS, _SERVER_SETTINGS, store } from '.';
+import { _APP_SETTINGS } from './constants';
 
 const pushCooldown = 250;
 var pushAviable = true;

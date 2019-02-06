@@ -66,7 +66,7 @@ export default class VerbalMemoryGame extends Component {
     let randomWord;
     do {
       randomWord = WORDS[utils.randomBetween(0, WORDS.length)];
-    } while (this.usedWords.indexOf(randomWord) != -1 || randomWord.length < 3);
+    } while (this.usedWords.indexOf(randomWord) != -1 || randomWord.length < 3 || random.length > 10);
     return randomWord;
   }
 

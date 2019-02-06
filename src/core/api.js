@@ -1,7 +1,5 @@
 import axios from "axios";
 
-import { user } from "../core";
-
 const API_URL = "https://manchmark-api.herokuapp.com";
 
 export const api = {

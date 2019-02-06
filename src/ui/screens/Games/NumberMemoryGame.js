@@ -19,6 +19,7 @@ import { store, _APP_SETTINGS, _SCREEN, utils, Generics } from "../../../core";
 import CounterBar from "../../../components/CounterBar";
 import CustomButton from "../../../components/CustomButton";
 import GameResult from '../../../components/GameResult';
+import Numpad from '../../../components/Numpad';
 
 export default class NumberMemoryGame extends Component {
 
@@ -93,16 +94,20 @@ export default class NumberMemoryGame extends Component {
     }
   }
 
-  onChangeText = (text) => {
-    let newText = '';
-    let numbers = '0123456789';
-
-    for (let i = 0; i < text.length; i++) {
-      if (numbers.indexOf(text[i]) > -1) {
-        newText = newText + text[i];
-      }
+  onPress = (text) => {
+    if (text == "del") {
+      this.setState({ userAnswer: this.state.userAnswer.slice(0, this.state.userAnswer.length - 1) });
     }
-    this.setState({ userAnswer: newText });
+    else if (text == "enter") {
+      this.onAnswer();
+    }
+    else {
+      this.setState({ userAnswer: this.state.userAnswer + text });
+    }
+  }
+
+  deleteAll = () => {
+    this.setState({ userAnswer: "" });
   }
 
   renderInfo = () => {
@@ -122,28 +127,26 @@ export default class NumberMemoryGame extends Component {
       <View style={Generics.container}>
         {this.state.isGuessing ?
           <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <Text style={Generics.bigText} >What was the number?</Text>
-            <TextInput
-              onChangeText={this.onChangeText}
-              autoCapitalize={"none"}
-              autoCorrect={false}
-              autoFocus={true}
-              style={{
-                width: _SCREEN.width / 2,
-                borderBottomWidth: 1,
-                borderColor: colors.primary,
-                padding: 5,
-                textAlign: 'center',
-                fontSize: 25,
-                color: colors.secondaryLight3,
-                marginBottom: 20
-              }}
-              returnKeyType={'done'}
-              underlineColorAndroid={"transparent"}
-              keyboardType="phone-pad"
-              value={this.state.userAnswer}
-            />
-            <CustomButton text="GUESS" onPress={this.onAnswer} />
+            <View style={Generics.container} >
+              <Text style={Generics.bigText} >What was the number?</Text>
+              <Text
+                style={{
+                  minWidth: _SCREEN.width * 0.3,
+                  borderBottomWidth: 1,
+                  borderColor: colors.primary,
+                  padding: 5,
+                  textAlign: 'center',
+                  fontSize: 25,
+                  color: colors.secondaryLight3,
+                  marginBottom: 20
+                }}
+                numberOfLines={1}
+              >{this.state.userAnswer}</Text>
+            </View>
+
+            <View style={{ height: _SCREEN.height * 0.4, width: _SCREEN.width }} >
+              <Numpad onPress={this.onPress} deleteAll={this.deleteAll} />
+            </View>
           </View>
           :
           <View style={{ justifyContent: "center", alignItems: "center" }} >
