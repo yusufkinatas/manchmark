@@ -19,20 +19,20 @@ import CustomButton from '../../../components/CustomButton';
 import DelayedText from '../../../components/DelayedText';
 import GameResult from '../../../components/GameResult';
 
-const CalculatePoint = [
+const calculatePoint = [
   () => {
     return 150;
   },
   (x) => {
-    let a = (x * x) / 392;
-    let b = - (55 / 49) * x;
-    let c = 223.4693;
+    let a = (x * x) / 800;
+    let b = - (7 / 10) * x;
+    let c = 198;
     return (Math.round((a + b + c) * 1000) / 1000);
   },
   (x) => {
-    let a = (x * x) / 3364;
-    let b = - (400 / 841) * x;
-    let c = 190.2497;
+    let a = (x * x) / 2704;
+    let b = - (100 / 169) * x;
+    let c = 236.6863;
     return (Math.round((a + b + c) * 1000) / 1000);
   },
   () => {
@@ -244,15 +244,15 @@ export default class ReactionSpeedGame extends Component {
   findScore = (reactionTime) => {
     switch (true) {
       case (reactionTime == 0):
-        return CalculatePoint[3]();
+        return calculatePoint[3]();
       case (reactionTime < 80):
-        return (CalculatePoint[0]());
+        return (calculatePoint[0]());
       case (reactionTime < 220):
-        return (CalculatePoint[1](reactionTime));
+        return (calculatePoint[1](reactionTime));
       case (reactionTime < 800):
-        return (CalculatePoint[2](reactionTime));
+        return (calculatePoint[2](reactionTime));
       default:
-        return (CalculatePoint[3]());
+        return (calculatePoint[3]());
     }
   }
 
