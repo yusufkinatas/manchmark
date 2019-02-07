@@ -32,46 +32,65 @@ export default class MainScreen extends Component {
       nickname: ""
     }
 
-    NetInfo.addEventListener("connectionChange", (res) => {
-      console.log("connectionChange", res.type);
-      if (res && res.type != "none") {
-        console.log("isConnected", true);
-        user.set({ isConnected: true });
-      }
-      else {
-        user.set({ isConnected: false });
-        console.log("isConnected", false);
-      }
-    })
   }
+
+
 
   componentDidMount() {
     setRootViewBackgroundColor(colors.secondary);
 
     NetInfo.isConnected.fetch().then(isConnected => {
-      user.set({ isConnected });
-      if (user.get().isConnected) {
-        api.login(user.get().deviceID).then((res) => {
-          var userData = _.omit(res.data, ["tokens", "__v", "_id"]);
-          userData.authToken = res.headers["x-auth"];
-          user.set(userData);
-          this.startGame();
-        }).catch(err => {
-          //login olamazsa yeni bir cihaz demektir, yeni kayıt aç
-          console.log(user.get().deviceID, err)
-          this.setState({ isLoading: false });
-        });
+      user.set({ isConnected })
+      if (isConnected) {
+        user.getFromStore()
+          .then(_user => {
+
+            if (_user && _user.nickname != null) {
+              this.startGame();
+            }
+            else {
+              user.login()
+                .then(() => {
+                  this.startGame();
+                })
+                .catch(err => {
+                  console.log("cannot login", err);
+                  this.setState({ isLoading: false });
+                });
+            }
+          }).catch(err => console.log(err));
       }
       else {
-        this.startGame();
+        user.getFromStore()
+          .then(_user => {
+            this.startGame();
+          }).catch(err => console.log(err));
       }
 
-    });
+    }).catch(err => console.log(err))
 
   }
 
+  addConnectionChangeListener = () => {
+    NetInfo.addEventListener("connectionChange", (res) => {
+      if (res && res.type != "none") {
+        console.log("isConnected", true);
+        user.set({ isConnected: true });
+        user.compareLocalHighscores();
+      }
+      else {
+        console.log("isConnected", false);
+        user.set({ isConnected: false });
+      }
+    });
+  }
+
   startGame = () => {
-    console.log("USER", user.get())
+    console.log("USER", user.get());
+    if (user.get().isConnected) {
+      user.compareLocalHighscores();
+    }
+    this.addConnectionChangeListener();
     nav.showGame();
   }
 
@@ -86,9 +105,11 @@ export default class MainScreen extends Component {
       this.setState({ isLoading: true });
       api.signup(this.state.nickname, user.get().deviceID)
         .then((res) => {
-          var user = _.omit(res, ["tokens", "__v", "_id"]);
-          user.authToken = res.headers["x-auth"];
-          this.startGame(user);
+          var tmpUser = _.omit(res.data, ["tokens", "__v", "_id"]);
+          tmpUser.authToken = res.headers["x-auth"];
+          console.log("saving user", tmpUser);
+          user.set(tmpUser, true);
+          this.startGame();
         })
         .catch(err => {
           console.log("err", JSON.stringify(err, undefined, 2));
@@ -128,9 +149,7 @@ export default class MainScreen extends Component {
         />
         <Text style={Generics.errorText} >{this.state.errorText}</Text>
         <CustomButton text="CHOOSE" onPress={this.onChooseNickname} />
-        <CustomButton text="Temporarybutton" onPress={() => {
-          alert("test")
-        }} />
+        <CustomButton text="Temporarybutton" onPress={() => { }} />
       </View>
     );
   }

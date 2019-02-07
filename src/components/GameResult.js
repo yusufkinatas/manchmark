@@ -60,18 +60,11 @@ export default class GameResult extends Component {
     console.log(this.state)
     if (this.state.highScore == null || this.state.highScore < this.state.currentScore) {
 
-      if (user.get().isConnected) {
-
-        user.updateHighscore(this.state.currentScore, this.highScoreName).then(() => {
-          this.setState({ isLoading: false, text: "NEW HIGHSCORE!" });
-        }).catch(() => {
-          this.setState({ isLoading: false, text: "NEW HIGHSCORE!", errorText: "Can't update highscore." });
-        });
-
-      }
-      else {
-        this.setState({ isLoading: false, text: "NEW HIGHSCORE!", errorText: "No internet connection." })
-      }
+      user.updateHighscore(this.state.currentScore, this.highScoreName).then(() => {
+        this.setState({ isLoading: false, text: "NEW HIGHSCORE!" });
+      }).catch(() => {
+        this.setState({ isLoading: false, text: "NEW HIGHSCORE!", errorText: "Can't update highscore." });
+      });
 
     }
     else {

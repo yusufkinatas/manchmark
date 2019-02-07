@@ -1,9 +1,12 @@
 import DeviceInfo from 'react-native-device-info';
+import _ from "lodash";
+
 import { api } from './api';
+import { store } from './store';
 
 var _user = {
   isConnected: false,
-  nickname: "User",
+  nickname: null,
   authToken: "",
   deviceID: DeviceInfo.getUniqueID(),
   calculationSpeedHS: null,
@@ -19,20 +22,74 @@ export const user = {
 
   get: () => _user,
 
-  set: (obj) => _user = { ..._user, ...obj },
+  set: (obj, saveToStore?= false) => {
+    _user = { ..._user, ...obj };
+    if (saveToStore) {
+      console.log("SAVING USER", _user);
+      store.setItem("user", _user)
+        .then(res => { })
+        .catch(err => console.log(err));
+    }
+  },
+
+  getFromStore: () => {
+    return new Promise((resolve, reject) => {
+      store.getItem("user")
+        .then(res => {
+          var parsedUser = _.omit(JSON.parse(res), ["isConnected"]);
+          console.log("USER FROM STORE", parsedUser);
+          user.set(parsedUser);
+          resolve(parsedUser);
+        })
+        .catch(err => reject(err));
+    });
+  },
 
   updateHighscore: (score, highScoreName) => {
     return new Promise((resolve, reject) => {
+      user.set({ [highScoreName]: score }, true);
 
-      api.updateHighscores(user.get().authToken, { [highScoreName]: score })
-        .then(res => {
-          _user[highScoreName] = score;
-          resolve();
-        })
-        .catch(err => {
-          reject();
-        })
+      if (_user.isConnected) {
+        api.updateHighscores(user.get().authToken, { [highScoreName]: score })
+          .then(res => {
+            resolve();
+          })
+          .catch(err => {
+            reject();
+          });
+      }
+      else {
+        store.getItem("savedHighscores").then(res => {
+          var savedHighscores = JSON.parse(res);
+          if (savedHighscores == null) {
+            savedHighscores = {};
+          }
+          savedHighscores[highScoreName] = score;
+          store.setItem("savedHighscores", savedHighscores);
+        }).catch(err => console.log(err));
+        resolve();
+      }
+
     });
+  },
+
+  compareLocalHighscores: () => {
+    store.getItem("savedHighscores").then(res => {
+      var savedHighscores = JSON.parse(res);
+      console.log("savedHighscores", savedHighscores);
+      var promises = [];
+      if(!savedHighscores) {
+        return;
+      }
+      Object.keys(savedHighscores).forEach(game => {
+        // user.updateHighscore(savedHighscores[game], game);
+        promises.push(user.updateHighscore(savedHighscores[game], game))
+        console.log("updating", game, "to", savedHighscores[game]);
+      })
+      Promise.all(promises).then(res => {
+        store.removeItem("savedHighscores");
+      }).catch(err => console.log(err))
+    }).catch(err => console.log(err));
   },
 
   getRank: (game) => {
@@ -46,6 +103,19 @@ export const user = {
         .catch(err => {
           reject(err);
         })
+    });
+  },
+
+  login: () => {
+    return new Promise((resolve, reject) => {
+      api.login(_user.deviceID).then((res) => {
+        var userData = _.omit(res.data, ["tokens", "__v", "_id"]);
+        userData.authToken = res.headers["x-auth"];
+        user.set(userData, true);
+        resolve();
+      }).catch(err => {
+        reject();
+      });
     });
   },
 
