@@ -163,6 +163,10 @@ configurations.all {
 }
 
 dependencies {
+    implementation project(':react-native-vector-icons')
+    implementation project(':react-native-splash-screen')
+    implementation project(':react-native-root-view-background')
+    implementation project(':react-native-device-info')
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation project(':react-native-device-info')
     implementation project(':react-native-root-view-background')

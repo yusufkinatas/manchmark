@@ -21,6 +21,7 @@ import _ from "lodash";
 import { store, _APP_SETTINGS, _SCREEN, nav, api, utils, user, Generics } from "../../core";
 import CustomButton from "../../components/CustomButton";
 import LoadingIndicator from "../../components/LoadingIndicator";
+import SplashScreen from 'react-native-splash-screen';
 
 export default class MainScreen extends Component {
 
@@ -46,6 +47,7 @@ export default class MainScreen extends Component {
   }
 
   componentDidMount() {
+    SplashScreen.hide();
     setRootViewBackgroundColor(colors.secondary);
 
     NetInfo.isConnected.fetch().then(isConnected => {
