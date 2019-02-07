@@ -19,7 +19,7 @@ import CustomButton from "../../../components/CustomButton";
 import SwappingText from "../../../components/SwappingText";
 import DelayedView from "../../../components/DelayedView";
 import GameResult from '../../../components/GameResult';
-const WORDS = require("../../../res/wordsEn.json").wordsEn;
+const WORDS = require("../../../../assets/wordsEn.json").wordsEn;
 
 export default class VerbalMemoryGame extends Component {
 

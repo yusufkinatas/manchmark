@@ -23,7 +23,7 @@ import BouncingText from "../../../components/BouncingText";
 import GameResult from '../../../components/GameResult';
 
 const TIMEOUT_MS = 30000;
-const WORDS = require("../../../res/wordsEn.json").wordsEn;
+const WORDS = require("../../../../assets/wordsEn.json").wordsEn;
 
 export default class TypingSpeedGame extends Component {
 

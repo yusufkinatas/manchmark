@@ -70,7 +70,7 @@ export default class AboutUsModal extends Component {
           <View style={{flexDirection: "row"}}>
             <View style={{overflow: "hidden", borderColor: colors.secondaryLight, borderRadius: 50, borderWidth: 1, elevation: 20}}>
               <Image
-              source={require('../../res/icon-flat.png')}
+              source={require('../../../assets/icon-flat.png')}
               style={styles.imageStyle}
               />
             </View>
