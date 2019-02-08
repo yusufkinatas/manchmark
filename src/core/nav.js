@@ -13,7 +13,10 @@ export const nav = {
 
     Navigation.push(componentId, {
       component: {
-        name: screen
+        name: screen,
+        options: {
+          statusBar: { backgroundColor: colors.secondaryDark }
+        }
       }
     });
     pushAviable = false;
@@ -46,6 +49,9 @@ export const nav = {
           backButton: {
             color: colors.secondaryLight3,
           }
+        },
+        statusBar: {
+          backgroundColor: colors.secondary,
         },
         layout: {
           orientation: ["portrait"],
