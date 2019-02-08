@@ -21,6 +21,15 @@ export const _APP_SETTINGS = {
     secondaryLight3: "#ffffff",
     failure: "#c0392b",
   },
+  games: [
+    { name: "CalculationSpeedGame", hsName: "calculationSpeedHS", fullName: "Calculation Speed", icon: "superscript" },
+    { name: "NumberMemoryGame", hsName: "numberMemoryHS", fullName: "Number Memory", icon: "list-ol" },
+    { name: "ReactionSpeedGame", hsName: "reactionSpeedHS", fullName: "Reaction Speed", icon: "bolt" },
+    { name: "TouchSpeedGame", hsName: "touchSpeedHS", fullName: "Touch Speed", icon: "hand-o-down" },
+    { name: "TypingSpeedGame", hsName: "typingSpeedHS", fullName: "Typing Speed", icon: "keyboard-o" },
+    { name: "VerbalMemoryGame", hsName: "verbalMemoryHS", fullName: "Verbal Memory", icon: "font" },
+    { name: "VisualMemoryGame", hsName: "visualMemoryHS", fullName: "Visual Memory", icon: "image" },
+  ]
 };
 
 const colors = _APP_SETTINGS.colors;

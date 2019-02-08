@@ -17,34 +17,7 @@ export default class GameResult extends Component {
   constructor(props) {
     super(props);
 
-    switch (props.game) {
-      case "CalculationSpeedGame":
-        this.highScoreName = "calculationSpeedHS"
-        break;
-      case "NumberMemoryGame":
-        this.highScoreName = "numberMemoryHS"
-        break;
-      case "ReactionSpeedGame":
-        this.highScoreName = "reactionSpeedHS"
-        break;
-      case "TouchSpeedGame":
-        this.highScoreName = "touchSpeedHS"
-        break;
-      case "TypingSpeedGame":
-        this.highScoreName = "typingSpeedHS"
-        break;
-      case "VerbalMemoryGame":
-        this.highScoreName = "verbalMemoryHS"
-        break;
-      case "VisualMemoryGame":
-        this.highScoreName = "visualMemoryHS"
-        break;
-
-      default:
-        this.highScoreName = "";
-        alert("YANLIŞ OYUN İSMİ " + props.game);
-        break;
-    }
+    this.highScoreName = _APP_SETTINGS.games[_APP_SETTINGS.games.findIndex(g => g.name == props.game)].hsName;
 
     this.state = {
       isLoading: true,

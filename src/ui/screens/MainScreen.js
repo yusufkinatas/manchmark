@@ -57,13 +57,11 @@ export default class MainScreen extends Component {
         </View>
 
         <View style={Generics.container} >
-          <CustomButton icon="superscript" text="Calculation Speed" onPress={() => this.pushScreen("CalculationSpeedGame")} />
-          <CustomButton icon="list-ol" text="Number Memory" onPress={() => this.pushScreen("NumberMemoryGame")} />
-          <CustomButton icon="bolt" text="Reaction Speed" onPress={() => this.pushScreen("ReactionSpeedGame")} />
-          <CustomButton icon="hand-o-down" text="Touch Speed" onPress={() => this.pushScreen("TouchSpeedGame")} />
-          <CustomButton icon="keyboard-o" text="Typing Speed" onPress={() => this.pushScreen("TypingSpeedGame")} />
-          <CustomButton icon="font" text="Verbal Memory" onPress={() => this.pushScreen("VerbalMemoryGame")} />
-          <CustomButton icon="image" text="Visual Memory" onPress={() => this.pushScreen("VisualMemoryGame")} />
+          {_APP_SETTINGS.games.map(g => {
+            return (
+              <CustomButton icon={g.icon} text={g.fullName} onPress={() => this.pushScreen(g.name)} />
+            )
+          })}
         </View>
 
         <View style={styles.bottomBarContainer} >
