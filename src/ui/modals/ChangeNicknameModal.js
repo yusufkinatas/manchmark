@@ -70,6 +70,9 @@ export default class ChangeNicknameModal extends Component {
     else if (!validator.isAlphanumeric(this.state.nickname.trim())) {
       this.setState({ errorText: "Nickname can contain only english letters and numbers" });
     }
+    else if (!user.get().isConnected) {
+      this.setState({ errorText: "There is no internet connection" });
+    }
     else {
       this.setState({ isLoading: true });
       user.changeNickname(this.state.nickname.trim())
