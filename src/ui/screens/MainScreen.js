@@ -59,16 +59,15 @@ export default class MainScreen extends Component {
         <View style={Generics.container} >
           <CustomButton big icon={"play"} text={"PLAY"} onPress={() => this.pushScreen("SelectGameScreen")} />
           <CustomButton big icon={"list-ol"} text={"LEADERBOARD"} onPress={() => this.pushScreen("LeaderboardScreen")} />
-          <CustomButton big icon={"bar-chart"} text={"STATISTICS"} onPress={() => this.pushScreen("LeaderboardScreen")} />
+          <CustomButton big icon={"bar-chart"} text={"STATISTICS"} onPress={() => this.pushScreen("StatisticsScreen")} />
         </View>
 
         <View style={styles.bottomBarContainer} >
-          <TouchableOpacity style={styles.smallButtonContainer} onPress={() => this.showModal("StatsModal")} >
-            <Icon name="list" size={20} color={colors.secondaryLight3} />
-          </TouchableOpacity>
+
           <TouchableOpacity style={styles.smallButtonContainer} onPress={() => this.showModal("AboutUsModal")} >
             <Icon name="info" size={20} color={colors.secondaryLight3} />
           </TouchableOpacity>
+
         </View>
 
       </View>
@@ -87,8 +86,14 @@ var styles = StyleSheet.create({
   },
   bottomBarContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    width: _SCREEN.width * 0.4,
+    justifyContent: "space-around",
+    width: _SCREEN.width,
     paddingBottom: 10,
   },
+  smallButtonContainer: {
+    width: 40,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center"
+  }
 });

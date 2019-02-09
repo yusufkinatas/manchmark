@@ -43,6 +43,14 @@ export const api = {
   getAverages: () => {
     return new Promise((resolve, reject) => {
       axios.get(`${API_URL}/averages`)
+        .then(res => resolve(res.data.averages))
+        .catch(err => reject(err.response.data));
+    });
+  },
+
+  getLeaderboard: (count) => {
+    return new Promise((resolve, reject) => {
+      axios.get(`${API_URL}/leaderboard`, { headers: { count } })
         .then(res => resolve(res.data))
         .catch(err => reject(err.response.data));
     });

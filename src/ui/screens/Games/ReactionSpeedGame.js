@@ -27,13 +27,13 @@ const calculatePoint = [
     let a = (x * x) / 800;
     let b = - (7 / 10) * x;
     let c = 198;
-    return (Math.round((a + b + c) * 1000) / 1000);
+    return (utils.truncateFloatingNumber(a + b + c, 3));
   },
   (x) => {
     let a = (x * x) / 2704;
     let b = - (100 / 169) * x;
     let c = 236.6863;
-    return (Math.round((a + b + c) * 1000) / 1000);
+    return (utils.truncateFloatingNumber(a + b + c, 3));
   },
   () => {
     return 0;
@@ -227,7 +227,7 @@ export default class ReactionSpeedGame extends Component {
       }
     }
     if (count != 0) {
-      average = Math.round((average / count * 100)) / 100;
+      average = utils.truncateFloatingNumber(average / count, 2);
     }
     return average ? average + "ms" : "-";
   }
@@ -237,7 +237,7 @@ export default class ReactionSpeedGame extends Component {
     let sum = 0;
     for (i = 0; i < this.reactionTime.length; i++) {
       sum += this.findScore(this.reactionTime[i]);
-    } 
+    }
     return sum;
   }
 

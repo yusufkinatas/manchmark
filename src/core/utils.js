@@ -11,6 +11,10 @@ export const utils = {
     return Math.round((Math.random() * (max - min) + min) * 1000) / 1000;
   },
 
+  truncateFloatingNumber: (number, afterComma) => {
+    return Math.round(number * Math.pow(10, afterComma)) / Math.pow(10, afterComma);
+  },
+
   increaseOrDecrease: (number, max) => {
     return (Math.random() < 0.5) ? (number + utils.randomBetween(1, max)) : (number - utils.randomBetween(1, max));
   },

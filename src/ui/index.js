@@ -4,11 +4,11 @@ import LoginScreen from './screens/LoginScreen';
 import MainScreen from './screens/MainScreen';
 import SelectGameScreen from './screens/SelectGameScreen';
 import LeaderboardScreen from './screens/LeaderboardScreen';
+import StatisticsScreen from './screens/StatisticsScreen';
 import PlaygroundScreen from './screens/PlaygroundScreen';
 
 //MODALS
 import AboutUsModal from './modals/AboutUsModal';
-import StatsModal from './modals/StatsModal';
 
 //GAMES
 import CalculationSpeedGame from './screens/Games/CalculationSpeedGame';
@@ -25,11 +25,11 @@ export function registerScreens() {
   Navigation.registerComponent('MainScreen', () => MainScreen);
   Navigation.registerComponent('SelectGameScreen', () => SelectGameScreen);
   Navigation.registerComponent('LeaderboardScreen', () => LeaderboardScreen);
+  Navigation.registerComponent('StatisticsScreen', () => StatisticsScreen);
   Navigation.registerComponent('Playground', () => PlaygroundScreen);
 
   //MODALS
   Navigation.registerComponent('AboutUsModal', () => AboutUsModal);
-  Navigation.registerComponent('StatsModal', () => StatsModal);
 
   //GAMES
   Navigation.registerComponent('CalculationSpeedGame', () => CalculationSpeedGame);
@@ -39,6 +39,5 @@ export function registerScreens() {
   Navigation.registerComponent('TypingSpeedGame', () => TypingSpeedGame);
   Navigation.registerComponent('VerbalMemoryGame', () => VerbalMemoryGame);
   Navigation.registerComponent('VisualMemoryGame', () => VisualMemoryGame);
-
 
 }
