@@ -2,42 +2,42 @@ import React, { Component } from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
   StyleSheet,
+  TouchableNativeFeedback,
 } from "react-native";
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Feather';
 
-import { store, _APP_SETTINGS, _SCREEN, nav } from "../core"
+import { store, _APP_SETTINGS, _SCREEN, nav, Generics } from "../core"
 
 
 
 export default class Numpad extends Component {
 
-  constructor(props) {
-    super(props);
+  onPressIn = (name) => {
+    this.props.onPress(name);
   }
 
-  renderButton = (text) => {
+  renderButton = (name) => {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}  >
-        <TouchableWithoutFeedback onPressIn={() => this.props.onPress(text)} >
+      <View style={Generics.container} >
+        <TouchableNativeFeedback onPressIn={() => this.onPressIn(name)} >
           <View style={styles.buttonInnerContainer} >
-            <Text style={styles.buttonText} >{text}</Text>
+            <Text style={styles.buttonText} >{name}</Text>
           </View>
-        </TouchableWithoutFeedback>
+        </TouchableNativeFeedback>
       </View>
     );
   }
+
   renderButtonWithIcon = (icon, name) => {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }} >
-        <TouchableWithoutFeedback onPressIn={() => this.props.onPress(name)} onLongPress={() => { if (name == "del") this.props.deleteAll() }} >
+      <View style={Generics.container} >
+        <TouchableNativeFeedback onPressIn={() => this.onPressIn(name)} onLongPress={() => { if (name == "del") this.props.deleteAll() }} >
           <View style={{ width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
             <Icon name={icon} color={colors.secondaryLight3} size={30} />
           </View>
-        </TouchableWithoutFeedback>
+        </TouchableNativeFeedback>
       </View>
     );
   }
