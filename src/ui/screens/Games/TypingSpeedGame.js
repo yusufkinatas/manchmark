@@ -82,12 +82,9 @@ export default class TypingSpeedGame extends Component {
 
   startGame = () => {
     let tmpArray = ["", "", ""];
-    // tmpArray[0] = this.generateNewWord();
-    // tmpArray[1] = this.generateNewWord();
-    // tmpArray[2] = this.generateNewWord();
-    tmpArray[0] = "workout";
-    tmpArray[1] = "hek";
-    tmpArray[2] = "jejimsi";
+    tmpArray[0] = this.generateNewWord();
+    tmpArray[1] = this.generateNewWord();
+    tmpArray[2] = this.generateNewWord();
 
     this.setState({ gameStatus: "active", word: tmpArray });
     this.endGameTimeout = setTimeout(() => {
