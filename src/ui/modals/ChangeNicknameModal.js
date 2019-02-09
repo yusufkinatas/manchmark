@@ -76,7 +76,7 @@ export default class ChangeNicknameModal extends Component {
         .then(() => { this.dissmissModal() })
         .catch(err => {
           console.log(err);
-          this.setState({ errorText: "An unexpecred error has been occured", isLoading: false });
+          this.setState({ errorText: "This nickname is already in use", isLoading: false });
         });
     }
 

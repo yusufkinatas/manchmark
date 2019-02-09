@@ -55,7 +55,20 @@ export default class LeaderboardScreen extends Component {
     api.getAverages().then(res => {
       console.log("AVERAGES", res);
       this.setState({ averages: res });
-    }).catch(err => console.log(err))
+    }).catch(err => console.log(err));
+
+
+
+  }
+
+  componentDidMount() {
+    this.timeout = setTimeout(() => {
+      this.scrollViewRef.scrollTo({ x: 10, animated: false });
+    }, 0);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
   }
 
   renderGames = () => {
@@ -105,7 +118,7 @@ export default class LeaderboardScreen extends Component {
       <View style={{ flex: 1 }} >
 
         <View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} >
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} ref={r => { this.scrollViewRef = r }} >
             {this.renderGames()}
           </ScrollView>
         </View>
