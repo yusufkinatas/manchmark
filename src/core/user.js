@@ -143,4 +143,17 @@ export const user = {
     });
   },
 
+  changeNickname: (nickname) => {
+    return new Promise((resolve, reject) => {
+      api.changeNickname(_user.authToken, nickname)
+        .then(res => {
+          console.log("NICKNAME CHANGED")
+          user.set({ nickname }, true);
+          resolve();
+        })
+        .catch(err => reject(err));
+
+    });
+  },
+
 };

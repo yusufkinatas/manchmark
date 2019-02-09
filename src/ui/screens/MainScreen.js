@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
-import { store, _APP_SETTINGS, _SCREEN, nav, Generics } from "../../core";
+import { store, _APP_SETTINGS, _SCREEN, nav, Generics, user } from "../../core";
 import CustomButton from "../../components/CustomButton";
 
 export default class MainScreen extends Component {
@@ -22,10 +22,11 @@ export default class MainScreen extends Component {
     nav.pushScreen(this.props.componentId, screen);
   }
 
-  showModal = (screen) => {
+  showModal = (screen, passProps) => {
     Navigation.showModal({
       component: {
         name: screen,
+        passProps,
         options: {
           animations: {
             showModal: {
@@ -53,8 +54,21 @@ export default class MainScreen extends Component {
       <View style={Generics.container} >
 
         <View style={styles.topBarContainer} >
+
           <Text style={Generics.header}>Manchmark</Text>
+
+          <View style={{ flexDirection: "row" }} >
+            <Text style={{ ...Generics.bigText, paddingHorizontal: 0 }} >Welcome </Text>
+            <TouchableOpacity
+              onPress={() => this.showModal("ChangeNicknameModal", { onDismiss: () => this.forceUpdate() })}
+              style={{ borderBottomWidth: 1, borderBottomColor: colors.secondaryLight3 }}
+            >
+              <Text style={{ ...Generics.bigText, paddingHorizontal: 0 }} >{user.get().nickname}!</Text>
+            </TouchableOpacity>
+          </View>
+
         </View>
+
 
         <View style={Generics.container} >
           <CustomButton big icon={"play"} text={"PLAY"} onPress={() => this.pushScreen("SelectGameScreen")} />
@@ -79,10 +93,9 @@ const colors = _APP_SETTINGS.colors;
 
 var styles = StyleSheet.create({
   topBarContainer: {
-    marginTop: 70,
-    height: 60,
     justifyContent: "center",
     alignItems: "center",
+    paddingTop: 50
   },
   bottomBarContainer: {
     flexDirection: "row",

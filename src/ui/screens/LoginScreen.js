@@ -48,6 +48,7 @@ export default class MainScreen extends Component {
           .then(_user => {
 
             if (_user && _user.nickname != null) {
+              user.login();
               this.startGame();
             }
             else {

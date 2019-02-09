@@ -68,7 +68,7 @@ export default class SelectGameScreen extends Component {
 
         {_APP_SETTINGS.games.map(g => {
           return (
-            <CustomButton icon={g.icon} text={g.fullName} onPress={() => this.pushScreen(g.name)} />
+            <CustomButton key={g.name} icon={g.icon} text={g.fullName} onPress={() => this.pushScreen(g.name)} />
           )
         })}
 

@@ -53,9 +53,9 @@ export default class AboutUsModal extends Component {
 
   render() {
     return (
-    <View style={{...Generics.container, backgroundColor: "rgba(0,0,0,0.6)"}} >
+      <View style={{ ...Generics.container, backgroundColor: "rgba(0,0,0,0.6)" }} >
         <TouchableOpacity
-          style={Generics.touchableArea}
+          style={styles.touchableArea}
           activeOpacity={1}
           onPressIn={this.dissmissModal}
         />
@@ -67,11 +67,11 @@ export default class AboutUsModal extends Component {
               outputRange: [_SCREEN.height * 0.15, 0]
             })
           }}>
-          <View style={{flexDirection: "row"}}>
-            <View style={{overflow: "hidden", borderColor: colors.secondaryLight, borderRadius: 50, borderWidth: 1, elevation: 20}}>
+          <View style={{ flexDirection: "row" }}>
+            <View style={{ overflow: "hidden", borderColor: colors.secondaryLight, borderRadius: 50, borderWidth: 1, elevation: 20 }}>
               <Image
-              source={require('../../../assets/icon-flat.png')}
-              style={styles.imageStyle}
+                source={require('../../../assets/icon-flat.png')}
+                style={styles.imageStyle}
               />
             </View>
             <View>
@@ -79,8 +79,8 @@ export default class AboutUsModal extends Component {
               <Text style={styles.smallText}>{_APP_SETTINGS.versionString}</Text>
             </View>
           </View>
-          <View style={{paddingTop: 20}}>
-            <View style={{marginBottom:5, flexDirection: "row"}}>
+          <View style={{ paddingTop: 20 }}>
+            <View style={{ marginBottom: 5, flexDirection: "row" }}>
               <Text style={styles.smallText} >Yusuf Kınataş</Text>
               <Text style={styles.smallText} >&</Text>
               <Text style={styles.smallText} >Yağız Akyüz</Text>
@@ -107,6 +107,14 @@ var styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.primary
   },
+  touchableArea: {
+    zIndex: -1,
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    position: "absolute"
+  },
   closeButton: {
     paddingVertical: 5,
     paddingHorizontal: 10,
@@ -119,7 +127,7 @@ var styles = StyleSheet.create({
     paddingLeft: 5
   },
   imageStyle: {
-    height:50,
+    height: 50,
     width: 50
   },
   smallText: {

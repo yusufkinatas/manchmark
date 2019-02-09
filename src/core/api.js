@@ -8,7 +8,7 @@ export const api = {
     return new Promise((resolve, reject) => {
       axios.post(`${API_URL}/signup`, { deviceID, nickname })
         .then(res => resolve(res))
-        .catch(err => reject(err.response.data));
+        .catch(err => reject(err));
     });
   },
 
@@ -19,7 +19,7 @@ export const api = {
       }
       axios.post(`${API_URL}/login`, { deviceID })
         .then(res => resolve(res))
-        .catch(err => reject(err.response.data));
+        .catch(err => reject(err));
 
     });
   },
@@ -28,7 +28,7 @@ export const api = {
     return new Promise((resolve, reject) => {
       axios.get(`${API_URL}/rank`, { headers: { nickname, game } })
         .then(res => resolve(res))
-        .catch(err => reject(err.response.data));
+        .catch(err => reject(err));
     });
   },
 
@@ -36,7 +36,7 @@ export const api = {
     return new Promise((resolve, reject) => {
       axios.get(`${API_URL}/me`, { headers: { "x-auth": token } })
         .then(res => resolve(res))
-        .catch(err => reject(err.response.data));
+        .catch(err => reject(err));
     });
   },
 
@@ -44,7 +44,7 @@ export const api = {
     return new Promise((resolve, reject) => {
       axios.get(`${API_URL}/averages`)
         .then(res => resolve(res.data.averages))
-        .catch(err => reject(err.response.data));
+        .catch(err => reject(err));
     });
   },
 
@@ -52,7 +52,7 @@ export const api = {
     return new Promise((resolve, reject) => {
       axios.get(`${API_URL}/leaderboard`, { headers: { count } })
         .then(res => resolve(res.data))
-        .catch(err => reject(err.response.data));
+        .catch(err => reject(err));
     });
   },
 
@@ -63,8 +63,18 @@ export const api = {
         headers: { "x-auth": token }
       })
         .then(res => resolve(res))
-        .catch(err => reject(err.response.data));
+        .catch(err => reject(err));
     });
   },
+
+  changeNickname: (token, nickname) => {
+    return new Promise((resolve, reject) => {
+      axios.patch(`${API_URL}/nickname`, { nickname }, {
+        headers: { "x-auth": token }
+      })
+        .then(res => resolve(res))
+        .catch(err => reject(err));
+    });
+  }
 
 };

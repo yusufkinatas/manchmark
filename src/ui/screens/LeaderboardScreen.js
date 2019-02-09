@@ -55,7 +55,7 @@ export default class LeaderboardScreen extends Component {
     api.getAverages().then(res => {
       console.log("AVERAGES", res);
       this.setState({ averages: res });
-    })
+    }).catch(err => console.log(err))
   }
 
   renderGames = () => {

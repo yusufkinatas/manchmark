@@ -9,6 +9,7 @@ import PlaygroundScreen from './screens/PlaygroundScreen';
 
 //MODALS
 import AboutUsModal from './modals/AboutUsModal';
+import ChangeNicknameModal from './modals/ChangeNicknameModal';
 
 //GAMES
 import CalculationSpeedGame from './screens/Games/CalculationSpeedGame';
@@ -30,6 +31,7 @@ export function registerScreens() {
 
   //MODALS
   Navigation.registerComponent('AboutUsModal', () => AboutUsModal);
+  Navigation.registerComponent('ChangeNicknameModal', () => ChangeNicknameModal);
 
   //GAMES
   Navigation.registerComponent('CalculationSpeedGame', () => CalculationSpeedGame);
