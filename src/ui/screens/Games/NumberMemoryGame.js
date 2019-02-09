@@ -137,6 +137,7 @@ export default class NumberMemoryGame extends Component {
                   padding: 5,
                   textAlign: 'center',
                   fontSize: 25,
+                  fontFamily: "roboto",
                   color: colors.secondaryLight3,
                   marginBottom: 20
                 }}

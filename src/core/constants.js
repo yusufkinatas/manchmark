@@ -43,6 +43,7 @@ export const Generics = StyleSheet.create({
   },
   hintText: {
     fontSize: 14,
+    fontFamily: "roboto",
     position: "absolute",
     color: colors.secondaryLight2,
     textAlign: "center",
@@ -52,6 +53,7 @@ export const Generics = StyleSheet.create({
   },
   bigText: {
     fontSize: 20,
+    fontFamily: "roboto",
     color: colors.secondaryLight3,
     textAlign: "center",
     paddingHorizontal: 10
@@ -80,6 +82,7 @@ export const Generics = StyleSheet.create({
   },
   hugeText: {
     fontSize: 50,
+    fontFamily: "roboto",
     fontWeight: "bold",
     textShadowColor: colors.secondaryDark,
     textShadowOffset: { width: 1, height: 1 },
@@ -101,6 +104,7 @@ export const Generics = StyleSheet.create({
   },
   questionText: {
     fontSize: 25,
+    fontFamily: "roboto",
     color: colors.secondaryLight3,
     fontWeight: "bold",
     width: _SCREEN.width,
@@ -108,6 +112,7 @@ export const Generics = StyleSheet.create({
   },
   errorText: {
     fontSize: 14,
+    fontFamily: "roboto",
     paddingHorizontal: 10,
     textAlign: "center",
     color: colors.failure,
@@ -115,6 +120,7 @@ export const Generics = StyleSheet.create({
   },
   text: {
     fontSize: 15,
+    fontFamily: "roboto",
     color: colors.secondaryLight3
   }
 });

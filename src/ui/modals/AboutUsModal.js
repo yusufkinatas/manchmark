@@ -121,6 +121,7 @@ var styles = StyleSheet.create({
   },
   bigText: {
     fontSize: 25,
+    fontFamily: "roboto",
     color: colors.secondaryLight3,
     textAlign: "center",
     paddingTop: 5,
@@ -132,12 +133,14 @@ var styles = StyleSheet.create({
   },
   smallText: {
     fontSize: 12,
+    fontFamily: "roboto",
     color: colors.secondaryLight2,
     textAlign: "left",
     paddingLeft: 5
   },
   copyRightText: {
     fontSize: 10,
+    fontFamily: "roboto",
     color: colors.secondaryLight,
     textAlign: "left",
     paddingLeft: 5,

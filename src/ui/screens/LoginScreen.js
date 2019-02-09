@@ -144,6 +144,7 @@ export default class MainScreen extends Component {
             borderRadius: 5,
             padding: 5,
             fontSize: 20,
+            fontFamily: "roboto",
             color: colors.secondaryLight3,
             marginBottom: 5
           }}
@@ -192,10 +193,12 @@ var styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
+    fontFamily: "roboto",
     color: colors.secondaryLight3
   },
   bigText: {
     fontSize: 25,
+    fontFamily: "roboto",
     color: colors.secondaryLight3
   },
   header: {

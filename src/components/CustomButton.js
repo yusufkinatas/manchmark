@@ -77,11 +77,13 @@ var styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
+    fontFamily: "roboto",
     color: colors.secondaryLight3,
     fontWeight: "bold",
   },
   bigText: {
     fontSize: 20,
+    fontFamily: "roboto",
     color: colors.secondaryLight3,
     textAlign: "center",
     paddingHorizontal: 10,

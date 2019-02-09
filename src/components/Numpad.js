@@ -95,6 +95,7 @@ var styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 30,
+    fontFamily: "roboto",
     fontWeight: "bold",
     color: colors.secondaryLight3,
   }

@@ -140,6 +140,7 @@ const colors = _APP_SETTINGS.colors;
 var styles = StyleSheet.create({
   pressCountText: {
     fontSize: 70,
+    fontFamily: "roboto",
     color: colors.primary,
     fontWeight: "bold",
     width: _SCREEN.width,

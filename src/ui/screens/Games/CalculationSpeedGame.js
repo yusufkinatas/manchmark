@@ -249,6 +249,7 @@ const colors = _APP_SETTINGS.colors;
 var styles = StyleSheet.create({
   text: {
     fontSize: 15,
+    fontFamily: "roboto",
     color: colors.secondaryLight3
   }
 })

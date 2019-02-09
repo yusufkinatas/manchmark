@@ -56,7 +56,7 @@ export default class SwappingText extends Component {
   }
 
   render() {
-    var textStyle = { fontSize: 70, color: "black", fontWeight: "bold" };
+    var textStyle = { fontSize: 70, fontFamily: "roboto", color: "black", fontWeight: "bold" };
     return (
       this.state.isAnimating ?
         <View style={{ alignItems: "center" }} >
