@@ -20,7 +20,7 @@ const CustomButton = ({ onPress, text, icon, big }) => {
       >
         {
           icon &&
-          <View style={{justifyContent: "center", alignItems: "center" }} >
+          <View style={{ justifyContent: "center", alignItems: "center" }} >
             <Icon name={icon} size={25} color={colors.secondaryLight3} style={{ marginRight: 10 }} />
           </View>
         }
