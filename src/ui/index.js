@@ -2,6 +2,8 @@ import { Navigation } from 'react-native-navigation';
 
 import LoginScreen from './screens/LoginScreen';
 import MainScreen from './screens/MainScreen';
+import SelectGameScreen from './screens/SelectGameScreen';
+import LeaderboardScreen from './screens/LeaderboardScreen';
 import PlaygroundScreen from './screens/PlaygroundScreen';
 
 //MODALS
@@ -21,6 +23,8 @@ export function registerScreens() {
 
   Navigation.registerComponent('LoginScreen', () => LoginScreen);
   Navigation.registerComponent('MainScreen', () => MainScreen);
+  Navigation.registerComponent('SelectGameScreen', () => SelectGameScreen);
+  Navigation.registerComponent('LeaderboardScreen', () => LeaderboardScreen);
   Navigation.registerComponent('Playground', () => PlaygroundScreen);
 
   //MODALS

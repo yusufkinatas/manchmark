@@ -3,6 +3,7 @@ import _ from "lodash";
 
 import { api } from './api';
 import { store } from './store';
+import { _APP_SETTINGS } from './constants';
 
 var _user = {
   isConnected: false,
@@ -15,7 +16,17 @@ var _user = {
   touchSpeedHS: null,
   typingSpeedHS: null,
   verbalMemoryHS: null,
-  visualMemoryHS: null
+  visualMemoryHS: null,
+  ranks: {
+    calculationSpeedHS: null,
+    numberMemoryHS: null,
+    reactionSpeedHS: null,
+    touchSpeedHS: null,
+    typingSpeedHS: null,
+    verbalMemoryHS: null,
+    visualMemoryHS: null,
+    userCount: null,
+  }
 }
 
 export const user = {
@@ -25,7 +36,7 @@ export const user = {
   set: (obj, saveToStore?= false) => {
     _user = { ..._user, ...obj };
     if (saveToStore) {
-      console.log("SAVING USER", _user);
+      // console.log("SAVING USER", _user);
       store.setItem("user", _user)
         .then(res => { })
         .catch(err => console.log(err));
@@ -78,7 +89,7 @@ export const user = {
       var savedHighscores = JSON.parse(res);
       console.log("savedHighscores", savedHighscores);
       var promises = [];
-      if(!savedHighscores) {
+      if (!savedHighscores) {
         return;
       }
       Object.keys(savedHighscores).forEach(game => {
@@ -104,6 +115,19 @@ export const user = {
           reject(err);
         })
     });
+  },
+
+  getAllRanks: () => {
+    _APP_SETTINGS.games.forEach(g => {
+      api.getRank(_user.nickname, g.hsName)
+        .then(res => {
+          // console.log(g.hsName, res.data)
+          user.set({ ranks: { ...user.get().ranks, [g.hsName]: res.data.rank, userCount: res.data.userCount } }, true);
+        })
+        .catch(err => {
+          console.log("ERR", g.hsName, err)
+        })
+    })
   },
 
   login: () => {

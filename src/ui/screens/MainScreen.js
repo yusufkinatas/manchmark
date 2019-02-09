@@ -57,11 +57,9 @@ export default class MainScreen extends Component {
         </View>
 
         <View style={Generics.container} >
-          {_APP_SETTINGS.games.map(g => {
-            return (
-              <CustomButton icon={g.icon} text={g.fullName} onPress={() => this.pushScreen(g.name)} />
-            )
-          })}
+          <CustomButton big icon={"play"} text={"PLAY"} onPress={() => this.pushScreen("SelectGameScreen")} />
+          <CustomButton big icon={"list-ol"} text={"LEADERBOARD"} onPress={() => this.pushScreen("LeaderboardScreen")} />
+          <CustomButton big icon={"bar-chart"} text={"STATISTICS"} onPress={() => this.pushScreen("LeaderboardScreen")} />
         </View>
 
         <View style={styles.bottomBarContainer} >
@@ -93,10 +91,4 @@ var styles = StyleSheet.create({
     width: _SCREEN.width * 0.4,
     paddingBottom: 10,
   },
-  smallButtonContainer: {
-    width: 30,
-    height: 30,
-    alignItems: "center",
-    justifyContent: "center"
-  }
 });
