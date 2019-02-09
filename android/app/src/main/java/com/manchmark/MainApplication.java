@@ -1,5 +1,6 @@
 package com.manchmark;
 
+import com.sbugert.rnadmob.RNAdMobPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
