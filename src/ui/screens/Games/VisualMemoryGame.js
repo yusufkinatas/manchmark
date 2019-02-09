@@ -22,7 +22,6 @@ import BouncingText from '../../../components/BouncingText';
 import SwappingText from '../../../components/SwappingText';
 import GameResult from '../../../components/GameResult';
 
-const SHOW_DURATION = 1000;
 const TOP_BAR_HEIGHT = 100
 
 export default class VisualMemoryGame extends Component {
@@ -41,11 +40,13 @@ export default class VisualMemoryGame extends Component {
     super(props);
     this.isAnimating = false;
     this.levelAnim = new Animated.Value(0);
+    this.showDuration = 1000;
     this.state = {
       gameStatus: "info",
       score: 0,
       level: 0,
-      lives: 5,
+      lives: 3,
+      levelMistakes: 0,
       squares: []
     };
     this.buttonsEnabled = true;
@@ -76,7 +77,8 @@ export default class VisualMemoryGame extends Component {
       gameStatus: "info",
       score: 0,
       level: 0,
-      lives: 5,
+      lives: 3,
+      levelMistakes: 0,
       squares: []
     });
     this.buttonsEnabled = true;
@@ -118,9 +120,15 @@ export default class VisualMemoryGame extends Component {
     })
   }
 
-  startNextLevel = () => {
+  startNextLevel = (replaySameLevel?) => {
     this.state.squares = [];
-    this.state.level++;
+    this.state.levelMistakes = 0
+    if (!replaySameLevel) {
+      this.state.level++;
+    }
+    else {
+      this.state.lives--;
+    }
     this.sideLengthOfBoard;
     this.specialSquireRequired = this.state.level > 13 ? 15 : this.state.level + 2;
     this.specialSquirePushed = 0;
@@ -131,15 +139,19 @@ export default class VisualMemoryGame extends Component {
     }
     else if (this.state.level <= 5) {
       this.sideLengthOfBoard = 4;
+      this.showDuration = 1200;
     }
     else if (this.state.level <= 8) {
       this.sideLengthOfBoard = 5;
+      this.showDuration = 1500;
     }
     else if (this.state.level <= 13) {
       this.sideLengthOfBoard = 6;
+      this.showDuration = 1800;
     }
     else {
       this.sideLengthOfBoard = 7;
+      this.showDuration = 2000;
     }
 
     for (let i = 0; i < this.sideLengthOfBoard * this.sideLengthOfBoard; i++) {
@@ -185,7 +197,7 @@ export default class VisualMemoryGame extends Component {
       this.isAnimating = false;
       this.buttonsEnabled = true;
       this.forceUpdate();
-    }, SHOW_DURATION);
+    }, this.showDuration);
 
   }
 
@@ -213,11 +225,11 @@ export default class VisualMemoryGame extends Component {
       this.state.score += 10;
     }
     else {
-      this.state.lives--;
+      this.state.levelMistakes++;
     }
     this.forceUpdate();
 
-    if (this.specialSquirePushed != this.specialSquireRequired && this.state.lives > 0) {
+    if ((this.specialSquirePushed != this.specialSquireRequired) && (this.state.levelMistakes < 3) && this.state.lives > 0) {
       this.buttonsEnabled = true;
     }
 
@@ -229,8 +241,13 @@ export default class VisualMemoryGame extends Component {
       if (this.specialSquirePushed == this.specialSquireRequired) {
         this.startNextLevel();
       }
-      else if (this.state.lives == 0) {
-        this.endGame();
+      else if (this.state.levelMistakes > 2) {
+        if (this.state.lives == 1) {
+          this.endGame();
+        }
+        else {
+          this.startNextLevel(true);
+        }
       }
     });
 
