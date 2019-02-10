@@ -167,7 +167,7 @@ export default class LeaderboardScreen extends Component {
           <TouchableOpacity
             key={g.name}
             onPress={() => this.selectGame(index, true)}
-            style={{ margin: 5, paddingHorizontal: 5, paddingVertical: 5, width: _SCREEN.width / 4.85, justifyContent: "center", alignItems: "center", elevation: 5, backgroundColor: this.state.selectedGameIndex == index ? colors.primary : colors.secondaryLight, borderRadius: 5 }}
+            style={{ margin: 5, paddingHorizontal: 5, paddingVertical: 5, width: 85, justifyContent: "center", alignItems: "center", elevation: 5, backgroundColor: this.state.selectedGameIndex == index ? colors.primary : colors.secondaryLight, borderRadius: 5 }}
           >
             <Icon name={g.icon} color={colors.secondaryLight3} size={10} />
             <Text style={{ ...Generics.text, fontSize: 10 }} >{g.fullName}</Text>
