@@ -22,78 +22,8 @@ import LoadingIndicator from "../../components/LoadingIndicator";
 
 const colors = _APP_SETTINGS.colors;
 
-export default class LeaderboardScreen extends Component {
 
-  static options(passProps) {
-    return {
-      topBar: {
-        title: {
-          text: 'Leaderboard',
-        },
-      },
-    };
-  }
-
-  constructor(props) {
-    super(props);
-    this.dragEnabled = true;
-    this.state = {
-      highscores: null,
-      averages: null,
-      selectedGameIndex: 0
-    };
-
-
-  }
-
-  componentWillMount() {
-    api.getLeaderboard(25).then(res => {
-      console.log("HIGHSCORES", res);
-      this.setState({ highscores: res });
-    }).catch(err => console.log(err));
-    api.getAverages().then(res => {
-      console.log("AVERAGES", res);
-      this.setState({ averages: res });
-    }).catch(err => console.log(err));
-  }
-
-  componentDidMount() {
-    this.timeout = setTimeout(() => {
-      this.scrollViewRef.scrollTo({ x: 10, animated: false });
-    }, 0);
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timeout);
-  }
-
-  renderGames = () => {
-    return (
-      _APP_SETTINGS.games.map((g, index) => {
-        return (
-          <TouchableOpacity
-            key={g.name}
-            onPress={() => this.selectGame(index)}
-            style={{ margin: 5, paddingHorizontal: 5, paddingVertical: 5, justifyContent: "center", alignItems: "center", backgroundColor: this.state.selectedGameIndex == index ? colors.primary : colors.secondaryLight, borderRadius: 5 }}
-          >
-            <Icon name={g.icon} color={colors.secondaryLight3} size={10} />
-            <Text style={{ ...Generics.text, fontSize: 10 }} >{g.fullName}</Text>
-          </TouchableOpacity>
-        );
-      })
-    );
-  }
-
-  selectGame = (index) => {
-    if (!this.state.highscores && this.state.averages && !this.flatList) {
-      return;
-    }
-    this.dragEnabled = false
-    this.setState({ selectedGameIndex: index }, () => {
-      this.flatList.scrollToIndex({ animated: false, index });
-      console.log("SELECT PAGE", index)
-    })
-  }
+class Leaderboard extends React.PureComponent {
 
   renderHs = (rank, nickname, hs) => {
     return (
@@ -120,8 +50,9 @@ export default class LeaderboardScreen extends Component {
     )
   }
 
-  renderLeaderboard = (data) => {
-    const game = _APP_SETTINGS.games.find(g => g.hsName == data.item);
+  render() {
+    const game = this.props.game;
+    console.log("RENDERING", game)
     return (
       <View style={{ width: _SCREEN.width }} >
 
@@ -129,9 +60,9 @@ export default class LeaderboardScreen extends Component {
         <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: _SCREEN.width, paddingHorizontal: 20, height: 50 }} >
           {
             game.name != _APP_SETTINGS.games[0].name &&
-            <TouchableOpacity style={{ position: "absolute", left: 20 }} >
+            <View style={{ position: "absolute", left: 20 }} >
               <Icon name="caret-left" size={30} color={colors.primary} />
-            </TouchableOpacity>
+            </View>
           }
 
           <View style={{ flexDirection: "row", flex: 1, alignItems: "center", justifyContent: "center" }} >
@@ -142,9 +73,9 @@ export default class LeaderboardScreen extends Component {
 
           {
             game.name != _APP_SETTINGS.games[_APP_SETTINGS.games.length - 1].name &&
-            <TouchableOpacity style={{ position: "absolute", right: 20 }} >
+            <View style={{ position: "absolute", right: 20 }} >
               <Icon name="caret-right" size={30} color={colors.primary} />
-            </TouchableOpacity>
+            </View>
           }
         </View>
 
@@ -156,10 +87,10 @@ export default class LeaderboardScreen extends Component {
               <Text style={{ ...Generics.bigText, fontWeight: "bold", textAlign: "left" }} >Average Score</Text>
             </View>
             {
-              this.state.averages[game.hsName]
+              this.props.averages[game.hsName]
                 ?
                 <Text style={{ ...Generics.text }} >
-                  {utils.truncateFloatingNumber(this.state.averages[game.hsName], 2)}
+                  {utils.truncateFloatingNumber(this.props.averages[game.hsName], 2)}
                   <Text style={{ ...Generics.text, color: colors.secondaryLight2 }} > Points</Text>
                 </Text>
                 :
@@ -170,7 +101,7 @@ export default class LeaderboardScreen extends Component {
 
         <ScrollView style={{ flex: 1, width: _SCREEN.width }} >
           {
-            this.state.highscores[game.hsName] ? this.state.highscores[game.hsName].map((user, index) =>
+            this.props.highscores[game.hsName] ? this.props.highscores[game.hsName].map((user, index) =>
               (this.renderHs(index + 1, user.nickname, user[game.hsName]))
             )
               :
@@ -184,6 +115,75 @@ export default class LeaderboardScreen extends Component {
     )
   }
 
+}
+
+
+export default class LeaderboardScreen extends Component {
+
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: 'Leaderboard',
+        },
+      },
+    };
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      highscores: null,
+      averages: null,
+      selectedGameIndex: 0,
+      isLoading: true
+    };
+
+
+  }
+
+  componentWillMount() {
+    Promise.all([
+      api.getLeaderboard(25).then(res => {
+        console.log("HIGHSCORES", res);
+        this.setState({ highscores: res });
+      }),
+      api.getAverages().then(res => {
+        console.log("AVERAGES", res);
+        this.setState({ averages: res });
+      })
+    ]).then(() => this.setState({ isLoading: false })).catch(err => console.log(err));
+  }
+
+  renderGames = () => {
+    return (
+      _APP_SETTINGS.games.map((g, index) => {
+        return (
+          <TouchableOpacity
+            key={g.name}
+            onPress={() => this.selectGame(index, true)}
+            style={{ margin: 5, paddingHorizontal: 5, paddingVertical: 5, justifyContent: "center", alignItems: "center", backgroundColor: this.state.selectedGameIndex == index ? colors.primary : colors.secondaryLight, borderRadius: 5 }}
+          >
+            <Icon name={g.icon} color={colors.secondaryLight3} size={10} />
+            <Text style={{ ...Generics.text, fontSize: 10 }} >{g.fullName}</Text>
+          </TouchableOpacity>
+        );
+      })
+    );
+  }
+
+  selectGame = (index, scrollFlatlist) => {
+    this.setState({ selectedGameIndex: index }, () => console.log("SET STATE"))
+    if (scrollFlatlist) {
+      this.flatList.scrollToIndex({ animated: false, index });
+    }
+  }
+
+  renderLeaderboard = (data) => {
+    const game = _APP_SETTINGS.games.find(g => g.hsName == data.item);
+    return (<Leaderboard game={game} averages={this.state.averages} highscores={this.state.highscores} />);
+  }
+
   renderListEmpty = () => {
     return (
       <View style={Generics.container} >
@@ -193,10 +193,13 @@ export default class LeaderboardScreen extends Component {
   }
 
   render() {
-    return (
+    return (this.state.isLoading ?
       <View style={Generics.container} >
-
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ maxHeight: 50 }} ref={r => { this.scrollViewRef = r }} >
+        <LoadingIndicator />
+      </View>
+      :
+      <View style={Generics.container} >
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ maxHeight: 50 }} >
           {this.renderGames()}
         </ScrollView>
 
@@ -208,7 +211,7 @@ export default class LeaderboardScreen extends Component {
           onScroll={(e) => {
             let index = Math.floor(e.nativeEvent.contentOffset.x / _SCREEN.width);
             if (this.state.selectedGameIndex != index) {
-              this.selectGame(index);
+              this.selectGame(index, false);
             }
           }}
           onScrollToIndexFailed={() => { }}
@@ -218,8 +221,7 @@ export default class LeaderboardScreen extends Component {
           renderItem={this.renderLeaderboard}
           ListEmptyComponent={this.renderListEmpty}
         />
+      </View>)
 
-      </View>
-    )
   }
 }
