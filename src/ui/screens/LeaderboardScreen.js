@@ -178,7 +178,7 @@ export default class LeaderboardScreen extends Component {
   }
 
   selectGame = (index, scrollFlatlist) => {
-    this.setState({ selectedGameIndex: index }, () => console.log("SET STATE"))
+    this.setState({ selectedGameIndex: index }, () => console.log("SET STATE", index))
     if (scrollFlatlist) {
       this.flatList.scrollToIndex({ animated: false, index });
     }
