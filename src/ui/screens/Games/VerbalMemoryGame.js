@@ -21,6 +21,8 @@ import DelayedView from "../../../components/DelayedView";
 import GameResult from '../../../components/GameResult';
 const WORDS = require("../../../../assets/wordsEn.json").wordsEn;
 
+const gameColor = _APP_SETTINGS.games.find(g => g.name== "VerbalMemoryGame").backgroundColor;
+
 export default class VerbalMemoryGame extends Component {
 
   static options(passProps) {
@@ -112,7 +114,7 @@ export default class VerbalMemoryGame extends Component {
         <View style={{ paddingBottom: 20 }} >
           <Text style={Generics.bigText} >Try to remember all words</Text>
         </View>
-        <CustomButton text="Start" onPress={this.startGame} />
+        <CustomButton backgroundColor= {gameColor} text="Start" onPress={this.startGame} />
       </View>
     );
   }
@@ -124,10 +126,10 @@ export default class VerbalMemoryGame extends Component {
           {this.state.word && this.state.word[0].toUpperCase()}{this.state.word.slice(1)}
         </SwappingText>
         <View style={styles.answerButtonsContainer} >
-          <TouchableOpacity onPress={() => this.onAnswer("seen")} style={styles.answerButton} >
+          <TouchableOpacity onPress={() => this.onAnswer("seen")} style={{...styles.answerButton, backgroundColor: gameColor}} >
             <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >SEEN</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.onAnswer("new")} style={{ ...styles.answerButton, marginLeft: 0 }} >
+          <TouchableOpacity onPress={() => this.onAnswer("new")} style={{ ...styles.answerButton, marginLeft: 0, backgroundColor: gameColor }} >
             <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >NEW</Text>
           </TouchableOpacity>
         </View>
@@ -164,7 +166,7 @@ var styles = StyleSheet.create({
   answerButtonsContainer: {
     flexDirection: "row",
     width: _SCREEN.width,
-    marginTop: 40
+    marginTop: 30
   },
   answerButton: {
     flex: 1,

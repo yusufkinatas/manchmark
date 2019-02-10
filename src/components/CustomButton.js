@@ -15,7 +15,7 @@ const CustomButton = ({ onPress, text, icon, big, backgroundColor }) => {
   return (
     big ?
       <TouchableOpacity
-        style={{ ...styles.bigButton, justifyContent: icon ? "flex-start" : "center" }}
+        style={{ ...styles.bigButton, backgroundColor:  backgroundColor ? backgroundColor : colors.primary, justifyContent: icon ? "flex-start" : "center" }}
         onPress={onPress}
       >
         {

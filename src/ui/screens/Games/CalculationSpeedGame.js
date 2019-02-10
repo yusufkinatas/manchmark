@@ -117,7 +117,7 @@ export default class CalculationSpeedGame extends Component {
         <View style={{ paddingBottom: 20 }} >
           <Text style={Generics.bigText} >Answer as much as possible in {TIMEOUT_MS / 1000} seconds</Text>
         </View>
-        <CustomButton text="Start" onPress={this.startGame} />
+        <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
       </View>
     );
   }
@@ -205,7 +205,7 @@ export default class CalculationSpeedGame extends Component {
             style={{
               minWidth: _SCREEN.width * 0.3,
               borderBottomWidth: 1,
-              borderColor: colors.primary,
+              borderColor: gameColor,
               padding: 5,
               textAlign: 'center',
               fontSize: 25,

@@ -37,6 +37,7 @@ export default class CounterBar extends Component {
           ...styles.container,
           width,
           height,
+          borderColor: color
         }} >
         <Animated.View style={{
           flex: 1,
@@ -74,7 +75,6 @@ var styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     borderWidth: 2,
-    borderColor: colors.primary,
     borderRadius: 10,
     marginBottom: 10,
     overflow: "hidden"
