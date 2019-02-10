@@ -40,6 +40,8 @@ const calculatePoint = [
   }
 ];
 
+const gameColor = _APP_SETTINGS.games.find(g => g.name == "ReactionSpeedGame").backgroundColor;
+
 export default class ReactionSpeedGame extends Component {
 
   static options(passProps) {
@@ -103,7 +105,7 @@ export default class ReactionSpeedGame extends Component {
           <Text style={Generics.bigText} >Press the screen as soon as the color changes!</Text>
         </View>
         <Text style={Generics.hintText} >There are 5 phases!</Text>
-        <CustomButton text="Start" onPress={this.startGame} />
+        <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
       </View>
     );
   }
@@ -136,7 +138,7 @@ export default class ReactionSpeedGame extends Component {
     this.startTime = (new Date()).getTime();
     return (
       <View style={{ ...Generics.container, width: _SCREEN.width }}>
-        <TouchableOpacity style={{ ...Generics.touchableArea, backgroundColor: colors.primary }} onPressIn={this.onAnswer}>
+        <TouchableOpacity style={{ ...Generics.touchableArea, backgroundColor: gameColor }} onPressIn={this.onAnswer}>
           <Text style={Generics.hugeText}>PRESS</Text>
         </TouchableOpacity>
       </View>

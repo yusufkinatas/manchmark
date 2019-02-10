@@ -22,7 +22,8 @@ import BouncingText from '../../../components/BouncingText';
 import SwappingText from '../../../components/SwappingText';
 import GameResult from '../../../components/GameResult';
 
-const TOP_BAR_HEIGHT = 100
+const TOP_BAR_HEIGHT = 100;
+const gameColor = _APP_SETTINGS.games.find(g => g.name == "VisualMemoryGame").backgroundColor;
 
 export default class VisualMemoryGame extends Component {
 
@@ -208,7 +209,7 @@ export default class VisualMemoryGame extends Component {
         <Animated.View style={{ paddingBottom: 20 }} >
           <Text style={Generics.bigText} >Try to remember the special tiles</Text>
         </Animated.View>
-        <CustomButton text="Start" onPress={this.startGame} />
+        <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
       </View>
     );
   }
@@ -271,7 +272,7 @@ export default class VisualMemoryGame extends Component {
               })
             }],
             borderRadius: squareWidth / 4,
-            backgroundColor: square.pushed ? (square.special ? colors.primary : colors.secondaryLight) : colors.secondaryLight2,
+            backgroundColor: square.pushed ? (square.special ? gameColor : colors.secondaryLight) : colors.secondaryLight2,
           }}
         />
       )

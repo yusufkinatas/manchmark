@@ -17,11 +17,11 @@ export default class GameResult extends Component {
   constructor(props) {
     super(props);
 
-    this.highScoreName = _APP_SETTINGS.games[_APP_SETTINGS.games.findIndex(g => g.name == props.game)].hsName;
+    this.game = _APP_SETTINGS.games[_APP_SETTINGS.games.findIndex(g => g.name == props.game)];
 
     this.state = {
       isLoading: true,
-      highScore: user.get()[this.highScoreName],
+      highScore: user.get()[this.game.hsName],
       currentScore: props.score,
       text: "",
       errorText: ""
@@ -33,7 +33,7 @@ export default class GameResult extends Component {
     console.log(this.state)
     if (this.state.highScore == null || this.state.highScore < this.state.currentScore) {
 
-      user.updateHighscore(this.state.currentScore, this.highScoreName).then(() => {
+      user.updateHighscore(this.state.currentScore, this.game.hsName).then(() => {
         this.setState({ isLoading: false, text: "NEW HIGHSCORE!" });
       }).catch(() => {
         this.setState({ isLoading: false, text: "NEW HIGHSCORE!", errorText: "Can't update highscore." });
@@ -61,7 +61,7 @@ export default class GameResult extends Component {
         {
           this.props.onRestart &&
           <DelayedView delay={this.state.errorText ? 800 : 600} style={{ paddingTop: 20 }}>
-            <CustomButton style={Generics.container} text="Restart" onPress={this.props.onRestart} />
+            <CustomButton backgroundColor={this.game.backgroundColor} style={Generics.container} text="Restart" onPress={this.props.onRestart} />
           </DelayedView>
         }
 

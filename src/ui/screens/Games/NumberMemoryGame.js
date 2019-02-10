@@ -21,6 +21,8 @@ import CustomButton from "../../../components/CustomButton";
 import GameResult from '../../../components/GameResult';
 import Numpad from '../../../components/Numpad';
 
+const gameColor = _APP_SETTINGS.games.find(g => g.name == "NumberMemoryGame").backgroundColor;
+
 export default class NumberMemoryGame extends Component {
 
   static options(passProps) {
@@ -117,7 +119,7 @@ export default class NumberMemoryGame extends Component {
         <View style={{ paddingBottom: 20 }} >
           <Text style={Generics.bigText} >Remember the numbers</Text>
         </View>
-        <CustomButton text="Start" onPress={this.startGame} />
+        <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
       </View>
     );
   }
@@ -133,7 +135,7 @@ export default class NumberMemoryGame extends Component {
                 style={{
                   minWidth: _SCREEN.width * 0.3,
                   borderBottomWidth: 1,
-                  borderColor: colors.primary,
+                  borderColor: gameColor,
                   padding: 5,
                   textAlign: 'center',
                   fontSize: 25,
@@ -145,14 +147,14 @@ export default class NumberMemoryGame extends Component {
             </View>
 
             <View style={{ height: _SCREEN.height * 0.4, width: _SCREEN.width }} >
-              <Numpad onPress={this.onPress} deleteAll={this.deleteAll} />
+              <Numpad rippleColor={gameColor} onPress={this.onPress} deleteAll={this.deleteAll} />
             </View>
           </View>
           :
           <View style={{ justifyContent: "center", alignItems: "center" }} >
             <Text style={{ ...Generics.hugeText, textAlign: "center" }} >{this.state.number}</Text>
             <View style={{ height: 10 }}></View>
-            <CounterBar time={(this.numberLength + 1) * 1000} width={_SCREEN.width * 0.8} color={colors.primary} />
+            <CounterBar time={(this.numberLength + 1) * 1000} width={_SCREEN.width * 0.8} color={gameColor} />
           </View>
         }
 
