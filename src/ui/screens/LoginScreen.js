@@ -11,7 +11,8 @@ import {
   Alert,
   Linking,
   TextInput,
-  NetInfo
+  NetInfo,
+  AppState
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { setRootViewBackgroundColor } from 'react-native-root-view-background';
@@ -38,8 +39,18 @@ export default class MainScreen extends Component {
 
 
   componentDidMount() {
+
     SplashScreen.hide();
     setRootViewBackgroundColor(colors.secondary);
+
+    AppState.addEventListener("change", (state) => {
+      if (state == "active") {
+        NetInfo.isConnected.fetch().then(isConnected => {
+          user.set({ isConnected });
+          console.log("isConnected", isConnected)
+        })
+      }
+    });
 
     NetInfo.isConnected.fetch().then(isConnected => {
       user.set({ isConnected })
@@ -156,7 +167,6 @@ export default class MainScreen extends Component {
         />
         <Text style={Generics.errorText} >{this.state.errorText}</Text>
         <CustomButton text="CHOOSE" onPress={this.onChooseNickname} />
-        <CustomButton text="Temporarybutton" onPress={() => { }} />
       </View>
     );
   }

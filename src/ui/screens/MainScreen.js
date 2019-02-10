@@ -59,11 +59,8 @@ export default class MainScreen extends Component {
 
           <View style={{ flexDirection: "row" }} >
             <Text style={{ ...Generics.bigText, paddingHorizontal: 0 }} >Welcome </Text>
-            <TouchableOpacity
-              onPress={() => this.showModal("ChangeNicknameModal", { onDismiss: () => this.forceUpdate() })}
-              style={{ borderBottomWidth: 1, borderBottomColor: colors.secondaryLight3 }}
-            >
-              <Text style={{ ...Generics.bigText, paddingHorizontal: 0 }} >{user.get().nickname}!</Text>
+            <TouchableOpacity onPress={() => this.showModal("ChangeNicknameModal", { onDismiss: () => this.forceUpdate() })} >
+              <Text style={{ ...Generics.bigText, paddingHorizontal: 0, textDecorationLine: "underline" }} >{user.get().nickname}!</Text>
             </TouchableOpacity>
           </View>
 

@@ -155,7 +155,7 @@ export default class LeaderboardScreen extends Component {
   }
 
   refreshLeaderboards = () => {
-    Promise.all([user.getGlobalAverages(), user.getGlobalHighscores()]).then(() => {
+    user.getGlobalHighscores().then(() => {
       this.setState({ highscores: user.get().globalHighscores, averages: user.get().globalAverages, });
     }).catch(err => console.log(err))
   }
@@ -167,7 +167,7 @@ export default class LeaderboardScreen extends Component {
           <TouchableOpacity
             key={g.name}
             onPress={() => this.selectGame(index, true)}
-            style={{ margin: 5, paddingHorizontal: 5, paddingVertical: 5, justifyContent: "center", alignItems: "center", backgroundColor: this.state.selectedGameIndex == index ? colors.primary : colors.secondaryLight, borderRadius: 5 }}
+            style={{ margin: 5, paddingHorizontal: 5, paddingVertical: 5, justifyContent: "center", alignItems: "center", elevation: 5, backgroundColor: this.state.selectedGameIndex == index ? colors.primary : colors.secondaryLight, borderRadius: 5 }}
           >
             <Icon name={g.icon} color={colors.secondaryLight3} size={10} />
             <Text style={{ ...Generics.text, fontSize: 10 }} >{g.fullName}</Text>
@@ -185,7 +185,7 @@ export default class LeaderboardScreen extends Component {
   }
 
   renderLeaderboard = (data) => {
-    const game = _APP_SETTINGS.games.find(g => g.hsName == data.item);
+    const game = data.item;
     return (<Leaderboard game={game} averages={this.state.averages} highscores={this.state.highscores} refreshLeaderboards={this.refreshLeaderboards} />);
   }
 
@@ -214,13 +214,13 @@ export default class LeaderboardScreen extends Component {
           horizontal
           pagingEnabled
           onScroll={(e) => {
-            let index = Math.floor(e.nativeEvent.contentOffset.x / _SCREEN.width);
+            let index = Math.round(e.nativeEvent.contentOffset.x / _SCREEN.width);
             if (this.state.selectedGameIndex != index) {
               this.selectGame(index, false);
             }
           }}
           onScrollToIndexFailed={() => { }}
-          data={this.state.highscores ? Object.keys(this.state.highscores) : []}
+          data={_APP_SETTINGS.games}
           keyExtractor={(item, index) => ("p" + index)}
           overScrollMode={Platform.OS === "android" ? "never" : "always"}
           renderItem={this.renderLeaderboard}

@@ -64,7 +64,7 @@ export default class SelectGameScreen extends Component {
 
 
 
-      <ScrollView contentContainerStyle={{ width: _SCREEN.width, minHeight: _SCREEN.height - 80, alignItems: "center", justifyContent: "center", paddingTop: 10 }} >
+      <ScrollView style={{flex:1, backgroundColor: _APP_SETTINGS.colors.secondary}}  contentContainerStyle={{ width: _SCREEN.width, minHeight: _SCREEN.height - 80, alignItems: "center", justifyContent: "center", paddingTop: 10, }} >
 
         {_APP_SETTINGS.games.map(g => {
           return (
