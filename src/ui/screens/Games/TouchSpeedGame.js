@@ -23,6 +23,7 @@ import GameResult from '../../../components/GameResult';
 
 
 const TIMEOUT_MS = 10000;
+const gameColor = _APP_SETTINGS.games.find(g => g.name == "TouchSpeedGame").backgroundColor;
 
 export default class TouchSpeedGame extends Component {
 
@@ -90,7 +91,7 @@ export default class TouchSpeedGame extends Component {
         <View style={{ paddingBottom: 20 }} >
           <Text style={Generics.bigText} >Press the screen as fast as you can</Text>
         </View>
-        <CustomButton text="Start" onPress={this.startGame} />
+        <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
       </View>
     );
   }
@@ -99,8 +100,8 @@ export default class TouchSpeedGame extends Component {
     return (
       <View style={{ ...Generics.container, width: _SCREEN.width }}>
         <TouchableOpacity activeOpacity={1} onPressIn={this.pressed} style={Generics.touchableArea} />
-        <BouncingText style={styles.pressCountText} >{this.state.pressCounter}</BouncingText>
-        <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={colors.primary} />
+        <BouncingText style={{...styles.pressCountText, color: gameColor}} >{this.state.pressCounter}</BouncingText>
+        <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={gameColor} />
       </View>
     );
   }
@@ -141,7 +142,6 @@ var styles = StyleSheet.create({
   pressCountText: {
     fontSize: 70,
     fontFamily: "roboto",
-    color: colors.primary,
     fontWeight: "bold",
     width: _SCREEN.width,
     textAlign: "center"

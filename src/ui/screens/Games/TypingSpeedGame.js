@@ -24,6 +24,7 @@ import GameResult from '../../../components/GameResult';
 
 const TIMEOUT_MS = 30000;
 const WORDS = require("../../../../assets/wordsEn.json").wordsEn;
+const gameColor = _APP_SETTINGS.games.find(g => g.name == "TypingSpeedGame").backgroundColor;
 
 export default class TypingSpeedGame extends Component {
 
@@ -101,7 +102,7 @@ export default class TypingSpeedGame extends Component {
       <View style={Generics.container} >
         <Text style={Generics.bigText} >Write as much word as possible in {TIMEOUT_MS / 1000} seconds</Text>
         <View style={{ height: 20 }}></View>
-        <CustomButton text="Start" onPress={this.startGame} />
+        <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
         <Text style={Generics.hintText} >Hint: You can write any one of the 3 words in any order!</Text>
       </View>
     );
@@ -136,11 +137,11 @@ export default class TypingSpeedGame extends Component {
   renderGame = () => {
     return (
       <View style={Generics.container}>
-        <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={colors.primary} />
+        <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={gameColor} />
         <BouncingText style={Generics.bigText}>Score: {this.state.score}</BouncingText>
         <View style={{ height: 10 }} />
 
-        <View style={{ flexDirection: "row", backgroundColor: colors.primary }} >
+        <View style={{ flexDirection: "row", backgroundColor: gameColor }} >
           <View style={styles.wordContainer} >
             <SwappingText style={Generics.questionText} >{this.state.word[0]}</SwappingText>
           </View>
@@ -165,7 +166,7 @@ export default class TypingSpeedGame extends Component {
           style={{
             width: _SCREEN.width / 3,
             borderBottomWidth: 1,
-            borderColor: colors.primary,
+            borderColor: gameColor,
             padding: 5,
             textAlign: 'center',
             fontSize: 25,
