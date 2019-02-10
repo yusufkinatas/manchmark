@@ -10,31 +10,20 @@ var _user = {
   nickname: null,
   authToken: "",
   deviceID: DeviceInfo.getUniqueID(),
-  calculationSpeedHS: null,
-  numberMemoryHS: null,
-  reactionSpeedHS: null,
-  touchSpeedHS: null,
-  typingSpeedHS: null,
-  verbalMemoryHS: null,
-  visualMemoryHS: null,
-  ranks: {
-    calculationSpeedHS: null,
-    numberMemoryHS: null,
-    reactionSpeedHS: null,
-    touchSpeedHS: null,
-    typingSpeedHS: null,
-    verbalMemoryHS: null,
-    visualMemoryHS: null,
-    userCount: null,
-  },
-  globalAverages: {
+  ranks: { userCount: null, },
+  globalAverages: {},
+  globalHighscores: {},
+  improvements: {}
 
-  },
-  globalHighscores: {
+};
 
-  }
-
-}
+_APP_SETTINGS.games.forEach(game => {
+  _user[game.hsName] = null;
+  _user.ranks[game.hsName] = null;
+  _user.globalAverages[game.hsName] = null;
+  _user.globalHighscores[game.hsName] = [];
+  _user.improvements[game.hsName] = [];
+});
 
 export const user = {
 
@@ -65,7 +54,17 @@ export const user = {
 
   updateHighscore: (score, highScoreName) => {
     return new Promise((resolve, reject) => {
-      user.set({ [highScoreName]: score }, true);
+
+      _user[highScoreName] = score;
+
+      if (_.isArray(_user.improvements[highScoreName])) {
+        _user.improvements[highScoreName].push({ score, date: new Date().getTime() });
+      }
+      else {
+        _user.improvements[highScoreName] = [{ score, date: new Date().getTime() }];
+      }
+
+      user.set({}, true); //for saving user to store easily
 
       if (_user.isConnected) {
         api.updateHighscores(user.get().authToken, { [highScoreName]: score })
@@ -100,7 +99,6 @@ export const user = {
         return;
       }
       Object.keys(savedHighscores).forEach(game => {
-        // user.updateHighscore(savedHighscores[game], game);
         promises.push(user.updateHighscore(savedHighscores[game], game))
         console.log("updating", game, "to", savedHighscores[game]);
       })
@@ -151,9 +149,9 @@ export const user = {
     });
   },
 
-  getGlobalHighscores: (count) => {
+  getGlobalHighscores: () => {
     return new Promise((resolve, reject) => {
-      api.getLeaderboard(count)
+      api.getLeaderboard(25)
         .then(res => {
           user.set({ globalHighscores: res }, true);
           resolve();
