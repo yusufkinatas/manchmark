@@ -1,6 +1,6 @@
 import { Navigation } from "react-native-navigation";
 
-import { _APP_SETTINGS } from './constants';
+import { _APP_SETTINGS, _SCREEN } from './constants';
 
 const pushCooldown = 250;
 var pushAviable = true;
@@ -15,7 +15,7 @@ export const nav = {
       component: {
         name: screen,
         options: {
-          statusBar: { backgroundColor: colors.secondaryDark }
+          statusBar: { backgroundColor: colors.secondaryDark },
         }
       }
     });
@@ -69,8 +69,14 @@ export const nav = {
               alpha: {
                 from: 0,
                 to: 1,
-                duration: 350,
+                duration: 250,
                 interpolation: 'accelerate'
+              },
+              y: {
+                from: _SCREEN.height * 0.15,
+                to: 0,
+                duration: 250,
+                interpolation: "accelerate"
               }
             }
           },
@@ -80,6 +86,13 @@ export const nav = {
                 from: 1,
                 to: 0,
                 duration: 250,
+                interpolation: 'decelerate'
+              },
+              y: {
+                from: 0,
+                to: _SCREEN.height * 0.15,
+                duration: 250,
+                interpolation: "decelerate"
               }
             }
           }
@@ -98,10 +111,7 @@ export const nav = {
               component: {
                 name: "MainScreen",
                 options: {
-                  topBar: {
-                    height: 0,
-                    visible: false
-                  },
+                  topBar: { visible: false },
                 }
               }
             }
