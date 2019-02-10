@@ -71,9 +71,9 @@ export default class MainScreen extends Component {
 
 
         <View style={Generics.container} >
-          <CustomButton big icon={"play"} text={"PLAY"} onPress={() => this.pushScreen("SelectGameScreen")} />
-          <CustomButton big icon={"list-ol"} text={"LEADERBOARD"} onPress={() => this.pushScreen("LeaderboardScreen")} />
-          <CustomButton big icon={"bar-chart"} text={"STATISTICS"} onPress={() => this.pushScreen("StatisticsScreen")} />
+          <CustomButton icon={"play"} text={"PLAY"} onPress={() => this.pushScreen("SelectGameScreen")} />
+          <CustomButton icon={"list-ol"} text={"LEADERBOARD"} onPress={() => this.pushScreen("LeaderboardScreen")} />
+          <CustomButton icon={"bar-chart"} text={"STATISTICS"} onPress={() => this.pushScreen("StatisticsScreen")} />
         </View>
 
         <View style={styles.bottomBarContainer} >

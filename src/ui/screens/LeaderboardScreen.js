@@ -178,7 +178,7 @@ export default class LeaderboardScreen extends Component {
   }
 
   selectGame = (index, scrollFlatlist) => {
-    this.setState({ selectedGameIndex: index }, () => console.log("SET STATE"))
+    this.setState({ selectedGameIndex: index }, () => console.log("SET STATE", index))
     if (scrollFlatlist) {
       this.flatList.scrollToIndex({ animated: false, index });
     }
@@ -214,7 +214,8 @@ export default class LeaderboardScreen extends Component {
           horizontal
           pagingEnabled
           onScroll={(e) => {
-            let index = Math.floor(e.nativeEvent.contentOffset.x / _SCREEN.width);
+            let index = Math.round(e.nativeEvent.contentOffset.x / _SCREEN.width);
+            console.log(index);
             if (this.state.selectedGameIndex != index) {
               this.selectGame(index, false);
             }

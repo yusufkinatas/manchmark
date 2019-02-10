@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { store, _APP_SETTINGS, _SCREEN, nav } from "../core"
 
-const CustomButton = ({ onPress, text, icon, big }) => {
+const CustomButton = ({ onPress, text, icon, big, backgroundColor }) => {
 
   return (
     big ?
@@ -28,7 +28,7 @@ const CustomButton = ({ onPress, text, icon, big }) => {
       </TouchableOpacity>
       :
       <TouchableOpacity
-        style={{ ...styles.button, justifyContent: icon ? "flex-start" : "center" }}
+        style={{ ...styles.button, backgroundColor:  backgroundColor ? backgroundColor : colors.primary, justifyContent: icon ? "flex-start" : "center" }}
         onPress={onPress}
       >
         {
@@ -46,7 +46,8 @@ CustomButton.propTypes = {
   onPress: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
   icon: PropTypes.string,
-  big: PropTypes.bool
+  big: PropTypes.bool,
+  backgroundColor: PropTypes.string
 };
 CustomButton.defaultProps = {
   onPress: () => { },
@@ -64,7 +65,7 @@ var styles = StyleSheet.create({
     borderRadius: 50,
     width: _SCREEN.width * 0.6,
     marginBottom: 10,
-    backgroundColor: colors.primary
+    backgroundColor:  colors.primary
   },
   bigButton: {
     flexDirection: "row",
