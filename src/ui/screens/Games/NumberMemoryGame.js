@@ -37,7 +37,7 @@ export default class NumberMemoryGame extends Component {
 
   constructor(props) {
     super(props);
-    this.numberLength = 0;
+    this.numberLength = 2;
     this.state = {
       gameStatus: "info", //info - active - finished
       isGuessing: false,
@@ -47,7 +47,7 @@ export default class NumberMemoryGame extends Component {
   }
 
   reinitialize = () => {
-    this.numberLength = 0;
+    this.numberLength = 2;
     this.setState({
       gameStatus: "info", //info - active - finished
       isGuessing: false,
