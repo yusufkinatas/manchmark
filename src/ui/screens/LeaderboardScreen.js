@@ -12,7 +12,8 @@ import {
   Linking,
   ScrollView,
   FlatList,
-  Platform
+  Platform,
+  RefreshControl
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -24,6 +25,11 @@ const colors = _APP_SETTINGS.colors;
 
 
 class Leaderboard extends React.PureComponent {
+
+  constructor(props) {
+    super(props);
+    this.isRefreshing = false;
+  }
 
   renderHs = (rank, nickname, hs) => {
     return (
@@ -52,7 +58,6 @@ class Leaderboard extends React.PureComponent {
 
   render() {
     const game = this.props.game;
-    console.log("RENDERING", game)
     return (
       <View style={{ width: _SCREEN.width }} >
 
@@ -99,16 +104,18 @@ class Leaderboard extends React.PureComponent {
           </View>
         </View>
 
-        <ScrollView style={{ flex: 1, width: _SCREEN.width }} >
-          {
-            this.props.highscores[game.hsName] ? this.props.highscores[game.hsName].map((user, index) =>
-              (this.renderHs(index + 1, user.nickname, user[game.hsName]))
-            )
-              :
-              <View style={Generics.container} >
-                <ActivityIndicator size="large" color={colors.primary} />
-              </View>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.isRefreshing}
+              onRefresh={this.props.refreshLeaderboards}
+            />
           }
+          style={{ flex: 1, width: _SCREEN.width }}
+        >
+          {this.props.highscores[game.hsName].map((user, index) =>
+            (this.renderHs(index + 1, user.nickname, user[game.hsName]))
+          )}
         </ScrollView>
 
       </View>
@@ -138,21 +145,19 @@ export default class LeaderboardScreen extends Component {
       selectedGameIndex: 0,
       isLoading: true
     };
-
-
   }
 
-  componentWillMount() {
-    Promise.all([
-      api.getLeaderboard(25).then(res => {
-        console.log("HIGHSCORES", res);
-        this.setState({ highscores: res });
-      }),
-      api.getAverages().then(res => {
-        console.log("AVERAGES", res);
-        this.setState({ averages: res });
-      })
-    ]).then(() => this.setState({ isLoading: false })).catch(err => console.log(err));
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ highscores: user.get().globalHighscores, averages: user.get().globalAverages, isLoading: false });
+      this.refreshLeaderboards();
+    }, 0);
+  }
+
+  refreshLeaderboards = () => {
+    Promise.all([user.getGlobalAverages(), user.getGlobalHighscores()]).then(() => {
+      this.setState({ highscores: user.get().globalHighscores, averages: user.get().globalAverages, });
+    }).catch(err => console.log(err))
   }
 
   renderGames = () => {
@@ -181,7 +186,7 @@ export default class LeaderboardScreen extends Component {
 
   renderLeaderboard = (data) => {
     const game = _APP_SETTINGS.games.find(g => g.hsName == data.item);
-    return (<Leaderboard game={game} averages={this.state.averages} highscores={this.state.highscores} />);
+    return (<Leaderboard game={game} averages={this.state.averages} highscores={this.state.highscores} refreshLeaderboards={this.refreshLeaderboards} />);
   }
 
   renderListEmpty = () => {

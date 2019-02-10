@@ -26,7 +26,14 @@ var _user = {
     verbalMemoryHS: null,
     visualMemoryHS: null,
     userCount: null,
+  },
+  globalAverages: {
+
+  },
+  globalHighscores: {
+
   }
+
 }
 
 export const user = {
@@ -128,6 +135,33 @@ export const user = {
           console.log("ERR", g.hsName, err)
         })
     })
+  },
+
+  getGlobalAverages: () => {
+    return new Promise((resolve, reject) => {
+
+      api.getAverages()
+        .then(res => {
+          user.set({ globalAverages: res }, true);
+          resolve();
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  },
+
+  getGlobalHighscores: (count) => {
+    return new Promise((resolve, reject) => {
+      api.getLeaderboard(count)
+        .then(res => {
+          user.set({ globalHighscores: res }, true);
+          resolve();
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
   },
 
   login: () => {

@@ -93,6 +93,8 @@ export default class MainScreen extends Component {
     if (user.get().isConnected) {
       user.compareLocalHighscores();
       user.getAllRanks();
+      user.getGlobalAverages();
+      user.getGlobalHighscores();
     }
     this.addConnectionChangeListener();
     nav.showGame();
