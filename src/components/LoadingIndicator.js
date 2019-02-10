@@ -11,11 +11,11 @@ import { store, _APP_SETTINGS, _SCREEN, nav, Generics } from "../core"
 
 const colors = _APP_SETTINGS.colors;
 
-const LoadingIndicator = ({ text }) => {
+const LoadingIndicator = ({ text, color }) => {
 
   return (
     <View>
-      <ActivityIndicator size="large" color={colors.primary} />
+      <ActivityIndicator size="large" color={color} />
       <Text style={Generics.bigText} >{text}</Text>
     </View>
   );
@@ -24,9 +24,11 @@ const LoadingIndicator = ({ text }) => {
 
 LoadingIndicator.propTypes = {
   text: PropTypes.string,
+  color: PropTypes.string
 };
 LoadingIndicator.defaultProps = {
   text: 'Loading...',
+  color: colors.primary
 };
 
 

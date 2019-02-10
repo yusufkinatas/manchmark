@@ -72,7 +72,7 @@ export default class GameResult extends Component {
   render() {
     return (
       <View style={Generics.container}>
-        {this.state.isLoading ? <LoadingIndicator /> : this.renderContent()}
+        {this.state.isLoading ? <LoadingIndicator color={this.game.backgroundColor} /> : this.renderContent()}
       </View>
     )
   }
