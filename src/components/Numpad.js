@@ -21,7 +21,7 @@ export default class Numpad extends Component {
   renderButton = (name) => {
     return (
       <View style={Generics.container} >
-        <TouchableNativeFeedback onPressIn={() => this.onPressIn(name)} >
+        <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple(this.props.rippleColor, false)} onPressIn={() => this.onPressIn(name)} >
           <View style={styles.buttonInnerContainer} >
             <Text style={styles.buttonText} >{name}</Text>
           </View>
@@ -33,8 +33,8 @@ export default class Numpad extends Component {
   renderButtonWithIcon = (icon, name) => {
     return (
       <View style={Generics.container} >
-        <TouchableNativeFeedback onPressIn={() => this.onPressIn(name)} onLongPress={() => { if (name == "del") this.props.deleteAll() }} >
-          <View style={{ width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
+        <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple(this.props.rippleColor, false)} onPressIn={() => this.onPressIn(name)} onLongPress={() => { if (name == "del") this.props.deleteAll() }} >
+          <View style={styles.buttonInnerContainer}>
             <Icon name={icon} color={colors.secondaryLight3} size={30} />
           </View>
         </TouchableNativeFeedback>
@@ -74,6 +74,11 @@ export default class Numpad extends Component {
 
 Numpad.propTypes = {
   onPress: PropTypes.func,
+  rippleColor: PropTypes.string
+};
+
+Numpad.defaultProps = {
+  rippleColor: null
 };
 
 const colors = _APP_SETTINGS.colors;

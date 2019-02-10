@@ -52,6 +52,8 @@ const QUESTION_FUNCTIONS = [
   },
 ]
 
+const gameColor = _APP_SETTINGS.games.find(g => g.name== "CalculationSpeedGame").backgroundColor;
+
 export default class CalculationSpeedGame extends Component {
 
   static options(passProps) {
@@ -187,7 +189,7 @@ export default class CalculationSpeedGame extends Component {
       <View style={Generics.container}>
 
         <View style={Generics.container} >
-          <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={colors.primary} />
+          <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={gameColor} />
           <View style={{paddingVertical: 5, paddingHorizontal: 10, borderRadius: 10, overflow:"hidden" }} >
             <Animated.View style={{
               ...StyleSheet.absoluteFill,
@@ -214,7 +216,7 @@ export default class CalculationSpeedGame extends Component {
         </View>
 
         <View style={{ height: _SCREEN.height * 0.4, width: _SCREEN.width }} >
-          <Numpad onPress={this.onPress} deleteAll={this.deleteAll} />
+          <Numpad onPress={this.onPress} deleteAll={this.deleteAll} rippleColor={gameColor} />
         </View>
 
       </View>

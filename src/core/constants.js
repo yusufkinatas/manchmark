@@ -22,13 +22,13 @@ export const _APP_SETTINGS = {
     failure: "#c0392b",
   },
   games: [
-    { name: "CalculationSpeedGame", hsName: "calculationSpeedHS", fullName: "Calculation Speed", icon: "superscript", backgroundColor: "#F44336" },
+    { name: "VisualMemoryGame", hsName: "visualMemoryHS", fullName: "Visual Memory", icon: "image", backgroundColor: "#F44336" },
     { name: "NumberMemoryGame", hsName: "numberMemoryHS", fullName: "Number Memory", icon: "list-ol", backgroundColor: "#e67e22" },
     { name: "ReactionSpeedGame", hsName: "reactionSpeedHS", fullName: "Reaction Speed", icon: "bolt", backgroundColor: "#FFCC00" },
     { name: "TouchSpeedGame", hsName: "touchSpeedHS", fullName: "Touch Speed", icon: "hand-o-down", backgroundColor: "#1db954" },
     { name: "TypingSpeedGame", hsName: "typingSpeedHS", fullName: "Typing Speed", icon: "keyboard-o", backgroundColor: "#03A9F4" },
     { name: "VerbalMemoryGame", hsName: "verbalMemoryHS", fullName: "Verbal Memory", icon: "font", backgroundColor: "#30336b" },
-    { name: "VisualMemoryGame", hsName: "visualMemoryHS", fullName: "Visual Memory", icon: "image", backgroundColor: "#673AB7" },
+    { name: "CalculationSpeedGame", hsName: "calculationSpeedHS", fullName: "Calculation Speed", icon: "superscript", backgroundColor: "#673AB7" },
   ]
 };
 

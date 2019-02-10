@@ -85,7 +85,7 @@ class Leaderboard extends React.PureComponent {
         </View>
 
 
-        <View style={{ flexDirection: "row", marginVertical: 8, marginHorizontal: 25, backgroundColor: colors.secondaryLight, borderRadius: 5, elevation: 5 }} >
+        <View style={{ flexDirection: "row", marginVertical: 8, marginHorizontal: 25, backgroundColor: colors.secondary, borderWidth: 3, borderColor: colors.secondaryLight2, borderRadius: 5, elevation: 5 }} >
 
           <View style={{ flex: 1, flexDirection: "row", minHeight: 50, paddingHorizontal: 5, alignItems: "center" }} >
             <View style={{ flex: 1 }} >
