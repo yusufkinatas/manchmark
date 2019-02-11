@@ -51,7 +51,7 @@ export const nav = {
           }
         },
         statusBar: {
-          backgroundColor: colors.secondary,
+          backgroundColor: colors.secondaryDark,
         },
         layout: {
           orientation: ["portrait"],

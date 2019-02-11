@@ -75,11 +75,11 @@ export default class MainScreen extends Component {
         </View>
 
         <View style={styles.bottomBarContainer} >
-
-          <TouchableHighlight style={styles.smallButtonContainer} underlayColor={ 'transparent' }  onPress={() => this.showModal("AboutUsModal")} >
+          <View style={{borderRadius:50, overflow:"hidden"}}>
+          <TouchableHighlight style={styles.smallButtonContainer} underlayColor={colors.primary}  onPress={() => this.showModal("AboutUsModal")} >
             <Icon name="info" size={20} color={colors.secondaryLight3} />
           </TouchableHighlight>
-
+          </View>
         </View>
 
       </View>
@@ -100,8 +100,7 @@ var styles = StyleSheet.create({
     overflow: "hidden",
     justifyContent: "space-around",
     width: _SCREEN.width,
-    paddingBottom: 10,
-    borderRadius: 20
+    paddingBottom: 10
   },
   smallButtonContainer: {
     width: 40,

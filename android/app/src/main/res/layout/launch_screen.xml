@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/secondary"
+    android:navigationBarColor="@color/secondaryDark"
+    android:statusBarColor="@color/secondaryDark"
     android:gravity="center">
 
     <ImageView
