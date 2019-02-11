@@ -31,27 +31,52 @@ class Leaderboard extends React.PureComponent {
     this.isRefreshing = false;
   }
 
-  renderHs = (rank, nickname, hs) => {
+  renderHs = (rank, nickname, hs, gameColor) => {
+    let rankColor;
+    switch (rank) {
+      case 1:
+        rankColor = gameColor;
+        break;
+      case 2:
+        rankColor = gameColor + "bb";
+        break;
+      case 3:
+        rankColor = gameColor + "88"
+        break;
+      case 4:
+        rankColor = gameColor + "55"
+        break;
+      case 5:
+        rankColor = gameColor + "33"
+        break;
+      default:
+        rankColor = colors.secondaryDark + "33";
+        break;
+    }
+    let fontColor = nickname == user.get().nickname ? gameColor : colors.secondaryLight3;
     return (
-      <View key={nickname} style={{ flexDirection: "row", marginVertical: 8, marginHorizontal: 25, backgroundColor: nickname == user.get().nickname ? colors.primary : colors.secondaryLight, borderRadius: 5, elevation: 5 }} >
+      <View style={{ flexDirection: "row", marginVertical: 8, marginHorizontal: 25, elevation: 5, backgroundColor: colors.secondary, borderRadius: 5 }} >
 
-        <View style={{ alignItems: "center", justifyContent: "center", backgroundColor: colors.secondaryDark, paddingHorizontal: 5, borderTopLeftRadius: 5, borderBottomLeftRadius: 5, borderRightWidth: 1, borderRightColor: colors.secondary }} >
+        <View style={{ alignItems: "center", minWidth: 30, justifyContent: "center", backgroundColor: rankColor, paddingHorizontal: 5, borderTopLeftRadius: 5, borderBottomLeftRadius: 5, borderRightWidth: 1, borderRightColor: colors.secondary }} >
           <Text style={Generics.text} >{rank}</Text>
         </View>
 
-        <View style={{ flex: 1, flexDirection: "row", minHeight: 50, paddingHorizontal: 5, alignItems: "center" }} >
+        <View key={nickname} style={{ flexDirection: "row", flex: 1, backgroundColor: colors.secondaryLight, borderTopRightRadius: 5, borderBottomRightRadius: 5 }} >
 
-          <View style={{ flex: 1 }} >
-            <Text style={{ ...Generics.bigText, fontWeight: "bold", textAlign: "left" }} >{nickname}</Text>
+          <View style={{ flex: 1, flexDirection: "row", minHeight: 50, paddingHorizontal: 5, alignItems: "center" }} >
+
+            <View style={{ flex: 1 }} >
+              <Text style={{ ...Generics.bigText, fontWeight: "bold", textAlign: "left", color: fontColor }} >{nickname}</Text>
+            </View>
+
+            <Text style={{ ...Generics.text, color: fontColor }} >
+              {utils.truncateFloatingNumber(hs, 2)}
+              <Text style={{ ...Generics.text, color: fontColor }} > Points</Text>
+            </Text>
+
           </View>
 
-          <Text style={{ ...Generics.text }} >
-            {utils.truncateFloatingNumber(hs, 2)}
-            <Text style={{ ...Generics.text, color: colors.secondaryLight2 }} > Points</Text>
-          </Text>
-
         </View>
-
       </View>
     )
   }
@@ -66,7 +91,7 @@ class Leaderboard extends React.PureComponent {
           {
             game.name != _APP_SETTINGS.games[0].name &&
             <View style={{ position: "absolute", left: 20 }} >
-              <Icon name="caret-left" size={30} color={colors.primary} />
+              <Icon name="caret-left" size={30} color={colors.secondaryLight3} />
             </View>
           }
 
@@ -79,13 +104,13 @@ class Leaderboard extends React.PureComponent {
           {
             game.name != _APP_SETTINGS.games[_APP_SETTINGS.games.length - 1].name &&
             <View style={{ position: "absolute", right: 20 }} >
-              <Icon name="caret-right" size={30} color={colors.primary} />
+              <Icon name="caret-right" size={30} color={colors.secondaryLight3} />
             </View>
           }
         </View>
 
 
-        <View style={{ flexDirection: "row", marginVertical: 8, marginHorizontal: 25, backgroundColor: colors.secondary, borderWidth: 3, borderColor: colors.secondaryLight2, borderRadius: 5, elevation: 5 }} >
+        <View style={{ flexDirection: "row", marginVertical: 8, marginHorizontal: 25, backgroundColor: colors.secondary, borderWidth: 3, borderColor: game.backgroundColor, borderRadius: 5, elevation: 5 }} >
 
           <View style={{ flex: 1, flexDirection: "row", minHeight: 50, paddingHorizontal: 5, alignItems: "center" }} >
             <View style={{ flex: 1 }} >
@@ -114,7 +139,7 @@ class Leaderboard extends React.PureComponent {
           style={{ flex: 1, width: _SCREEN.width }}
         >
           {this.props.highscores[game.hsName].map((user, index) =>
-            (this.renderHs(index + 1, user.nickname, user[game.hsName]))
+            (this.renderHs(index + 1, user.nickname, user[game.hsName], game.backgroundColor))
           )}
         </ScrollView>
 
@@ -161,16 +186,16 @@ export default class LeaderboardScreen extends Component {
   }
 
   renderGames = () => {
+    let squareWidth = (_SCREEN.width / _APP_SETTINGS.games.length) - 6
     return (
       _APP_SETTINGS.games.map((g, index) => {
         return (
           <TouchableOpacity
             key={g.name}
             onPress={() => this.selectGame(index, true)}
-            style={{ margin: 5, paddingHorizontal: 5, paddingVertical: 5, width: 85, justifyContent: "center", alignItems: "center", elevation: 5, backgroundColor: this.state.selectedGameIndex == index ? colors.primary : colors.secondaryLight, borderRadius: 5 }}
+            style={{ margin: 3, padding: 5, width: squareWidth, height: squareWidth, justifyContent: "center", alignItems: "center", elevation: 5, backgroundColor: this.state.selectedGameIndex == index ? g.backgroundColor : colors.secondaryLight, borderRadius: 5 }}
           >
-            <Icon name={g.icon} color={colors.secondaryLight3} size={10} />
-            <Text style={{ ...Generics.text, fontSize: 10 }} >{g.fullName}</Text>
+            <Icon name={g.icon} color={colors.secondaryLight3} size={20} />
           </TouchableOpacity>
         );
       })
