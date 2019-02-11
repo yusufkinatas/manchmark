@@ -61,14 +61,14 @@ export default class ChangeNicknameModal extends Component {
 
   onChooseNickname = () => {
     if (this.state.nickname.trim().length < 3 || this.state.nickname.trim().length > 20) {
-      this.setState({ errorText: "Nickname must contain between 3 and 20 characters" });
+      this.setState({ errorText: "Username must be between 3 and 20 characters" });
     }
     else if (this.state.nickname == user.get().nickname) {
       this.dissmissModal();
       return;
     }
     else if (!validator.isAlphanumeric(this.state.nickname.trim())) {
-      this.setState({ errorText: "Nickname can contain only english letters and numbers" });
+      this.setState({ errorText: "Username can only contain english letters and numbers" });
     }
     else if (!user.get().isConnected) {
       this.setState({ errorText: "There is no internet connection" });
@@ -79,7 +79,7 @@ export default class ChangeNicknameModal extends Component {
         .then(() => { this.dissmissModal() })
         .catch(err => {
           console.log(err);
-          this.setState({ errorText: "This nickname is already in use", isLoading: false });
+          this.setState({ errorText: "This username is already in use", isLoading: false });
         });
     }
 
@@ -87,7 +87,7 @@ export default class ChangeNicknameModal extends Component {
 
   render() {
     return (
-      <View style={{ ...Generics.container, backgroundColor: colors.secondaryDark }} >
+      <View style={{ ...Generics.container, backgroundColor: "rgba(0,0,0,0.6)" }} >
         <TouchableOpacity
           style={styles.touchableArea}
           activeOpacity={1}
@@ -106,6 +106,8 @@ export default class ChangeNicknameModal extends Component {
               <ActivityIndicator size="large" color={colors.primary} />
               :
               <View style={{ justifyContent: "center", alignItems: "center", zIndex: 10 }} >
+                <Text style={Generics.bigText}>Change Username</Text>
+                <View style={{paddingTop: 10}}></View>
                 <TextInput
                   onChangeText={t => this.setState({ nickname: t })}
                   autoCapitalize={"none"}
@@ -118,7 +120,7 @@ export default class ChangeNicknameModal extends Component {
                     padding: 5,
                     fontSize: 20,
                     fontFamily: "roboto",
-                    color: colors.secondaryLight3,
+                    color: colors.secondaryLight2,
                     marginBottom: 5
                   }}
                   placeholder="Type your nickname"
@@ -128,7 +130,8 @@ export default class ChangeNicknameModal extends Component {
                 />
                 <Text style={Generics.errorText} >{this.state.errorText}</Text>
                 <CustomButton text="CHANGE" onPress={this.onChooseNickname} />
-                <CustomButton text="CLOSE" onPress={this.dissmissModal} />
+                <Text style={{...Generics.bigText, color: colors.secondaryLight2, fontSize: 15, textDecorationLine: "underline"}} onPress={this.dissmissModal}>CLOSE</Text>
+                
               </View>
           }
         </Animated.View>
