@@ -116,15 +116,10 @@ export default class TypingSpeedGame extends Component {
 
   onChangeText = (text) => {
     let ans = text.toLowerCase();
-    console.log('text bu ',ans);
     this.setState({answer: ans}, this.onAnswer);
-    //this.onAnswer(text.toLowerCase());
   }
 
-  onAnswer = () => {
-    //this.setState({answer: answer});
-    //console.log(answer);
-    console.log('state bu ',this.state.answer);
+  onAnswer = () => { 
     let newWord, index = -1;
     let tmpArray = this.state.word;
     switch (this.state.answer) {
