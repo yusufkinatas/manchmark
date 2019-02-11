@@ -5,6 +5,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  TouchableHighlight,
   ActivityIndicator,
   ImageBackground,
   Image,
@@ -75,9 +76,9 @@ export default class MainScreen extends Component {
 
         <View style={styles.bottomBarContainer} >
 
-          <TouchableOpacity style={styles.smallButtonContainer} onPress={() => this.showModal("AboutUsModal")} >
+          <TouchableHighlight style={styles.smallButtonContainer} underlayColor={ 'transparent' }  onPress={() => this.showModal("AboutUsModal")} >
             <Icon name="info" size={20} color={colors.secondaryLight3} />
-          </TouchableOpacity>
+          </TouchableHighlight>
 
         </View>
 
@@ -96,9 +97,11 @@ var styles = StyleSheet.create({
   },
   bottomBarContainer: {
     flexDirection: "row",
+    overflow: "hidden",
     justifyContent: "space-around",
     width: _SCREEN.width,
     paddingBottom: 10,
+    borderRadius: 20
   },
   smallButtonContainer: {
     width: 40,

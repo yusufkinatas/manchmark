@@ -10,6 +10,36 @@ export const _SCREEN = {
   ratio: Dimensions.get('window').height / Dimensions.get('window').width
 }
 
+const gameColor = {
+  scheme900: {
+    visual:"#B71C1C",
+    number:"#E65100",
+    touch:"#F9A825",
+    reaction:"#1db954",
+    typing:"#01579B",
+    verbal:"#1A237E",
+    calculation:"#4A148C"
+  },
+  scheme700: {
+    visual:"#C62828",
+    number:"#F4511E",
+    touch:"#FFB300",
+    reaction:"#1db954",
+    typing:"#0288D1",
+    verbal:"#303F9F",
+    calculation:"#7B1FA2"
+  },
+  scheme500: {
+    visual:"#F44336",
+    number:"#e67e22",
+    touch:"#FFCC00",
+    reaction:"#1db954",
+    typing:"#03A9F4",
+    verbal:"#30336b",
+    calculation:"#673AB7"
+  }
+}
+
 export const _APP_SETTINGS = {
   versionString: "Version 0.1.0",
   colors: {
@@ -22,13 +52,13 @@ export const _APP_SETTINGS = {
     failure: "#c0392b",
   },
   games: [
-    { name: "VisualMemoryGame", hsName: "visualMemoryHS", fullName: "Visual Memory", icon: "image", backgroundColor: "#F44336" },
-    { name: "NumberMemoryGame", hsName: "numberMemoryHS", fullName: "Number Memory", icon: "list-ol", backgroundColor: "#e67e22" },
-    { name: "TouchSpeedGame", hsName: "touchSpeedHS", fullName: "Touch Speed", icon: "hand-o-down", backgroundColor: "#FFCC00" },
-    { name: "ReactionSpeedGame", hsName: "reactionSpeedHS", fullName: "Reaction Speed", icon: "bolt", backgroundColor: "#1db954" },
-    { name: "TypingSpeedGame", hsName: "typingSpeedHS", fullName: "Typing Speed", icon: "keyboard-o", backgroundColor: "#03A9F4" },
-    { name: "VerbalMemoryGame", hsName: "verbalMemoryHS", fullName: "Verbal Memory", icon: "font", backgroundColor: "#30336b" },
-    { name: "CalculationSpeedGame", hsName: "calculationSpeedHS", fullName: "Calculation Speed", icon: "superscript", backgroundColor: "#673AB7" },
+    { name: "VisualMemoryGame", hsName: "visualMemoryHS", fullName: "Visual Memory", icon: "image", backgroundColor: gameColor.scheme900.visual },
+    { name: "NumberMemoryGame", hsName: "numberMemoryHS", fullName: "Number Memory", icon: "list-ol", backgroundColor: gameColor.scheme900.number },
+    { name: "TouchSpeedGame", hsName: "touchSpeedHS", fullName: "Touch Speed", icon: "hand-o-down", backgroundColor: gameColor.scheme900.touch },
+    { name: "ReactionSpeedGame", hsName: "reactionSpeedHS", fullName: "Reaction Speed", icon: "bolt", backgroundColor: gameColor.scheme900.reaction },
+    { name: "TypingSpeedGame", hsName: "typingSpeedHS", fullName: "Typing Speed", icon: "keyboard-o", backgroundColor: gameColor.scheme900.typing },
+    { name: "VerbalMemoryGame", hsName: "verbalMemoryHS", fullName: "Verbal Memory", icon: "font", backgroundColor: gameColor.scheme900.verbal },
+    { name: "CalculationSpeedGame", hsName: "calculationSpeedHS", fullName: "Calculation Speed", icon: "superscript", backgroundColor: gameColor.scheme900.calculation },
   ]
 };
 
