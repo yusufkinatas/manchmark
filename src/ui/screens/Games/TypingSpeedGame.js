@@ -48,6 +48,7 @@ export default class TypingSpeedGame extends Component {
       question: "",
       word: ["", "", ""],
       trueAnswer: 0,
+      answer: ""
     };
   }
 
@@ -61,6 +62,7 @@ export default class TypingSpeedGame extends Component {
       question: "",
       word: ["", "", ""],
       trueAnswer: 0,
+      answer: ""
     });
   }
 
@@ -108,14 +110,24 @@ export default class TypingSpeedGame extends Component {
     );
   }
 
-  onChangeText = (text) => {
-    this.onAnswer(text.toLowerCase());
+  clearText = () => {
+    this.textInputRef.setNativeProps({text: ''});
   }
 
-  onAnswer = (answer) => {
+  onChangeText = (text) => {
+    let ans = text.toLowerCase();
+    console.log('text bu ',ans);
+    this.setState({answer: ans}, this.onAnswer);
+    //this.onAnswer(text.toLowerCase());
+  }
+
+  onAnswer = () => {
+    //this.setState({answer: answer});
+    //console.log(answer);
+    console.log('state bu ',this.state.answer);
     let newWord, index = -1;
     let tmpArray = this.state.word;
-    switch (answer) {
+    switch (this.state.answer) {
       case this.state.word[0]:
         index = 0;
         break;
@@ -127,10 +139,12 @@ export default class TypingSpeedGame extends Component {
         break;
     }
     if (index != -1) {
-      this.usedWords.push(answer);
+      this.usedWords.push(this.state.answer);
       tmpArray[index] = this.generateNewWord();
-      this.setState({ word: tmpArray, score: this.state.score + answer.length * 5, });
-      this.textInputRef.clear();
+      this.clearText();
+      setTimeout(() => {
+        this.setState({ answer: "", word: tmpArray, score: this.state.score + this.state.answer.length * 5}, this.clearText); 
+      }, 70);
     }
   }
 
@@ -161,8 +175,11 @@ export default class TypingSpeedGame extends Component {
           autoCapitalize={"none"}
           autoCorrect={false}
           spellCheck={false}
+          secureTextEntry={false}
+          bufferDelay={0}
           textContentType={"none"}
           autoFocus={true}
+          value={this.state.answer}
           style={{
             width: _SCREEN.width / 3,
             borderBottomWidth: 1,
