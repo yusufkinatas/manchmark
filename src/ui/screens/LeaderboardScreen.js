@@ -23,7 +23,6 @@ import LoadingIndicator from "../../components/LoadingIndicator";
 
 const colors = _APP_SETTINGS.colors;
 
-
 class Leaderboard extends React.PureComponent {
 
   constructor(props) {
@@ -55,7 +54,7 @@ class Leaderboard extends React.PureComponent {
     }
     let fontColor = nickname == user.get().nickname ? gameColor : colors.secondaryLight3;
     return (
-      <View style={{ flexDirection: "row", marginVertical: 8, marginHorizontal: 25, elevation: 5, backgroundColor: colors.secondary, borderRadius: 5 }} >
+      <View key={rank} style={{ flexDirection: "row", marginVertical: 8, marginHorizontal: 25, elevation: 5, backgroundColor: colors.secondary, borderRadius: 5 }} >
 
         <View style={{ alignItems: "center", minWidth: 30, justifyContent: "center", backgroundColor: rankColor, paddingHorizontal: 5, borderTopLeftRadius: 5, borderBottomLeftRadius: 5, borderRightWidth: 1, borderRightColor: colors.secondary }} >
           <Text style={Generics.text} >{rank}</Text>
@@ -138,9 +137,9 @@ class Leaderboard extends React.PureComponent {
           }
           style={{ flex: 1, width: _SCREEN.width }}
         >
-          {this.props.highscores[game.hsName].map((user, index) =>
-            (this.renderHs(index + 1, user.nickname, user[game.hsName], game.backgroundColor))
-          )}
+          {this.props.highscores[game.hsName] ? this.props.highscores[game.hsName].map((user, index) =>
+            (this.renderHs(index + 1, user.nickname, user[game.hsName], game.backgroundColor))) : <LoadingIndicator />
+          }
         </ScrollView>
 
       </View>
@@ -148,7 +147,6 @@ class Leaderboard extends React.PureComponent {
   }
 
 }
-
 
 export default class LeaderboardScreen extends Component {
 
@@ -165,23 +163,23 @@ export default class LeaderboardScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      highscores: null,
-      averages: null,
       selectedGameIndex: 0,
-      isLoading: true
     };
   }
 
+  averages = {};
+  highscores = {};
+
   componentDidMount() {
-    setTimeout(() => {
-      this.setState({ highscores: user.get().globalHighscores, averages: user.get().globalAverages, isLoading: false });
-      this.refreshLeaderboards();
-    }, 0);
+    this.averages = user.get().globalAverages;
+    this.highscores = user.get().globalHighscores;
+    this.refreshLeaderboards();
   }
 
   refreshLeaderboards = () => {
     user.getGlobalHighscores().then(() => {
-      this.setState({ highscores: user.get().globalHighscores, averages: user.get().globalAverages, });
+      this.highscores = user.get().globalHighscores;
+      this.forceUpdate();
     }).catch(err => console.log(err))
   }
 
@@ -211,7 +209,7 @@ export default class LeaderboardScreen extends Component {
 
   renderLeaderboard = (data) => {
     const game = data.item;
-    return (<Leaderboard game={game} averages={this.state.averages} highscores={this.state.highscores} refreshLeaderboards={this.refreshLeaderboards} />);
+    return (<Leaderboard game={game} averages={this.averages} highscores={this.highscores} refreshLeaderboards={this.refreshLeaderboards} />);
   }
 
   renderListEmpty = () => {
@@ -223,11 +221,7 @@ export default class LeaderboardScreen extends Component {
   }
 
   render() {
-    return (this.state.isLoading ?
-      <View style={Generics.container} >
-        <LoadingIndicator />
-      </View>
-      :
+    return (
       <View style={Generics.container} >
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ maxHeight: 50 }} >
           {this.renderGames()}
@@ -251,7 +245,8 @@ export default class LeaderboardScreen extends Component {
           renderItem={this.renderLeaderboard}
           ListEmptyComponent={this.renderListEmpty}
         />
-      </View>)
+      </View>
+    )
 
   }
 }

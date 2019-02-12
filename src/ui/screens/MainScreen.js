@@ -10,7 +10,8 @@ import {
   ImageBackground,
   Image,
   Alert,
-  Linking
+  Linking,
+  TouchableNativeFeedback
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -75,10 +76,12 @@ export default class MainScreen extends Component {
         </View>
 
         <View style={styles.bottomBarContainer} >
-          <View style={{borderRadius:50, overflow:"hidden"}}>
-          <TouchableHighlight style={styles.smallButtonContainer} underlayColor={colors.primary}  onPress={() => this.showModal("AboutUsModal")} >
-            <Icon name="info" size={20} color={colors.secondaryLight3} />
-          </TouchableHighlight>
+          <View style={{ borderRadius: 50, overflow: "hidden" }}>
+            <TouchableNativeFeedback style={styles.smallButtonContainer} background={TouchableNativeFeedback.Ripple(colors.primary, true)} onPress={() => this.showModal("AboutUsModal")} >
+              <View style={{ width: 50, height: 40, justifyContent: "center", alignItems: "center" }} >
+                <Icon name="info" size={20} color={colors.secondaryLight3} />
+              </View>
+            </TouchableNativeFeedback>
           </View>
         </View>
 

@@ -32,7 +32,6 @@ export const user = {
   set: (obj, saveToStore?= false) => {
     _user = { ..._user, ...obj };
     if (saveToStore) {
-      // console.log("SAVING USER", _user);
       store.setItem("user", _user)
         .then(res => { })
         .catch(err => console.log(err));
