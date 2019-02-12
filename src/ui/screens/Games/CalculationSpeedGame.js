@@ -52,7 +52,7 @@ const QUESTION_FUNCTIONS = [
   },
 ]
 
-const gameColor = _APP_SETTINGS.games.find(g => g.name== "CalculationSpeedGame").backgroundColor;
+const gameColor = _APP_SETTINGS.games.find(g => g.name == "CalculationSpeedGame").backgroundColor;
 
 export default class CalculationSpeedGame extends Component {
 
@@ -137,7 +137,7 @@ export default class CalculationSpeedGame extends Component {
   }
 
   animateBackground = (status) => {
-    this.setState({ backgroundColor: status == "failure" ? colors.failure : colors.primary });
+    this.setState({ backgroundColor: status == "failure" ? colors.failure : gameColor });
     Animated.timing(this.backgroundAnim, {
       toValue: 1,
       duration: 100,
@@ -190,7 +190,7 @@ export default class CalculationSpeedGame extends Component {
 
         <View style={Generics.container} >
           <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={gameColor} />
-          <View style={{paddingVertical: 5, paddingHorizontal: 10, borderRadius: 10, overflow:"hidden" }} >
+          <View style={{ paddingVertical: 5, paddingHorizontal: 10, borderRadius: 10, overflow: "hidden" }} >
             <Animated.View style={{
               ...StyleSheet.absoluteFill,
               backgroundColor: this.state.backgroundColor,
