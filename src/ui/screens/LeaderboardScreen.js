@@ -30,7 +30,13 @@ class Leaderboard extends React.PureComponent {
     this.isRefreshing = false;
   }
 
-  renderHs = (rank, nickname, hs, gameColor) => {
+  // renderHs = (rank, nickname, hs, gameColor) => {
+  renderHs = (data) => {
+    console.log(data);
+    let rank = data.index + 1;
+    let nickname = data.item.nickname;
+    let hs = data.item[this.props.game.hsName];
+    let gameColor = this.props.game.backgroundColor;
     let rankColor;
     switch (rank) {
       case 1:
@@ -128,19 +134,16 @@ class Leaderboard extends React.PureComponent {
           </View>
         </View>
 
-        <ScrollView
-          refreshControl={
-            <RefreshControl
-              refreshing={this.isRefreshing}
-              onRefresh={this.props.refreshLeaderboards}
-            />
-          }
-          style={{ flex: 1, width: _SCREEN.width }}
-        >
-          {this.props.highscores[game.hsName] ? this.props.highscores[game.hsName].map((user, index) =>
-            (this.renderHs(index + 1, user.nickname, user[game.hsName], game.backgroundColor))) : <LoadingIndicator />
-          }
-        </ScrollView>
+        <FlatList
+          data={this.props.highscores[game.hsName]}
+          renderItem={this.renderHs}
+          keyExtractor={(item, index) => ("p" + index)}
+          refreshControl={<RefreshControl
+            refreshing={this.isRefreshing}
+            onRefresh={this.props.refreshLeaderboards}
+          />}
+          windowSize={5}
+        />
 
       </View>
     )
@@ -173,6 +176,7 @@ export default class LeaderboardScreen extends Component {
   componentDidMount() {
     this.averages = user.get().globalAverages;
     this.highscores = user.get().globalHighscores;
+    this.forceUpdate();
     this.refreshLeaderboards();
   }
 
@@ -220,10 +224,14 @@ export default class LeaderboardScreen extends Component {
     )
   }
 
+  getItemLayout = (data, index) => (
+    { length: _SCREEN.width, offset: _SCREEN.width * index, index }
+  );
+
   render() {
     return (
       <View style={Generics.container} >
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ maxHeight: 50 }} >
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ height: (_SCREEN.width / _APP_SETTINGS.games.length + 6) }} >
           {this.renderGames()}
         </ScrollView>
 
@@ -238,13 +246,16 @@ export default class LeaderboardScreen extends Component {
               this.selectGame(index, false);
             }
           }}
-          onScrollToIndexFailed={() => { }}
+          getItemLayout={this.getItemLayout}
+          windowSize={2}
           data={_APP_SETTINGS.games}
+          initialNumToRender={2}
           keyExtractor={(item, index) => ("p" + index)}
           overScrollMode={Platform.OS === "android" ? "never" : "always"}
           renderItem={this.renderLeaderboard}
           ListEmptyComponent={this.renderListEmpty}
         />
+
       </View>
     )
 
