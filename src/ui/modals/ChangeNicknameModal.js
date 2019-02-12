@@ -6,6 +6,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   ActivityIndicator,
+  KeyboardAvoidingView,
+  ScrollView,
   ImageBackground,
   Image,
   Alert,
@@ -87,55 +89,55 @@ export default class ChangeNicknameModal extends Component {
 
   render() {
     return (
-      <View style={{ ...Generics.container, backgroundColor: "rgba(0,0,0,0.6)" }} >
-        <TouchableOpacity
-          style={styles.touchableArea}
-          activeOpacity={1}
-          onPressIn={this.dissmissModal}
-        />
-        <Animated.View
-          style={{
-            ...styles.innerContainer,
-            translateY: this.anim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [_SCREEN.height * 0.15, 0]
-            })
-          }}>
-          {
-            this.state.isLoading ?
-              <ActivityIndicator size="large" color={colors.primary} />
-              :
-              <View style={{ justifyContent: "center", alignItems: "center", zIndex: 10 }} >
-                <Text style={Generics.bigText}>Change Username</Text>
-                <View style={{paddingTop: 10}}></View>
-                <TextInput
-                  onChangeText={t => this.setState({ nickname: t })}
-                  autoCapitalize={"none"}
-                  autoCorrect={false}
-                  style={{
-                    width: _SCREEN.width * 0.6,
-                    borderWidth: 1,
-                    borderColor: colors.primary,
-                    borderRadius: 5,
-                    padding: 5,
-                    fontSize: 20,
-                    fontFamily: "roboto",
-                    color: colors.secondaryLight2,
-                    marginBottom: 5
-                  }}
-                  placeholder="Type your nickname"
-                  placeholderTextColor={colors.secondaryLight2}
-                  underlineColorAndroid={"transparent"}
-                  value={this.state.nickname}
-                />
-                <Text style={Generics.errorText} >{this.state.errorText}</Text>
-                <CustomButton text="CHANGE" onPress={this.onChooseNickname} />
-                <Text style={{...Generics.bigText, color: colors.secondaryLight2, fontSize: 15, textDecorationLine: "underline"}} onPress={this.dissmissModal}>CLOSE</Text>
-                
-              </View>
-          }
-        </Animated.View>
-      </View>
+      <KeyboardAvoidingView behavior="padding" style={{...Generics.container, backgroundColor: "rgba(0,0,0,0.6)"}}>
+          <TouchableOpacity
+            style={styles.touchableArea}
+            activeOpacity={1}
+            onPressIn={this.dissmissModal}
+          />
+          <Animated.View
+            style={{
+              ...styles.innerContainer,
+              translateY: this.anim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [_SCREEN.height * 0.15, 0]
+              })
+            }}>
+            {
+              this.state.isLoading ?
+                <ActivityIndicator size="large" color={colors.primary} />
+                :
+                <View style={{ justifyContent: "center", alignItems: "center", zIndex: 10 }} >
+                  <Text style={Generics.bigText}>Change Username</Text>
+                  <View style={{paddingTop: 10}}></View>
+                  <TextInput
+                    onChangeText={t => this.setState({ nickname: t })}
+                    autoCapitalize={"none"}
+                    autoCorrect={false}
+                    style={{
+                      width: _SCREEN.width * 0.6,
+                      borderWidth: 1,
+                      borderColor: colors.primary,
+                      borderRadius: 5,
+                      padding: 5,
+                      fontSize: 20,
+                      fontFamily: "roboto",
+                      color: colors.secondaryLight2,
+                      marginBottom: 5
+                    }}
+                    placeholder="Type your nickname"
+                    placeholderTextColor={colors.secondaryLight2}
+                    underlineColorAndroid={"transparent"}
+                    value={this.state.nickname}
+                  />
+                  <Text style={Generics.errorText} >{this.state.errorText}</Text>
+                  <CustomButton text="CHANGE" onPress={this.onChooseNickname} />
+                  <Text style={{...Generics.bigText, color: colors.secondaryLight2, fontSize: 15, textDecorationLine: "underline"}} onPress={this.dissmissModal}>CLOSE</Text>
+                  
+                </View>
+            }
+          </Animated.View>
+      </KeyboardAvoidingView>
     );
   }
 }

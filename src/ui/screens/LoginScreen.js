@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   ImageBackground,
+  KeyboardAvoidingView,
+  ScrollView,
   Image,
   Alert,
   Linking,
@@ -113,10 +115,10 @@ export default class MainScreen extends Component {
 
   onChooseNickname = () => {
     if (this.state.nickname.trim().length < 3 || this.state.nickname.trim().length > 20) {
-      this.setState({ errorText: "Nickname must contain between 3 and 20 characters" });
+      this.setState({ errorText: "Username must be between 3 and 20 characters" });
     }
     else if (!validator.isAlphanumeric(this.state.nickname.trim())) {
-      this.setState({ errorText: "Nickname can contain only english letters and numbers" });
+      this.setState({ errorText: "Username can only contain english letters and numbers" });
     }
     else {
       this.setState({ isLoading: true });
@@ -131,7 +133,7 @@ export default class MainScreen extends Component {
         .catch(err => {
           console.log("err", JSON.stringify(err, undefined, 2));
           console.log("err", err);
-          this.setState({ errorText: "This nickname is already in use", isLoading: false });
+          this.setState({ errorText: "This username is already in use", isLoading: false });
         });
     }
 
@@ -145,7 +147,9 @@ export default class MainScreen extends Component {
 
   renderLoginForm = () => {
     return (
-      <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }} >
+      <View>
+        <Text style={Generics.bigText}>Pick a Username</Text>
+        <View style={{ paddingTop: 10 }}></View>
         <TextInput
           onChangeText={t => this.setState({ nickname: t })}
           autoCapitalize={"none"}
@@ -173,13 +177,12 @@ export default class MainScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container} >
-
-        <View style={{ flex: 1, justifyContent: "center" }} >
-          <Text style={styles.header} >MANCHMARK</Text>
+      <KeyboardAvoidingView behavior="padding" style={Generics.container}>
+        <View style={{ flex: 2, justifyContent: "center" }} >
+          <Text style={{ ...Generics.header }} >MANCHMARK</Text>
         </View>
 
-        <View style={{ flex: 6, justifyContent: "center", alignItems: "center" }} >
+        <View style={{ flex: 3, alignItems: "center", paddingTop:50 }} >
           {
             this.state.isLoading
               ?
@@ -188,8 +191,7 @@ export default class MainScreen extends Component {
               this.renderLoginForm()
           }
         </View>
-
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }

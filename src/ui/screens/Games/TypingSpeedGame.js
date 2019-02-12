@@ -6,6 +6,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   ActivityIndicator,
+  KeyboardAvoidingView,
+  ScrollView,
   ImageBackground,
   Image,
   Alert,
@@ -145,7 +147,8 @@ export default class TypingSpeedGame extends Component {
 
   renderGame = () => {
     return (
-      <View style={Generics.container}>
+      <KeyboardAvoidingView behavior="padding" style={Generics.container}>
+    
         <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={gameColor} />
         <BouncingText style={Generics.bigText}>Score: {this.state.score}</BouncingText>
         <View style={{ height: 10 }} />
@@ -188,7 +191,9 @@ export default class TypingSpeedGame extends Component {
           }}
           underlineColorAndroid={"transparent"}
         />
-      </View>
+      
+      
+      </KeyboardAvoidingView>
     );
   }
 

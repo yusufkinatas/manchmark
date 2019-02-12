@@ -53,7 +53,7 @@ export default class AboutUsModal extends Component {
 
   render() {
     return (
-      <View style={{ ...Generics.container, backgroundColor: "rgba(0,0,0,0.6)" }} >
+      <KeyboardAvoidingView style={{ ...Generics.container, backgroundColor: "rgba(0,0,0,0.6)" }} >
         <TouchableOpacity
           style={styles.touchableArea}
           activeOpacity={1}
@@ -89,7 +89,7 @@ export default class AboutUsModal extends Component {
           </View>
           <CustomButton text="Close" onPress={this.dissmissModal} />
         </Animated.View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
