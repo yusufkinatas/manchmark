@@ -13,32 +13,18 @@ import { store, _APP_SETTINGS, _SCREEN, nav } from "../core"
 const CustomButton = ({ onPress, text, icon, big, backgroundColor }) => {
 
   return (
-    big ?
-      <TouchableOpacity
-        style={{ ...styles.bigButton, backgroundColor:  backgroundColor ? backgroundColor : colors.primary, justifyContent: icon ? "flex-start" : "center" }}
-        onPress={onPress}
-      >
-        {
-          icon &&
-          <View style={{ justifyContent: "center", alignItems: "center" }} >
-            <Icon name={icon} size={25} color={colors.secondaryLight3} style={{ marginRight: 10 }} />
-          </View>
-        }
-        <Text style={styles.bigText} >{text}</Text>
-      </TouchableOpacity>
-      :
-      <TouchableOpacity
-        style={{ ...styles.button, backgroundColor:  backgroundColor ? backgroundColor : colors.primary, justifyContent: icon ? "flex-start" : "center" }}
-        onPress={onPress}
-      >
-        {
-          icon &&
-          <View style={{ width: 45, justifyContent: "center", alignItems: "center" }} >
-            <Icon name={icon} size={25} color={colors.secondaryLight3} style={{ marginRight: 10 }} />
-          </View>
-        }
-        <Text style={styles.text} >{text}</Text>
-      </TouchableOpacity>
+    <TouchableOpacity
+      style={{ ...styles.button, backgroundColor: backgroundColor ? backgroundColor : colors.primary, justifyContent: icon ? "flex-start" : "center" }}
+      onPress={onPress}
+    >
+      {
+        icon &&
+        <View style={{ width: 45, justifyContent: "center", alignItems: "center" }} >
+          <Icon name={icon} size={25} color={colors.secondaryLight3} style={{ marginRight: 10 }} />
+        </View>
+      }
+      <Text style={styles.text} >{text}</Text>
+    </TouchableOpacity>
   )
 };
 
@@ -65,7 +51,8 @@ var styles = StyleSheet.create({
     borderRadius: 50,
     width: _SCREEN.width * 0.6,
     marginBottom: 10,
-    backgroundColor:  colors.primary
+    elevation: 3,
+    backgroundColor: colors.primary
   },
   bigButton: {
     flexDirection: "row",

@@ -12,31 +12,31 @@ export const _SCREEN = {
 
 const gameColor = {
   scheme900: {
-    visual:"#B71C1C",
-    number:"#E65100",
-    touch:"#F9A825",
-    reaction:"#1db954",
-    typing:"#01579B",
-    verbal:"#1A237E",
-    calculation:"#4A148C"
+    visual: "#B71C1C",
+    number: "#E65100",
+    touch: "#F9A825",
+    reaction: "#1db954",
+    typing: "#01579B",
+    verbal: "#1A237E",
+    calculation: "#4A148C"
   },
   scheme700: {
-    visual:"#C62828",
-    number:"#F4511E",
-    touch:"#FFB300",
-    reaction:"#1db954",
-    typing:"#0288D1",
-    verbal:"#303F9F",
-    calculation:"#7B1FA2"
+    visual: "#C62828",
+    number: "#F4511E",
+    touch: "#FFB300",
+    reaction: "#1db954",
+    typing: "#0288D1",
+    verbal: "#303F9F",
+    calculation: "#7B1FA2"
   },
   scheme500: {
-    visual:"#F44336",
-    number:"#e67e22",
-    touch:"#FFCC00",
-    reaction:"#1db954",
-    typing:"#03A9F4",
-    verbal:"#30336b",
-    calculation:"#673AB7"
+    visual: "#F44336",
+    number: "#e67e22",
+    touch: "#FFCC00",
+    reaction: "#1db954",
+    typing: "#03A9F4",
+    verbal: "#30336b",
+    calculation: "#673AB7"
   }
 }
 
@@ -48,7 +48,7 @@ export const _APP_SETTINGS = {
     secondaryDark: '#121212',
     secondaryLight: '#535353',
     secondaryLight2: '#b3b3b3',
-    secondaryLight3: "#ffffff",
+    secondaryLight3: "#dfe4ea",
     failure: "#c0392b",
   },
   games: [
@@ -86,7 +86,10 @@ export const Generics = StyleSheet.create({
     fontFamily: "roboto",
     color: colors.secondaryLight3,
     textAlign: "center",
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    textShadowColor: colors.secondaryDark,
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
   },
   touchableArea: {
     width: _SCREEN.width,

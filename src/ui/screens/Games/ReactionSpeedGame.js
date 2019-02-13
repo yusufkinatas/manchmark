@@ -201,14 +201,6 @@ export default class ReactionSpeedGame extends Component {
     console.log()
     return (
       <View style={Generics.container}>
-        <View style={{ paddingTop: 20 }} >
-          <DelayedText style={Generics.bigText} delay={0}>Your average reaction time : {this.findAverage()}</DelayedText>
-          <DelayedText style={Generics.bigText} delay={100}>Phase 1: {this.reactionTime[0]}ms</DelayedText>
-          <DelayedText style={Generics.bigText} delay={200}>Phase 2: {this.reactionTime[1]}ms</DelayedText>
-          <DelayedText style={Generics.bigText} delay={300}>Phase 3: {this.reactionTime[2]}ms</DelayedText>
-          <DelayedText style={Generics.bigText} delay={400}>Phase 4: {this.reactionTime[3]}ms</DelayedText>
-          <DelayedText style={Generics.bigText} delay={500}>Phase 5: {this.reactionTime[4]}ms</DelayedText>
-        </View>
         <GameResult
           onRestart={this.reinitialize}
           game="ReactionSpeedGame"

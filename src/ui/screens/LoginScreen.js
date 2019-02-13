@@ -147,7 +147,7 @@ export default class MainScreen extends Component {
 
   renderLoginForm = () => {
     return (
-      <View>
+      <View style={{ alignItems: "center" }} >
         <Text style={Generics.bigText}>Pick a Username</Text>
         <View style={{ paddingTop: 10 }}></View>
         <TextInput
@@ -182,7 +182,7 @@ export default class MainScreen extends Component {
           <Text style={{ ...Generics.header }} >MANCHMARK</Text>
         </View>
 
-        <View style={{ flex: 3, alignItems: "center", paddingTop:50 }} >
+        <View style={{ flex: 3, alignItems: "center", paddingTop: 50 }} >
           {
             this.state.isLoading
               ?
