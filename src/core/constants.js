@@ -101,8 +101,8 @@ export const Generics = StyleSheet.create({
     justifyContent: "center"
   },
   header: {
-    fontFamily: "Roboto",
-    fontSize: 50,
+    fontFamily: "Kanit",
+    fontSize: 60,
     textShadowColor: colors.secondaryDark,
     textShadowOffset: { width: 3, height: 3 },
     textShadowRadius: 3,

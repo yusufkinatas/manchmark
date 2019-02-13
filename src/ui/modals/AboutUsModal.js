@@ -53,7 +53,7 @@ export default class AboutUsModal extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView style={{ ...Generics.container, backgroundColor: "rgba(0,0,0,0.6)" }} >
+      <View style={{ ...Generics.container, backgroundColor: "rgba(0,0,0,0.6)" }} >
         <TouchableOpacity
           style={styles.touchableArea}
           activeOpacity={1}
@@ -79,7 +79,8 @@ export default class AboutUsModal extends Component {
               <Text style={styles.smallText}>{_APP_SETTINGS.versionString}</Text>
             </View>
           </View>
-          <View style={{ paddingTop: 20 }}>
+          <Text style={{...Generics.bigText, fontSize:15, fontFamily:"Kanit-LightItalic", paddingTop: 10}}>Harder, better, faster, smarter!</Text>
+          <View style={{ paddingTop: 10 }}>
             <View style={{ marginBottom: 5, flexDirection: "row" }}>
               <Text style={styles.smallText} >Yusuf Kınataş</Text>
               <Text style={styles.smallText} >&</Text>
@@ -89,7 +90,7 @@ export default class AboutUsModal extends Component {
           </View>
           <CustomButton text="Close" onPress={this.dissmissModal} />
         </Animated.View>
-      </KeyboardAvoidingView>
+      </View>
     );
   }
 }
@@ -121,7 +122,7 @@ var styles = StyleSheet.create({
   },
   bigText: {
     fontSize: 25,
-    fontFamily: "roboto",
+    fontFamily: "Kanit",
     color: colors.secondaryLight3,
     textAlign: "center",
     paddingTop: 5,
