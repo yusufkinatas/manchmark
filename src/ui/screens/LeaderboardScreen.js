@@ -58,20 +58,20 @@ class Leaderboard extends React.PureComponent {
         rankColor = colors.secondaryDark + "33";
         break;
     }
-    let fontColor = nickname == user.get().nickname ? gameColor : colors.secondaryLight3;
+    let fontColor = colors.secondaryLight3;
     return (
       <View key={rank} style={{ flexDirection: "row", marginVertical: 8, marginHorizontal: 25, elevation: 5, backgroundColor: colors.secondary, borderRadius: 5 }} >
 
         <View style={{ alignItems: "center", minWidth: 30, justifyContent: "center", backgroundColor: rankColor, paddingHorizontal: 5, borderTopLeftRadius: 5, borderBottomLeftRadius: 5, borderRightWidth: 1, borderRightColor: colors.secondary }} >
-          <Text style={Generics.text} >{rank}</Text>
+          <Text style={{ ...Generics.bigText, paddingHorizontal: 0 }} >{rank}</Text>
         </View>
 
-        <View key={nickname} style={{ flexDirection: "row", flex: 1, backgroundColor: colors.secondaryLight, borderTopRightRadius: 5, borderBottomRightRadius: 5 }} >
+        <View key={nickname} style={{ flexDirection: "row", flex: 1, backgroundColor: nickname == user.get().nickname ? gameColor : colors.secondaryLight, borderTopRightRadius: 5, borderBottomRightRadius: 5 }} >
 
           <View style={{ flex: 1, flexDirection: "row", minHeight: 50, paddingHorizontal: 5, alignItems: "center" }} >
 
             <View style={{ flex: 1 }} >
-              <Text style={{ ...Generics.bigText, fontWeight: "bold", textAlign: "left", color: fontColor }} >{nickname}</Text>
+              <Text style={{ ...Generics.bigText, textAlign: "left", color: fontColor }} >{nickname}</Text>
             </View>
 
             <Text style={{ ...Generics.text, color: fontColor }} >

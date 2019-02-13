@@ -41,7 +41,7 @@ export default class StatisticsScreen extends Component {
     return (
       <View style={Generics.container} >
 
-        <Text style={Generics.bigText} >STATISTICS</Text>
+        <Text style={Generics.bigText} >WORK IN PROGRESS</Text>
 
       </View>
     )
