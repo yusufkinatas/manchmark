@@ -69,8 +69,8 @@ export const Generics = StyleSheet.create({
     color: colors.secondaryLight2,
     textAlign: "center",
     paddingHorizontal: 20,
-    paddingBottom: 20,
-    bottom: 20
+    bottom: 20,
+    width: _SCREEN.width
   },
   bigText: {
     fontSize: 20,

@@ -64,13 +64,31 @@ export default class GameResult extends Component {
       return (
         <View style={Generics.container} >
 
-          <DelayedView delay={0} style={{ ...styles.infoContainer, backgroundColor: this.game.backgroundColor, justifyContent: "center" }} >
+          <DelayedView delay={0} style={{ ...styles.infoContainer, justifyContent: "center" }} >
             <Text style={{ ...Generics.bigText, fontWeight: "bold", fontSize: 25 }} >{"Congratulations!\nNew Highscore"}</Text>
           </DelayedView>
 
-          <DelayedView delay={200} style={{ ...styles.infoContainer, backgroundColor: this.game.backgroundColor + "bb" }} >
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Score</Text>
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{this.state.currentScore}</Text>
+          <DelayedView delay={200} style={{ ...styles.infoContainer, backgroundColor: this.game.backgroundColor }} >
+            <View style={{ width: "100%" }} >
+              <View style={{ flexDirection: "row", width: "100%", justifyContent: "space-between" }} >
+                <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Score</Text>
+                <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{this.state.currentScore}</Text>
+              </View>
+
+              {this.props.extraData.map(({ data, important }) => {
+                let fontStyle = {
+                  ...Generics.bigText,
+                  fontSize: important ? 14 : 12,
+                  fontWeight: important ? "bold" : "normal",
+                };
+                return (
+                  <View style={{ flexDirection: "row", width: "100%", justifyContent: "space-between" }} >
+                    <Text style={fontStyle} >{data[0]}</Text>
+                    <Text style={fontStyle} >{data[1]}</Text>
+                  </View>
+                );
+              })}
+            </View>
           </DelayedView>
 
           <DelayedView delay={400} style={{ ...styles.infoContainer, backgroundColor: this.game.backgroundColor + "88" }} >
@@ -87,7 +105,6 @@ export default class GameResult extends Component {
             <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >You are better than {utils.truncateFloatingNumber(100 - (this.state.rank / this.state.userCount * 100), 2)}% of people</Text>
           </DelayedView>
 
-
           <DelayedView delay={1000} >
             <CustomButton backgroundColor={this.game.backgroundColor} style={Generics.container} text="Restart" onPress={this.props.onRestart} />
           </DelayedView>
@@ -100,9 +117,30 @@ export default class GameResult extends Component {
         <View style={Generics.container} >
 
           <DelayedView delay={0} style={{ ...styles.infoContainer, backgroundColor: this.game.backgroundColor }} >
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Score</Text>
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{this.state.currentScore}</Text>
+            <View style={{ width: "100%" }} >
+              <View style={{ flexDirection: "row", width: "100%", justifyContent: "space-between" }} >
+                <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Score</Text>
+                <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{this.state.currentScore}</Text>
+              </View>
+
+              {this.props.extraData.map(({ data, important }) => {
+                let fontStyle = {
+                  ...Generics.bigText,
+                  fontSize: important ? 14 : 12,
+                  fontWeight: important ? "bold" : "normal",
+                };
+                return (
+                  <View style={{ flexDirection: "row", width: "100%", justifyContent: "space-between" }} >
+                    <Text style={fontStyle} >{data[0]}</Text>
+                    <Text style={fontStyle} >{data[1]}</Text>
+                  </View>
+                );
+              })}
+            </View>
           </DelayedView>
+
+
+
           <DelayedView delay={200} style={{ ...styles.infoContainer, backgroundColor: this.game.backgroundColor + "bb" }} >
             <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Highscore</Text>
             <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{this.state.highScore}</Text>
@@ -111,12 +149,13 @@ export default class GameResult extends Component {
             <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Average of Players</Text>
             <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{utils.truncateFloatingNumber(user.get().globalAverages[this.game.hsName], 2)}</Text>
           </DelayedView>
-          <DelayedView delay={600} style={{ ...styles.infoContainer, backgroundColor: this.game.backgroundColor + "55", justifyContent: "center" }} >
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Repetition is the key to success!</Text>
+
+          <DelayedView delay={600} >
+            <CustomButton backgroundColor={this.game.backgroundColor} style={Generics.container} text="Restart" onPress={this.props.onRestart} />
           </DelayedView>
 
-          <DelayedView delay={800} >
-            <CustomButton backgroundColor={this.game.backgroundColor} style={Generics.container} text="Restart" onPress={this.props.onRestart} />
+          <DelayedView delay={800} style={{ position: "absolute", bottom: 20 }} >
+            <Text style={{ ...Generics.text, color: colors.secondaryLight2, fontStyle: "italic" }} >Repetition is the key to success!</Text>
           </DelayedView>
 
         </View>
@@ -136,7 +175,12 @@ export default class GameResult extends Component {
 GameResult.propsTypes = {
   game: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
-  onRestart: PropTypes.func.isRequired
+  onRestart: PropTypes.func.isRequired,
+  extraData: PropTypes.array,
+}
+
+GameResult.defaultProps = {
+  extraData: []
 }
 
 const styles = StyleSheet.create({
@@ -145,9 +189,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
-    borderRadius: 15,
-    // elevation: 3,
-    marginBottom: 20,
+    borderRadius: 10,
+    marginBottom: 10,
     paddingHorizontal: 5,
     paddingVertical: 7,
   }
