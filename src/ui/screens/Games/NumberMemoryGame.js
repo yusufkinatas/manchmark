@@ -87,6 +87,11 @@ export default class NumberMemoryGame extends Component {
     }, (this.numberLength + 1) * 1000);
   }
 
+  skipWaiting = () => {
+    clearTimeout(this.numberTimeout);
+    this.setState({ isGuessing: true });
+  }
+
   onAnswer = () => {
     if (this.state.userAnswer == this.state.number) {
       this.showNewNumber();
@@ -155,6 +160,8 @@ export default class NumberMemoryGame extends Component {
             <Text style={{ ...Generics.hugeText, textAlign: "center" }} >{this.state.number}</Text>
             <View style={{ height: 10 }}></View>
             <CounterBar time={(this.numberLength + 1) * 1000} width={_SCREEN.width * 0.8} color={gameColor} />
+            <View style={{ height: 10 }}></View>
+            <CustomButton backgroundColor={gameColor} text="Skip" onPress={this.skipWaiting} />
           </View>
         }
 
