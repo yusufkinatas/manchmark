@@ -12,6 +12,15 @@ export const _SCREEN = {
 
 const gameColor = {
   scheme900: {
+    visual: "#902c2c",
+    number: "#bf5e29",
+    touch: "#e0ac56",
+    reaction: "#3fa563",
+    typing: "#18517e",
+    verbal: "#202662",
+    calculation: "#431e6c"
+  },
+  scheme900_Old: {
     visual: "#B71C1C",
     number: "#E65100",
     touch: "#F9A825",
@@ -19,24 +28,6 @@ const gameColor = {
     typing: "#01579B",
     verbal: "#1A237E",
     calculation: "#4A148C"
-  },
-  scheme700: {
-    visual: "#C62828",
-    number: "#F4511E",
-    touch: "#FFB300",
-    reaction: "#1db954",
-    typing: "#0288D1",
-    verbal: "#303F9F",
-    calculation: "#7B1FA2"
-  },
-  scheme500: {
-    visual: "#F44336",
-    number: "#e67e22",
-    touch: "#FFCC00",
-    reaction: "#1db954",
-    typing: "#03A9F4",
-    verbal: "#30336b",
-    calculation: "#673AB7"
   }
 }
 
@@ -78,8 +69,8 @@ export const Generics = StyleSheet.create({
     color: colors.secondaryLight2,
     textAlign: "center",
     paddingHorizontal: 20,
-    paddingBottom: 20,
-    bottom: 20
+    bottom: 20,
+    width: _SCREEN.width
   },
   bigText: {
     fontSize: 20,

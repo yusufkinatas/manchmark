@@ -199,12 +199,23 @@ export default class ReactionSpeedGame extends Component {
 
   renderFinish() {
     console.log()
+    let extraData = [{ data: ["Average", this.findAverage()], important: true }];
+    this.reactionTime.forEach((time, index) => {
+      if (time) {
+        extraData.push({ data: [`Phase ${index + 1}`, time + "ms"] });
+      }
+      else {
+        extraData.push({ data: [`Phase ${index + 1}`, "-"] });
+      }
+    });
+
     return (
       <View style={Generics.container}>
         <GameResult
           onRestart={this.reinitialize}
           game="ReactionSpeedGame"
           score={this.findTotalPoint()}
+          extraData={extraData}
         />
       </View>
     );
@@ -232,7 +243,7 @@ export default class ReactionSpeedGame extends Component {
     for (i = 0; i < this.reactionTime.length; i++) {
       sum += this.findScore(this.reactionTime[i]);
     }
-    return sum;
+    return utils.truncateFloatingNumber(sum, 2);
   }
 
   findScore = (reactionTime) => {
