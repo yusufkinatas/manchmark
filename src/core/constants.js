@@ -15,7 +15,7 @@ const gameColor = {
     visual: "#902c2c",
     number: "#bf5e29",
     touch: "#e0ac56",
-    reaction: "#3fa563",
+    reaction: "#2F9458",
     typing: "#18517e",
     verbal: "#202662",
     calculation: "#431e6c"

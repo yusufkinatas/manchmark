@@ -86,7 +86,7 @@ export default class AboutUsModal extends Component {
               <Text style={styles.smallText} >&</Text>
               <Text style={styles.smallText} >Yağız Akyüz</Text>
             </View>
-            <Text style={styles.copyRightText}>© Copyright 2018, All Rights Reserved.</Text>
+            <Text style={styles.copyRightText}>© Copyright 2019, All Rights Reserved.</Text>
           </View>
           <CustomButton text="Close" onPress={this.dissmissModal} />
         </Animated.View>

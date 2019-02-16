@@ -122,7 +122,7 @@ export default class NumberMemoryGame extends Component {
       <View style={Generics.container} >
 
         <View style={{ paddingBottom: 20 }} >
-          <Text style={Generics.bigText} >Remember the numbers</Text>
+          <Text style={Generics.bigText} >Remember the number</Text>
         </View>
         <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
       </View>

@@ -18,12 +18,15 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { store, _APP_SETTINGS, _SCREEN, utils, Generics } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
+import CounterBar from "../../../components/CounterBar";
 import BouncingText from '../../../components/BouncingText';
 import SwappingText from '../../../components/SwappingText';
 import GameResult from '../../../components/GameResult';
 
-const TOP_BAR_HEIGHT = 100;
+const TOP_BAR_HEIGHT = 150;
 const gameColor = _APP_SETTINGS.games.find(g => g.name == "VisualMemoryGame").backgroundColor;
+const animationDuration = 250;
+const answerDuration = 7000;
 
 export default class VisualMemoryGame extends Component {
 
@@ -44,6 +47,7 @@ export default class VisualMemoryGame extends Component {
     this.showDuration = 1000;
     this.state = {
       gameStatus: "info",
+      timesUp: false,
       score: 0,
       level: 0,
       lives: 3,
@@ -60,7 +64,9 @@ export default class VisualMemoryGame extends Component {
         e.nativeEvent.touches.forEach(touch => {
           indexX = Math.floor(touch.pageX / _SCREEN.width * numberOfColumns);
           indexY = Math.floor((touch.pageY - TOP_BAR_HEIGHT) / _SCREEN.width * numberOfColumns);
-          console.log("[", indexX, ",", indexY, "]");
+          indexY < 0 ? indexY = 0 : indexY = indexY;
+          indexY > numberOfColumns - 1 ? indexY = numberOfColumns - 1 : indexY = indexY;
+          // console.log("[", indexX, ",", indexY, "]");
         })
         this.onSquarePress(indexX + indexY * this.sideLengthOfBoard)
       }
@@ -76,6 +82,7 @@ export default class VisualMemoryGame extends Component {
 
     this.setState({
       gameStatus: "info",
+      timesUp: false,
       score: 0,
       level: 0,
       lives: 3,
@@ -122,6 +129,7 @@ export default class VisualMemoryGame extends Component {
   }
 
   startNextLevel = (replaySameLevel?) => {
+    clearTimeout(this.answerTime);
     this.state.squares = [];
     this.state.levelMistakes = 0
     if (!replaySameLevel) {
@@ -158,6 +166,7 @@ export default class VisualMemoryGame extends Component {
     for (let i = 0; i < this.sideLengthOfBoard * this.sideLengthOfBoard; i++) {
       this.state.squares.push({ special: false, pushed: false, animation: new Animated.Value(0) });
     }
+    this.state.timesUp = false;
 
     while (specialSquireCount < this.specialSquireRequired) {
       let randomIndex = utils.randomBetween(0, this.state.squares.length - 1);
@@ -169,6 +178,16 @@ export default class VisualMemoryGame extends Component {
     this.forceUpdate();
     this.showNewLevelAnimation()
       .then(() => this.showSpecialSquares());
+    
+    this.answerTime = setTimeout(() => {
+        this.setState({timesUp: "true"});
+        if (this.state.lives == 1) {
+          this.endGame();
+        }
+        else {
+          this.startNextLevel(true);
+        }
+    }, answerDuration + this.showDuration + 2 * animationDuration + 200);
   }
 
   showSpecialSquares = () => {
@@ -178,7 +197,7 @@ export default class VisualMemoryGame extends Component {
         square.pushed = true; //renk değişimi için
         Animated.timing(square.animation, {
           toValue: 1,
-          duration: 250,
+          duration: animationDuration,
           useNativeDriver: true
         }).start();
       }
@@ -190,7 +209,7 @@ export default class VisualMemoryGame extends Component {
           square.pushed = false; //renk değişimi için
           Animated.timing(square.animation, {
             toValue: 0,
-            duration: 250,
+            duration: animationDuration,
             useNativeDriver: true
           }).start();
         }
@@ -303,18 +322,25 @@ export default class VisualMemoryGame extends Component {
           </Animated.View>
         }
 
-        <View style={{
-          paddingBottom: 10,
-          width: _SCREEN.width,
-          height: TOP_BAR_HEIGHT,
-          flexDirection: "row",
-          alignItems: "flex-end",
-          justifyContent: "space-between",
-          paddingHorizontal: 20
-        }} >
-          <BouncingText style={{ ...Generics.text, textAlign: "center" }} >Level: {this.state.level}</BouncingText>
-          <BouncingText style={{ ...Generics.bigText, fontWeight: "bold" }} >Score: {this.state.score}</BouncingText>
-          <SwappingText style={{ ...Generics.text, textAlign: "center" }} >Lives: {this.state.lives}</SwappingText>
+        <View style={{width: _SCREEN.width, height: TOP_BAR_HEIGHT}}>
+          { !this.state.isAnimating &&
+          <View style={{flex:1, alignItems: "center", justifyContent:"flex-start", paddingTop: TOP_BAR_HEIGHT / 3.2}}>
+            <CounterBar time={answerDuration + this.showDuration} width={_SCREEN.width * 0.8} color={gameColor} />
+          </View>
+          }
+
+          <View style={{
+            flex: 2,
+            paddingBottom: 10,
+            flexDirection: "row",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+            paddingHorizontal: 20
+          }}>
+            <BouncingText style={{ ...Generics.text, textAlign: "center" }} >Level: {this.state.level}</BouncingText>
+            <BouncingText style={{ ...Generics.bigText, fontWeight: "bold" }} >Score: {this.state.score}</BouncingText>
+            <SwappingText style={{ ...Generics.text, textAlign: "center" }} >Lives: {this.state.lives}</SwappingText>
+          </View>
         </View>
 
         <View
