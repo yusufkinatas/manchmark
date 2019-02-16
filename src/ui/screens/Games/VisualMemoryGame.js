@@ -26,7 +26,7 @@ import GameResult from '../../../components/GameResult';
 const TOP_BAR_HEIGHT = 150;
 const gameColor = _APP_SETTINGS.games.find(g => g.name == "VisualMemoryGame").backgroundColor;
 const animationDuration = 250;
-const answerDuration = 7000;
+const answerDuration = 5000;
 
 export default class VisualMemoryGame extends Component {
 
@@ -95,6 +95,7 @@ export default class VisualMemoryGame extends Component {
   componentWillUnmount() {
     clearTimeout(this.animationTimeout);
     clearTimeout(this.levelAnimationTimer);
+    clearTimeout(this.answerTime);
   }
 
   endGame = () => {
@@ -181,13 +182,14 @@ export default class VisualMemoryGame extends Component {
     
     this.answerTime = setTimeout(() => {
         this.setState({timesUp: "true"});
+        this.buttonsEnabled = false;
         if (this.state.lives == 1) {
           this.endGame();
         }
         else {
           this.startNextLevel(true);
         }
-    }, answerDuration + this.showDuration + 2 * animationDuration + 200);
+    }, answerDuration + this.showDuration + 2 * animationDuration + 500);
   }
 
   showSpecialSquares = () => {

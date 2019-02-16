@@ -64,6 +64,7 @@ export default class NumberMemoryGame extends Component {
   componentWillUnmount() {
     console.log('componentWillUnmount');
     clearTimeout(this.numberTimeout);
+    clearTimeout(this.answerTime);
   }
 
   startGame = () => {
@@ -84,15 +85,23 @@ export default class NumberMemoryGame extends Component {
     this.setState({ number, isGuessing: false, userAnswer: "" });
     this.numberTimeout = setTimeout(() => {
       this.setState({ isGuessing: true });
+      this.answerTime = setTimeout(() => {
+        this.onAnswer();
+      }, 5000);
     }, (this.numberLength + 1) * 1000);
   }
 
   skipWaiting = () => {
     clearTimeout(this.numberTimeout);
+    clearTimeout(this.answerTime);
     this.setState({ isGuessing: true });
+    this.answerTime = setTimeout(() => {
+      this.onAnswer();
+    }, 5000);
   }
 
   onAnswer = () => {
+    clearTimeout(this.answerTime);
     if (this.state.userAnswer == this.state.number) {
       this.showNewNumber();
     }
@@ -129,42 +138,54 @@ export default class NumberMemoryGame extends Component {
     );
   }
 
+  renderMemorizingPhase = () => {
+    return (
+      <View style={{ justifyContent: "center", alignItems: "center" }} >
+        <Text style={{ ...Generics.hugeText, textAlign: "center" }} >{this.state.number}</Text>
+        <View style={{ height: 10 }}></View>
+        <CounterBar time={(this.numberLength + 1) * 1000} width={_SCREEN.width * 0.8} color={gameColor} />
+        <View style={{ height: 10 }}></View>
+        <CustomButton backgroundColor={gameColor} text="Skip" onPress={this.skipWaiting} />
+      </View>
+    );
+  }
+
+  renderAnswerPhase = () => {
+    return (
+      <View style={{ justifyContent: "center", alignItems: "center" }}>
+        <View style={Generics.container} >
+          <CounterBar time={5000} width={_SCREEN.width * 0.8} color={gameColor} />
+          <Text style={Generics.bigText} >What was the number?</Text>
+          <Text
+            style={{
+              minWidth: _SCREEN.width * 0.3,
+              borderBottomWidth: 1,
+              borderColor: gameColor,
+              padding: 5,
+              textAlign: 'center',
+              fontSize: 25,
+              fontFamily: "roboto",
+              color: colors.secondaryLight3,
+              marginBottom: 20
+            }}
+          >{this.state.userAnswer}</Text>
+        </View>
+
+        <View style={{ height: _SCREEN.height * 0.4, width: _SCREEN.width }} >
+          <Numpad rippleColor={gameColor} onPress={this.onPress} deleteAll={this.deleteAll} />
+        </View>
+      </View>
+    );
+  }
+
   renderGame = () => {
     return (
       <View style={Generics.container}>
         {this.state.isGuessing ?
-          <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <View style={Generics.container} >
-              <Text style={Generics.bigText} >What was the number?</Text>
-              <Text
-                style={{
-                  minWidth: _SCREEN.width * 0.3,
-                  borderBottomWidth: 1,
-                  borderColor: gameColor,
-                  padding: 5,
-                  textAlign: 'center',
-                  fontSize: 25,
-                  fontFamily: "roboto",
-                  color: colors.secondaryLight3,
-                  marginBottom: 20
-                }}
-              >{this.state.userAnswer}</Text>
-            </View>
-
-            <View style={{ height: _SCREEN.height * 0.4, width: _SCREEN.width }} >
-              <Numpad rippleColor={gameColor} onPress={this.onPress} deleteAll={this.deleteAll} />
-            </View>
-          </View>
+          this.renderAnswerPhase()
           :
-          <View style={{ justifyContent: "center", alignItems: "center" }} >
-            <Text style={{ ...Generics.hugeText, textAlign: "center" }} >{this.state.number}</Text>
-            <View style={{ height: 10 }}></View>
-            <CounterBar time={(this.numberLength + 1) * 1000} width={_SCREEN.width * 0.8} color={gameColor} />
-            <View style={{ height: 10 }}></View>
-            <CustomButton backgroundColor={gameColor} text="Skip" onPress={this.skipWaiting} />
-          </View>
+          this.renderMemorizingPhase()
         }
-
       </View>
     );
   }
