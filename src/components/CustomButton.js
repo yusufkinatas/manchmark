@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { store, _APP_SETTINGS, _SCREEN, nav } from "../core"
 
-const CustomButton = ({ onPress, text, icon, big, backgroundColor }) => {
+const CustomButton = ({ onPress, text, icon, backgroundColor }) => {
 
   return (
     <TouchableOpacity
@@ -32,13 +32,11 @@ CustomButton.propTypes = {
   onPress: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
   icon: PropTypes.string,
-  big: PropTypes.bool,
   backgroundColor: PropTypes.string
 };
 CustomButton.defaultProps = {
   onPress: () => { },
   text: 'Button Text',
-  big: false
 };
 
 const colors = _APP_SETTINGS.colors;
@@ -54,30 +52,12 @@ var styles = StyleSheet.create({
     elevation: 3,
     backgroundColor: colors.primary
   },
-  bigButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 15,
-    padding: 25,
-    borderRadius: 50,
-    marginBottom: 10,
-    backgroundColor: colors.primary,
-  },
   text: {
     fontSize: 15,
     fontFamily: "roboto",
     color: colors.secondaryLight3,
     fontWeight: "bold",
   },
-  bigText: {
-    fontSize: 20,
-    fontFamily: "roboto",
-    color: colors.secondaryLight3,
-    textAlign: "center",
-    paddingHorizontal: 10,
-    fontWeight: "bold"
-  }
-
 });
 
 export default CustomButton;

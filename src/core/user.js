@@ -13,8 +13,14 @@ var _user = {
   ranks: { userCount: null, },
   globalAverages: {},
   globalHighscores: {},
-  improvements: {}
-
+  friendHighscores: {},
+  follows: [],
+  contacts: [],
+  phone: null,
+  improvements: {},
+  settings: {
+    friendsEnabled: false
+  }
 };
 
 _APP_SETTINGS.games.forEach(game => {
@@ -22,6 +28,7 @@ _APP_SETTINGS.games.forEach(game => {
   _user.ranks[game.hsName] = null;
   _user.globalAverages[game.hsName] = null;
   _user.globalHighscores[game.hsName] = [];
+  _user.friendHighscores[game.hsName] = [];
   _user.improvements[game.hsName] = [];
 });
 
@@ -36,6 +43,15 @@ export const user = {
         .then(res => { })
         .catch(err => console.log(err));
     }
+  },
+
+  initialize: () => {
+    //TOKEN İSTEMEYEN İŞLEMLER
+    user.compareLocalHighscores();
+    user.getAllRanks();
+    user.getGlobalAverages();
+    user.getGlobalHighscores();
+    user.getSettings();
   },
 
   getFromStore: () => {
@@ -161,6 +177,19 @@ export const user = {
     });
   },
 
+  getFriendHighscores: () => {
+    return new Promise((resolve, reject) => {
+      api.getFriendLeaderboard(_user.authToken)
+        .then(res => {
+          user.set({ friendHighscores: res }, true);
+          resolve();
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  },
+
   login: () => {
     return new Promise((resolve, reject) => {
       api.login(_user.deviceID).then((res) => {
@@ -180,6 +209,44 @@ export const user = {
         .then(res => {
           console.log("NICKNAME CHANGED")
           user.set({ nickname }, true);
+          resolve();
+        })
+        .catch(err => reject(err));
+
+    });
+  },
+
+  changePhoneNumber: (phone) => {
+    return new Promise((resolve, reject) => {
+      api.changePhoneNumber(_user.authToken, phone)
+        .then(res => {
+          console.log("PHONE CHANGED")
+          user.set({ phone }, true);
+          resolve();
+        })
+        .catch(err => reject(err));
+
+    });
+  },
+
+  getSettings: () => {
+    return new Promise((resolve, reject) => {
+      api.getSettings().then((res) => {
+        console.log("SETTIGNS", res);
+        user.set({ settings: res.settings }, true);
+        resolve();
+      }).catch(err => {
+        reject();
+      });
+    });
+  },
+
+  follow: (_id) => {
+    return new Promise((resolve, reject) => {
+      api.follow(_user.authToken, _id)
+        .then(res => {
+          console.log("New follow\nUPDATED USER:", res)
+          // user.set(res, true);
           resolve();
         })
         .catch(err => reject(err));
