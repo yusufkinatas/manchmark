@@ -15,14 +15,11 @@ import {
   TextInput,
   NetInfo,
   AppState,
-  PermissionsAndroid
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { setRootViewBackgroundColor } from 'react-native-root-view-background';
 import validator from "validator";
 import _ from "lodash";
-
-import Contacts from 'react-native-contacts';
 
 import { store, _APP_SETTINGS, _SCREEN, nav, api, utils, user, Generics } from "../../core";
 import CustomButton from "../../components/CustomButton";
