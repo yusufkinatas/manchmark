@@ -14,12 +14,15 @@ import {
   Linking,
   TextInput,
   NetInfo,
-  AppState
+  AppState,
+  PermissionsAndroid
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { setRootViewBackgroundColor } from 'react-native-root-view-background';
 import validator from "validator";
 import _ from "lodash";
+
+import Contacts from 'react-native-contacts';
 
 import { store, _APP_SETTINGS, _SCREEN, nav, api, utils, user, Generics } from "../../core";
 import CustomButton from "../../components/CustomButton";
@@ -104,10 +107,7 @@ export default class MainScreen extends Component {
   startGame = () => {
     console.log("USER", user.get());
     if (user.get().isConnected) {
-      user.compareLocalHighscores();
-      user.getAllRanks();
-      user.getGlobalAverages();
-      user.getGlobalHighscores();
+      user.initialize();
     }
     this.addConnectionChangeListener();
     nav.showGame();

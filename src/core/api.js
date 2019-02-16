@@ -56,6 +56,14 @@ export const api = {
     });
   },
 
+  getFriendLeaderboard: (token) => {
+    return new Promise((resolve, reject) => {
+      axios.get(`${API_URL}/leaderboard/follows`, { headers: { "x-auth": token } })
+        .then(res => resolve(res.data))
+        .catch(err => reject(err));
+    });
+  },
+
   updateHighscores: (token, highscores) => {
     return new Promise((resolve, reject) => {
       console.log({ ...highscores }, token);
@@ -75,6 +83,40 @@ export const api = {
         .then(res => resolve(res))
         .catch(err => reject(err));
     });
-  }
+  },
+
+  getSettings: () => {
+    return new Promise((resolve, reject) => {
+      axios.get(`${API_URL}/settings`)
+        .then(res => resolve(res.data))
+        .catch(err => reject(err));
+    });
+  },
+
+  follow: (token, _id) => {
+    return new Promise((resolve, reject) => {
+      axios.post(`${API_URL}/follow`, { _id }, { headers: { "x-auth": token } })
+        .then(res => resolve(res.data))
+        .catch(err => reject(err));
+    });
+  },
+
+  getContacts: (phones) => {
+    return new Promise((resolve, reject) => {
+      axios.post(`${API_URL}/contacts`, { phones })
+        .then(res => resolve(res.data.users))
+        .catch(err => reject(err));
+    });
+  },
+
+  changePhoneNumber: (token, phone) => {
+    return new Promise((resolve, reject) => {
+      axios.patch(`${API_URL}/phone`, { phone }, {
+        headers: { "x-auth": token }
+      })
+        .then(res => resolve(res))
+        .catch(err => reject(err));
+    });
+  },
 
 };
