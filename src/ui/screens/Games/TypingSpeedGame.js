@@ -75,6 +75,7 @@ export default class TypingSpeedGame extends Component {
   componentWillUnmount() {
     console.log('componentWillUnmount');
     clearTimeout(this.endGameTimeout);
+    clearTimeout(this.keyboardTimer);
   }
 
   generateNewWord = () => {
@@ -117,14 +118,14 @@ export default class TypingSpeedGame extends Component {
   }
 
   onChangeText = (text) => {
-    let ans = text.toLowerCase();
-    this.setState({answer: ans}, this.onAnswer);
+    let ans = text.toLowerCase().trim();
+    this.onAnswer(ans);
   }
 
-  onAnswer = () => { 
+  onAnswer = (answer) => { 
     let newWord, index = -1;
     let tmpArray = this.state.word;
-    switch (this.state.answer) {
+    switch (answer) {
       case this.state.word[0]:
         index = 0;
         break;
@@ -139,7 +140,7 @@ export default class TypingSpeedGame extends Component {
       this.usedWords.push(this.state.answer);
       tmpArray[index] = this.generateNewWord();
       this.clearText();
-      setTimeout(() => {
+      this.keyboardTimer = setTimeout(() => {
         this.setState({ answer: "", word: tmpArray, score: this.state.score + this.state.answer.length * 5}, this.clearText); 
       }, 70);
     }
@@ -177,7 +178,6 @@ export default class TypingSpeedGame extends Component {
           bufferDelay={0}
           textContentType={"none"}
           autoFocus={true}
-          value={this.state.answer}
           style={{
             width: _SCREEN.width / 3,
             borderBottomWidth: 1,

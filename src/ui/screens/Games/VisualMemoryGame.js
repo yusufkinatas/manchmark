@@ -26,7 +26,7 @@ import GameResult from '../../../components/GameResult';
 const TOP_BAR_HEIGHT = 150;
 const gameColor = _APP_SETTINGS.games.find(g => g.name == "VisualMemoryGame").backgroundColor;
 const animationDuration = 250;
-const answerDuration = 5000;
+const answerDuration = 7000;
 
 export default class VisualMemoryGame extends Component {
 
@@ -130,6 +130,7 @@ export default class VisualMemoryGame extends Component {
   }
 
   startNextLevel = (replaySameLevel?) => {
+    this.willPassLevel = false;
     clearTimeout(this.answerTime);
     this.state.squares = [];
     this.state.levelMistakes = 0
@@ -140,8 +141,8 @@ export default class VisualMemoryGame extends Component {
       this.state.lives--;
     }
     this.sideLengthOfBoard;
-    this.specialSquireRequired = this.state.level > 13 ? 15 : this.state.level + 2;
-    this.specialSquirePushed = 0;
+    this.specialSquareRequired = this.state.level > 13 ? 15 : this.state.level + 2;
+    this.specialSquarePushed = 0;
     let specialSquireCount = 0;
 
     if (this.state.level <= 2) {
@@ -169,7 +170,7 @@ export default class VisualMemoryGame extends Component {
     }
     this.state.timesUp = false;
 
-    while (specialSquireCount < this.specialSquireRequired) {
+    while (specialSquireCount < this.specialSquareRequired) {
       let randomIndex = utils.randomBetween(0, this.state.squares.length - 1);
       if (!this.state.squares[randomIndex].special) {
         this.state.squares[randomIndex].special = true;
@@ -179,16 +180,18 @@ export default class VisualMemoryGame extends Component {
     this.forceUpdate();
     this.showNewLevelAnimation()
       .then(() => this.showSpecialSquares());
-    
+
     this.answerTime = setTimeout(() => {
-        this.setState({timesUp: "true"});
-        this.buttonsEnabled = false;
+      this.setState({ timesUp: "true" });
+      this.buttonsEnabled = false;
+      if (!this.willPassLevel) {
         if (this.state.lives == 1) {
           this.endGame();
         }
         else {
           this.startNextLevel(true);
         }
+      }
     }, answerDuration + this.showDuration + 2 * animationDuration + 500);
   }
 
@@ -243,7 +246,7 @@ export default class VisualMemoryGame extends Component {
     this.buttonsEnabled = false;
     this.state.squares[index].pushed = true;
     if (this.state.squares[index].special) {
-      this.specialSquirePushed++;
+      this.specialSquarePushed++;
       this.state.score += 10;
     }
     else {
@@ -251,8 +254,11 @@ export default class VisualMemoryGame extends Component {
     }
     this.forceUpdate();
 
-    if ((this.specialSquirePushed != this.specialSquireRequired) && (this.state.levelMistakes < 3) && this.state.lives > 0) {
+    if ((this.specialSquarePushed != this.specialSquareRequired) && (this.state.levelMistakes < 3) && this.state.lives > 0) {
       this.buttonsEnabled = true;
+    }
+    if (this.specialSquarePushed == this.specialSquareRequired) {
+      this.willPassLevel = true;
     }
 
     Animated.timing(this.state.squares[index].animation, {
@@ -260,7 +266,7 @@ export default class VisualMemoryGame extends Component {
       duration: 250,
       useNativeDriver: true
     }).start(() => {
-      if (this.specialSquirePushed == this.specialSquireRequired) {
+      if (this.specialSquarePushed == this.specialSquareRequired) {
         this.startNextLevel();
       }
       else if (this.state.levelMistakes > 2) {
@@ -324,11 +330,11 @@ export default class VisualMemoryGame extends Component {
           </Animated.View>
         }
 
-        <View style={{width: _SCREEN.width, height: TOP_BAR_HEIGHT}}>
-          { !this.state.isAnimating &&
-          <View style={{flex:1, alignItems: "center", justifyContent:"flex-start", paddingTop: TOP_BAR_HEIGHT / 3.2}}>
-            <CounterBar time={answerDuration + this.showDuration} width={_SCREEN.width * 0.8} color={gameColor} />
-          </View>
+        <View style={{ width: _SCREEN.width, height: TOP_BAR_HEIGHT }}>
+          {!this.state.isAnimating &&
+            <View style={{ flex: 1, alignItems: "center", justifyContent: "flex-start", paddingTop: TOP_BAR_HEIGHT / 3.2 }}>
+              <CounterBar time={answerDuration + this.showDuration} width={_SCREEN.width * 0.8} color={gameColor} />
+            </View>
           }
 
           <View style={{

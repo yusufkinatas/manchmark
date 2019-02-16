@@ -87,7 +87,7 @@ export default class NumberMemoryGame extends Component {
       this.setState({ isGuessing: true });
       this.answerTime = setTimeout(() => {
         this.onAnswer();
-      }, 5000);
+      }, (this.numberLength + 1) * 1000 + 500);
     }, (this.numberLength + 1) * 1000);
   }
 
@@ -97,7 +97,7 @@ export default class NumberMemoryGame extends Component {
     this.setState({ isGuessing: true });
     this.answerTime = setTimeout(() => {
       this.onAnswer();
-    }, 5000);
+    }, (this.numberLength + 1) * 1000 + 500);
   }
 
   onAnswer = () => {
@@ -143,7 +143,7 @@ export default class NumberMemoryGame extends Component {
       <View style={{ justifyContent: "center", alignItems: "center" }} >
         <Text style={{ ...Generics.hugeText, textAlign: "center" }} >{this.state.number}</Text>
         <View style={{ height: 10 }}></View>
-        <CounterBar time={(this.numberLength + 1) * 1000} width={_SCREEN.width * 0.8} color={gameColor} />
+        <CounterBar time={(this.numberLength + 1) * 1000 + 500} width={_SCREEN.width * 0.8} color={gameColor} />
         <View style={{ height: 10 }}></View>
         <CustomButton backgroundColor={gameColor} text="Skip" onPress={this.skipWaiting} />
       </View>
@@ -154,7 +154,7 @@ export default class NumberMemoryGame extends Component {
     return (
       <View style={{ justifyContent: "center", alignItems: "center" }}>
         <View style={Generics.container} >
-          <CounterBar time={5000} width={_SCREEN.width * 0.8} color={gameColor} />
+          <CounterBar time={(this.numberLength + 1) * 1000} width={_SCREEN.width * 0.8} color={gameColor} />
           <Text style={Generics.bigText} >What was the number?</Text>
           <Text
             style={{
