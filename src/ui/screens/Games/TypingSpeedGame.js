@@ -49,8 +49,7 @@ export default class TypingSpeedGame extends Component {
       score: 0,
       question: "",
       word: ["", "", ""],
-      trueAnswer: 0,
-      answer: ""
+      trueAnswer: 0
     };
   }
 
@@ -63,8 +62,7 @@ export default class TypingSpeedGame extends Component {
       score: 0,
       question: "",
       word: ["", "", ""],
-      trueAnswer: 0,
-      answer: ""
+      trueAnswer: 0
     });
   }
 
@@ -137,11 +135,11 @@ export default class TypingSpeedGame extends Component {
         break;
     }
     if (index != -1) {
-      this.usedWords.push(this.state.answer);
+      this.usedWords.push(answer);
       tmpArray[index] = this.generateNewWord();
       this.clearText();
       this.keyboardTimer = setTimeout(() => {
-        this.setState({ answer: "", word: tmpArray, score: this.state.score + this.state.answer.length * 5}, this.clearText); 
+        this.setState({ word: tmpArray, score: this.state.score + answer.length * 5}, this.clearText); 
       }, 70);
     }
   }
