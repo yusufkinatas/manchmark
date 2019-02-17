@@ -109,12 +109,12 @@ export const api = {
     });
   },
 
-  changePhoneNumber: (token, phone) => {
+  changePhoneNumber: (token, facebookAuthCode) => {
     return new Promise((resolve, reject) => {
-      axios.patch(`${API_URL}/phone`, { phone }, {
+      axios.patch(`${API_URL}/phone`, { code: facebookAuthCode }, {
         headers: { "x-auth": token }
       })
-        .then(res => resolve(res))
+        .then(res => resolve(res.data))
         .catch(err => reject(err));
     });
   },

@@ -30,9 +30,7 @@ class Leaderboard extends React.PureComponent {
     this.isRefreshing = false;
   }
 
-  // renderHs = (rank, nickname, hs, gameColor) => {
   renderHs = (data) => {
-    console.log(data);
     let rank = data.index + 1;
     let nickname = data.item.nickname;
     let hs = data.item[this.props.game.hsName];
@@ -142,6 +140,7 @@ class Leaderboard extends React.PureComponent {
             refreshing={this.isRefreshing}
             onRefresh={this.props.refreshLeaderboards}
           />}
+          initialNumToRender={this.props.index == 0 ? 5 : 0}
           windowSize={5}
         />
 
@@ -158,7 +157,7 @@ export default class LeaderboardScreen extends Component {
       topBar: {
         title: {
           text: 'Leaderboard',
-        },
+        }
       },
     };
   }
@@ -167,7 +166,13 @@ export default class LeaderboardScreen extends Component {
     super(props);
     this.state = {
       selectedGameIndex: 0,
+      showFriends: false,
     };
+    Navigation.events().bindComponent(this);
+  }
+
+  pushScreen = (screen) => {
+    nav.pushScreen(this.props.componentId, screen);
   }
 
   averages = {};
@@ -178,6 +183,55 @@ export default class LeaderboardScreen extends Component {
     this.highscores = user.get().globalHighscores;
     this.forceUpdate();
     this.refreshLeaderboards();
+
+    if (user.get().settings.friendsEnabled) {
+      Icon.getImageSource("users", 20, colors.secondaryLight3).then(source => {
+        this.friendsIcon = source;
+        Navigation.mergeOptions(this.props.componentId, {
+          topBar: {
+            rightButtons: [{
+              id: "toggleFollows",
+              icon: source,
+            }]
+          }
+        });
+
+      });
+    }
+
+  }
+
+  navigationButtonPressed({ buttonId }) {
+    if (this.state.showFriends) {
+      this.highscores = user.get().globalHighscores;
+      this.setState({ showFriends: false }, () => {
+        Navigation.mergeOptions(this.props.componentId, {
+          topBar: {
+            title: { text: "Leaderboard" },
+            rightButtons: [{
+              id: "toggleFollows",
+              icon: this.friendsIcon,
+              color: colors.secondaryLight3
+            }]
+          }
+        });
+      });
+    }
+    else {
+      this.highscores = [];
+      this.setState({ showFriends: true }, () => {
+        Navigation.mergeOptions(this.props.componentId, {
+          topBar: {
+            title: { text: "Leaderboard(Friends)" },
+            rightButtons: [{
+              id: "toggleFollows",
+              icon: this.friendsIcon,
+              color: colors.primary
+            }]
+          }
+        });
+      })
+    }
   }
 
   refreshLeaderboards = () => {
@@ -213,7 +267,7 @@ export default class LeaderboardScreen extends Component {
 
   renderLeaderboard = (data) => {
     const game = data.item;
-    return (<Leaderboard game={game} averages={this.averages} highscores={this.highscores} refreshLeaderboards={this.refreshLeaderboards} />);
+    return (<Leaderboard game={game} index={data.index} averages={this.averages} highscores={this.highscores} refreshLeaderboards={this.refreshLeaderboards} />);
   }
 
   renderListEmpty = () => {
@@ -224,11 +278,11 @@ export default class LeaderboardScreen extends Component {
     )
   }
 
-  getItemLayout = (data, index) => (
-    { length: _SCREEN.width, offset: _SCREEN.width * index, index }
-  );
+  getItemLayout = (data, index) => {
+    return { length: _SCREEN.width, offset: _SCREEN.width * index, index };
+  }
 
-  render() {
+  renderGlobalLeaderboards = () => {
     return (
       <View style={Generics.container} >
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ height: (_SCREEN.width / _APP_SETTINGS.games.length + 6) }} >
@@ -238,6 +292,7 @@ export default class LeaderboardScreen extends Component {
         <FlatList
           ref={r => this.flatList = r}
           contentContainerStyle={{ height: "100%" }}
+          style={{ height: "100%" }}
           horizontal
           pagingEnabled
           onScroll={(e) => {
@@ -255,9 +310,27 @@ export default class LeaderboardScreen extends Component {
           renderItem={this.renderLeaderboard}
           ListEmptyComponent={this.renderListEmpty}
         />
-
       </View>
-    )
+    );
+  }
 
+  renderFriendLeaderboards = () => {
+    return (
+      <View style={Generics.container} >
+        {user.get().follows.length == 0
+          ?
+          <View style={Generics.container} >
+            <Text style={{ ...Generics.bigText, marginBottom: 20 }} >You haven't added friends yet</Text>
+            <CustomButton text="Add Friends" icon="plus" onPress={() => this.pushScreen("FollowsScreen")} />
+          </View>
+          :
+          <Text>YOU HAVE JEJ</Text>
+        }
+      </View>
+    );
+  }
+
+  render() {
+    return this.state.showFriends ? this.renderFriendLeaderboards() : this.renderGlobalLeaderboards();
   }
 }

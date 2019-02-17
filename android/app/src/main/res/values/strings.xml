@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Manchmark</string>
+    <string name="fb_app_id">334121930540682</string>
+    <string name="ak_client_token">4eb1c386dedf7e499c21a0f3b8b367cf</string>
 </resources>
