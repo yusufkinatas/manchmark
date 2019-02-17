@@ -18,6 +18,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import Contacts from "react-native-contacts";
 import DeviceInfo from "react-native-device-info";
 import RNAccountKit from 'react-native-facebook-account-kit'
+import { parsePhoneNumberFromString } from 'libphonenumber-js'
 
 import { store, _APP_SETTINGS, _SCREEN, nav, Generics, user, api } from "../../core";
 import CustomButton from "../../components/CustomButton";
@@ -36,7 +37,6 @@ export default class FollowsScreen extends Component {
 
   constructor(props) {
     super(props);
-
   }
 
   componentDidMount() {
@@ -85,9 +85,10 @@ export default class FollowsScreen extends Component {
           }
           else {
             let nums = [];
+            let country = DeviceInfo.getDeviceCountry();
             contacts.forEach(contact => {
-              nums.push(contact.phoneNumbers[0].number.replace(/ +/g, ""));
-            })
+              nums.push(parsePhoneNumberFromString(contact.phoneNumbers[0].number, country).number);
+            });
             console.log(nums.length);
             console.log(nums);
             api.getContacts(nums).then(res => {
