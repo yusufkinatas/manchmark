@@ -113,9 +113,9 @@ export default class GameResult extends Component {
             <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{utils.truncateFloatingNumber(user.get().globalAverages[this.game.hsName], 2)}</Text>
           </DelayedView>
 
-          {this.isHighScore &&
+          {this.isHighScore() &&
           <DelayedView delay={800} style={{ ...styles.infoContainer, borderRadius: 5, borderWidth: 2, borderColor: this.game.backgroundColor, justifyContent: "center" }} >
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Your Highscore is higher than {utils.truncateFloatingNumber(100 - (this.state.rank / this.state.userCount * 100), 2)}% of players</Text>
+            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Your score is higher than {utils.truncateFloatingNumber(100 - (this.state.rank / this.state.userCount * 100), 2)}% of players</Text>
           </DelayedView>
           }
 
