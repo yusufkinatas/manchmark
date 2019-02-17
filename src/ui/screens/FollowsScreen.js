@@ -87,7 +87,9 @@ export default class FollowsScreen extends Component {
             let nums = [];
             let country = DeviceInfo.getDeviceCountry();
             contacts.forEach(contact => {
-              nums.push(parsePhoneNumberFromString(contact.phoneNumbers[0].number, country).number);
+              if (contact.phoneNumbers.length > 0 && contact.phoneNumbers[0].number) {
+                nums.push(parsePhoneNumberFromString(contact.phoneNumbers[0].number, country).number);
+              };
             });
             console.log(nums.length);
             console.log(nums);
