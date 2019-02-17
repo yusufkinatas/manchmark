@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "libphonenumber-js": "^1.7.8",
     "lodash": "^4.17.11",
     "react": "16.6.3",
     "react-native": "0.57.8",
