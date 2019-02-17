@@ -81,7 +81,6 @@ export default class TouchSpeedGame extends Component {
     this.endGameTimeout = setTimeout(() => {
       this.endGame();
     }, TIMEOUT_MS)
-
   }
 
   renderInfo = () => {
@@ -92,6 +91,7 @@ export default class TouchSpeedGame extends Component {
           <Text style={Generics.bigText} >Press the screen as fast as you can</Text>
         </View>
         <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
+        <Text style={Generics.hintText}>You can use more than one finger!</Text>
       </View>
     );
   }
