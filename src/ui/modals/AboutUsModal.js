@@ -70,7 +70,7 @@ export default class AboutUsModal extends Component {
           <View style={{ flexDirection: "row" }}>
             <View style={{ overflow: "hidden", borderColor: colors.secondaryLight, borderRadius: 50, borderWidth: 1 }}>
               <Image
-                source={require('../../../assets/icon-flat.png')}
+                source={require('../../../assets/icon-low-res.png')}
                 style={styles.imageStyle}
               />
             </View>
@@ -79,13 +79,14 @@ export default class AboutUsModal extends Component {
               <Text style={styles.smallText}>{_APP_SETTINGS.versionString}</Text>
             </View>
           </View>
-          <View style={{ paddingTop: 20 }}>
+          <Text style={{...Generics.bigText, fontSize:15, fontFamily:"Kanit-LightItalic", paddingTop: 10}}>Harder, better, faster, smarter!</Text>
+          <View style={{ paddingTop: 10 }}>
             <View style={{ marginBottom: 5, flexDirection: "row" }}>
               <Text style={styles.smallText} >Yusuf Kınataş</Text>
               <Text style={styles.smallText} >&</Text>
               <Text style={styles.smallText} >Yağız Akyüz</Text>
             </View>
-            <Text style={styles.copyRightText}>© Copyright 2018, All Rights Reserved.</Text>
+            <Text style={styles.copyRightText}>© Copyright 2019, All Rights Reserved.</Text>
           </View>
           <CustomButton text="Close" onPress={this.dissmissModal} />
         </Animated.View>
@@ -121,7 +122,7 @@ var styles = StyleSheet.create({
   },
   bigText: {
     fontSize: 25,
-    fontFamily: "roboto",
+    fontFamily: "Kanit",
     color: colors.secondaryLight3,
     textAlign: "center",
     paddingTop: 5,

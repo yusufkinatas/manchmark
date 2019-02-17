@@ -15,7 +15,7 @@ const gameColor = {
     visual: "#902c2c",
     number: "#bf5e29",
     touch: "#e0ac56",
-    reaction: "#3fa563",
+    reaction: "#2F9458",
     typing: "#18517e",
     verbal: "#202662",
     calculation: "#431e6c"
@@ -95,8 +95,8 @@ export const Generics = StyleSheet.create({
     justifyContent: "center"
   },
   header: {
-    fontFamily: "Roboto",
-    fontSize: 50,
+    fontFamily: "Kanit",
+    fontSize: 60,
     textShadowColor: colors.secondaryDark,
     textShadowOffset: { width: 3, height: 3 },
     textShadowRadius: 3,

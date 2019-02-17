@@ -63,6 +63,9 @@
 		35CFED7100A64F07A19068FA /* libRNAdMobManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17E96D9764A94808BF7A5861 /* libRNAdMobManager.a */; };
 		FED5EDB3F85A48049C46CBEE /* libRCTContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B02F730BFF4E59896A0961 /* libRCTContacts.a */; };
 		FBD0B97458C64E9FA5D120B8 /* libRNAccountKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 690396A0299F437A8DCCB0D2 /* libRNAccountKit.a */; };
+		28A8FA4BC18A4F368236CF48 /* simplifica.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1A5B2F0D09140CF9B9EB211 /* simplifica.ttf */; };
+		FB7B059FC5894597951CA3E2 /* Kanit.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C69F06A3126C4CDAB5B74483 /* Kanit.ttf */; };
+		B71E23F640E94896B04B663F /* Kanit-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3F7EE1F3E8D4CA8A974F74B /* Kanit-LightItalic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -402,6 +405,9 @@
 		04B02F730BFF4E59896A0961 /* libRCTContacts.a */ = {isa = PBXFileReference; name = "libRCTContacts.a"; path = "libRCTContacts.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		83DEDABD168A4EDBA0FEFBB8 /* RNAccountKit.xcodeproj */ = {isa = PBXFileReference; name = "RNAccountKit.xcodeproj"; path = "../node_modules/react-native-facebook-account-kit/ios/RNAccountKit.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		690396A0299F437A8DCCB0D2 /* libRNAccountKit.a */ = {isa = PBXFileReference; name = "libRNAccountKit.a"; path = "libRNAccountKit.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		F1A5B2F0D09140CF9B9EB211 /* simplifica.ttf */ = {isa = PBXFileReference; name = "simplifica.ttf"; path = "../assets/fonts/simplifica.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C69F06A3126C4CDAB5B74483 /* Kanit.ttf */ = {isa = PBXFileReference; name = "Kanit.ttf"; path = "../assets/fonts/Kanit.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D3F7EE1F3E8D4CA8A974F74B /* Kanit-LightItalic.ttf */ = {isa = PBXFileReference; name = "Kanit-LightItalic.ttf"; path = "../assets/fonts/Kanit-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -700,6 +706,9 @@
 				31F6F7DF0BB042B9B1CA8E4B /* Octicons.ttf */,
 				E8C606EB6B3C49DFA5B86A9D /* SimpleLineIcons.ttf */,
 				07AC4CCF9E2644C8A4F746A4 /* Zocial.ttf */,
+				F1A5B2F0D09140CF9B9EB211 /* simplifica.ttf */,
+				C69F06A3126C4CDAB5B74483 /* Kanit.ttf */,
+				D3F7EE1F3E8D4CA8A974F74B /* Kanit-LightItalic.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1166,6 +1175,9 @@
 				7BA298AFDEA840D3BB7D4920 /* Octicons.ttf in Resources */,
 				F378B6C42A0840B89589ACEE /* SimpleLineIcons.ttf in Resources */,
 				8D6517E5484446F294CB748A /* Zocial.ttf in Resources */,
+				28A8FA4BC18A4F368236CF48 /* simplifica.ttf in Resources */,
+				FB7B059FC5894597951CA3E2 /* Kanit.ttf in Resources */,
+				B71E23F640E94896B04B663F /* Kanit-LightItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
