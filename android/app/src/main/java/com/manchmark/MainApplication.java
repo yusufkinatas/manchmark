@@ -1,7 +1,9 @@
 package com.manchmark;
 
+import com.rt2zz.reactnativecontacts.ReactNativeContacts;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import io.underscope.react.fbak.RNAccountKitPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.reactlibrary.RNRootViewBackgroundPackage;
@@ -39,6 +41,8 @@ public class MainApplication extends NavigationApplication {
             new SplashScreenReactPackage(),
             new VectorIconsPackage(),
             new RNDeviceInfo(),
+            new ReactNativeContacts(),
+            new RNAccountKitPackage(),
             new RNRootViewBackgroundPackage()
         );
     }

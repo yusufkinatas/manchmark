@@ -6,6 +6,7 @@ import SelectGameScreen from './screens/SelectGameScreen';
 import LeaderboardScreen from './screens/LeaderboardScreen';
 import StatisticsScreen from './screens/StatisticsScreen';
 import PlaygroundScreen from './screens/PlaygroundScreen';
+import FollowsScreen from './screens/FollowsScreen';
 
 //MODALS
 import AboutUsModal from './modals/AboutUsModal';
@@ -27,6 +28,7 @@ export function registerScreens() {
   Navigation.registerComponent('SelectGameScreen', () => SelectGameScreen);
   Navigation.registerComponent('LeaderboardScreen', () => LeaderboardScreen);
   Navigation.registerComponent('StatisticsScreen', () => StatisticsScreen);
+  Navigation.registerComponent('FollowsScreen', () => FollowsScreen);
   Navigation.registerComponent('Playground', () => PlaygroundScreen);
 
   //MODALS

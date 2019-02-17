@@ -216,12 +216,11 @@ export const user = {
     });
   },
 
-  changePhoneNumber: (phone) => {
+  changePhoneNumber: (facebookAuthCode) => {
     return new Promise((resolve, reject) => {
-      api.changePhoneNumber(_user.authToken, phone)
+      api.changePhoneNumber(_user.authToken, facebookAuthCode)
         .then(res => {
-          console.log("PHONE CHANGED")
-          user.set({ phone }, true);
+          user.set({ phone: res.phone }, true);
           resolve();
         })
         .catch(err => reject(err));
