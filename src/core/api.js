@@ -101,6 +101,14 @@ export const api = {
     });
   },
 
+  unfollow: (token, _id) => {
+    return new Promise((resolve, reject) => {
+      axios.post(`${API_URL}/unfollow`, { _id }, { headers: { "x-auth": token } })
+        .then(res => resolve(res.data))
+        .catch(err => reject(err));
+    });
+  },
+
   getContacts: (phones) => {
     return new Promise((resolve, reject) => {
       axios.post(`${API_URL}/contacts`, { phones })
@@ -114,6 +122,23 @@ export const api = {
       axios.patch(`${API_URL}/phone`, { code: facebookAuthCode }, {
         headers: { "x-auth": token }
       })
+        .then(res => resolve(res.data))
+        .catch(err => reject(err));
+    });
+  },
+
+  search: (text) => {
+    return new Promise((resolve, reject) => {
+      axios.get(`${API_URL}/search`, { headers: { text } })
+        .then(res => resolve(res.data))
+        .catch(err => reject(err));
+    });
+
+  },
+
+  getUsers: (ids) => {
+    return new Promise((resolve, reject) => {
+      axios.post(`${API_URL}/users`, { ids })
         .then(res => resolve(res.data))
         .catch(err => reject(err));
     });

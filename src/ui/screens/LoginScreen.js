@@ -111,15 +111,16 @@ export default class MainScreen extends Component {
   }
 
   onChooseNickname = () => {
-    if (this.state.nickname.trim().length < 3 || this.state.nickname.trim().length > 20) {
+    let _nickname = this.state.nickname.trim().toLocaleLowerCase();
+    if (_nickname.length < 3 || _nickname.trim().length > 20) {
       this.setState({ errorText: "Username must be between 3 and 20 characters" });
     }
-    else if (!validator.isAlphanumeric(this.state.nickname.trim())) {
+    else if (!validator.isAlphanumeric(_nickname.trim())) {
       this.setState({ errorText: "Username can only contain english letters and numbers" });
     }
     else {
       this.setState({ isLoading: true });
-      api.signup(this.state.nickname, user.get().deviceID)
+      api.signup(_nickname, user.get().deviceID)
         .then((res) => {
           var tmpUser = _.omit(res.data, ["tokens", "__v", "_id"]);
           tmpUser.authToken = res.headers["x-auth"];
@@ -176,7 +177,7 @@ export default class MainScreen extends Component {
     return (
       <KeyboardAvoidingView behavior="padding" style={Generics.container}>
         <View style={{ flex: 2, justifyContent: "center" }} >
-          <Text style={{ ...Generics.header }} >MANCHMARK</Text>
+          <Text style={Generics.header} >Manchmark</Text>
         </View>
 
         <View style={{ flex: 3, alignItems: "center", paddingTop: 50 }} >

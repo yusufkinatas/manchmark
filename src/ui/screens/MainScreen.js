@@ -71,6 +71,7 @@ export default class MainScreen extends Component {
 
         <View style={Generics.container} >
           <CustomButton icon={"play"} text={"PLAY"} onPress={() => this.pushScreen("SelectGameScreen")} />
+          <CustomButton icon={"users"} text={"FRIENDS"} onPress={() => this.pushScreen("FollowsScreen")} />
           <CustomButton icon={"list-ol"} text={"LEADERBOARD"} onPress={() => this.pushScreen("LeaderboardScreen")} />
           <CustomButton icon={"bar-chart"} text={"STATISTICS"} onPress={() => this.pushScreen("StatisticsScreen")} />
         </View>
@@ -96,7 +97,7 @@ var styles = StyleSheet.create({
   topBarContainer: {
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: 50
+    paddingTop: 30
   },
   bottomBarContainer: {
     flexDirection: "row",
