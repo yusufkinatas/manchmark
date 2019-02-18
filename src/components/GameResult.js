@@ -72,7 +72,7 @@ export default class GameResult extends Component {
       <View style={Generics.container} >
 
         {this.isHighScore() &&
-          <DelayedView delay={0} style={{ ...styles.infoContainer, justifyContent: "center", paddingTop: 0 }} >
+          <DelayedView delay={0} style={{ ...styles.infoContainer, justifyContent: "center", paddingTop: 10 }} >
             <Text style={{ ...Generics.bigText, fontWeight: "bold", paddingTop: 0 }} >{"Congratulations!\nNew Highscore"}</Text>
           </DelayedView>
         }

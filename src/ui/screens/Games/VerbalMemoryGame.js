@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, utils, Generics } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
 import SwappingText from "../../../components/SwappingText";
 import DelayedView from "../../../components/DelayedView";
@@ -139,6 +139,14 @@ export default class VerbalMemoryGame extends Component {
   }
 
   renderFinish = () => {
+    let oldUserStat = user.get().statistics;
+    let verbalStats = oldUserStat.VerbalMemoryGame;
+
+    user.set({statistics:{...oldUserStat, ["VerbalMemoryGame"]: {
+      amountPlayed: verbalStats.amountPlayed + 1,
+      totalWordMemorized: verbalStats.totalWordMemorized + this.usedWords.length
+    }}}, true);
+
     return (
       <GameResult
         onRestart={this.reinitialize}

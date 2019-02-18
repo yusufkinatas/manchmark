@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, utils, Generics } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user } from "../../../core";
 import CounterBar from "../../../components/CounterBar";
 import CustomButton from "../../../components/CustomButton";
 import SwappingText from "../../../components/SwappingText";
@@ -68,6 +68,7 @@ export default class CalculationSpeedGame extends Component {
 
   constructor(props) {
     super(props);
+    this.correctAnswerCount = 0;
     this.state = {
       gameStatus: "info", //info - active - finished
       score: 0,
@@ -79,6 +80,7 @@ export default class CalculationSpeedGame extends Component {
   }
 
   reinitialize = () => {
+    this.correctAnswerCount = 0;
     this.setState({
       gameStatus: "info",
       score: 0,
@@ -155,6 +157,7 @@ export default class CalculationSpeedGame extends Component {
   onAnswer = () => {
     if (this.state.text == this.trueAnswer) {
       this.setState({ score: this.state.score + 50 });
+      this.correctAnswerCount++;
       this.showNewQuestion();
       this.animateBackground("green");
     }
@@ -225,6 +228,12 @@ export default class CalculationSpeedGame extends Component {
   }
 
   renderFinish = () => {
+    let oldUserStat = user.get().statistics;
+    user.set({statistics:{...oldUserStat, ["CalculationSpeedGame"]: {
+      amountPlayed: oldUserStat.CalculationSpeedGame.amountPlayed + 1,
+      totalCalculation: oldUserStat.CalculationSpeedGame.totalCalculation + this.correctAnswerCount
+    }}}, true);
+
     return (
       <GameResult
         onRestart={this.reinitialize}

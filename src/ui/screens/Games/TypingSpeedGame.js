@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, utils, Generics } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user } from "../../../core";
 import CounterBar from "../../../components/CounterBar";
 import CustomButton from "../../../components/CustomButton";
 import SwappingText from "../../../components/SwappingText";
@@ -43,6 +43,7 @@ export default class TypingSpeedGame extends Component {
   constructor(props) {
     super(props);
     this.usedWords = [];
+    this.keyPressCount = 0;
 
     this.state = {
       gameStatus: "info", //info - active - finished
@@ -55,6 +56,7 @@ export default class TypingSpeedGame extends Component {
 
   reinitialize = () => {
     this.usedWords = [];
+    this.keyPressCount = 0;
     clearTimeout(this.endGameTimeout);
 
     this.setState({
@@ -116,6 +118,7 @@ export default class TypingSpeedGame extends Component {
   }
 
   onChangeText = (text) => {
+    this.keyPressCount++;
     let ans = text.toLowerCase().trim();
     this.onAnswer(ans);
   }
@@ -196,10 +199,20 @@ export default class TypingSpeedGame extends Component {
   }
 
   renderFinish = () => {
-    let keypress = (this.state.score - this.usedWords.length * 10) / 5;
+    let correctKeypress = (this.state.score - this.usedWords.length * 10) / 5;
     let extraData = [{ data: ["Word Count", this.usedWords.length ], important: true }];
-    extraData.push({ data: ["Key Press", keypress], important: true });
+    extraData.push({ data: ["Key Press", correctKeypress], important: true });
     
+    let oldUserStat = user.get().statistics;
+    let typeStats = oldUserStat.TypingSpeedGame;
+
+    user.set({statistics:{...oldUserStat, ["TypingSpeedGame"]: {
+      amountPlayed: typeStats.amountPlayed + 1,
+      totalWordCount: typeStats.totalWordCount + this.usedWords.length,
+      totalKeyPress:  typeStats.totalKeyPress + this.keyPressCount,
+      totalCorrectKeyPress: typeStats.totalCorrectKeyPress + correctKeypress
+    }}}, true);
+
     return (
       <GameResult
         onRestart={this.reinitialize}

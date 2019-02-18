@@ -15,7 +15,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import _ from "lodash";
 
-import { store, _APP_SETTINGS, _SCREEN, utils, Generics } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user } from "../../../core";
 import CounterBar from "../../../components/CounterBar";
 import CustomButton from "../../../components/CustomButton";
 import GameResult from '../../../components/GameResult';
@@ -48,7 +48,7 @@ export default class NumberMemoryGame extends Component {
   }
 
   reinitialize = () => {
-    this.numberLength = 2;
+    this.numberLength = 0;
     this.number = "";
     this.setState({
       gameStatus: "info", //info - active - finished
@@ -86,8 +86,8 @@ export default class NumberMemoryGame extends Component {
       this.setState({ isGuessing: true });
       this.answerTime = setTimeout(() => {
         this.onAnswer();
-      }, (this.numberLength + 1) * 1000 + 500);
-    }, (this.numberLength + 1) * 1000);
+      }, (this.numberLength + 3) * 1000 + 500);
+    }, (this.numberLength + 3) * 1000);
   }
 
   skipWaiting = () => {
@@ -143,7 +143,7 @@ export default class NumberMemoryGame extends Component {
       <View style={{ justifyContent: "center", alignItems: "center" }} >
         <Text style={{ ...Generics.hugeText, textAlign: "center" }} >{this.state.number}</Text>
         <View style={{ height: 10 }}></View>
-        <CounterBar time={(this.numberLength + 1) * 1000 + 500} width={_SCREEN.width * 0.8} color={gameColor} />
+        <CounterBar time={(this.numberLength + 3) * 1000 + 500} width={_SCREEN.width * 0.8} color={gameColor} />
         <View style={{ height: 10 }}></View>
         <CustomButton backgroundColor={gameColor} text="Skip" onPress={this.skipWaiting} />
       </View>
@@ -154,7 +154,7 @@ export default class NumberMemoryGame extends Component {
     return (
       <View style={{ justifyContent: "center", alignItems: "center" }}>
         <View style={Generics.container} >
-          <CounterBar time={(this.numberLength + 1) * 1000} width={_SCREEN.width * 0.8} color={gameColor} />
+          <CounterBar time={(this.numberLength + 3) * 1000} width={_SCREEN.width * 0.8} color={gameColor} />
           <Text style={Generics.bigText} >What was the number?</Text>
           <Text
             style={{
@@ -228,6 +228,13 @@ export default class NumberMemoryGame extends Component {
   }
 
   renderFinish = () => {
+    let oldUserStat = user.get().statistics;
+    let numberMemorized = ((this.state.number.length - 1) * this.state.number.length) / 2;
+    user.set({statistics:{...oldUserStat, ["NumberMemoryGame"]: {
+      amountPlayed: oldUserStat.NumberMemoryGame.amountPlayed + 1,
+      totalNumberMemorized: oldUserStat.NumberMemoryGame.totalNumberMemorized + numberMemorized
+    }}}, true);
+
     return (
       <View style={Generics.container}>
         {this.state.userAnswer != "" && this.showError()}
