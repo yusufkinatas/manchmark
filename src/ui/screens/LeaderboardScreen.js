@@ -16,6 +16,7 @@ import {
   RefreshControl
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import IconFeather from 'react-native-vector-icons/Feather';
 
 import { store, _APP_SETTINGS, _SCREEN, nav, Generics, api, user, utils } from "../../core";
 import CustomButton from "../../components/CustomButton";
@@ -166,7 +167,7 @@ export default class LeaderboardScreen extends Component {
     super(props);
     this.state = {
       selectedGameIndex: 0,
-      showFriends: false,
+      showGlobal: false,
     };
     Navigation.events().bindComponent(this);
   }
@@ -176,41 +177,41 @@ export default class LeaderboardScreen extends Component {
   }
 
   averages = {};
-  highscores = {};
+  globalHighscores = {};
+  friendHighscores = {};
 
   componentDidMount() {
     this.averages = user.get().globalAverages;
-    this.highscores = user.get().globalHighscores;
+    this.globalHighscores = user.get().globalHighscores;
+    this.friendHighscores = user.get().friendHighscores;
     this.forceUpdate();
     this.refreshLeaderboards();
 
-    if (user.get().settings.friendsEnabled) {
-      Icon.getImageSource("users", 20, colors.secondaryLight3).then(source => {
-        this.friendsIcon = source;
-        Navigation.mergeOptions(this.props.componentId, {
-          topBar: {
-            rightButtons: [{
-              id: "toggleFollows",
-              icon: source,
-            }]
-          }
-        });
-
+    IconFeather.getImageSource("globe", 20, colors.secondaryLight3).then(source => {
+      this.globalIcon = source;
+      Navigation.mergeOptions(this.props.componentId, {
+        topBar: {
+          rightButtons: [{
+            id: "toggleGlobal",
+            icon: source,
+          }]
+        }
       });
-    }
+
+    });
 
   }
 
   navigationButtonPressed({ buttonId }) {
-    if (this.state.showFriends) {
-      this.highscores = user.get().globalHighscores;
-      this.setState({ showFriends: false }, () => {
+    if (this.state.showGlobal) {
+      this.globalHighscores = user.get().globalHighscores;
+      this.setState({ showGlobal: false, selectedGameIndex: 0 }, () => {
         Navigation.mergeOptions(this.props.componentId, {
           topBar: {
             title: { text: "Leaderboard" },
             rightButtons: [{
-              id: "toggleFollows",
-              icon: this.friendsIcon,
+              id: "toggleGlobal",
+              icon: this.globalIcon,
               color: colors.secondaryLight3
             }]
           }
@@ -218,14 +219,13 @@ export default class LeaderboardScreen extends Component {
       });
     }
     else {
-      this.highscores = [];
-      this.setState({ showFriends: true }, () => {
+      this.setState({ showGlobal: true, selectedGameIndex: 0 }, () => {
         Navigation.mergeOptions(this.props.componentId, {
           topBar: {
-            title: { text: "Leaderboard(Friends)" },
+            title: { text: "Leaderboard(Global)" },
             rightButtons: [{
-              id: "toggleFollows",
-              icon: this.friendsIcon,
+              id: "toggleGlobal",
+              icon: this.globalIcon,
               color: colors.primary
             }]
           }
@@ -235,10 +235,14 @@ export default class LeaderboardScreen extends Component {
   }
 
   refreshLeaderboards = () => {
-    user.getGlobalHighscores().then(() => {
-      this.highscores = user.get().globalHighscores;
-      this.forceUpdate();
-    }).catch(err => console.log(err))
+    Promise.all([
+      user.getGlobalHighscores().then(() => {
+        this.globalHighscores = user.get().globalHighscores;
+      }),
+      user.getFriendHighscores().then(() => {
+        this.friendHighscores = user.get().friendHighscores;
+      })
+    ]).then(() => this.forceUpdate());
   }
 
   renderGames = () => {
@@ -265,9 +269,14 @@ export default class LeaderboardScreen extends Component {
     }
   }
 
-  renderLeaderboard = (data) => {
+  renderGlobalLeaderboard = (data) => {
     const game = data.item;
-    return (<Leaderboard game={game} index={data.index} averages={this.averages} highscores={this.highscores} refreshLeaderboards={this.refreshLeaderboards} />);
+    return (<Leaderboard game={game} index={data.index} averages={this.averages} highscores={this.globalHighscores} refreshLeaderboards={this.refreshLeaderboards} />);
+  }
+
+  renderFriendLeaderboard = (data) => {
+    const game = data.item;
+    return (<Leaderboard game={game} index={data.index} averages={this.averages} highscores={this.friendHighscores} refreshLeaderboards={this.refreshLeaderboards} />);
   }
 
   renderListEmpty = () => {
@@ -302,13 +311,13 @@ export default class LeaderboardScreen extends Component {
             }
           }}
           getItemLayout={this.getItemLayout}
-          windowSize={2}
           data={_APP_SETTINGS.games}
-          initialNumToRender={2}
           keyExtractor={(item, index) => ("p" + index)}
           overScrollMode={Platform.OS === "android" ? "never" : "always"}
-          renderItem={this.renderLeaderboard}
+          renderItem={this.renderGlobalLeaderboard}
           ListEmptyComponent={this.renderListEmpty}
+          maxToRenderPerBatch={1}
+          initialNumToRender={2}
         />
       </View>
     );
@@ -324,13 +333,39 @@ export default class LeaderboardScreen extends Component {
             <CustomButton text="Add Friends" icon="plus" onPress={() => this.pushScreen("FollowsScreen")} />
           </View>
           :
-          <Text>YOU HAVE JEJ</Text>
+          <View style={Generics.container} >
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ height: (_SCREEN.width / _APP_SETTINGS.games.length + 6) }} >
+              {this.renderGames()}
+            </ScrollView>
+
+            <FlatList
+              ref={r => this.flatList = r}
+              contentContainerStyle={{ height: "100%" }}
+              style={{ height: "100%" }}
+              horizontal
+              pagingEnabled
+              onScroll={(e) => {
+                let index = Math.round(e.nativeEvent.contentOffset.x / _SCREEN.width);
+                if (this.state.selectedGameIndex != index) {
+                  this.selectGame(index, false);
+                }
+              }}
+              getItemLayout={this.getItemLayout}
+              data={_APP_SETTINGS.games}
+              keyExtractor={(item, index) => ("p" + index)}
+              overScrollMode={Platform.OS === "android" ? "never" : "always"}
+              renderItem={this.renderFriendLeaderboard}
+              ListEmptyComponent={this.renderListEmpty}
+              maxToRenderPerBatch={1}
+              initialNumToRender={2}
+            />
+          </View>
         }
       </View>
     );
   }
 
   render() {
-    return this.state.showFriends ? this.renderFriendLeaderboards() : this.renderGlobalLeaderboards();
+    return this.state.showGlobal ? this.renderGlobalLeaderboards() : this.renderFriendLeaderboards();
   }
 }

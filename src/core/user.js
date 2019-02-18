@@ -244,8 +244,21 @@ export const user = {
     return new Promise((resolve, reject) => {
       api.follow(_user.authToken, _id)
         .then(res => {
-          console.log("New follow\nUPDATED USER:", res)
-          // user.set(res, true);
+          console.log("New follow:", res)
+          user.set({ follows: res.follows }, true);
+          resolve();
+        })
+        .catch(err => reject(err));
+
+    });
+  },
+
+  unfollow: (_id) => {
+    return new Promise((resolve, reject) => {
+      api.unfollow(_user.authToken, _id)
+        .then(res => {
+          console.log("New unfollow:", res)
+          user.set({ follows: res.follows }, true);
           resolve();
         })
         .catch(err => reject(err));

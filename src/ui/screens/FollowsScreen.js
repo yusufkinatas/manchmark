@@ -11,17 +11,20 @@ import {
   Image,
   Alert,
   Linking,
-  TouchableNativeFeedback,
   PermissionsAndroid,
+  ScrollView,
+  TextInput,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
-import Contacts from "react-native-contacts";
+import Icon from 'react-native-vector-icons/FontAwesome';
 import DeviceInfo from "react-native-device-info";
-import RNAccountKit from 'react-native-facebook-account-kit'
-import { parsePhoneNumberFromString } from 'libphonenumber-js'
+import validator from "validator";
 
 import { store, _APP_SETTINGS, _SCREEN, nav, Generics, user, api } from "../../core";
 import CustomButton from "../../components/CustomButton";
+import LoadingIndicator from "../../components/LoadingIndicator";
 
 export default class FollowsScreen extends Component {
 
@@ -37,86 +40,190 @@ export default class FollowsScreen extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      follows: user.get().follows,
+      followsData: [],
+      renderStatus: "follows", //follows - search
+      showInfoText: true,
+      isLoading: true,
+      searchResults: [],
+      searchText: "",
+      errorText: "",
+    };
+  }
+
+  pushScreen = (screen) => {
+    nav.pushScreen(this.props.componentId, screen);
+  }
+
+  refreshUserData = (reRender = true) => {
+    if (reRender) {
+      api.getUsers(user.get().follows).then(res => {
+        this.setState({ followsData: res, follows: user.get().follows });
+      });
+    }
+    else {
+      this.setState({ follows: user.get().follows });
+    }
   }
 
   componentDidMount() {
-    RNAccountKit.configure({
-      responseType: 'code',
-      initialPhoneCountryPrefix: '+90',
-      defaultCountry: DeviceInfo.getDeviceCountry() || "TR",
-    })
+    api.getUsers(this.state.follows).then(res => {
+      this.setState({ followsData: res, isLoading: false });
+    });
   }
 
-  handleButtonPress = async () => {
-    if (!user.get().phone) {
-
-      try {
-        const payload = await RNAccountKit.loginWithPhone()
-
-        if (!payload) {
-          console.warn('Login cancelled', payload)
-        } else {
-          console.warn('Logged with phone. Payload:', payload.code);
-          var code = payload.code;
-          user.changePhoneNumber(code).then(() => {
-            this.handleButtonPress();
-          }).catch(err => console.log("err", err));
-
-        }
-      } catch (err) {
-        console.warn('Error', err.message)
-      }
-
+  onChangeText = (text) => {
+    let _text = text.trim();
+    if (_text == "") {
+      this.setState({ renderStatus: "follows", searchText: _text, errorText: "" });
     }
     else {
-      this.tryToGetContacts();
-    }
-
-  }
-
-  tryToGetContacts = () => {
-
-    PermissionsAndroid.request("android.permission.READ_CONTACTS").then(granted => {
-      if (granted == PermissionsAndroid.RESULTS.GRANTED) {
-        console.log("GRANTED");
-        Contacts.getAll((err, contacts) => {
-          if (err) {
-            console.log(err);
-          }
-          else {
-            let nums = [];
-            let country = DeviceInfo.getDeviceCountry();
-            contacts.forEach(contact => {
-              if (contact.phoneNumbers.length > 0 && contact.phoneNumbers[0].number) {
-                nums.push(parsePhoneNumberFromString(contact.phoneNumbers[0].number, country).number);
-              };
-            });
-            console.log(nums.length);
-            console.log(nums);
-            api.getContacts(nums).then(res => {
-              console.log("CONTACTS", res);
-              console.log("CONTACTS LEN", res.length);
-            })
-              .catch(err => console.log("ERR", err));
-          }
-        })
+      if (!validator.isAlphanumeric(text)) {
+        this.setState({ renderStatus: "search", searchText: _text, errorText: "Username can only contain english letters and numbers" });
       }
       else {
-        console.log("NOT GRANTED");
+        this.setState({ renderStatus: "search", searchText: _text, errorText: "" });
+        api.search(_text).then(res => {
+          this.setState({ searchResults: res });
+        })
       }
-    }).catch(err => {
-      console.log("ERR", err)
-    })
+    }
+  }
+
+  onUserPress = (pressedUser, userFromSearchResults) => {
+    if (this.state.follows.indexOf(pressedUser._id) == -1) {
+      user.follow(pressedUser._id).then(() => {
+        this.refreshUserData(userFromSearchResults || false);
+      })
+    }
+    else {
+      user.unfollow(pressedUser._id).then(() => {
+        this.refreshUserData(userFromSearchResults || false);
+      });
+    }
+  }
+
+  renderUser = (user, userFromSearchResults) => {
+    let isFollowing = this.state.follows.indexOf(user._id) != -1;
+    return (
+      <View key={user.nickname} style={{ flexDirection: "row", width: _SCREEN.width * 0.8, justifyContent: "space-between", padding: 10, backgroundColor: colors.secondaryLight, borderRadius: 5, elevation: 5, marginVertical: 8, marginHorizontal: 25, }} >
+        <Text style={Generics.bigText} >{user.nickname}</Text>
+        <TouchableOpacity
+          style={{ width: 100, alignItems: "center", justifyContent: "center", backgroundColor: isFollowing ? colors.secondary : colors.primary, borderRadius: 5, borderWidth: isFollowing ? 1 : 0, borderColor: colors.secondaryDark }}
+          onPress={() => this.onUserPress(user, userFromSearchResults)} hitSlop={{ bottom: 20, top: 20, left: 20, right: 20 }}
+        >
+          <Text style={{ ...Generics.text, color: isFollowing ? colors.secondaryLight3 : colors.secondaryLight3 }} >{isFollowing ? "Friend" : "Add"}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  renderFollows = () => {
+    return (
+      <ScrollView style={{ width: _SCREEN.width, marginBottom: 0 }} contentContainerStyle={{ alignItems: "center", paddingTop: 10 }} >
+        {
+          this.state.isLoading ?
+            <LoadingIndicator />
+            :
+            this.state.followsData.map(_user => this.renderUser(_user))
+        }
+      </ScrollView>
+    );
+  }
+
+  renderSearchResults = () => {
+    return (
+      <ScrollView style={{ width: _SCREEN.width, marginBottom: 0 }} contentContainerStyle={{ alignItems: "center", paddingTop: 10 }} >
+        {
+          this.state.searchResults.map(_user => {
+            if (user.get().nickname != _user.nickname) {
+              return (this.renderUser(_user, true));
+            }
+          })
+        }
+      </ScrollView>
+    );
+  }
+
+  renderContent = () => {
+    switch (this.state.renderStatus) {
+      case "follows":
+        return (this.renderFollows());
+      case "search":
+        return (this.renderSearchResults());
+    }
   }
 
   render() {
     return (
-      <View style={Generics.container} >
+      <View style={{ ...Generics.container, justifyContent: "flex-start" }} >
+        {(this.state.renderStatus == "follows" || this.state.renderStatus == "search") &&
+          <View>
+            <View style={{
+              width: "100%",
+              alignItems: "center",
+              flexDirection: "row",
+              paddingHorizontal: 10
+            }}>
 
-        <View style={{ alignItems: "center" }} >
-          <Text style={{ ...Generics.text, fontSize: 12, color: colors.secondaryLight2, textAlign: "center", marginBottom: 10 }} >Rehberinizdeki oyuncuları arkadaş eklemeniz için telefon numaranızı doğrulamanız ve kişilere erişim izni vermeniz gerekmektedir</Text>
-          <CustomButton text="Rehberdeki arkadaşları bul" onPress={this.handleButtonPress} />
-        </View>
+              <TouchableOpacity
+                activeOpacity={1}
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+                onPressIn={() => this.textInputRef.focus()}
+              >
+                <Icon name="search" size={25} color={colors.secondaryLight2} />
+                <TextInput
+                  ref={r => this.textInputRef = r}
+                  onChangeText={this.onChangeText}
+                  autoCapitalize={"none"}
+                  style={{
+                    flex: 1,
+                    paddingVertical: 10,
+                    paddingHorizontal: 20,
+                    fontSize: 20,
+                    fontFamily: "roboto",
+                    color: colors.secondaryLight2,
+                  }}
+                  placeholder="Seach user"
+                  placeholderTextColor={colors.secondaryLight2}
+                  underlineColorAndroid={"transparent"}
+                  value={this.state.searchText}
+                />
+              </TouchableOpacity>
+
+              {this.state.searchText != "" &&
+                <TouchableOpacity onPressIn={() => this.setState({ searchText: "", renderStatus: "follows" })} activeOpacity={1} >
+                  <Icon color={colors.secondaryLight2} name="times" size={25} />
+                </TouchableOpacity>
+              }
+
+            </View>
+
+            {this.state.errorText != "" &&
+              <Text style={Generics.errorText} >{this.state.errorText}</Text>
+            }
+
+            <View style={{ width: _SCREEN.width, backgroundColor: colors.secondaryDark, height: 1 }} />
+            <View style={{ width: _SCREEN.width, backgroundColor: colors.secondaryDark + "55", height: 1 }} />
+          </View>
+        }
+
+        {this.renderContent()}
+
+        {user.get().settings.friendsEnabled &&
+          <View style={{ alignItems: "center", backgroundColor: colors.secondary, width: _SCREEN.width }} >
+            <View style={{ width: _SCREEN.width, backgroundColor: colors.secondaryDark + "55", height: 1 }} />
+            <View style={{ width: _SCREEN.width, backgroundColor: colors.secondaryDark, height: 1, marginBottom: 8 }} />
+            <CustomButton text="Find Your Friends" onPress={() => this.pushScreen("FindFriendsScreen")} />
+            <View style={{ width: _SCREEN.width, backgroundColor: colors.secondaryDark + "55", height: 1 }} />
+            <View style={{ width: _SCREEN.width, backgroundColor: colors.secondaryDark, height: 1 }} />
+          </View>
+        }
 
       </View>
     )
