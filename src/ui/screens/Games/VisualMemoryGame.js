@@ -99,6 +99,11 @@ export default class VisualMemoryGame extends Component {
   }
 
   endGame = () => {
+    if (this.gameEnded) {
+      return;
+    }
+    this.gameEnded = true;
+
     this.setState({ gameStatus: "finished" });
   }
 
@@ -252,15 +257,20 @@ export default class VisualMemoryGame extends Component {
     }
     else {
       this.state.levelMistakes++;
+      if (this.state.levelMistakes > 2 && this.state.lives == 1) {
+        clearTimeout(this.answerTime);
+        console.log("CLEARED TIMEOUT. WILL LOSE")
+      }
     }
     this.forceUpdate();
 
-    if ((this.specialSquarePushed != this.specialSquareRequired) && (this.state.levelMistakes < 3) && this.state.lives > 0) {
+    if (this.specialSquarePushed != this.specialSquareRequired && this.state.levelMistakes < 3 && this.state.lives > 0) {
       this.buttonsEnabled = true;
     }
     if (this.specialSquarePushed == this.specialSquareRequired) {
       this.willPassLevel = true;
     }
+
 
     Animated.timing(this.state.squares[index].animation, {
       toValue: 1,
