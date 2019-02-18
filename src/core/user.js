@@ -20,12 +20,47 @@ var _user = {
   improvements: {},
   settings: {
     friendsEnabled: false
+  },
+  statistics: {
+    VisualMemoryGame: {
+      amountPlayed: 0,
+      totalCorrectTilePress: 0,
+      totalWrongTilePress: 0
+    },
+    NumberMemoryGame: {
+      amountPlayed: 0,
+      totalNumberMemorized: 0,
+    },
+    TouchSpeedGame: {
+      amountPlayed: 0,
+      totalTouchCount: 0
+    },
+    ReactionSpeedGame: {
+      amountPlayed: 0,
+      fastestReaction: 0,
+      fastestAverage: 0
+    },
+    TypingSpeedGame: {
+      amountPlayed: 0,
+      totalWordCount: 0,
+      totalCorrectKeyPress: 0,
+      totalKeyPress: 0
+    },
+    VerbalMemoryGame: {
+      amountPlayed: 0,
+      totalWordMemorized: 0
+    },
+    CalculationSpeedGame: {
+      amountPlayed: 0,
+      totalCalculation: 0
+    }
   }
 };
 
 _APP_SETTINGS.games.forEach(game => {
   _user[game.hsName] = null;
   _user.ranks[game.hsName] = null;
+  _user.statistics[game.hsName] = null;
   _user.globalAverages[game.hsName] = null;
   _user.globalHighscores[game.hsName] = [];
   _user.friendHighscores[game.hsName] = [];

@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, Generics } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, Generics, user } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
 import CounterBar from "../../../components/CounterBar";
 import BouncingText from "../../../components/BouncingText";
@@ -107,6 +107,14 @@ export default class TouchSpeedGame extends Component {
   }
 
   renderFinish = () => {
+    let oldUserStat = user.get().statistics;
+    let touchStats = oldUserStat.TouchSpeedGame;
+
+    user.set({statistics:{...oldUserStat, ["TouchSpeedGame"]: {
+      amountPlayed: oldUserStat.TouchSpeedGame.amountPlayed + 1,
+      totalTouchCount: oldUserStat.TouchSpeedGame.totalTouchCount + this.state.pressCounter
+    }}}, true);
+
     return (
       <GameResult
         onRestart={this.reinitialize}

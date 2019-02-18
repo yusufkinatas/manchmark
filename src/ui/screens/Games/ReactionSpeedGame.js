@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, utils, Generics } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user } from "../../../core";
 import CustomButton from '../../../components/CustomButton';
 import DelayedText from '../../../components/DelayedText';
 import GameResult from '../../../components/GameResult';
@@ -178,6 +178,17 @@ export default class ReactionSpeedGame extends Component {
     this.setState({ playingState: "betweenPhases" });
   }
 
+  findFastestReaction = () => {
+    let fastest = this.reactionTime[0];
+
+    for (i = 1; i < this.reactionTime.length - 1; i++) {
+      if ((this.reactionTime[i] != 0 && this.reactionTime[i] < fastest) || fastest == 0) {
+        fastest = this.reactionTime[i];
+      }
+    }
+    return fastest;
+  }
+
   renderGame = () => {
 
     let randomDelay = utils.randomDoubleBetween(1.25, 2.5);
@@ -202,8 +213,38 @@ export default class ReactionSpeedGame extends Component {
   }
 
   renderFinish() {
-    console.log()
-    let extraData = [{ data: ["Average", this.findAverage()], important: true }];
+    let oldUserStat = user.get().statistics;
+    let reactionStats = oldUserStat.ReactionSpeedGame;
+    let averageReaction = this.findAverage();
+    let fastest = this.findFastestReaction();
+
+    console.log(fastest);
+    console.log(averageReaction);
+
+    let currentStats = {}
+
+    if (fastest != 0 && (reactionStats.fastestReaction == 0 || reactionStats.fastestReaction > fastest)) {
+      currentStats.fastestReaction = fastest;
+    }
+    else{
+      currentStats.fastestReaction = reactionStats.fastestReaction;
+    }
+
+    if (averageReaction != 0 && (reactionStats.fastestAverage == 0 || reactionStats.fastestAverage > averageReaction)) {
+      currentStats.fastestAverage = averageReaction;
+    }
+    else{
+      currentStats.fastestAverage = reactionStats.fastestAverage;
+    }
+
+    currentStats.amountPlayed = reactionStats.amountPlayed + 1;
+
+    user.set({
+      statistics: {...oldUserStat, ["ReactionSpeedGame"]: currentStats }
+    }, true);
+
+
+    let extraData = [{ data: ["Average", this.findAverage(true)], important: true }];
     this.reactionTime.forEach((time, index) => {
       if (time) {
         extraData.push({ data: [`Phase ${index + 1}`, time + "ms"] });
@@ -225,7 +266,7 @@ export default class ReactionSpeedGame extends Component {
     );
   }
 
-  findAverage = () => {
+  findAverage = (isString?) => {
     let index;
     let average = 0;
     let count = 0;
@@ -238,7 +279,12 @@ export default class ReactionSpeedGame extends Component {
     if (count != 0) {
       average = utils.truncateFloatingNumber(average / count, 2);
     }
-    return average ? average + "ms" : "-";
+    if (isString){
+      return average ? average + "ms" : "-";
+    }
+    else {
+      return average;
+    }
   }
 
   findTotalPoint = () => {
