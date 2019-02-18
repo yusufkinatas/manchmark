@@ -106,7 +106,7 @@ export default class TypingSpeedGame extends Component {
         <Text style={Generics.bigText} >Write as much word as possible in {TIMEOUT_MS / 1000} seconds</Text>
         <View style={{ height: 20 }}></View>
         <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
-        <Text style={Generics.hintText} >Hint: You can write any one of the 3 words in any order!</Text>
+        <Text style={Generics.hintText} >You can write any one of the 3 words in any order!</Text>
       </View>
     );
   }

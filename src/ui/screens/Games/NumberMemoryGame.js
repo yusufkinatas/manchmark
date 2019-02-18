@@ -133,6 +133,7 @@ export default class NumberMemoryGame extends Component {
           <Text style={Generics.bigText} >Remember the number</Text>
         </View>
         <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
+        <Text style={Generics.hintText} >You can group numbers to make it easier to memorize!</Text>
       </View>
     );
   }
