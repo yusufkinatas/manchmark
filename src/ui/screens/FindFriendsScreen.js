@@ -53,6 +53,7 @@ export default class FindFriendsScreen extends Component {
     PermissionsAndroid.check("android.permission.READ_CONTACTS").then(granted => {
       if (granted) {
         this.setState({ showInfoText: false });
+        this.tryToGetContacts();
       }
     })
   }
@@ -111,9 +112,16 @@ export default class FindFriendsScreen extends Component {
             let nums = [];
             let country = DeviceInfo.getDeviceCountry();
             contacts.forEach(contact => {
-              if (contact.phoneNumbers.length > 0 && contact.phoneNumbers[0].number) {
-                nums.push(parsePhoneNumberFromString(contact.phoneNumbers[0].number, country).number);
-              };
+              // console.log("PHONE NUMBER", contact)
+              try {
+                if (contact.phoneNumbers.length > 0 && contact.phoneNumbers[0].number) {
+                  nums.push(parsePhoneNumberFromString(contact.phoneNumbers[0].number, country).number);
+                };
+              } catch (error) {
+                console.log("err", error);
+              }
+              
+
             });
             console.log(nums.length);
             console.log(nums);
