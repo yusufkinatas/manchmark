@@ -29,19 +29,19 @@ export default class GameResult extends Component {
       currentScore: props.score,
       text: "",
       errorText: "",
-      userCount: 0,
+      userCount: 1,
       rank: 0,
     };
 
   }
 
   componentDidMount() {
-    console.log(this.state)
+    //console.log(this.state);
     if (this.state.highScore == null || this.state.highScore < this.state.currentScore) {
 
       user.updateHighscore(this.state.currentScore, this.game.hsName).then(() => {
         user.getRank(this.game.hsName).then(res => {
-          // alert(`usercount ${res.userCount} rank ${res.rank}`)
+          //alert(`usercount ${res.userCount} rank ${res.rank}`)
           this.setState({ isLoading: false, userCount: res.userCount, rank: res.rank });
         }).catch(err => this.setState({ isLoading: false }));
       }).catch(() => {
@@ -58,109 +58,76 @@ export default class GameResult extends Component {
 
   }
 
-
-  renderContent = () => {
+  isHighScore = () => {
     if (this.state.highScore == null || this.state.highScore < this.state.currentScore) {
-      return (
-        <View style={Generics.container} >
-
-          <DelayedView delay={0} style={{ ...styles.infoContainer, justifyContent: "center" }} >
-            <Text style={{ ...Generics.bigText, fontWeight: "bold", fontSize: 25 }} >{"Congratulations!\nNew Highscore"}</Text>
-          </DelayedView>
-
-          <DelayedView delay={200} style={{ ...styles.infoContainer, backgroundColor: this.game.backgroundColor }} >
-            <View style={{ width: "100%" }} >
-              <View style={{ flexDirection: "row", width: "100%", justifyContent: "space-between" }} >
-                <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Score</Text>
-                <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{this.state.currentScore}</Text>
-              </View>
-
-              {this.props.extraData.map(({ data, important }) => {
-                let fontStyle = {
-                  ...Generics.bigText,
-                  fontSize: important ? 14 : 12,
-                  fontWeight: important ? "bold" : "normal",
-                };
-                return (
-                  <View style={{ flexDirection: "row", width: "100%", justifyContent: "space-between" }} >
-                    <Text style={fontStyle} >{data[0]}</Text>
-                    <Text style={fontStyle} >{data[1]}</Text>
-                  </View>
-                );
-              })}
-            </View>
-          </DelayedView>
-
-          <DelayedView delay={400} style={{ ...styles.infoContainer, backgroundColor: this.game.backgroundColor + "88" }} >
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Average of Players</Text>
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{utils.truncateFloatingNumber(user.get().globalAverages[this.game.hsName], 2)}</Text>
-          </DelayedView>
-
-          <DelayedView delay={600} style={{ ...styles.infoContainer, backgroundColor: this.game.backgroundColor + "55" }} >
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Your rank</Text>
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{this.state.rank} / {this.state.userCount}</Text>
-          </DelayedView>
-
-          <DelayedView delay={800} style={{ ...styles.infoContainer, backgroundColor: this.game.backgroundColor + "33", justifyContent: "center" }} >
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >You are better than {utils.truncateFloatingNumber(100 - (this.state.rank / this.state.userCount * 100), 2)}% of people</Text>
-          </DelayedView>
-
-          <DelayedView delay={1000} >
-            <CustomButton backgroundColor={this.game.backgroundColor} style={Generics.container} text="Restart" onPress={this.props.onRestart} />
-          </DelayedView>
-
-        </View>
-      )
+      return true;
     }
     else {
-      return (
-        <View style={Generics.container} >
-
-          <DelayedView delay={0} style={{ ...styles.infoContainer, backgroundColor: this.game.backgroundColor }} >
-            <View style={{ width: "100%" }} >
-              <View style={{ flexDirection: "row", width: "100%", justifyContent: "space-between" }} >
-                <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Score</Text>
-                <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{this.state.currentScore}</Text>
-              </View>
-
-              {this.props.extraData.map(({ data, important }) => {
-                let fontStyle = {
-                  ...Generics.bigText,
-                  fontSize: important ? 14 : 12,
-                  fontWeight: important ? "bold" : "normal",
-                };
-                return (
-                  <View style={{ flexDirection: "row", width: "100%", justifyContent: "space-between" }} >
-                    <Text style={fontStyle} >{data[0]}</Text>
-                    <Text style={fontStyle} >{data[1]}</Text>
-                  </View>
-                );
-              })}
-            </View>
-          </DelayedView>
-
-
-
-          <DelayedView delay={200} style={{ ...styles.infoContainer, backgroundColor: this.game.backgroundColor + "bb" }} >
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Highscore</Text>
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{this.state.highScore}</Text>
-          </DelayedView>
-          <DelayedView delay={400} style={{ ...styles.infoContainer, backgroundColor: this.game.backgroundColor + "88" }} >
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Average of Players</Text>
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{utils.truncateFloatingNumber(user.get().globalAverages[this.game.hsName], 2)}</Text>
-          </DelayedView>
-
-          <DelayedView delay={600} >
-            <CustomButton backgroundColor={this.game.backgroundColor} style={Generics.container} text="Restart" onPress={this.props.onRestart} />
-          </DelayedView>
-
-          <DelayedView delay={800} style={{ position: "absolute", bottom: 20 }} >
-            <Text style={{ ...Generics.text, color: colors.secondaryLight2, fontStyle: "italic" }} >Repetition is the key to success!</Text>
-          </DelayedView>
-
-        </View>
-      );
+      return false;
     }
+  }
+
+  renderContent = () => {
+    return (
+      <View style={Generics.container} >
+
+        {this.isHighScore() &&
+          <DelayedView delay={0} style={{ ...styles.infoContainer, justifyContent: "center", paddingTop: 0 }} >
+            <Text style={{ ...Generics.bigText, fontWeight: "bold", paddingTop: 0 }} >{"Congratulations!\nNew Highscore"}</Text>
+          </DelayedView>
+        }
+
+        <DelayedView delay={0} style={{ ...styles.infoContainer, borderRadius: 5, borderWidth: 2, borderColor: this.game.backgroundColor }} >
+          <View style={{ width: "100%" }} >
+            <View style={{ flexDirection: "row", width: "100%", justifyContent: "space-between" }} >
+              <Text style={{ ...Generics.bigText, fontWeight: "bold", fontSize: 25 }} >Score</Text>
+              <Text style={{ ...Generics.bigText, fontWeight: "bold", fontSize: 25 }} >{this.state.currentScore}</Text>
+            </View>
+
+            {this.props.extraData.map(({ data, important }) => {
+              let fontStyle = {
+                ...Generics.bigText,
+                color: important ? colors.secondaryLight2 : colors.secondaryLight,
+                fontSize: important ? 16 : 12,
+                fontWeight: important ? "bold" : "normal",
+              };
+              return (
+                <View style={{ flexDirection: "row", width: "100%", justifyContent: "space-between" }} >
+                  <Text style={fontStyle} >{data[0]}</Text>
+                  <Text style={fontStyle} >{data[1]}</Text>
+                </View>
+              );
+            })}
+          </View>
+        </DelayedView>
+
+
+
+        <DelayedView delay={200} style={{ ...styles.infoContainer, borderRadius: 5, borderWidth: 2, borderColor: this.game.backgroundColor }} >
+          <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Highscore</Text>
+          <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{this.isHighScore() ? this.state.currentScore : this.state.highScore}</Text>
+        </DelayedView>
+        <DelayedView delay={400} style={{ ...styles.infoContainer, borderRadius: 5, borderWidth: 2, borderColor: this.game.backgroundColor }} >
+          <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Average of Players</Text>
+          <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{utils.truncateFloatingNumber(user.get().globalAverages[this.game.hsName], 2)}</Text>
+        </DelayedView>
+
+        {(this.isHighScore() && user.get().isConnected) &&
+          <DelayedView delay={800} style={{ ...styles.infoContainer, borderRadius: 5, borderWidth: 2, borderColor: this.game.backgroundColor, justifyContent: "center" }} >
+            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Your score is higher than {utils.truncateFloatingNumber(100 - (this.state.rank / this.state.userCount * 100), 2)}% of players</Text>
+          </DelayedView>
+        }
+
+        <DelayedView delay={600} >
+          <CustomButton backgroundColor={this.game.backgroundColor} style={Generics.container} text="Restart" onPress={this.props.onRestart} />
+        </DelayedView>
+
+        <DelayedView delay={800} style={{ position: "absolute", bottom: 20 }} >
+          <Text style={{ ...Generics.text, color: colors.secondaryLight2 }} >Repetition is the key to success!</Text>
+        </DelayedView>
+
+      </View>
+    );
   }
 
   render() {

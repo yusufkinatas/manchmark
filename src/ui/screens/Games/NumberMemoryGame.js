@@ -38,6 +38,7 @@ export default class NumberMemoryGame extends Component {
   constructor(props) {
     super(props);
     this.numberLength = 2;
+    this.number = "";
     this.state = {
       gameStatus: "info", //info - active - finished
       isGuessing: false,
@@ -48,6 +49,7 @@ export default class NumberMemoryGame extends Component {
 
   reinitialize = () => {
     this.numberLength = 2;
+    this.number = "";
     this.setState({
       gameStatus: "info", //info - active - finished
       isGuessing: false,
@@ -78,11 +80,8 @@ export default class NumberMemoryGame extends Component {
 
   showNewNumber = () => {
     this.numberLength++;
-    var number = "";
-    for (let i = 0; i < this.numberLength; i++) {
-      number += utils.randomBetween(1, 9);
-    }
-    this.setState({ number, isGuessing: false, userAnswer: "" });
+    this.number = utils.randomBetween(1, 9) + this.number;
+    this.setState({ number: this.number, isGuessing: false, userAnswer: "" });
     this.numberTimeout = setTimeout(() => {
       this.setState({ isGuessing: true });
       this.answerTime = setTimeout(() => {
@@ -134,6 +133,7 @@ export default class NumberMemoryGame extends Component {
           <Text style={Generics.bigText} >Remember the number</Text>
         </View>
         <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
+        <Text style={Generics.hintText} >You can group numbers to make it easier to memorize!</Text>
       </View>
     );
   }
@@ -190,13 +190,53 @@ export default class NumberMemoryGame extends Component {
     );
   }
 
+  returnChar = (number, correct) => {
+    return (
+      <Text style={{ ...Generics.bigText, fontSize: 24, paddingHorizontal: 0, color: correct ? colors.secondaryLight3 : gameColor, textDecorationLine: correct ? "none" : "line-through" }}>{number}</Text>
+    );
+  }
+
+
+  showError = () => {
+    let num = this.state.number;
+    let ans = this.state.userAnswer;
+    let ansArray = ans.split("");
+    console.log(_SCREEN.height);
+
+    return (
+      <View style={{ position: "absolute", zIndex: 10, top: _SCREEN.height / 10, width: _SCREEN.width }}>
+        <Text style={{ ...Generics.bigText, fontSize: 16, color: colors.secondaryLight2 }}>Number</Text>
+        <Text style={{ ...Generics.bigText, fontSize: 24 }}>{num}</Text>
+        <Text style={{ ...Generics.bigText, fontSize: 16, color: colors.secondaryLight2 }}>Your Answer</Text>
+        <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+          {ansArray.map((char, index) => {
+            if (index <= num.length - 1) {
+              if (char == num[index]) {
+                return this.returnChar(char, true);
+              }
+              else {
+                return this.returnChar(char, false);
+              }
+            }
+            else {
+              return this.returnChar(char, false);
+            }
+          })}
+        </View>
+      </View>
+    );
+  }
+
   renderFinish = () => {
     return (
-      <GameResult
-        onRestart={this.reinitialize}
-        game="NumberMemoryGame"
-        score={this.numberLength - 1}
-      />
+      <View style={Generics.container}>
+        {this.state.userAnswer != "" && this.showError()}
+        <GameResult
+          onRestart={this.reinitialize}
+          game="NumberMemoryGame"
+          score={this.numberLength - 1}
+        />
+      </View>
     );
   }
 

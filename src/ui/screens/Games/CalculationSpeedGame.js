@@ -118,6 +118,7 @@ export default class CalculationSpeedGame extends Component {
           <Text style={Generics.bigText} >Answer as much as possible in {TIMEOUT_MS / 1000} seconds</Text>
         </View>
         <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
+        <Text style={Generics.hintText} >Remember the order of expressions!</Text>
       </View>
     );
   }

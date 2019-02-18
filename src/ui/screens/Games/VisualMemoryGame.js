@@ -231,9 +231,10 @@ export default class VisualMemoryGame extends Component {
       <View style={Generics.container} >
 
         <Animated.View style={{ paddingBottom: 20 }} >
-          <Text style={Generics.bigText} >Try to remember the special tiles</Text>
+          <Text style={Generics.bigText} >Remember the pattern</Text>
         </Animated.View>
         <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
+        <Text style={Generics.hintText}>You are allowed to make 2 mistakes each round!</Text>
       </View>
     );
   }

@@ -102,7 +102,7 @@ export default class ReactionSpeedGame extends Component {
     return (
       <View style={Generics.container} >
         <View style={{ paddingBottom: 20 }} >
-          <Text style={Generics.bigText} >Press the screen as soon as the color changes!</Text>
+          <Text style={Generics.bigText} >Press the screen as soon as the color changes</Text>
         </View>
         <Text style={Generics.hintText} >There are 5 phases!</Text>
         <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
@@ -115,7 +115,9 @@ export default class ReactionSpeedGame extends Component {
       return (
         <View style={{ ...Generics.container, width: _SCREEN.width }}>
           <TouchableOpacity style={Generics.touchableArea} onPressIn={() => this.setState({ playingState: "waiting" })}>
-            <Text style={Generics.hugeText}>{this.reactionTime[this.phase - 1]} ms</Text>
+            <Text style={{ ...Generics.bigText, marginTop: -50 }}>Phase</Text>
+            <Text style={{ ...Generics.bigText, color: colors.secondaryLight2, fontSize: 15 }}>{this.phase} / 5</Text>
+            <Text style={{ ...Generics.hugeText, paddingTop: 10 }}>{this.reactionTime[this.phase - 1]} ms</Text>
             <Text style={Generics.hintText} >Press the screen for the next phase!</Text>
           </TouchableOpacity>
         </View>
@@ -125,6 +127,8 @@ export default class ReactionSpeedGame extends Component {
       return (
         <View style={{ ...Generics.container, width: _SCREEN.width }}>
           <TouchableOpacity style={{ ...Generics.touchableArea, backgroundColor: colors.failure }} activeOpacity={1} onPressIn={() => this.setState({ playingState: "waiting" })}>
+            <Text style={{ ...Generics.bigText, marginTop: -50 }}>Phase</Text>
+            <Text style={{ ...Generics.bigText, color: colors.secondaryLight2, fontSize: 15 }}>{this.phase} / 5</Text>
             <Text style={Generics.hugeText}>TOO EARLY!</Text>
             <Text style={Generics.hintText} >Press the screen for the next phase!</Text>
           </TouchableOpacity>
