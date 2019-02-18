@@ -73,8 +73,8 @@ export default class GameResult extends Component {
         <View style={Generics.container} >
 
           {this.isHighScore() &&
-          <DelayedView delay={0} style={{ ...styles.infoContainer, justifyContent: "center" }} >
-            <Text style={{ ...Generics.bigText, fontWeight: "bold", fontSize: 25 }} >{"Congratulations!\nNew Highscore"}</Text>
+          <DelayedView delay={0} style={{ ...styles.infoContainer, justifyContent: "center", paddingTop: 0 }} >
+            <Text style={{ ...Generics.bigText, fontWeight: "bold", paddingTop: 0 }} >{"Congratulations!\nNew Highscore"}</Text>
           </DelayedView>
           }
 
@@ -106,7 +106,7 @@ export default class GameResult extends Component {
 
           <DelayedView delay={200} style={{ ...styles.infoContainer, borderRadius: 5, borderWidth: 2, borderColor: this.game.backgroundColor }} >
             <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Highscore</Text>
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{this.isHighScore? this.state.currentScore : this.state.highScore}</Text>
+            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{this.isHighScore() ? this.state.currentScore : this.state.highScore}</Text>
           </DelayedView>
           <DelayedView delay={400} style={{ ...styles.infoContainer, borderRadius: 5, borderWidth: 2, borderColor: this.game.backgroundColor }} >
             <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >Average of Players</Text>

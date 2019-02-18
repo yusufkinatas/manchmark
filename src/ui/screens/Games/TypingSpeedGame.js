@@ -139,8 +139,8 @@ export default class TypingSpeedGame extends Component {
       tmpArray[index] = this.generateNewWord();
       this.clearText();
       this.keyboardTimer = setTimeout(() => {
-        this.setState({ word: tmpArray, score: this.state.score + answer.length * 5}, this.clearText); 
-      }, 70);
+        this.setState({ word: tmpArray, score: this.state.score + answer.length * 5 + 10}, this.clearText); 
+      }, 80);
     }
   }
 
@@ -196,11 +196,16 @@ export default class TypingSpeedGame extends Component {
   }
 
   renderFinish = () => {
+    let keypress = (this.state.score - this.usedWords.length * 10) / 5;
+    let extraData = [{ data: ["Word Count", this.usedWords.length ], important: true }];
+    extraData.push({ data: ["Key Press", keypress], important: true });
+    
     return (
       <GameResult
         onRestart={this.reinitialize}
         game="TypingSpeedGame"
         score={this.state.score}
+        extraData={extraData}
       />
     );
   }
