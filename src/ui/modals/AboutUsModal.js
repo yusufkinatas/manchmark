@@ -67,19 +67,19 @@ export default class AboutUsModal extends Component {
               outputRange: [_SCREEN.height * 0.15, 0]
             })
           }}>
-          <View style={{ flexDirection: "row" }}>
-            <View style={{ overflow: "hidden", borderColor: colors.secondaryLight, borderRadius: 50, borderWidth: 1 }}>
+          <View style={{ flexDirection: "row", alignItems: "center", }}>
+            <View style={{ overflow: "hidden", borderColor: colors.secondaryLight, borderRadius: 25, width: 50, height: 50, borderWidth: 1 }}>
               <Image
                 source={require('../../../assets/icon-low-res.png')}
                 style={styles.imageStyle}
               />
             </View>
-            <View>
+            <View style={{ paddingLeft: 5 }} >
               <Text style={styles.bigText}>Manchmark</Text>
-              <Text style={styles.smallText}>{_APP_SETTINGS.versionString}</Text>
+              <Text style={{ ...styles.smallText, top: -5 }}>{_APP_SETTINGS.versionString}</Text>
             </View>
           </View>
-          <Text style={{...Generics.bigText, fontSize:15, fontFamily:"Kanit-LightItalic", paddingTop: 10}}>Harder, better, faster, smarter!</Text>
+          <Text style={{ ...Generics.bigText, fontSize: 15, fontFamily: "Kanit-LightItalic", paddingTop: 10 }}>Test your limits.</Text>
           <View style={{ paddingTop: 10 }}>
             <View style={{ marginBottom: 5, flexDirection: "row" }}>
               <Text style={styles.smallText} >Yusuf Kınataş</Text>
@@ -120,24 +120,23 @@ var styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 10,
   },
+  imageStyle: {
+    flex: 1,
+    width: undefined,
+    height: undefined
+  },
   bigText: {
     fontSize: 25,
     fontFamily: "Kanit",
     color: colors.secondaryLight3,
     textAlign: "center",
-    paddingTop: 5,
-    paddingLeft: 5
-  },
-  imageStyle: {
-    height: 50,
-    width: 50
   },
   smallText: {
     fontSize: 12,
     fontFamily: "roboto",
     color: colors.secondaryLight2,
     textAlign: "left",
-    paddingLeft: 5
+    paddingLeft: 5,
   },
   copyRightText: {
     fontSize: 10,

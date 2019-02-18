@@ -11,7 +11,8 @@ import {
   Image,
   Alert,
   Linking,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
+  Share
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -22,6 +23,17 @@ export default class MainScreen extends Component {
 
   pushScreen = (screen) => {
     nav.pushScreen(this.props.componentId, screen);
+  }
+
+  shareGame = () => {
+    Share.share({
+      message: `Are you ready to test your limits on Manchmark?\nDownload now and see your rank among people in multiple games.\nGoogle Play: ${_APP_SETTINGS.playstoreURL}`,
+      title: "Let's play Manchmark",
+    }, {});
+  }
+
+  rateGame = () => {
+    Linking.openURL(_APP_SETTINGS.playstoreLink)
   }
 
   showModal = (screen, passProps) => {
@@ -51,6 +63,19 @@ export default class MainScreen extends Component {
     });
   }
 
+  renderBottomButton = (icon, text, onPress) => {
+    return (
+      <View style={{ flex: 1, borderRadius: 5, overflow: "hidden", marginHorizontal: 10 }} >
+        <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple(colors.primary, true)} onPress={onPress} >
+          <View style={{ paddingHorizontal: 5, justifyContent: "center", alignItems: "center" }} >
+            <Icon name={icon} size={20} color={colors.secondaryLight2} />
+            <Text style={{ ...Generics.text, fontSize: 12, color: colors.secondaryLight2 }} >{text}</Text>
+          </View>
+        </TouchableNativeFeedback>
+      </View>
+    );
+  }
+
   render() {
     return (
       <View style={Generics.container} >
@@ -77,13 +102,9 @@ export default class MainScreen extends Component {
         </View>
 
         <View style={styles.bottomBarContainer} >
-          <View style={{ borderRadius: 50, overflow: "hidden" }}>
-            <TouchableNativeFeedback style={styles.smallButtonContainer} background={TouchableNativeFeedback.Ripple(colors.primary, true)} onPress={() => this.showModal("AboutUsModal")} >
-              <View style={{ width: 50, height: 40, justifyContent: "center", alignItems: "center" }} >
-                <Icon name="info" size={20} color={colors.secondaryLight3} />
-              </View>
-            </TouchableNativeFeedback>
-          </View>
+          {this.renderBottomButton("star", "Rate Us", this.rateGame)}
+          {this.renderBottomButton("info", "About Us", () => this.showModal("AboutUsModal"))}
+          {this.renderBottomButton("share-2", "Invite People", this.shareGame)}
         </View>
 
       </View>
@@ -102,14 +123,7 @@ var styles = StyleSheet.create({
   bottomBarContainer: {
     flexDirection: "row",
     overflow: "hidden",
-    justifyContent: "space-around",
     width: _SCREEN.width,
     paddingBottom: 10
-  },
-  smallButtonContainer: {
-    width: 40,
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center"
   }
 });

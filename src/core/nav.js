@@ -8,7 +8,7 @@ const colors = _APP_SETTINGS.colors;
 
 export const nav = {
 
-  pushScreen: (componentId: string, screen: string, ) => {
+  pushScreen: (componentId: string, screen: string, passProps) => {
     if (!pushAviable) return;
 
     Navigation.push(componentId, {
@@ -16,7 +16,8 @@ export const nav = {
         name: screen,
         options: {
           statusBar: { backgroundColor: colors.secondaryDark },
-        }
+        },
+        passProps
       }
     });
     pushAviable = false;

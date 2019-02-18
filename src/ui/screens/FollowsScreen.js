@@ -52,8 +52,8 @@ export default class FollowsScreen extends Component {
     };
   }
 
-  pushScreen = (screen) => {
-    nav.pushScreen(this.props.componentId, screen);
+  pushScreen = (screen, passProps) => {
+    nav.pushScreen(this.props.componentId, screen, passProps);
   }
 
   refreshUserData = (reRender = true) => {
@@ -219,7 +219,7 @@ export default class FollowsScreen extends Component {
           <View style={{ alignItems: "center", backgroundColor: colors.secondary, width: _SCREEN.width }} >
             <View style={{ width: _SCREEN.width, backgroundColor: colors.secondaryDark + "55", height: 1 }} />
             <View style={{ width: _SCREEN.width, backgroundColor: colors.secondaryDark, height: 1, marginBottom: 8 }} />
-            <CustomButton text="Find Your Friends" onPress={() => this.pushScreen("FindFriendsScreen")} />
+            <CustomButton text="Find Your Friends" onPress={() => this.pushScreen("FindFriendsScreen", {onClose: () => this.refreshUserData(true)})} />
             <View style={{ width: _SCREEN.width, backgroundColor: colors.secondaryDark + "55", height: 1 }} />
             <View style={{ width: _SCREEN.width, backgroundColor: colors.secondaryDark, height: 1 }} />
           </View>

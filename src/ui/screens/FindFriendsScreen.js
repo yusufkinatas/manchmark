@@ -58,6 +58,12 @@ export default class FindFriendsScreen extends Component {
     })
   }
 
+  componentWillUnmount() {
+    if (this.props.onClose) {
+      this.props.onClose();
+    }
+  }
+
   componentDidMount() {
     RNAccountKit.configure({
       responseType: 'code',
@@ -112,22 +118,24 @@ export default class FindFriendsScreen extends Component {
             let nums = [];
             let country = DeviceInfo.getDeviceCountry();
             contacts.forEach(contact => {
-              // console.log("PHONE NUMBER", contact)
               try {
                 if (contact.phoneNumbers.length > 0 && contact.phoneNumbers[0].number) {
-                  nums.push(parsePhoneNumberFromString(contact.phoneNumbers[0].number, country).number);
+                  let num = parsePhoneNumberFromString(contact.phoneNumbers[0].number, country).number;
+                  if (num != user.get().phone) {
+                    nums.push(num);
+                  }
                 };
               } catch (error) {
                 console.log("err", error);
               }
-              
+
 
             });
-            console.log(nums.length);
-            console.log(nums);
+            // console.log(nums.length);
+            // console.log(nums);
             api.getContacts(nums).then(res => {
-              console.log("CONTACTS", res);
-              console.log("CONTACTS LEN", res.length);
+              // console.log("CONTACTS", res);
+              // console.log("CONTACTS LEN", res.length);
               user.set({ contacts: res }, true);
               this.refreshUserData();
             })
@@ -159,7 +167,7 @@ export default class FindFriendsScreen extends Component {
   renderUser = (user) => {
     let isFollowing = this.state.follows.indexOf(user._id) != -1;
     return (
-      <View style={{ flexDirection: "row", width: _SCREEN.width * 0.8, justifyContent: "space-between", padding: 10, backgroundColor: colors.secondaryLight, borderRadius: 5, elevation: 5, marginVertical: 8, marginHorizontal: 25, }} >
+      <View key={user.nickname} style={{ flexDirection: "row", width: _SCREEN.width * 0.8, justifyContent: "space-between", padding: 10, backgroundColor: colors.secondaryLight, borderRadius: 5, elevation: 5, marginVertical: 8, marginHorizontal: 25, }} >
         <Text style={Generics.bigText} >{user.nickname}</Text>
         <TouchableOpacity
           style={{ width: 100, alignItems: "center", justifyContent: "center", backgroundColor: isFollowing ? colors.secondary : colors.primary, borderRadius: 5, borderWidth: isFollowing ? 1 : 0, borderColor: colors.secondaryDark }}

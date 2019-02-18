@@ -33,6 +33,8 @@ const gameColor = {
 
 export const _APP_SETTINGS = {
   versionString: "Version 0.1.0",
+  playstoreLink: "market://details?id=com.manchmark",
+  playstoreURL: "https://play.google.com/store/apps/details?id=com.manchmark",
   colors: {
     primary: '#1db954',
     secondary: '#212121',
