@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user, translate } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
 import SwappingText from "../../../components/SwappingText";
 import DelayedView from "../../../components/DelayedView";
@@ -29,7 +29,7 @@ export default class VerbalMemoryGame extends Component {
     return {
       topBar: {
         title: {
-          text: 'Verbal Memory',
+          text: translate("VerbalMemoryGame"),
         },
       }
     };

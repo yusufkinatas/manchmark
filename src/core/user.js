@@ -60,7 +60,6 @@ var _user = {
 _APP_SETTINGS.games.forEach(game => {
   _user[game.hsName] = null;
   _user.ranks[game.hsName] = null;
-  _user.statistics[game.hsName] = null;
   _user.globalAverages[game.hsName] = null;
   _user.globalHighscores[game.hsName] = [];
   _user.friendHighscores[game.hsName] = [];

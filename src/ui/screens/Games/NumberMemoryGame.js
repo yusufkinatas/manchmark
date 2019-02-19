@@ -15,7 +15,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import _ from "lodash";
 
-import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user, translate } from "../../../core";
 import CounterBar from "../../../components/CounterBar";
 import CustomButton from "../../../components/CustomButton";
 import GameResult from '../../../components/GameResult';
@@ -29,7 +29,7 @@ export default class NumberMemoryGame extends Component {
     return {
       topBar: {
         title: {
-          text: 'Number Memory',
+          text: translate("NumberMemoryGame"),
         },
       }
     };

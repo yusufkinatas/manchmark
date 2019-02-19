@@ -42,7 +42,7 @@
   "VisualMemoryGame": "Görsel Hafıza",
   "NumberMemoryGame": "Sayısal Hafıza",
   "TouchSpeedGame": "Dokunma Hızı",
-  "ReactionSpeedGame": "Reaksiyon Hızı",
+  "ReactionSpeedGame": "Tepki Hızı",
   "TypingSpeedGame": "Yazma Hızı",
   "VerbalMemoryGame": "Sözel Hafıza",
   "CalculationSpeedGame": "Hesaplama Hızı",
@@ -50,6 +50,18 @@
   "errMustBetween3and20": "Kullanıcı adı 3-20 karakter uzunluğunda olmalıdır",
   "errOnlyEngLetters": "Kullanıcı adı sadece ingilizce karakterler ve sayılar içerebilir",
   "errNoConnection": "İnternet bağlantısı yok",
-  "errUsernameAlreadyInUse": "Bu kullanıcı adı zaten kullanılıyor"
+  "errUsernameAlreadyInUse": "Bu kullanıcı adı zaten kullanılıyor",
 
+  "amountPlayed": "Oynama Sayısı",
+  "totalCorrectTilePress" : "Doğru Basma Sayısı",
+  "totalWrongTilePress" : "Yanlış Basma Sayısı",
+  "totalNumberMemorized" : "Ezberlenen Rakam Sayısı",
+  "totalTouchCount" : "Dokunma Sayısı",
+  "fastestReaction" : "En Kısa Tepki Süresi(ms)",
+  "fastestAverage" : "Ortalama En Kısa Tepki Süresi(ms)",
+  "totalWordCount" : "Kelime Sayısı",
+  "totalCorrectKeyPress" : "Doğru Basılan Tuş Sayısı",
+  "totalKeyPress" : "Basılan Tuş Sayısı",
+  "totalWordMemorized" : "Ezberlenen Kelime Sayısı",
+  "totalCalculation" : "Toplam Hesap Sayısı"
 }

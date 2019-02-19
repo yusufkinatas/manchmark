@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user, translate } from "../../../core";
 import CounterBar from "../../../components/CounterBar";
 import CustomButton from "../../../components/CustomButton";
 import SwappingText from "../../../components/SwappingText";
@@ -60,7 +60,7 @@ export default class CalculationSpeedGame extends Component {
     return {
       topBar: {
         title: {
-          text: 'Calculation Speed',
+          text: translate("CalculationSpeedGame"),
         },
       }
     };

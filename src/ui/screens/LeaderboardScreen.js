@@ -157,7 +157,7 @@ export default class LeaderboardScreen extends Component {
     return {
       topBar: {
         title: {
-          text: 'Leaderboard',
+          text: translate("leaderboard"),
         }
       },
     };

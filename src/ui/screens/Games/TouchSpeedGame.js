@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, Generics, user } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, Generics, user, translate } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
 import CounterBar from "../../../components/CounterBar";
 import BouncingText from "../../../components/BouncingText";
@@ -31,7 +31,7 @@ export default class TouchSpeedGame extends Component {
     return {
       topBar: {
         title: {
-          text: 'Touch Speed',
+          text: translate("TouchSpeedGame"),
         },
       }
     };

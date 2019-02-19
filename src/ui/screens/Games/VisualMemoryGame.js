@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, utils, Generics } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, translate } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
 import CounterBar from "../../../components/CounterBar";
 import BouncingText from '../../../components/BouncingText';
@@ -34,7 +34,7 @@ export default class VisualMemoryGame extends Component {
     return {
       topBar: {
         title: {
-          text: 'Visual Memory',
+          text: translate("VisualMemoryGame"),
         },
       }
     };

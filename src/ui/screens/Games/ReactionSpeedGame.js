@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user, translate } from "../../../core";
 import CustomButton from '../../../components/CustomButton';
 import DelayedText from '../../../components/DelayedText';
 import GameResult from '../../../components/GameResult';
@@ -48,7 +48,7 @@ export default class ReactionSpeedGame extends Component {
     return {
       topBar: {
         title: {
-          text: 'Reaction Speed',
+          text: translate("ReactionSpeedGame"),
         },
       }
     };
