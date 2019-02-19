@@ -21,7 +21,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import validator from "validator";
 
-import { store, _APP_SETTINGS, _SCREEN, Generics, user, api } from "../../core";
+import { store, _APP_SETTINGS, _SCREEN, Generics, user, api, translate } from "../../core";
 import CustomButton from '../../components/CustomButton';
 
 export default class ChangeNicknameModal extends Component {
@@ -64,17 +64,17 @@ export default class ChangeNicknameModal extends Component {
   onChooseNickname = () => {
     let _nickname = this.state.nickname.trim().toLocaleLowerCase();
     if (_nickname.length < 3 || _nickname.length > 20) {
-      this.setState({ errorText: "Username must be between 3 and 20 characters" });
+      this.setState({ errorText: translate("errMustBetween3and20") });
     }
     else if (_nickname == user.get().nickname) {
       this.dissmissModal();
       return;
     }
     else if (!validator.isAlphanumeric(_nickname)) {
-      this.setState({ errorText: "Username can only contain english letters and numbers" });
+      this.setState({ errorText: translate("errOnlyEngLetters") });
     }
     else if (!user.get().isConnected) {
-      this.setState({ errorText: "There is no internet connection" });
+      this.setState({ errorText: translate("errNoConnection") });
     }
     else {
       this.setState({ isLoading: true });
@@ -82,7 +82,7 @@ export default class ChangeNicknameModal extends Component {
         .then(() => { this.dissmissModal() })
         .catch(err => {
           console.log(err);
-          this.setState({ errorText: "This username is already in use", isLoading: false });
+          this.setState({ errorText: translate("errUsernameAlreadyInUse"), isLoading: false });
         });
     }
 
@@ -113,7 +113,7 @@ export default class ChangeNicknameModal extends Component {
               <ActivityIndicator size="large" color={colors.primary} />
               :
               <View style={{ justifyContent: "center", alignItems: "center", zIndex: 10 }} >
-                <Text style={Generics.bigText}>Change Username</Text>
+                <Text style={Generics.bigText}>{translate("changeUsername")}</Text>
                 <View style={{ paddingTop: 10 }}></View>
                 <TextInput
                   onChangeText={this.onChangeText}
@@ -130,14 +130,14 @@ export default class ChangeNicknameModal extends Component {
                     color: colors.secondaryLight2,
                     marginBottom: 5
                   }}
-                  placeholder="Type your nickname"
+                  placeholder={translate("typeYourUsername")}
                   placeholderTextColor={colors.secondaryLight2}
                   underlineColorAndroid={"transparent"}
                   value={this.state.nickname}
                 />
                 <Text style={Generics.errorText} >{this.state.errorText}</Text>
-                <CustomButton text="CHANGE" onPress={this.onChooseNickname} />
-                <Text style={{ ...Generics.bigText, color: colors.secondaryLight2, fontSize: 15, textDecorationLine: "underline" }} onPress={this.dissmissModal}>CLOSE</Text>
+                <CustomButton text={translate("change")} onPress={this.onChooseNickname} />
+                <Text style={{ ...Generics.bigText, color: colors.secondaryLight2, fontSize: 15, textDecorationLine: "underline" }} onPress={this.dissmissModal}>{translate("close")}</Text>
 
               </View>
           }

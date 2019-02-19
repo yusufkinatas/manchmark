@@ -5,3 +5,4 @@ export { utils } from "./utils";
 export { nav } from "./nav";
 export { api } from "./api";
 export { user } from "./user";
+export { setI18nConfig, translate } from "./language";

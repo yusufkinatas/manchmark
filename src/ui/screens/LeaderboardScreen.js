@@ -18,7 +18,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IconFeather from 'react-native-vector-icons/Feather';
 
-import { store, _APP_SETTINGS, _SCREEN, nav, Generics, api, user, utils } from "../../core";
+import { store, _APP_SETTINGS, _SCREEN, nav, Generics, api, user, utils, translate } from "../../core";
 import CustomButton from "../../components/CustomButton";
 import LoadingIndicator from "../../components/LoadingIndicator";
 
@@ -75,7 +75,7 @@ class Leaderboard extends React.PureComponent {
 
             <Text style={{ ...Generics.text, color: fontColor }} >
               {utils.truncateFloatingNumber(hs, 2)}
-              <Text style={{ ...Generics.text, color: fontColor }} > Points</Text>
+              <Text style={{ ...Generics.text, color: fontColor }} > {translate("points")}</Text>
             </Text>
 
           </View>
@@ -118,14 +118,14 @@ class Leaderboard extends React.PureComponent {
 
           <View style={{ flex: 1, flexDirection: "row", minHeight: 50, paddingHorizontal: 5, alignItems: "center" }} >
             <View style={{ flex: 1 }} >
-              <Text style={{ ...Generics.bigText, fontWeight: "bold", textAlign: "left" }} >Average Score</Text>
+              <Text style={{ ...Generics.bigText, fontWeight: "bold", textAlign: "left" }} >{translate("averageScore")}</Text>
             </View>
             {
               this.props.averages[game.hsName]
                 ?
                 <Text style={{ ...Generics.text }} >
                   {utils.truncateFloatingNumber(this.props.averages[game.hsName], 2)}
-                  <Text style={{ ...Generics.text, color: colors.secondaryLight2 }} > Points</Text>
+                  <Text style={{ ...Generics.text, color: colors.secondaryLight2 }} > {translate("points")}</Text>
                 </Text>
                 :
                 <ActivityIndicator color={colors.primary} />
@@ -208,7 +208,7 @@ export default class LeaderboardScreen extends Component {
       this.setState({ showGlobal: false, selectedGameIndex: 0 }, () => {
         Navigation.mergeOptions(this.props.componentId, {
           topBar: {
-            title: { text: "Leaderboard" },
+            title: { text: translate("leaderboard") },
             rightButtons: [{
               id: "toggleGlobal",
               icon: this.globalIcon,
@@ -222,7 +222,7 @@ export default class LeaderboardScreen extends Component {
       this.setState({ showGlobal: true, selectedGameIndex: 0 }, () => {
         Navigation.mergeOptions(this.props.componentId, {
           topBar: {
-            title: { text: "Leaderboard(Global)" },
+            title: { text: translate("leaderboard") + `(${translate("global")})` },
             rightButtons: [{
               id: "toggleGlobal",
               icon: this.globalIcon,
@@ -282,7 +282,7 @@ export default class LeaderboardScreen extends Component {
   renderListEmpty = () => {
     return (
       <View style={Generics.container} >
-        <LoadingIndicator />
+        <LoadingIndicator text={translate("loading")} />
       </View>
     )
   }

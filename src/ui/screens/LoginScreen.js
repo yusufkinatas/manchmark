@@ -21,7 +21,7 @@ import { setRootViewBackgroundColor } from 'react-native-root-view-background';
 import validator from "validator";
 import _ from "lodash";
 
-import { store, _APP_SETTINGS, _SCREEN, nav, api, utils, user, Generics } from "../../core";
+import { store, _APP_SETTINGS, _SCREEN, nav, api, utils, user, Generics, translate } from "../../core";
 import CustomButton from "../../components/CustomButton";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import SplashScreen from 'react-native-splash-screen';
@@ -113,10 +113,10 @@ export default class MainScreen extends Component {
   onChooseNickname = () => {
     let _nickname = this.state.nickname.trim().toLocaleLowerCase();
     if (_nickname.length < 3 || _nickname.trim().length > 20) {
-      this.setState({ errorText: "Username must be between 3 and 20 characters" });
+      this.setState({ errorText: translate("errMustBetween3and20") });
     }
     else if (!validator.isAlphanumeric(_nickname.trim())) {
-      this.setState({ errorText: "Username can only contain english letters and numbers" });
+      this.setState({ errorText: translate("errOnlyEngLetters") });
     }
     else {
       this.setState({ isLoading: true });
@@ -131,7 +131,7 @@ export default class MainScreen extends Component {
         .catch(err => {
           console.log("err", JSON.stringify(err, undefined, 2));
           console.log("err", err);
-          this.setState({ errorText: "This username is already in use", isLoading: false });
+          this.setState({ errorText: translate("errUsernameAlreadyInUse"), isLoading: false });
         });
     }
 
@@ -139,14 +139,14 @@ export default class MainScreen extends Component {
 
   renderLoading = () => {
     return (
-      <LoadingIndicator />
+      <LoadingIndicator text={translate("loading")} />
     );
   }
 
   renderLoginForm = () => {
     return (
       <View style={{ alignItems: "center" }} >
-        <Text style={Generics.bigText}>Pick a Username</Text>
+        <Text style={Generics.bigText}>{translate("pickAUsername")}</Text>
         <View style={{ paddingTop: 10 }}></View>
         <TextInput
           onChangeText={t => this.setState({ nickname: t })}
@@ -163,7 +163,7 @@ export default class MainScreen extends Component {
             color: colors.secondaryLight3,
             marginBottom: 5
           }}
-          placeholder="Type your nickname"
+          placeholder={translate("typeYourUsername")}
           placeholderTextColor={colors.secondaryLight2}
           underlineColorAndroid={"transparent"}
         />
@@ -177,7 +177,7 @@ export default class MainScreen extends Component {
     return (
       <KeyboardAvoidingView behavior="padding" style={Generics.container}>
         <View style={{ flex: 2, justifyContent: "center" }} >
-          <Text style={Generics.header} >Manchmark</Text>
+          <Text style={Generics.header} >{translate("manchmark")}</Text>
         </View>
 
         <View style={{ flex: 3, alignItems: "center", paddingTop: 50 }} >

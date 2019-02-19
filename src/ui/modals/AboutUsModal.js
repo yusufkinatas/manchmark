@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, Generics } from "../../core";
+import { store, _APP_SETTINGS, _SCREEN, Generics, translate } from "../../core";
 import CustomButton from '../../components/CustomButton';
 
 export default class AboutUsModal extends Component {
@@ -75,20 +75,20 @@ export default class AboutUsModal extends Component {
               />
             </View>
             <View style={{ paddingLeft: 5 }} >
-              <Text style={styles.bigText}>Manchmark</Text>
-              <Text style={{ ...styles.smallText, top: -5 }}>{_APP_SETTINGS.versionString}</Text>
+              <Text style={styles.bigText}>{translate("manchmark")}</Text>
+              <Text style={{ ...styles.smallText, top: -5 }}>{translate("version") + " " + _APP_SETTINGS.version}</Text>
             </View>
           </View>
-          <Text style={{ ...Generics.bigText, fontSize: 15, fontFamily: "Kanit-LightItalic", paddingTop: 10 }}>Test your limits.</Text>
+          <Text style={{ ...Generics.bigText, fontSize: 15, fontFamily: "Kanit-LightItalic", paddingTop: 10 }}>{translate("motto")}</Text>
           <View style={{ paddingTop: 10 }}>
             <View style={{ marginBottom: 5, flexDirection: "row" }}>
               <Text style={styles.smallText} >Yusuf Kınataş</Text>
               <Text style={styles.smallText} >&</Text>
               <Text style={styles.smallText} >Yağız Akyüz</Text>
             </View>
-            <Text style={styles.copyRightText}>© Copyright 2019, All Rights Reserved.</Text>
+            <Text style={styles.copyRightText}>{translate("allRightsReserved")}</Text>
           </View>
-          <CustomButton text="Close" onPress={this.dissmissModal} />
+          <CustomButton text={translate("close")} onPress={this.dissmissModal} />
         </Animated.View>
       </View>
     );

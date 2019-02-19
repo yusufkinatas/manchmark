@@ -1,0 +1,55 @@
+{
+  "welcome": "Welcome",
+  "manchmark": "Manchmark",
+  "motto": "Test your limits.",
+  "version": "Version",
+  "allRightsReserved": "© Copyright 2019, All Rights Reserved.", 
+  "letsPlayManchmark": "Let's play Manchmark",
+  "invitationMessage": "Are you ready to test your limits on Manchmark?\nDownload now and see your rank among people in multiple games.",
+  
+  "loading": "Loading...",
+
+  "play": "Play",
+  "friends": "Friends",
+  "leaderboard": "Leaderboard",
+  "statistics": "Statistics",
+  "rateUs": "Rate Us",
+  "aboutUs": "About Us",
+  "invite": "Invite",
+  
+
+  "changeUsername": "Change Username",
+  "change": "Change",
+  "close": "Close",
+  "typeYourUsername": "Type your username",
+  "selectGame": "Select Game",
+
+  "findYourFriends": "Find Your Friends",
+  "friend": "Friend",
+  "add": "Add",
+  "getNumbersInfo": "To add friends from your contacts, you must verify your phone number and grant access to contacts",
+  "findFriends": "Find Friends",
+  "searchUser": "Search User",
+
+  "points": "Points",
+  "averageScore": "Average Score",
+  "global": "Global",
+  
+  "pickAUsername": "Pick a Username",
+
+
+
+  "VisualMemoryGame": "Visual Memory",
+  "NumberMemoryGame": "Number Memory",
+  "TouchSpeedGame": "Touch Speed",
+  "ReactionSpeedGame": "Reaction Speed",
+  "TypingSpeedGame": "Typing Speed",
+  "VerbalMemoryGame": "Verbal Memory",
+  "CalculationSpeedGame": "Calculation Speed",
+
+  "errMustBetween3and20": "Username must be between 3 and 20 characters",
+  "errOnlyEngLetters": "Username can only contain english letters and numbers",
+  "errNoConnection": "There is no internet connection",
+  "errUsernameAlreadyInUse": "This username is already in use"
+  
+}

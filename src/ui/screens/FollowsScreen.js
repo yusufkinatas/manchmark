@@ -22,7 +22,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import DeviceInfo from "react-native-device-info";
 import validator from "validator";
 
-import { store, _APP_SETTINGS, _SCREEN, nav, Generics, user, api } from "../../core";
+import { store, _APP_SETTINGS, _SCREEN, nav, Generics, user, api, translate } from "../../core";
 import CustomButton from "../../components/CustomButton";
 import LoadingIndicator from "../../components/LoadingIndicator";
 
@@ -32,7 +32,7 @@ export default class FollowsScreen extends Component {
     return {
       topBar: {
         title: {
-          text: 'Friends',
+          text: translate("friends"),
         }
       },
     };
@@ -80,7 +80,7 @@ export default class FollowsScreen extends Component {
     }
     else {
       if (!validator.isAlphanumeric(text)) {
-        this.setState({ renderStatus: "search", searchText: _text, errorText: "Username can only contain english letters and numbers" });
+        this.setState({ renderStatus: "search", searchText: _text, errorText: translate("errOnlyEngLetters") });
       }
       else {
         this.setState({ renderStatus: "search", searchText: _text, errorText: "" });
@@ -113,7 +113,7 @@ export default class FollowsScreen extends Component {
           style={{ width: 100, alignItems: "center", justifyContent: "center", backgroundColor: isFollowing ? colors.secondary : colors.primary, borderRadius: 5, borderWidth: isFollowing ? 1 : 0, borderColor: colors.secondaryDark }}
           onPress={() => this.onUserPress(user, userFromSearchResults)} hitSlop={{ bottom: 20, top: 20, left: 20, right: 20 }}
         >
-          <Text style={{ ...Generics.text, color: isFollowing ? colors.secondaryLight3 : colors.secondaryLight3 }} >{isFollowing ? "Friend" : "Add"}</Text>
+          <Text style={{ ...Generics.text, color: isFollowing ? colors.secondaryLight3 : colors.secondaryLight3 }} >{isFollowing ? translate("friend") : translate("add")}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -124,7 +124,7 @@ export default class FollowsScreen extends Component {
       <ScrollView style={{ width: _SCREEN.width, marginBottom: 0 }} contentContainerStyle={{ alignItems: "center", paddingTop: 10 }} >
         {
           this.state.isLoading ?
-            <LoadingIndicator />
+            <LoadingIndicator text={translate("loading")} />
             :
             this.state.followsData.map(_user => this.renderUser(_user))
         }
@@ -189,7 +189,7 @@ export default class FollowsScreen extends Component {
                     fontFamily: "roboto",
                     color: colors.secondaryLight2,
                   }}
-                  placeholder="Seach user"
+                  placeholder={translate("searchUser")}
                   placeholderTextColor={colors.secondaryLight2}
                   underlineColorAndroid={"transparent"}
                   value={this.state.searchText}
@@ -219,7 +219,7 @@ export default class FollowsScreen extends Component {
           <View style={{ alignItems: "center", backgroundColor: colors.secondary, width: _SCREEN.width }} >
             <View style={{ width: _SCREEN.width, backgroundColor: colors.secondaryDark + "55", height: 1 }} />
             <View style={{ width: _SCREEN.width, backgroundColor: colors.secondaryDark, height: 1, marginBottom: 8 }} />
-            <CustomButton text="Find Your Friends" onPress={() => this.pushScreen("FindFriendsScreen", {onClose: () => this.refreshUserData(true)})} />
+            <CustomButton text={translate("findYourFriends")} onPress={() => this.pushScreen("FindFriendsScreen", { onClose: () => this.refreshUserData(true) })} />
             <View style={{ width: _SCREEN.width, backgroundColor: colors.secondaryDark + "55", height: 1 }} />
             <View style={{ width: _SCREEN.width, backgroundColor: colors.secondaryDark, height: 1 }} />
           </View>

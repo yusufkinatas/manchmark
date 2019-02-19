@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
-import { store, _APP_SETTINGS, _SCREEN, nav, Generics, user } from "../../core";
+import { store, _APP_SETTINGS, _SCREEN, nav, Generics, user, translate } from "../../core";
 import CustomButton from "../../components/CustomButton";
 
 export default class MainScreen extends Component {
@@ -27,8 +27,8 @@ export default class MainScreen extends Component {
 
   shareGame = () => {
     Share.share({
-      message: `Are you ready to test your limits on Manchmark?\nDownload now and see your rank among people in multiple games.\nGoogle Play: ${_APP_SETTINGS.playstoreURL}`,
-      title: "Let's play Manchmark",
+      message: translate("invitationMessage") + `\nGoogle Play: ${_APP_SETTINGS.playstoreURL}`,
+      title: translate("invitationMessage"),
     }, {});
   }
 
@@ -82,10 +82,10 @@ export default class MainScreen extends Component {
 
         <View style={styles.topBarContainer} >
 
-          <Text style={Generics.header}>Manchmark</Text>
+          <Text style={Generics.header}>{translate("manchmark")}</Text>
 
           <View style={{ flexDirection: "row" }} >
-            <Text style={{ ...Generics.bigText, paddingHorizontal: 0 }} >Welcome </Text>
+            <Text style={{ ...Generics.bigText, paddingHorizontal: 0 }} >{translate("welcome")} </Text>
             <TouchableOpacity onPress={() => this.showModal("ChangeNicknameModal", { onDismiss: () => this.forceUpdate() })} >
               <Text style={{ ...Generics.bigText, paddingHorizontal: 0, textDecorationLine: "underline" }} >{user.get().nickname}!</Text>
             </TouchableOpacity>
@@ -95,16 +95,16 @@ export default class MainScreen extends Component {
 
 
         <View style={Generics.container} >
-          <CustomButton icon={"play"} text={"PLAY"} onPress={() => this.pushScreen("SelectGameScreen")} />
-          <CustomButton icon={"users"} text={"FRIENDS"} onPress={() => this.pushScreen("FollowsScreen")} />
-          <CustomButton icon={"list-ol"} text={"LEADERBOARD"} onPress={() => this.pushScreen("LeaderboardScreen")} />
-          <CustomButton icon={"bar-chart"} text={"STATISTICS"} onPress={() => this.pushScreen("StatisticsScreen")} />
+          <CustomButton icon={"play"} text={translate("play")} onPress={() => this.pushScreen("SelectGameScreen")} />
+          <CustomButton icon={"users"} text={translate("friends")} onPress={() => this.pushScreen("FollowsScreen")} />
+          <CustomButton icon={"list-ol"} text={translate("leaderboard")} onPress={() => this.pushScreen("LeaderboardScreen")} />
+          <CustomButton icon={"bar-chart"} text={translate("statistics")} onPress={() => this.pushScreen("StatisticsScreen")} />
         </View>
 
         <View style={styles.bottomBarContainer} >
-          {this.renderBottomButton("star", "Rate Us", this.rateGame)}
-          {this.renderBottomButton("info", "About Us", () => this.showModal("AboutUsModal"))}
-          {this.renderBottomButton("share-2", "Invite People", this.shareGame)}
+          {this.renderBottomButton("star", translate("rateUs"), this.rateGame)}
+          {this.renderBottomButton("info", translate("aboutUs"), () => this.showModal("AboutUsModal"))}
+          {this.renderBottomButton("share-2", translate("invite"), this.shareGame)}
         </View>
 
       </View>

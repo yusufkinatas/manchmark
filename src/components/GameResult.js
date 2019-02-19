@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 
-import { store, _APP_SETTINGS, _SCREEN, nav, user, Generics, utils } from "../core"
+import { store, _APP_SETTINGS, _SCREEN, nav, user, Generics, utils, translate } from "../core"
 import DelayedText from "./DelayedText";
 import DelayedView from "./DelayedView";
 import CustomButton from "./CustomButton";
@@ -133,7 +133,7 @@ export default class GameResult extends Component {
   render() {
     return (
       <View style={Generics.container}>
-        {this.state.isLoading ? <LoadingIndicator color={this.game.backgroundColor} /> : this.renderContent()}
+        {this.state.isLoading ? <LoadingIndicator text={translate("loading")} color={this.game.backgroundColor} /> : this.renderContent()}
       </View>
     )
   }

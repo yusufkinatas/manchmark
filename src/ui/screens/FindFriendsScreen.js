@@ -24,7 +24,7 @@ import DeviceInfo from "react-native-device-info";
 import RNAccountKit from 'react-native-facebook-account-kit'
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
 
-import { store, _APP_SETTINGS, _SCREEN, nav, Generics, user, api } from "../../core";
+import { store, _APP_SETTINGS, _SCREEN, nav, Generics, user, api, translate } from "../../core";
 import CustomButton from "../../components/CustomButton";
 
 export default class FindFriendsScreen extends Component {
@@ -33,7 +33,7 @@ export default class FindFriendsScreen extends Component {
     return {
       topBar: {
         title: {
-          text: 'Find Your Friends',
+          text: translate("findYourFriends"),
         }
       },
     };
@@ -173,7 +173,7 @@ export default class FindFriendsScreen extends Component {
           style={{ width: 100, alignItems: "center", justifyContent: "center", backgroundColor: isFollowing ? colors.secondary : colors.primary, borderRadius: 5, borderWidth: isFollowing ? 1 : 0, borderColor: colors.secondaryDark }}
           onPress={() => this.onUserPress(user)} hitSlop={{ bottom: 20, top: 20, left: 20, right: 20 }}
         >
-          <Text style={{ ...Generics.text, color: isFollowing ? colors.secondaryLight3 : colors.secondaryLight3 }} >{isFollowing ? "Friend" : "Add"}</Text>
+          <Text style={{ ...Generics.text, color: isFollowing ? colors.secondaryLight3 : colors.secondaryLight3 }} >{isFollowing ? translate("friend") : translate("add")}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -187,9 +187,9 @@ export default class FindFriendsScreen extends Component {
         <ScrollView style={{ flex: 1, width: _SCREEN.width, borderBottomWidth: 1, elevation: 2, marginBottom: 0 }} contentContainerStyle={{ alignItems: "center", paddingTop: 10 }} >
           <View style={{ alignItems: "center" }} >
             {this.state.showInfoText &&
-              <Text style={{ ...Generics.text, fontSize: 12, color: colors.secondaryLight2, textAlign: "center", marginBottom: 10 }} >Rehberinizdeki oyuncuları arkadaş eklemeniz için telefon numaranızı doğrulamanız ve kişilere erişim izni vermeniz gerekmektedir</Text>
+              <Text style={{ ...Generics.text, fontSize: 12, color: colors.secondaryLight2, textAlign: "center", marginBottom: 10 }} >{translate("getNumbersInfo")}</Text>
             }
-            <CustomButton text="Rehberdeki arkadaşları bul" onPress={this.handleButtonPress} />
+            <CustomButton text={translate("findFriends")} onPress={this.handleButtonPress} />
           </View>
           {
             this.state.contacts.map(user => this.renderUser(user))

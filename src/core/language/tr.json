@@ -1,0 +1,55 @@
+{
+  "welcome": "Hoşgeldin",
+  "manchmark": "Adamölçer",
+  "motto": "Sınırlarını zorla.",
+  "version": "Versiyon",
+  "allRightsReserved": "© 2019, Tüm Hakları Sakdılır.", 
+  "letsPlayManchmark": "Hadi Adamölçer Oynayalım!",
+  "invitationMessage": "Adamölçer ile sınırlarını zorlamaya hazır mısın?\nŞimdi yükle ve farklı kategorilerde insanlar arasındaki sıranı gör.",
+  
+  "loading": "Yükleniyor...",
+
+  "play": "Oyna",
+  "friends": "Arkadaşlar",
+  "leaderboard": "Skor Tablosu",
+  "statistics": "İstatistikler",
+  "rateUs": "Bizi Puanla",
+  "aboutUs": "Hakkımızda",
+  "invite": "Davet Et",
+  
+
+  "changeUsername": "Kullanıcı Adı Değiştir",
+  "change": "Değiştir",
+  "close": "Kapat",
+  "typeYourUsername": "Kullanıcı adını yaz",
+  "selectGame": "Oyun Seç",
+
+  "findYourFriends": "Arkadaşlarını Bul",
+  "friend": "Arkadaş",
+  "add": "Ekle",
+  "getNumbersInfo": "Rehberindeki kişileri arkadaş eklemek için, numaranı doğrulaman ve kişilere erişim izni vermen gerekir",
+  "findFriends": "Arkadaşlarını Bul",
+  "searchUser": "Kullanıcı Ara",
+
+  "points": "Puan",
+  "averageScore": "Ortalama Skor",
+  "global": "Global",
+  
+  "pickAUsername": "Kullanıcı Adı Seç",
+
+
+
+  "VisualMemoryGame": "Görsel Hafıza",
+  "NumberMemoryGame": "Sayısal Hafıza",
+  "TouchSpeedGame": "Dokunma Hızı",
+  "ReactionSpeedGame": "Reaksiyon Hızı",
+  "TypingSpeedGame": "Yazma Hızı",
+  "VerbalMemoryGame": "Sözel Hafıza",
+  "CalculationSpeedGame": "Hesaplama Hızı",
+
+  "errMustBetween3and20": "Kullanıcı adı 3-20 karakter uzunluğunda olmalıdır",
+  "errOnlyEngLetters": "Kullanıcı adı sadece ingilizce karakterler ve sayılar içerebilir",
+  "errNoConnection": "İnternet bağlantısı yok",
+  "errUsernameAlreadyInUse": "Bu kullanıcı adı zaten kullanılıyor"
+
+}

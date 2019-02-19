@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
-import { store, _APP_SETTINGS, _SCREEN, nav, Generics } from "../../core";
+import { store, _APP_SETTINGS, _SCREEN, nav, Generics, translate } from "../../core";
 import CustomButton from "../../components/CustomButton";
 
 export default class SelectGameScreen extends Component {
@@ -23,7 +23,7 @@ export default class SelectGameScreen extends Component {
     return {
       topBar: {
         title: {
-          text: 'Select Game',
+          text: translate("selectGame"),
         },
       }
     };
