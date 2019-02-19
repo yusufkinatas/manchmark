@@ -86,6 +86,18 @@ export default class VerbalMemoryGame extends Component {
   }
 
   endGame = () => {
+    let oldUserStat = user.get().statistics;
+    let verbalStats = oldUserStat.VerbalMemoryGame;
+
+    user.set({
+      statistics: {
+        ...oldUserStat, ["VerbalMemoryGame"]: {
+          amountPlayed: verbalStats.amountPlayed + 1,
+          totalWordMemorized: verbalStats.totalWordMemorized + this.usedWords.length
+        }
+      }
+    }, true);
+
     this.setState({ gameStatus: "finished" });
   }
 
@@ -139,14 +151,6 @@ export default class VerbalMemoryGame extends Component {
   }
 
   renderFinish = () => {
-    let oldUserStat = user.get().statistics;
-    let verbalStats = oldUserStat.VerbalMemoryGame;
-
-    user.set({statistics:{...oldUserStat, ["VerbalMemoryGame"]: {
-      amountPlayed: verbalStats.amountPlayed + 1,
-      totalWordMemorized: verbalStats.totalWordMemorized + this.usedWords.length
-    }}}, true);
-
     return (
       <GameResult
         onRestart={this.reinitialize}

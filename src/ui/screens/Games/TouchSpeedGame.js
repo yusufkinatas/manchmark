@@ -73,6 +73,18 @@ export default class TouchSpeedGame extends Component {
   }
 
   endGame = () => {
+    let oldUserStat = user.get().statistics;
+    let touchStats = oldUserStat.TouchSpeedGame;
+
+    user.set({
+      statistics: {
+        ...oldUserStat, ["TouchSpeedGame"]: {
+          amountPlayed: oldUserStat.TouchSpeedGame.amountPlayed + 1,
+          totalTouchCount: oldUserStat.TouchSpeedGame.totalTouchCount + this.state.pressCounter
+        }
+      }
+    }, true);
+
     this.setState({ gameStatus: "finished" });
   }
 
@@ -100,21 +112,13 @@ export default class TouchSpeedGame extends Component {
     return (
       <View style={{ ...Generics.container, width: _SCREEN.width }}>
         <TouchableOpacity activeOpacity={1} onPressIn={this.pressed} style={Generics.touchableArea} />
-        <BouncingText style={{...styles.pressCountText, color: gameColor}} >{this.state.pressCounter}</BouncingText>
+        <BouncingText style={{ ...styles.pressCountText, color: gameColor }} >{this.state.pressCounter}</BouncingText>
         <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={gameColor} />
       </View>
     );
   }
 
   renderFinish = () => {
-    let oldUserStat = user.get().statistics;
-    let touchStats = oldUserStat.TouchSpeedGame;
-
-    user.set({statistics:{...oldUserStat, ["TouchSpeedGame"]: {
-      amountPlayed: oldUserStat.TouchSpeedGame.amountPlayed + 1,
-      totalTouchCount: oldUserStat.TouchSpeedGame.totalTouchCount + this.state.pressCounter
-    }}}, true);
-
     return (
       <GameResult
         onRestart={this.reinitialize}

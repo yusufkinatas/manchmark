@@ -98,6 +98,48 @@ export default class ReactionSpeedGame extends Component {
     this.setState({ gameStatus: "active" });
   }
 
+  endGame = () => {
+    let oldUserStat = user.get().statistics;
+    let reactionStats = oldUserStat.ReactionSpeedGame;
+    let averageReaction = this.findAverage();
+    let fastest = this.findFastestReaction();
+
+    let currentStats = {}
+
+    if (fastest != 0 && (reactionStats.fastestReaction == 0 || reactionStats.fastestReaction > fastest)) {
+      currentStats.fastestReaction = fastest;
+    }
+    else {
+      currentStats.fastestReaction = reactionStats.fastestReaction;
+    }
+
+    if (averageReaction != 0 && (reactionStats.fastestAverage == 0 || reactionStats.fastestAverage > averageReaction)) {
+      currentStats.fastestAverage = averageReaction;
+    }
+    else {
+      currentStats.fastestAverage = reactionStats.fastestAverage;
+    }
+
+    currentStats.amountPlayed = reactionStats.amountPlayed + 1;
+
+    user.set({
+      statistics: { ...oldUserStat, ["ReactionSpeedGame"]: currentStats }
+    }, true);
+
+
+    this.extraData = [{ data: ["Average", this.findAverage(true)], important: true }];
+    this.reactionTime.forEach((time, index) => {
+      if (time) {
+        this.extraData.push({ data: [`Phase ${index + 1}`, time + "ms"] });
+      }
+      else {
+        this.extraData.push({ data: [`Phase ${index + 1}`, "-"] });
+      }
+    });
+
+    this.setState({ gameStatus: "finished" });
+  }
+
   renderInfo = () => {
     return (
       <View style={Generics.container} >
@@ -208,59 +250,18 @@ export default class ReactionSpeedGame extends Component {
       }
     }
     else {
-      this.setState({ gameStatus: "finished" });
+      this.endGame();
     }
   }
 
   renderFinish() {
-    let oldUserStat = user.get().statistics;
-    let reactionStats = oldUserStat.ReactionSpeedGame;
-    let averageReaction = this.findAverage();
-    let fastest = this.findFastestReaction();
-
-    console.log(fastest);
-    console.log(averageReaction);
-
-    let currentStats = {}
-
-    if (fastest != 0 && (reactionStats.fastestReaction == 0 || reactionStats.fastestReaction > fastest)) {
-      currentStats.fastestReaction = fastest;
-    }
-    else{
-      currentStats.fastestReaction = reactionStats.fastestReaction;
-    }
-
-    if (averageReaction != 0 && (reactionStats.fastestAverage == 0 || reactionStats.fastestAverage > averageReaction)) {
-      currentStats.fastestAverage = averageReaction;
-    }
-    else{
-      currentStats.fastestAverage = reactionStats.fastestAverage;
-    }
-
-    currentStats.amountPlayed = reactionStats.amountPlayed + 1;
-
-    user.set({
-      statistics: {...oldUserStat, ["ReactionSpeedGame"]: currentStats }
-    }, true);
-
-
-    let extraData = [{ data: ["Average", this.findAverage(true)], important: true }];
-    this.reactionTime.forEach((time, index) => {
-      if (time) {
-        extraData.push({ data: [`Phase ${index + 1}`, time + "ms"] });
-      }
-      else {
-        extraData.push({ data: [`Phase ${index + 1}`, "-"] });
-      }
-    });
-
     return (
       <View style={Generics.container}>
         <GameResult
           onRestart={this.reinitialize}
           game="ReactionSpeedGame"
           score={this.findTotalPoint()}
-          extraData={extraData}
+          extraData={this.extraData}
         />
       </View>
     );
@@ -279,7 +280,7 @@ export default class ReactionSpeedGame extends Component {
     if (count != 0) {
       average = utils.truncateFloatingNumber(average / count, 2);
     }
-    if (isString){
+    if (isString) {
       return average ? average + "ms" : "-";
     }
     else {
