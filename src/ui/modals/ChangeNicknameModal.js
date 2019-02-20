@@ -37,7 +37,7 @@ export default class ChangeNicknameModal extends Component {
     super(props);
     this.anim = new Animated.Value(0);
     this.state = {
-      nickname: user.get().nickname,
+      nickname: "",
       isLoading: false,
       errorText: "",
     }

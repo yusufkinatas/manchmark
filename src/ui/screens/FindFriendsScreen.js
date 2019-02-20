@@ -167,8 +167,8 @@ export default class FindFriendsScreen extends Component {
   renderUser = (user) => {
     let isFollowing = this.state.follows.indexOf(user._id) != -1;
     return (
-      <View key={user.nickname} style={{ flexDirection: "row", width: _SCREEN.width * 0.8, justifyContent: "space-between", padding: 10, backgroundColor: colors.secondaryLight, borderRadius: 5, elevation: 5, marginVertical: 8, marginHorizontal: 25, }} >
-        <Text style={Generics.bigText} >{user.nickname}</Text>
+      <View key={user.nickname} style={{ flexDirection: "row", width: _SCREEN.width * 0.8, padding: 10, backgroundColor: colors.secondaryLight, borderRadius: 5, elevation: 5, marginVertical: 8, marginHorizontal: 25, }} >
+        <Text numberOfLines={1} style={{ ...Generics.bigText, flex: 1, textAlign: "left" }} >{user.nickname}</Text>
         <TouchableOpacity
           style={{ width: 100, alignItems: "center", justifyContent: "center", backgroundColor: isFollowing ? colors.secondary : colors.primary, borderRadius: 5, borderWidth: isFollowing ? 1 : 0, borderColor: colors.secondaryDark }}
           onPress={() => this.onUserPress(user)} hitSlop={{ bottom: 20, top: 20, left: 20, right: 20 }}

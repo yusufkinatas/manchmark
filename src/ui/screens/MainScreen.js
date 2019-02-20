@@ -84,11 +84,15 @@ export default class MainScreen extends Component {
 
           <Text style={Generics.header}>{translate("manchmark")}</Text>
 
-          <View style={{ flexDirection: "row" }} >
-            <Text style={{ ...Generics.bigText, paddingHorizontal: 0 }} >{translate("welcome")} </Text>
-            <TouchableOpacity onPress={() => this.showModal("ChangeNicknameModal", { onDismiss: () => this.forceUpdate() })} >
-              <Text style={{ ...Generics.bigText, paddingHorizontal: 0, textDecorationLine: "underline" }} >{user.get().nickname}!</Text>
-            </TouchableOpacity>
+          <View style={{ flexDirection: "row", paddingHorizontal: 20 }} >
+            <Text style={{ ...Generics.bigText, paddingHorizontal: 0 }} >
+              {translate("welcome") + " "}
+              <Text
+                onPress={() => this.showModal("ChangeNicknameModal", { onDismiss: () => this.forceUpdate() })}
+                style={{ ...Generics.bigText, paddingHorizontal: 0, textDecorationLine: "underline" }}
+              >{user.get().nickname}!
+             </Text>
+            </Text>
           </View>
 
         </View>
