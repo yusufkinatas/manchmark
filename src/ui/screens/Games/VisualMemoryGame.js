@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, utils, Generics, translate } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, translate, user } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
 import CounterBar from "../../../components/CounterBar";
 import BouncingText from '../../../components/BouncingText';
@@ -42,6 +42,7 @@ export default class VisualMemoryGame extends Component {
 
   constructor(props) {
     super(props);
+    this.wrongTileCount = 0;
     this.isAnimating = false;
     this.levelAnim = new Animated.Value(0);
     this.showDuration = 1000;
@@ -76,6 +77,7 @@ export default class VisualMemoryGame extends Component {
   reinitialize = () => {
     this.isAnimating = false;
     this.levelAnim = new Animated.Value(0);
+    this.wrongTileCount = 0;
 
     clearTimeout(this.animationTimeout);
     clearTimeout(this.levelAnimationTimer);
@@ -103,6 +105,25 @@ export default class VisualMemoryGame extends Component {
       return;
     }
     this.gameEnded = true;
+
+    let pressedTile = this.state.score / 10
+    let oldUserStat = user.get().statistics;
+    let visualStats = oldUserStat.VisualMemoryGame;
+
+    user.set({
+      statistics: {
+        ...oldUserStat, ["VisualMemoryGame"]: {
+          amountPlayed: visualStats.amountPlayed + 1,
+          totalCorrectTilePress: visualStats.totalCorrectTilePress + pressedTile,
+          totalWrongTilePress: visualStats.totalWrongTilePress + this.wrongTileCount
+        }
+      }
+    }, true);
+
+    let tmp = user.get().statistics;
+    console.log("amount", tmp.VisualMemoryGame.amountPlayed);
+    console.log("correct", tmp.VisualMemoryGame.totalCorrectTilePress);
+    console.log("wrong", tmp.VisualMemoryGame.totalWrongTilePress);
 
     this.setState({ gameStatus: "finished" });
   }
@@ -257,6 +278,7 @@ export default class VisualMemoryGame extends Component {
     }
     else {
       this.state.levelMistakes++;
+      this.wrongTileCount++;
       if (this.state.levelMistakes > 2 && this.state.lives == 1) {
         clearTimeout(this.answerTime);
         console.log("CLEARED TIMEOUT. WILL LOSE")

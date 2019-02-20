@@ -75,6 +75,17 @@ export default class NumberMemoryGame extends Component {
   }
 
   endGame = () => {
+    let oldUserStat = user.get().statistics;
+    let numberMemorized = ((this.state.number.length - 1) * this.state.number.length) / 2;
+    user.set({
+      statistics: {
+        ...oldUserStat, ["NumberMemoryGame"]: {
+          amountPlayed: oldUserStat.NumberMemoryGame.amountPlayed + 1,
+          totalNumberMemorized: oldUserStat.NumberMemoryGame.totalNumberMemorized + numberMemorized
+        }
+      }
+    }, true);
+
     this.setState({ gameStatus: "finished" });
   }
 
@@ -87,7 +98,7 @@ export default class NumberMemoryGame extends Component {
       this.answerTime = setTimeout(() => {
         this.onAnswer();
       }, (this.numberLength + 3) * 1000 + 500);
-    }, (this.numberLength + 3) * 1000);
+    }, (this.numberLength + 3) * 1000 + 500);
   }
 
   skipWaiting = () => {
@@ -143,7 +154,7 @@ export default class NumberMemoryGame extends Component {
       <View style={{ justifyContent: "center", alignItems: "center" }} >
         <Text style={{ ...Generics.hugeText, textAlign: "center" }} >{this.state.number}</Text>
         <View style={{ height: 10 }}></View>
-        <CounterBar time={(this.numberLength + 3) * 1000 + 500} width={_SCREEN.width * 0.8} color={gameColor} />
+        <CounterBar time={(this.numberLength + 3) * 1000 + 450} width={_SCREEN.width * 0.8} color={gameColor} />
         <View style={{ height: 10 }}></View>
         <CustomButton backgroundColor={gameColor} text="Skip" onPress={this.skipWaiting} />
       </View>
@@ -154,7 +165,7 @@ export default class NumberMemoryGame extends Component {
     return (
       <View style={{ justifyContent: "center", alignItems: "center" }}>
         <View style={Generics.container} >
-          <CounterBar time={(this.numberLength + 3) * 1000} width={_SCREEN.width * 0.8} color={gameColor} />
+          <CounterBar time={(this.numberLength + 3) * 1000 + 450} width={_SCREEN.width * 0.8} color={gameColor} />
           <Text style={Generics.bigText} >What was the number?</Text>
           <Text
             style={{
@@ -204,7 +215,7 @@ export default class NumberMemoryGame extends Component {
     console.log(_SCREEN.height);
 
     return (
-      <View style={{ position: "absolute", zIndex: 10, top: _SCREEN.height / 10, width: _SCREEN.width }}>
+      <View style={{ ...Generics.container, flex: 0.25, justifyContent: "center", paddingTop: 10 }}>
         <Text style={{ ...Generics.bigText, fontSize: 16, color: colors.secondaryLight2 }}>Number</Text>
         <Text style={{ ...Generics.bigText, fontSize: 24 }}>{num}</Text>
         <Text style={{ ...Generics.bigText, fontSize: 16, color: colors.secondaryLight2 }}>Your Answer</Text>
@@ -228,13 +239,6 @@ export default class NumberMemoryGame extends Component {
   }
 
   renderFinish = () => {
-    let oldUserStat = user.get().statistics;
-    let numberMemorized = ((this.state.number.length - 1) * this.state.number.length) / 2;
-    user.set({statistics:{...oldUserStat, ["NumberMemoryGame"]: {
-      amountPlayed: oldUserStat.NumberMemoryGame.amountPlayed + 1,
-      totalNumberMemorized: oldUserStat.NumberMemoryGame.totalNumberMemorized + numberMemorized
-    }}}, true);
-
     return (
       <View style={Generics.container}>
         {this.state.userAnswer != "" && this.showError()}

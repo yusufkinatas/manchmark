@@ -110,6 +110,16 @@ export default class CalculationSpeedGame extends Component {
   }
 
   endGame = () => {
+    let oldUserStat = user.get().statistics;
+    user.set({
+      statistics: {
+        ...oldUserStat, ["CalculationSpeedGame"]: {
+          amountPlayed: oldUserStat.CalculationSpeedGame.amountPlayed + 1,
+          totalCalculation: oldUserStat.CalculationSpeedGame.totalCalculation + this.correctAnswerCount
+        }
+      }
+    }, true);
+
     this.setState({ gameStatus: "finished" });
   }
 
@@ -228,12 +238,6 @@ export default class CalculationSpeedGame extends Component {
   }
 
   renderFinish = () => {
-    let oldUserStat = user.get().statistics;
-    user.set({statistics:{...oldUserStat, ["CalculationSpeedGame"]: {
-      amountPlayed: oldUserStat.CalculationSpeedGame.amountPlayed + 1,
-      totalCalculation: oldUserStat.CalculationSpeedGame.totalCalculation + this.correctAnswerCount
-    }}}, true);
-
     return (
       <GameResult
         onRestart={this.reinitialize}

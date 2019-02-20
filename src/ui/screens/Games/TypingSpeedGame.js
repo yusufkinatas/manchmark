@@ -99,6 +99,24 @@ export default class TypingSpeedGame extends Component {
   }
 
   endGame = () => {
+    this.correctKeypress = (this.state.score - this.usedWords.length * 10) / 5;
+    this.extraData = [{ data: ["Word Count", this.usedWords.length], important: true }];
+    this.extraData.push({ data: ["Key Press", this.correctKeypress], important: true });
+
+    let oldUserStat = user.get().statistics;
+    let typeStats = oldUserStat.TypingSpeedGame;
+
+    user.set({
+      statistics: {
+        ...oldUserStat, ["TypingSpeedGame"]: {
+          amountPlayed: typeStats.amountPlayed + 1,
+          totalWordCount: typeStats.totalWordCount + this.usedWords.length,
+          totalKeyPress: typeStats.totalKeyPress + this.keyPressCount,
+          totalCorrectKeyPress: typeStats.totalCorrectKeyPress + this.correctKeypress
+        }
+      }
+    }, true);
+
     this.setState({ gameStatus: "finished" });
   }
 
@@ -114,7 +132,7 @@ export default class TypingSpeedGame extends Component {
   }
 
   clearText = () => {
-    this.textInputRef.setNativeProps({text: ''});
+    this.textInputRef.setNativeProps({ text: '' });
   }
 
   onChangeText = (text) => {
@@ -123,7 +141,7 @@ export default class TypingSpeedGame extends Component {
     this.onAnswer(ans);
   }
 
-  onAnswer = (answer) => { 
+  onAnswer = (answer) => {
     let newWord, index = -1;
     let tmpArray = this.state.word;
     switch (answer) {
@@ -142,7 +160,7 @@ export default class TypingSpeedGame extends Component {
       tmpArray[index] = this.generateNewWord();
       this.clearText();
       this.keyboardTimer = setTimeout(() => {
-        this.setState({ word: tmpArray, score: this.state.score + answer.length * 5 + 10}, this.clearText); 
+        this.setState({ word: tmpArray, score: this.state.score + answer.length * 5 + 10 }, this.clearText);
       }, 80);
     }
   }
@@ -150,17 +168,17 @@ export default class TypingSpeedGame extends Component {
   renderGame = () => {
     return (
       <KeyboardAvoidingView behavior="padding" style={Generics.container}>
-    
+
         <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={gameColor} />
         <BouncingText style={Generics.bigText}>Score: {this.state.score}</BouncingText>
         <View style={{ height: 10 }} />
 
         <View style={{ flexDirection: "row", backgroundColor: gameColor }} >
-          <View style={styles.wordContainer} >
-            <SwappingText style={Generics.questionText} >{this.state.word[0]}</SwappingText>
+          <View style={{ ...styles.wordContainer, backgroundColor: gameColor, borderRightWidth: 2, borderColor: colors.secondaryLight3 }} >
+            <SwappingText style={{ ...Generics.questionText }} >{this.state.word[0]}</SwappingText>
           </View>
 
-          <View style={styles.wordContainer} >
+          <View style={{ ...styles.wordContainer, backgroundColor: gameColor, borderRightWidth: 2, borderColor: colors.secondaryLight3 }} >
             <SwappingText style={Generics.questionText} >{this.state.word[1]}</SwappingText>
           </View>
 
@@ -192,33 +210,19 @@ export default class TypingSpeedGame extends Component {
           }}
           underlineColorAndroid={"transparent"}
         />
-      
-      
+
+
       </KeyboardAvoidingView>
     );
   }
 
   renderFinish = () => {
-    let correctKeypress = (this.state.score - this.usedWords.length * 10) / 5;
-    let extraData = [{ data: ["Word Count", this.usedWords.length ], important: true }];
-    extraData.push({ data: ["Key Press", correctKeypress], important: true });
-    
-    let oldUserStat = user.get().statistics;
-    let typeStats = oldUserStat.TypingSpeedGame;
-
-    user.set({statistics:{...oldUserStat, ["TypingSpeedGame"]: {
-      amountPlayed: typeStats.amountPlayed + 1,
-      totalWordCount: typeStats.totalWordCount + this.usedWords.length,
-      totalKeyPress:  typeStats.totalKeyPress + this.keyPressCount,
-      totalCorrectKeyPress: typeStats.totalCorrectKeyPress + correctKeypress
-    }}}, true);
-
     return (
       <GameResult
         onRestart={this.reinitialize}
         game="TypingSpeedGame"
         score={this.state.score}
-        extraData={extraData}
+        extraData={this.extraData}
       />
     );
   }
@@ -241,7 +245,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginHorizontal: 5,
     paddingVertical: 5,
-    borderRadius: 10,
     flex: 1
   },
 });
