@@ -51,7 +51,7 @@ export default class FindFriendsScreen extends Component {
 
   componentWillMount() {
     PermissionsAndroid.check("android.permission.READ_CONTACTS").then(granted => {
-      if (granted) {
+      if (granted && user.get().phone) {
         this.setState({ showInfoText: false });
         this.tryToGetContacts();
       }
