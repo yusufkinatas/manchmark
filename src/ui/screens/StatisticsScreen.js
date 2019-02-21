@@ -75,6 +75,8 @@ export default class StatisticsScreen extends Component {
 
   renderStatisticForGame = (data) => {
     const game = data.item;
+    console.log("buradayimmmmmmmmmmmmmm");
+    console.log(data);
     return (
       <View style={{ width: _SCREEN.width }} >
 
@@ -99,6 +101,8 @@ export default class StatisticsScreen extends Component {
             </View>
           }
         </View>
+
+        {this.renderInfoField("highScore", user.get()[game.hsName], game.backgroundColor)}
 
         {Object.keys(user.get().statistics[game.name]).map(key => {
           return (this.renderInfoField(key, user.get().statistics[game.name][key], game.backgroundColor));
