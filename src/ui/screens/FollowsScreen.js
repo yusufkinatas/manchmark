@@ -164,7 +164,8 @@ export default class FollowsScreen extends Component {
               width: "100%",
               alignItems: "center",
               flexDirection: "row",
-              paddingHorizontal: 10
+              paddingHorizontal: 10,
+              backgroundColor: colors.secondaryDark2 
             }}>
 
               <TouchableOpacity
@@ -187,7 +188,7 @@ export default class FollowsScreen extends Component {
                     paddingHorizontal: 20,
                     fontSize: 20,
                     fontFamily: "roboto",
-                    color: colors.secondaryLight2,
+                    color: colors.secondaryLight2
                   }}
                   placeholder={translate("searchUser")}
                   placeholderTextColor={colors.secondaryLight2}
@@ -216,7 +217,7 @@ export default class FollowsScreen extends Component {
         {this.renderContent()}
 
         {user.get().settings.friendsEnabled &&
-          <View style={{ alignItems: "center", backgroundColor: colors.secondary, width: _SCREEN.width }} >
+          <View style={{ alignItems: "center", backgroundColor: colors.secondaryDark2, width: _SCREEN.width }} >
             <View style={{ width: _SCREEN.width, backgroundColor: colors.secondaryDark + "55", height: 1 }} />
             <View style={{ width: _SCREEN.width, backgroundColor: colors.secondaryDark, height: 1, marginBottom: 8 }} />
             <CustomButton text={translate("findYourFriends")} onPress={() => this.pushScreen("FindFriendsScreen", { onClose: () => this.refreshUserData(true) })} />

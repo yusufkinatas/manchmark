@@ -135,6 +135,8 @@ export default class VerbalMemoryGame extends Component {
   renderGame = () => {
     return (
       <View style={Generics.container}>
+        <Text style={{...Generics.bigText, color: colors.secondaryLight}}>Was this word shown previously?</Text>
+        <View style={{paddingBottom: 20}}></View>
         <SwappingText style={Generics.hugeText} >
           {this.state.word && this.state.word[0].toUpperCase()}{this.state.word.slice(1)}
         </SwappingText>

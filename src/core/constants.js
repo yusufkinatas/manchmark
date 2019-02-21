@@ -39,6 +39,7 @@ export const _APP_SETTINGS = {
     primary: '#1db954',
     secondary: '#212121',
     secondaryDark: '#121212',
+    secondaryDark2: '#171717',
     secondaryLight: '#535353',
     secondaryLight2: '#b3b3b3',
     secondaryLight3: "#dfe4ea",

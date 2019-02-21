@@ -5,7 +5,7 @@
   "version": "Version",
   "allRightsReserved": "© Copyright 2019, All Rights Reserved.", 
   "letsPlayManchmark": "Let's play Manchmark",
-  "invitationMessage": "Are you ready to test your limits on Manchmark?\nDownload now and see your rank among people in multiple games.",
+  "invitationMessage": "Are you ready to test your limits on Manchmark?\nDownload now and see where do you stand among players!",
   
   "loading": "Loading...",
 
@@ -48,21 +48,22 @@
   "CalculationSpeedGame": "Calculation Speed",
 
   "errMustBetween3and20": "Username must be between 3 and 20 characters",
-  "errOnlyEngLetters": "Username can only contain english letters and numbers",
+  "errOnlyEngLetters": "Username can only contain english letters and numbers.",
   "errNoConnection": "There is no internet connection",
   "errUsernameAlreadyInUse": "This username is already in use",
 
-  "amountPlayed": "Play Count",
+  "amountPlayed": "Amount Played",
   "totalCorrectTilePress" : "Correct Press Count",
   "totalWrongTilePress" : "Wrong Press Count",
   "totalNumberMemorized" : "Memorized Number Count",
-  "totalTouchCount" : "Touch Count",
+  "totalTouchCount" : "Total Number of Touches",
   "fastestReaction" : "Fastest Reaction Time(ms)",
   "fastestAverage" : "Fastest Average Reaction Time(ms)",
-  "totalWordCount" : "Word Count",
+  "totalWordCount" : "Total Word Count",
   "totalCorrectKeyPress" : "Correct Key Press Count",
   "totalKeyPress" : "Key Press Count",
   "totalWordMemorized" : "Memorized Word Count",
-  "totalCalculation" : "Total Calculation Count"
+  "totalCalculation" : "Total Calculation Count",
   
+  "calculationSpeedExplanation" : "Answer as much as possible in"
 }

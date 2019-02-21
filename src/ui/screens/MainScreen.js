@@ -27,7 +27,7 @@ export default class MainScreen extends Component {
 
   shareGame = () => {
     Share.share({
-      message: translate("invitationMessage") + `\nGoogle Play: ${_APP_SETTINGS.playstoreURL}`,
+      message: translate("invitationMessage") + `\n\nGoogle Play: ${_APP_SETTINGS.playstoreURL}`,
       title: translate("invitationMessage"),
     }, {});
   }
