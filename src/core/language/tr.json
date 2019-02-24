@@ -67,5 +67,6 @@
   "totalCalculation" : "Toplam Hesap Sayısı",
 
   "calculationSpeedExplanation" : "doldurucam",
-  "percentile" : "Yüzdelik Dilim"
+  "percentile" : "Yüzdelik Dilim",
+  "xUsersFound": "2 kullanıcı bulundu"
 }

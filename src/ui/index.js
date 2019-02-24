@@ -9,6 +9,8 @@ import PlaygroundScreen from './screens/PlaygroundScreen';
 import FollowsScreen from './screens/FollowsScreen';
 import FindFriendsScreen from './screens/FindFriendsScreen';
 
+import HeaderButton from '../components/HeaderButton';
+
 //MODALS
 import AboutUsModal from './modals/AboutUsModal';
 import ChangeNicknameModal from './modals/ChangeNicknameModal';
@@ -32,6 +34,8 @@ export function registerScreens() {
   Navigation.registerComponent('FollowsScreen', () => FollowsScreen);
   Navigation.registerComponent('FindFriendsScreen', () => FindFriendsScreen);
   Navigation.registerComponent('Playground', () => PlaygroundScreen);
+
+  Navigation.registerComponent('HeaderButton', () => HeaderButton);
 
   //MODALS
   Navigation.registerComponent('AboutUsModal', () => AboutUsModal);

@@ -67,5 +67,6 @@
   "totalCalculation" : "Total Calculation Count",
   
   "calculationSpeedExplanation" : "Answer as much as possible in",
-  "percentile" : "Percentile"
+  "percentile" : "Percentile",
+  "xUsersFound": "2 users found"
 }

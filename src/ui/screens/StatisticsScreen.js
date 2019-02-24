@@ -161,6 +161,7 @@ export default class StatisticsScreen extends Component {
           contentContainerStyle={{ height: "100%" }}
           style={{ height: "100%" }}
           horizontal
+          showsHorizontalScrollIndicator={false}
           pagingEnabled
           onScroll={(e) => {
             let index = Math.round(e.nativeEvent.contentOffset.x / _SCREEN.width);

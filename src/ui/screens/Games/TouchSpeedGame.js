@@ -90,9 +90,6 @@ export default class TouchSpeedGame extends Component {
 
   startGame = () => {
     this.setState({ gameStatus: "active" });
-    this.endGameTimeout = setTimeout(() => {
-      this.endGame();
-    }, TIMEOUT_MS)
   }
 
   renderInfo = () => {
@@ -113,7 +110,7 @@ export default class TouchSpeedGame extends Component {
       <View style={{ ...Generics.container, width: _SCREEN.width }}>
         <TouchableOpacity activeOpacity={1} onPressIn={this.pressed} style={Generics.touchableArea} />
         <BouncingText style={{ ...styles.pressCountText, color: gameColor }} >{this.state.pressCounter}</BouncingText>
-        <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={gameColor} />
+        <CounterBar ref={r => this.counterBarRef = r} width={_SCREEN.width * 0.8} color={gameColor} />
       </View>
     );
   }
@@ -130,6 +127,14 @@ export default class TouchSpeedGame extends Component {
 
   pressed = () => {
     if (this.state.gameStatus != "active") return;
+
+    if (!this.endGameTimeout) {
+      this.counterBarRef.start(TIMEOUT_MS);
+      this.endGameTimeout = setTimeout(() => {
+        this.endGame();
+      }, TIMEOUT_MS);
+    }
+
     this.setState({ pressCounter: this.state.pressCounter + 1 });
   }
 

@@ -84,9 +84,21 @@ export default class FollowsScreen extends Component {
       }
       else {
         this.setState({ renderStatus: "search", searchText: _text, errorText: "" });
+        console.log(this.state.follows)
         api.search(_text).then(res => {
-          this.setState({ searchResults: res });
-        })
+          let clone = []
+          res.forEach(_user => {
+            if (this.state.follows.indexOf(_user._id) != -1) {
+              clone.push(_user);
+            }
+          })
+          res.forEach(_user => {
+            if (this.state.follows.indexOf(_user._id) == -1) {
+              clone.push(_user);
+            }
+          })
+          this.setState({ searchResults: clone });
+        });
       }
     }
   }
@@ -135,6 +147,9 @@ export default class FollowsScreen extends Component {
   renderSearchResults = () => {
     return (
       <ScrollView style={{ width: _SCREEN.width, marginBottom: 0 }} contentContainerStyle={{ alignItems: "center", paddingTop: 10 }} >
+        <View>
+          <Text style={Generics.text} >{translate("xUsersFound").replace("2", this.state.searchResults.length)}</Text>
+        </View>
         {
           this.state.searchResults.map(_user => {
             if (user.get().nickname != _user.nickname) {
@@ -165,7 +180,7 @@ export default class FollowsScreen extends Component {
               alignItems: "center",
               flexDirection: "row",
               paddingHorizontal: 10,
-              backgroundColor: colors.secondaryDark2 
+              backgroundColor: colors.secondaryDark2
             }}>
 
               <TouchableOpacity
