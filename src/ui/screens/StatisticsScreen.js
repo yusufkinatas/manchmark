@@ -61,7 +61,7 @@ export default class StatisticsScreen extends Component {
 
   renderInfoField = (infoName, infoValue, bgColor) => {
     return (
-      <View style={{ flexDirection: "row", marginVertical: 8, marginHorizontal: 25, backgroundColor: colors.secondary, borderWidth: 3, borderColor: bgColor, borderRadius: 5, elevation: 5 }} >
+      <View key={infoName} style={{ flexDirection: "row", marginVertical: 8, marginHorizontal: 25, backgroundColor: colors.secondary, borderWidth: 3, borderColor: bgColor, borderRadius: 5, elevation: 5 }} >
         <View style={{ flex: 1, flexDirection: "row", minHeight: 50, paddingHorizontal: 5, alignItems: "center" }} >
 
           <View style={{ flex: 1 }} >
@@ -79,7 +79,7 @@ export default class StatisticsScreen extends Component {
     console.log("buradayimmmmmmmmmmmmmm");
     console.log(data);
     return (
-      <View style={{ width: _SCREEN.width }} >
+      <ScrollView style={{ width: _SCREEN.width }} >
 
         <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: _SCREEN.width, paddingHorizontal: 20, height: 50 }} >
           {
@@ -103,7 +103,7 @@ export default class StatisticsScreen extends Component {
           }
         </View>
 
-        {this.renderInfoField("highScore", user.get()[game.hsName] == null ? "- " : user.get()[game.hsName], game.backgroundColor)}
+        {this.renderInfoField("highscore", user.get()[game.hsName] == null ? "- " : user.get()[game.hsName], game.backgroundColor)}
 
         {this.returnPercent(game.hsName, game.backgroundColor)}
 
@@ -112,7 +112,7 @@ export default class StatisticsScreen extends Component {
         })}
 
 
-      </View>
+      </ScrollView>
     );
   }
 
@@ -123,16 +123,16 @@ export default class StatisticsScreen extends Component {
 
     console.log(count);
     console.log(rank);
-    if (_.isInteger(count) && _.isInteger(rank)){
+    if (_.isInteger(count) && _.isInteger(rank)) {
       userPercent = utils.truncateFloatingNumber(100 - (rank / count * 100), 3);
       console.log(userPercent);
       userPercent = _.isNaN(userPercent) ? "- " : userPercent + "%";
     }
     else {
-       userPercent = "- "
+      userPercent = "- "
     }
-    
-    
+
+
 
     return (this.renderInfoField("percentile", userPercent, backgroundColor));
   }

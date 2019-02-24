@@ -8,7 +8,7 @@ import {
 
 const translationGetters = {
   en: () => require("./en.json"),
-  // tr: () => require("./tr.json"), //bunu yorum satırı yaparak ingilizce dilini görebilirsin
+  tr: () => require("./tr.json"), //bunu yorum satırı yaparak ingilizce dilini görebilirsin
 };
 
 export const translate = memoize(

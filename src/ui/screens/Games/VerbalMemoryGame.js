@@ -124,10 +124,10 @@ export default class VerbalMemoryGame extends Component {
     return (
       <View style={Generics.container} >
         <View style={{ paddingBottom: 20 }} >
-          <Text style={Generics.bigText} >Memorize all the words</Text>
+          <Text style={Generics.bigText} >{translate("memorizeAllWords")}</Text>
         </View>
-        <Text style={Generics.hintText} >Don't forget to mark the words you have already seen!</Text>
-        <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
+        <Text style={Generics.hintText} >{translate("dontForgetToMarkTheWords")}</Text>
+        <CustomButton backgroundColor={gameColor} text={translate("start")} onPress={this.startGame} />
       </View>
     );
   }
@@ -135,17 +135,17 @@ export default class VerbalMemoryGame extends Component {
   renderGame = () => {
     return (
       <View style={Generics.container}>
-        <Text style={{...Generics.bigText, color: colors.secondaryLight}}>Was this word shown previously?</Text>
-        <View style={{paddingBottom: 20}}></View>
+        <Text style={{ ...Generics.bigText, color: colors.secondaryLight }}>{translate("wasThisShownPreviously")}</Text>
+        <View style={{ paddingBottom: 20 }}></View>
         <SwappingText style={Generics.hugeText} >
           {this.state.word && this.state.word[0].toUpperCase()}{this.state.word.slice(1)}
         </SwappingText>
         <View style={styles.answerButtonsContainer} >
           <TouchableOpacity onPress={() => this.onAnswer("seen")} style={{ ...styles.answerButton, backgroundColor: gameColor }} >
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >SEEN</Text>
+            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{translate("seen")}</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.onAnswer("new")} style={{ ...styles.answerButton, marginLeft: 0, backgroundColor: gameColor }} >
-            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >NEW</Text>
+            <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{translate("new")}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -187,7 +187,7 @@ var styles = StyleSheet.create({
     flex: 1,
     margin: 10,
     paddingVertical: 15,
-    paddingHorizontal: 40,
+    paddingHorizontal: 20,
     backgroundColor: colors.primary,
     borderRadius: 50,
     alignItems: "center",

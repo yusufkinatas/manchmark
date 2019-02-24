@@ -6,7 +6,7 @@
   "allRightsReserved": "© Copyright 2019, All Rights Reserved.", 
   "letsPlayManchmark": "Let's play Manchmark",
   "invitationMessage": "Are you ready to test your limits on Manchmark?\nDownload now and see where do you stand among players!",
-  "highScore" : "High Score",
+  "highscore" : "Highscore",
 
   "loading": "Loading...",
 
@@ -65,8 +65,55 @@
   "totalKeyPress" : "Key Press Count",
   "totalWordMemorized" : "Memorized Word Count",
   "totalCalculation" : "Total Calculation Count",
-  
-  "calculationSpeedExplanation" : "Answer as much as possible in",
   "percentile" : "Percentile",
-  "xUsersFound": "2 users found"
+  "xUsersFound": "2 users found",
+
+  "cantUpdateHighscore": "Can't update highscore",
+  "congratulations": "Congratulations!",
+  "newHighscore": "New Highscore",
+  "score": "Score",
+  "averageOfPlayers": "Average of Players",
+  "yourScoreIsHigherThanXOfPlayers": "Your score is higher than 2% of players",
+  "restart": "Restart",
+  "repetitionIsKeyToSuccess": "Repetition is the key to success!",
+
+  "answerMuchInXSeconds": "Answer as much as possible in 2 seconds",
+  "dontRush": "Don't rush! Making mistakes will cost you points.",
+
+  "rememberTheNumber": "Remember the number",
+  "youCanGroupNumbers": "You can group numbers to make it easier to memorize!",
+  "skip": "Skip",
+  "whatWasTheNumber": "What was the number?",
+  "number": "Number",
+  "yourAnswer": "Your Answer",
+
+  "pressTheScreenColorChanges": "Press the screen as soon as the color changes",
+  "thereAre5Phases": "There are 5 phases!",
+  "phase": "Phase",
+  "pressForNextPhase": "Press the screen for the next phase!",
+  "tooEarly": "TOO EARLY!",
+  "press": "PRESS",
+  "wait": "WAIT",
+
+  "pressTheScreenFast": "Press the screen as fast as you can",
+  "youCanUseMoreFingers": "You can use more than one finger!",
+  "pressToStart": "Press Screen to Start",
+  "wordCount": "Word Count",
+  "keyPress": "Key Press",
+  "writeMuchInXSeconds": "Write as much word as possible in 2 seconds",
+  "youCanWriteInAnyOrder": "You can write any one of the 3 words in any order!",
+  "start": "Start",
+  "memorizeAllWords": "Memorize all the words",
+  "dontForgetToMarkTheWords": "Don't forget to mark the words you have already seen!",
+  "wasThisShownPreviously": "Was this word shown previously?",
+  "seen": "SEEN",
+  "new": "NEW",
+
+  "rememberThePattern": "Remember the pattern",
+  "XmistakesAllowed": "You are allowed to make 2 mistakes each round!",
+  "levelX": "Level 2",
+  "lives": "Lives",
+  "level": "Level"
+
+
 }

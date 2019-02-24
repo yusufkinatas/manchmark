@@ -127,10 +127,10 @@ export default class CalculationSpeedGame extends Component {
     return (
       <View style={Generics.container} >
         <View style={{ paddingBottom: 20 }} >
-          <Text style={Generics.bigText} >Answer as much as possible in {TIMEOUT_MS / 1000} seconds</Text>
+          <Text style={Generics.bigText} >{translate("answerMuchInXSeconds").replace("2", TIMEOUT_MS / 1000)}</Text>
         </View>
         <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
-        <Text style={Generics.hintText} >Remember the order of expressions!</Text>
+        <Text style={Generics.hintText} >{translate("dontRush")}</Text>
       </View>
     );
   }
@@ -210,7 +210,7 @@ export default class CalculationSpeedGame extends Component {
               backgroundColor: this.state.backgroundColor,
               opacity: backgroundOpacity
             }} />
-            <BouncingText style={Generics.bigText} >Score: {this.state.score}</BouncingText>
+            <BouncingText style={Generics.bigText} >{translate("score")} : {this.state.score}</BouncingText>
           </View>
           <View style={{ height: 10 }} />
           <SwappingText style={Generics.questionText} >{this.state.question}</SwappingText>

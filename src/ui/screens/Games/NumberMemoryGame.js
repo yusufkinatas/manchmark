@@ -141,10 +141,10 @@ export default class NumberMemoryGame extends Component {
       <View style={Generics.container} >
 
         <View style={{ paddingBottom: 20 }} >
-          <Text style={Generics.bigText} >Remember the number</Text>
+          <Text style={Generics.bigText} >{translate("rememberTheNumber")}</Text>
         </View>
         <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
-        <Text style={Generics.hintText} >You can group numbers to make it easier to memorize!</Text>
+        <Text style={Generics.hintText} >{translate("youCanGroupNumbers")}</Text>
       </View>
     );
   }
@@ -156,7 +156,7 @@ export default class NumberMemoryGame extends Component {
         <View style={{ height: 10 }}></View>
         <CounterBar time={(this.numberLength + 3) * 1000 + 450} width={_SCREEN.width * 0.8} color={gameColor} />
         <View style={{ height: 10 }}></View>
-        <CustomButton backgroundColor={gameColor} text="Skip" onPress={this.skipWaiting} />
+        <CustomButton backgroundColor={gameColor} text={translate("skip")} onPress={this.skipWaiting} />
       </View>
     );
   }
@@ -166,7 +166,7 @@ export default class NumberMemoryGame extends Component {
       <View style={{ justifyContent: "center", alignItems: "center" }}>
         <View style={Generics.container} >
           <CounterBar time={(this.numberLength + 3) * 1000 + 450} width={_SCREEN.width * 0.8} color={gameColor} />
-          <Text style={Generics.bigText} >What was the number?</Text>
+          <Text style={Generics.bigText} >{translate("whatWasTheNumber")}</Text>
           <Text
             style={{
               minWidth: _SCREEN.width * 0.3,
@@ -216,9 +216,9 @@ export default class NumberMemoryGame extends Component {
 
     return (
       <View style={{ ...Generics.container, flex: 0.25, justifyContent: "center", paddingTop: 10 }}>
-        <Text style={{ ...Generics.bigText, fontSize: 16, color: colors.secondaryLight2 }}>Number</Text>
+        <Text style={{ ...Generics.bigText, fontSize: 16, color: colors.secondaryLight2 }}>{translate("number")}</Text>
         <Text style={{ ...Generics.bigText, fontSize: 24 }}>{num}</Text>
-        <Text style={{ ...Generics.bigText, fontSize: 16, color: colors.secondaryLight2 }}>Your Answer</Text>
+        <Text style={{ ...Generics.bigText, fontSize: 16, color: colors.secondaryLight2 }}>{translate("yourAnswer")}</Text>
         <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
           {ansArray.map((char, index) => {
             if (index <= num.length - 1) {

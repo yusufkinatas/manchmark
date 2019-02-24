@@ -6,7 +6,7 @@
   "allRightsReserved": "© 2019, Tüm Hakları Saklıdır.", 
   "letsPlayManchmark": "Hadi Manchmark Oynayalım!",
   "invitationMessage": "Manchmark ile sınırlarını zorlamaya hazır mısın?\nŞimdi yükle ve farklı kategorilerde, insanlar arasındaki sıranı gör.",
-  "highScore" : "Yüksek Skor",
+  "highscore" : "Rekor",
 
   "loading": "Yükleniyor...",
 
@@ -65,8 +65,55 @@
   "totalKeyPress" : "Basılan Tuş Sayısı",
   "totalWordMemorized" : "Ezberlenen Kelime Sayısı",
   "totalCalculation" : "Toplam Hesap Sayısı",
-
-  "calculationSpeedExplanation" : "doldurucam",
   "percentile" : "Yüzdelik Dilim",
-  "xUsersFound": "2 kullanıcı bulundu"
+  "xUsersFound": "2 kullanıcı bulundu",
+
+  
+  "cantUpdateHighscore": "Rekor güncellenemedi",
+  "congratulations": "Tebrikler!",
+  "newHighscore": "Yeni Rekor",
+  "score": "Skor",
+  "averageOfPlayers": "Oyuncuların Ortalaması",
+  "yourScoreIsHigherThanXOfPlayers": "%2 oyuncudan daha iyisin",
+  "restart": "Tekrar Oyna",
+  "repetitionIsKeyToSuccess": "Tekrar başarının anahtarıdır!",
+
+  "answerMuchInXSeconds": "2 saniye içinde mümkün olduğunca çok yanıt ver",
+  "dontRush": "Acele etme! Hata yapmak skorunu azaltacaktır.",
+
+  "rememberTheNumber": "Sayıyı hatırla",
+  "youCanGroupNumbers": "Ezberlemeyi kolaylaştırmak için sayıları gruplandırabilirsin!",
+  "skip": "Atla",
+  "whatWasTheNumber": "Sayı kaçtı?",
+  "number": "Sayı",
+  "yourAnswer": "Cevabın",
+
+  "pressTheScreenColorChanges": "Ekranın rengi değişir değişmez ekrana dokun",
+  "thereAre5Phases": "5 aşamadan oluşmaktadır!",
+  "phase": "Aşama",
+  "pressForNextPhase": "Sıradaki aşama için ekrana dokun!",
+  "tooEarly": "ÇOK ERKEN!",
+  "press": "DOKUN",
+  "wait": "BEKLE",
+
+  "pressTheScreenFast": "Ekrana dokunabildiğin kadar hızlı dokun",
+  "youCanUseMoreFingers": "Birden fazla parmağını kullanabilirsin!",
+  "pressToStart": "Başlamak için Ekrana Dokun",
+  "wordCount": "Kelime Sayısı",
+  "keyPress": "Tuş Basma Sayısı",
+  "writeMuchInXSeconds": "2 saniyede yazabildiğin kadar kelime yaz",
+  "youCanWriteInAnyOrder": "3 kelimeden istediğini yazabilirsin!",
+  "start": "Başla",
+  "memorizeAllWords": "Bütün kelimeleri ezberle",
+  "dontForgetToMarkTheWords": "Sana gösterilen kelimeleri işaretlemeyi unutma!",
+  "wasThisShownPreviously": "Bu kelime az önce gösterildi mi?",
+  "seen": "GÖRDÜM",
+  "new": "YENİ",
+
+  "rememberThePattern": "Deseni ezberle",
+  "XmistakesAllowed": "Her seviyede 2 hata hakkın vardır!",
+  "levelX": "Seviye 2",
+  "lives": "Can",
+  "level": "Seviye"
+
 }

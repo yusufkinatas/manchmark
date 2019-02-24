@@ -97,8 +97,8 @@ export default class TypingSpeedGame extends Component {
 
   endGame = () => {
     this.correctKeypress = (this.state.score - this.usedWords.length * 10) / 5;
-    this.extraData = [{ data: ["Word Count", this.usedWords.length], important: true }];
-    this.extraData.push({ data: ["Key Press", this.correctKeypress], important: true });
+    this.extraData = [{ data: [translate("wordCount"), this.usedWords.length], important: true }];
+    this.extraData.push({ data: [translate("keyPress"), this.correctKeypress], important: true });
 
     let oldUserStat = user.get().statistics;
     let typeStats = oldUserStat.TypingSpeedGame;
@@ -120,10 +120,10 @@ export default class TypingSpeedGame extends Component {
   renderInfo = () => {
     return (
       <View style={Generics.container} >
-        <Text style={Generics.bigText} >Write as much word as possible in {TIMEOUT_MS / 1000} seconds</Text>
+        <Text style={Generics.bigText} >{translate("writeMuchInXSeconds").replace("2", TIMEOUT_MS / 1000)}</Text>
         <View style={{ height: 20 }}></View>
-        <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
-        <Text style={Generics.hintText} >You can write any one of the 3 words in any order!</Text>
+        <CustomButton backgroundColor={gameColor} text={translate("start")} onPress={this.startGame} />
+        <Text style={Generics.hintText} >{translate("youCanWriteInAnyOrder")}</Text>
       </View>
     );
   }
@@ -177,7 +177,7 @@ export default class TypingSpeedGame extends Component {
       <KeyboardAvoidingView behavior="padding" style={Generics.container}>
 
         <CounterBar ref={r => this.counterBarRef = r} width={_SCREEN.width * 0.8} color={gameColor} />
-        <BouncingText style={Generics.bigText}>Score: {this.state.score}</BouncingText>
+        <BouncingText style={Generics.bigText}>{translate("score")} : {this.state.score}</BouncingText>
         <View style={{ height: 10 }} />
 
         <View style={{ flexDirection: "row", backgroundColor: gameColor }} >

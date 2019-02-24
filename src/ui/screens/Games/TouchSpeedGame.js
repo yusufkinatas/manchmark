@@ -44,7 +44,8 @@ export default class TouchSpeedGame extends Component {
       pressCounter: 0,
       gameStatus: "info", // info - active - finished
       remainingTime: TIMEOUT_MS,
-      progress: 1
+      progress: 1,
+      isStarted: false,
     };
   }
 
@@ -97,10 +98,10 @@ export default class TouchSpeedGame extends Component {
       <View style={Generics.container} >
 
         <View style={{ paddingBottom: 20 }} >
-          <Text style={Generics.bigText} >Press the screen as fast as you can</Text>
+          <Text style={Generics.bigText} >{translate("pressTheScreenFast")}</Text>
         </View>
-        <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
-        <Text style={Generics.hintText}>You can use more than one finger!</Text>
+        <CustomButton backgroundColor={gameColor} text={translate("start")} onPress={this.startGame} />
+        <Text style={Generics.hintText}>{translate("youCanUseMoreFingers")}</Text>
       </View>
     );
   }
@@ -109,6 +110,9 @@ export default class TouchSpeedGame extends Component {
     return (
       <View style={{ ...Generics.container, width: _SCREEN.width }}>
         <TouchableOpacity activeOpacity={1} onPressIn={this.pressed} style={Generics.touchableArea} />
+        {!this.state.isStarted &&
+          <Text style={{ ...Generics.bigText, position: "absolute", top: 50 }} >{translate("pressToStart")}</Text>
+        }
         <BouncingText style={{ ...styles.pressCountText, color: gameColor }} >{this.state.pressCounter}</BouncingText>
         <CounterBar ref={r => this.counterBarRef = r} width={_SCREEN.width * 0.8} color={gameColor} />
       </View>
@@ -130,6 +134,7 @@ export default class TouchSpeedGame extends Component {
 
     if (!this.endGameTimeout) {
       this.counterBarRef.start(TIMEOUT_MS);
+      this.setState({ isStarted: true });
       this.endGameTimeout = setTimeout(() => {
         this.endGame();
       }, TIMEOUT_MS);

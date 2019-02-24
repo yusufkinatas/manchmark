@@ -163,7 +163,8 @@ export const user = {
 
       api.getRank(_user.nickname, game)
         .then(res => {
-          user.set({ rank: {..._user.ranks, userCount: res.data.userCount, [game]: res.data.rank }}, true);
+          user.set({ ranks: { ..._user.ranks, userCount: res.data.userCount, [game]: res.data.rank } }, true);
+          console.log("get rank", game, _user);
           resolve(res.data);
         })
         .catch(err => {
@@ -174,14 +175,11 @@ export const user = {
 
   getAllRanks: () => {
     _APP_SETTINGS.games.forEach(g => {
-      api.getRank(_user.nickname, g.hsName)
-        .then(res => {
-          // console.log(g.hsName, res.data)
-          user.set({ ranks: { ...user.get().ranks, [g.hsName]: res.data.rank, userCount: res.data.userCount } }, true);
-        })
+      user.getRank(g.hsName)
+        .then(res => { })
         .catch(err => {
           console.log("ERR", g.hsName, err)
-        })
+        });
     })
   },
 

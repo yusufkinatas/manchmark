@@ -67,9 +67,8 @@ export default class VisualMemoryGame extends Component {
           indexY = Math.floor((touch.pageY - TOP_BAR_HEIGHT) / _SCREEN.width * numberOfColumns);
           indexY < 0 ? indexY = 0 : indexY = indexY;
           indexY > numberOfColumns - 1 ? indexY = numberOfColumns - 1 : indexY = indexY;
-          // console.log("[", indexX, ",", indexY, "]");
-        })
-        this.onSquarePress(indexX + indexY * this.sideLengthOfBoard)
+        });
+        this.onSquarePress(indexX + indexY * this.sideLengthOfBoard);
       }
     });
   }
@@ -89,7 +88,7 @@ export default class VisualMemoryGame extends Component {
       level: 0,
       lives: 3,
       levelMistakes: 0,
-      squares: []
+      squares: [],
     });
     this.buttonsEnabled = true;
   }
@@ -106,7 +105,7 @@ export default class VisualMemoryGame extends Component {
     }
     this.gameEnded = true;
 
-    let pressedTile = this.state.score / 10
+    let pressedTile = this.state.score / 10;
     let oldUserStat = user.get().statistics;
     let visualStats = oldUserStat.VisualMemoryGame;
 
@@ -121,9 +120,6 @@ export default class VisualMemoryGame extends Component {
     }, true);
 
     let tmp = user.get().statistics;
-    console.log("amount", tmp.VisualMemoryGame.amountPlayed);
-    console.log("correct", tmp.VisualMemoryGame.totalCorrectTilePress);
-    console.log("wrong", tmp.VisualMemoryGame.totalWrongTilePress);
 
     this.setState({ gameStatus: "finished" });
   }
@@ -257,10 +253,10 @@ export default class VisualMemoryGame extends Component {
       <View style={Generics.container} >
 
         <Animated.View style={{ paddingBottom: 20 }} >
-          <Text style={Generics.bigText} >Remember the pattern</Text>
+          <Text style={Generics.bigText} >{translate("rememberThePattern")}</Text>
         </Animated.View>
-        <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
-        <Text style={Generics.hintText}>You are allowed to make 2 mistakes each round!</Text>
+        <CustomButton backgroundColor={gameColor} text={translate("start")} onPress={this.startGame} />
+        <Text style={Generics.hintText}>{translate("XmistakesAllowed").replace("2", 2)}</Text>
       </View>
     );
   }
@@ -281,7 +277,6 @@ export default class VisualMemoryGame extends Component {
       this.wrongTileCount++;
       if (this.state.levelMistakes > 2 && this.state.lives == 1) {
         clearTimeout(this.answerTime);
-        console.log("CLEARED TIMEOUT. WILL LOSE")
       }
     }
     this.forceUpdate();
@@ -358,7 +353,7 @@ export default class VisualMemoryGame extends Component {
             }}
           >
             <View style={{ width: _SCREEN.width, paddingVertical: 20, justifyContent: "center", alignItems: "center", backgroundColor: colors.secondaryDark }} >
-              <Text style={Generics.bigText} >LEVEL {this.state.level}</Text>
+              <Text style={Generics.bigText} >{translate("levelX").replace("2", this.state.level)}</Text>
             </View>
           </Animated.View>
         }
@@ -378,9 +373,9 @@ export default class VisualMemoryGame extends Component {
             justifyContent: "space-between",
             paddingHorizontal: 20
           }}>
-            <BouncingText style={{ ...Generics.text, textAlign: "center" }} >Level: {this.state.level}</BouncingText>
-            <BouncingText style={{ ...Generics.bigText, fontWeight: "bold" }} >Score: {this.state.score}</BouncingText>
-            <SwappingText style={{ ...Generics.text, textAlign: "center" }} >Lives: {this.state.lives}</SwappingText>
+            <BouncingText style={{ ...Generics.text, textAlign: "center" }} >{translate("level")}: {this.state.level}</BouncingText>
+            <BouncingText style={{ ...Generics.bigText, fontWeight: "bold" }} >{translate("score")}: {this.state.score}</BouncingText>
+            <SwappingText style={{ ...Generics.text, textAlign: "center" }} >{translate("lives")}: {this.state.lives}</SwappingText>
           </View>
         </View>
 

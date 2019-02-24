@@ -149,10 +149,10 @@ export default class ReactionSpeedGame extends Component {
     return (
       <View style={Generics.container} >
         <View style={{ paddingBottom: 20 }} >
-          <Text style={Generics.bigText} >Press the screen as soon as the color changes</Text>
+          <Text style={Generics.bigText} >{translate("pressTheScreenColorChanges")}</Text>
         </View>
-        <Text style={Generics.hintText} >There are 5 phases!</Text>
-        <CustomButton backgroundColor={gameColor} text="Start" onPress={this.startGame} />
+        <Text style={Generics.hintText} >{translate("thereAre5Phases")}</Text>
+        <CustomButton backgroundColor={gameColor} text={translate("start")} onPress={this.startGame} />
       </View>
     );
   }
@@ -162,10 +162,10 @@ export default class ReactionSpeedGame extends Component {
       return (
         <View style={{ ...Generics.container, width: _SCREEN.width }}>
           <TouchableOpacity style={Generics.touchableArea} onPressIn={() => this.setState({ playingState: "waiting" })}>
-            <Text style={{ ...Generics.bigText, marginTop: -50 }}>Phase</Text>
+            <Text style={{ ...Generics.bigText, marginTop: -50 }}>{translate("phase")}</Text>
             <Text style={{ ...Generics.bigText, color: colors.secondaryLight2, fontSize: 15 }}>{this.phase} / 5</Text>
             <Text style={{ ...Generics.hugeText, paddingTop: 10 }}>{this.reactionTime[this.phase - 1]} ms</Text>
-            <Text style={Generics.hintText} >Press the screen for the next phase!</Text>
+            <Text style={Generics.hintText} >{translate("pressForNextPhase")}</Text>
           </TouchableOpacity>
         </View>
       );
@@ -174,10 +174,10 @@ export default class ReactionSpeedGame extends Component {
       return (
         <View style={{ ...Generics.container, width: _SCREEN.width }}>
           <TouchableOpacity style={{ ...Generics.touchableArea, backgroundColor: colors.failure }} activeOpacity={1} onPressIn={() => this.setState({ playingState: "waiting" })}>
-            <Text style={{ ...Generics.bigText, marginTop: -50 }}>Phase</Text>
+            <Text style={{ ...Generics.bigText, marginTop: -50 }}>{translate("phase")}</Text>
             <Text style={{ ...Generics.bigText, color: colors.secondaryLight2, fontSize: 15 }}>{this.phase} / 5</Text>
-            <Text style={Generics.hugeText}>TOO EARLY!</Text>
-            <Text style={Generics.hintText} >Press the screen for the next phase!</Text>
+            <Text style={Generics.hugeText}>{translate("tooEarly")}</Text>
+            <Text style={Generics.hintText} >{translate("pressForNextPhase")}</Text>
           </TouchableOpacity>
         </View>
       );
@@ -190,7 +190,7 @@ export default class ReactionSpeedGame extends Component {
     return (
       <View style={{ ...Generics.container, width: _SCREEN.width }}>
         <TouchableOpacity style={{ ...Generics.touchableArea, backgroundColor: gameColor }} onPressIn={this.onAnswer}>
-          <Text style={Generics.hugeText}>PRESS</Text>
+          <Text style={Generics.hugeText}>{translate("press")}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -202,8 +202,8 @@ export default class ReactionSpeedGame extends Component {
     }, randomDelay * 1000);
     return (
       <View style={{ ...Generics.container, width: _SCREEN.width }}>
-        <TouchableOpacity style={Generics.touchableArea} text='tikla' onPressIn={this.onWrongAnswer}>
-          <Text style={Generics.hugeText}>WAIT</Text>
+        <TouchableOpacity style={Generics.touchableArea} onPressIn={this.onWrongAnswer}>
+          <Text style={Generics.hugeText}>{translate("wait")}</Text>
         </TouchableOpacity>
       </View>
     );
