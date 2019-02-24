@@ -93,9 +93,6 @@ export default class TypingSpeedGame extends Component {
     tmpArray[2] = this.generateNewWord();
 
     this.setState({ gameStatus: "active", word: tmpArray });
-    this.endGameTimeout = setTimeout(() => {
-      this.endGame();
-    }, TIMEOUT_MS);
   }
 
   endGame = () => {
@@ -136,9 +133,19 @@ export default class TypingSpeedGame extends Component {
   }
 
   onChangeText = (text) => {
+
+    if (!this.endGameTimeout) {
+      this.counterBarRef.start(TIMEOUT_MS);
+      this.endGameTimeout = setTimeout(() => {
+        this.endGame();
+      }, TIMEOUT_MS);
+    }
+
     this.keyPressCount++;
     let ans = text.toLowerCase().trim();
     this.onAnswer(ans);
+
+
   }
 
   onAnswer = (answer) => {
@@ -169,7 +176,7 @@ export default class TypingSpeedGame extends Component {
     return (
       <KeyboardAvoidingView behavior="padding" style={Generics.container}>
 
-        <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={gameColor} />
+        <CounterBar ref={r => this.counterBarRef = r} width={_SCREEN.width * 0.8} color={gameColor} />
         <BouncingText style={Generics.bigText}>Score: {this.state.score}</BouncingText>
         <View style={{ height: 10 }} />
 

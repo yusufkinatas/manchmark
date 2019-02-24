@@ -21,8 +21,19 @@ export default class CounterBar extends Component {
   }
 
   componentDidMount() {
+    if (this.props.time) {
+      Animated.timing(this.width, {
+        duration: this.props.time,
+        toValue: 1,
+        useNativeDriver: true,
+        easing: Easing.linear,
+      }).start();
+    }
+  }
+
+  start = (time) => {
     Animated.timing(this.width, {
-      duration: this.props.time,
+      duration: time,
       toValue: 1,
       useNativeDriver: true,
       easing: Easing.linear,
@@ -63,7 +74,6 @@ CounterBar.propsTypes = {
 
 
 CounterBar.defaultProps = {
-  time: 5000,
   width: 200,
   height: 40,
   color: "gray",

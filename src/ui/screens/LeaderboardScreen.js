@@ -117,8 +117,9 @@ class Leaderboard extends React.PureComponent {
         <View style={{ flexDirection: "row", marginVertical: 8, marginHorizontal: 25, backgroundColor: colors.secondary, borderWidth: 3, borderColor: game.backgroundColor, borderRadius: 5, elevation: 5 }} >
 
           <View style={{ flex: 1, flexDirection: "row", minHeight: 50, paddingHorizontal: 5, alignItems: "center" }} >
+            <Icon name="globe" size={20} color={colors.secondaryLight3} />
             <View style={{ flex: 1 }} >
-              <Text style={{ ...Generics.bigText, fontWeight: "bold", textAlign: "left" }} >{translate("averageScore")}</Text>
+              <Text style={{ ...Generics.bigText, fontWeight: "bold", textAlign: "left", paddingHorizontal: 5 }} >{translate("averageScore")}</Text>
             </View>
             {
               this.props.averages[game.hsName]
@@ -187,22 +188,25 @@ export default class LeaderboardScreen extends Component {
     this.forceUpdate();
     this.refreshLeaderboards();
 
-    IconFeather.getImageSource("globe", 20, colors.secondaryLight3).then(source => {
-      this.globalIcon = source;
-      Navigation.mergeOptions(this.props.componentId, {
-        topBar: {
-          rightButtons: [{
-            id: "toggleGlobal",
-            icon: source,
-          }]
-        }
-      });
-
+    Navigation.mergeOptions(this.props.componentId, {
+      topBar: {
+        rightButtons: [{
+          component: {
+            name: "HeaderButton",
+            passProps: {
+              onPress: this.onGlobalPress,
+              icon: "globe",
+              backgroundColor: colors.secondaryLight,
+            }
+          }
+        }]
+      }
     });
+
 
   }
 
-  navigationButtonPressed({ buttonId }) {
+  onGlobalPress = () => {
     if (this.state.showGlobal) {
       this.globalHighscores = user.get().globalHighscores;
       this.setState({ showGlobal: false, selectedGameIndex: 0 }, () => {
@@ -210,9 +214,14 @@ export default class LeaderboardScreen extends Component {
           topBar: {
             title: { text: translate("leaderboard") },
             rightButtons: [{
-              id: "toggleGlobal",
-              icon: this.globalIcon,
-              color: colors.secondaryLight3
+              component: {
+                name: "HeaderButton",
+                passProps: {
+                  onPress: this.onGlobalPress,
+                  backgroundColor: colors.secondaryLight,
+                  icon: "globe"
+                }
+              }
             }]
           }
         });
@@ -224,9 +233,13 @@ export default class LeaderboardScreen extends Component {
           topBar: {
             title: { text: translate("leaderboard") + `(${translate("global")})` },
             rightButtons: [{
-              id: "toggleGlobal",
-              icon: this.globalIcon,
-              color: colors.primary
+              component: {
+                name: "HeaderButton",
+                passProps: {
+                  onPress: this.onGlobalPress,
+                  icon: "globe"
+                }
+              }
             }]
           }
         });
@@ -304,6 +317,7 @@ export default class LeaderboardScreen extends Component {
           style={{ height: "100%" }}
           horizontal
           pagingEnabled
+          showsHorizontalScrollIndicator={false}
           onScroll={(e) => {
             let index = Math.round(e.nativeEvent.contentOffset.x / _SCREEN.width);
             if (this.state.selectedGameIndex != index) {
@@ -343,6 +357,7 @@ export default class LeaderboardScreen extends Component {
               contentContainerStyle={{ height: "100%" }}
               style={{ height: "100%" }}
               horizontal
+              showsHorizontalScrollIndicator={false}
               pagingEnabled
               onScroll={(e) => {
                 let index = Math.round(e.nativeEvent.contentOffset.x / _SCREEN.width);
