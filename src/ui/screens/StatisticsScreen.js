@@ -16,7 +16,8 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, nav, Generics, api, translate, user } from "../../core";
+import _ from "lodash";
+import { store, _APP_SETTINGS, _SCREEN, nav, Generics, api, translate, user, utils } from "../../core";
 import CustomButton from "../../components/CustomButton";
 
 const colors = _APP_SETTINGS.colors;
@@ -102,7 +103,9 @@ export default class StatisticsScreen extends Component {
           }
         </View>
 
-        {this.renderInfoField("highScore", user.get()[game.hsName], game.backgroundColor)}
+        {this.renderInfoField("highScore", user.get()[game.hsName] == null ? "- " : user.get()[game.hsName], game.backgroundColor)}
+
+        {this.returnPercent(game.hsName, game.backgroundColor)}
 
         {Object.keys(user.get().statistics[game.name]).map(key => {
           return (this.renderInfoField(key, user.get().statistics[game.name][key], game.backgroundColor));
@@ -111,6 +114,27 @@ export default class StatisticsScreen extends Component {
 
       </View>
     );
+  }
+
+  returnPercent = (hsName, backgroundColor) => {
+    let rank = user.get().ranks[hsName];
+    let count = user.get().ranks.userCount;
+    let userPercent;
+
+    console.log(count);
+    console.log(rank);
+    if (_.isInteger(count) && _.isInteger(rank)){
+      userPercent = utils.truncateFloatingNumber(100 - (rank / count * 100), 3);
+      console.log(userPercent);
+      userPercent = _.isNaN(userPercent) ? "- " : userPercent + "%";
+    }
+    else {
+       userPercent = "- "
+    }
+    
+    
+
+    return (this.renderInfoField("percentile", userPercent, backgroundColor));
   }
 
   getItemLayout = (data, index) => {

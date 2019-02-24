@@ -163,6 +163,7 @@ export const user = {
 
       api.getRank(_user.nickname, game)
         .then(res => {
+          user.set({ rank: {..._user.ranks, userCount: res.data.userCount, [game]: res.data.rank }}, true);
           resolve(res.data);
         })
         .catch(err => {

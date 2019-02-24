@@ -104,12 +104,17 @@ export default class ReactionSpeedGame extends Component {
     let averageReaction = this.findAverage();
     let fastest = this.findFastestReaction();
 
+    console.log("fastest", fastest)
+    console.log("old fastest", reactionStats.fastestReaction)
+
     let currentStats = {}
 
     if (fastest != 0 && (reactionStats.fastestReaction == 0 || reactionStats.fastestReaction > fastest)) {
+      console.log("geldim1");
       currentStats.fastestReaction = fastest;
     }
     else {
+      console.log("geldim2");
       currentStats.fastestReaction = reactionStats.fastestReaction;
     }
 

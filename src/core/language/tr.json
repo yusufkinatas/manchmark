@@ -64,5 +64,8 @@
   "totalCorrectKeyPress" : "Doğru Basılan Tuş Sayısı",
   "totalKeyPress" : "Basılan Tuş Sayısı",
   "totalWordMemorized" : "Ezberlenen Kelime Sayısı",
-  "totalCalculation" : "Toplam Hesap Sayısı"
+  "totalCalculation" : "Toplam Hesap Sayısı",
+
+  "calculationSpeedExplanation" : "doldurucam",
+  "percentile" : "Yüzdelik Dilim"
 }
