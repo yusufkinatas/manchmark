@@ -163,6 +163,7 @@ configurations.all {
 }
 
 dependencies {
+    compile project(':react-native-admob')
     implementation project(':react-native-localize')
     implementation project(':react-native-facebook-account-kit')
     implementation project(':react-native-contacts')
