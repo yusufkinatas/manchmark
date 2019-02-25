@@ -113,7 +113,7 @@ export default class TypingSpeedGame extends Component {
         }
       }
     }, true);
-
+    user.updateStatistics();
     this.setState({ gameStatus: "finished" });
   }
 

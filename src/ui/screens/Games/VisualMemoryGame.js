@@ -42,6 +42,7 @@ export default class VisualMemoryGame extends Component {
 
   constructor(props) {
     super(props);
+    
     this.wrongTileCount = 0;
     this.isAnimating = false;
     this.levelAnim = new Animated.Value(0);
@@ -74,6 +75,7 @@ export default class VisualMemoryGame extends Component {
   }
 
   reinitialize = () => {
+    this.gameEnded = false;
     this.isAnimating = false;
     this.levelAnim = new Animated.Value(0);
     this.wrongTileCount = 0;
@@ -118,14 +120,15 @@ export default class VisualMemoryGame extends Component {
         }
       }
     }, true);
-
+    
     let tmp = user.get().statistics;
-
+    user.updateStatistics();
     this.setState({ gameStatus: "finished" });
   }
 
   startGame = () => {
     this.setState({ gameStatus: "active" });
+    this.gameEnded = false;
     this.startNextLevel();
   }
 
@@ -152,7 +155,6 @@ export default class VisualMemoryGame extends Component {
   }
 
   startNextLevel = (replaySameLevel?) => {
-    this.willPassLevel = false;
     clearTimeout(this.answerTime);
     this.state.squares = [];
     this.state.levelMistakes = 0
@@ -206,14 +208,13 @@ export default class VisualMemoryGame extends Component {
     this.answerTime = setTimeout(() => {
       this.setState({ timesUp: "true" });
       this.buttonsEnabled = false;
-      if (!this.willPassLevel) {
-        if (this.state.lives == 1) {
-          this.endGame();
-        }
-        else {
-          this.startNextLevel(true);
-        }
+      if (this.state.lives == 1) {
+        this.endGame();
       }
+      else {
+        this.startNextLevel(true);
+      }
+
     }, answerDuration + this.showDuration + 2 * animationDuration + 500);
   }
 
@@ -284,10 +285,6 @@ export default class VisualMemoryGame extends Component {
     if (this.specialSquarePushed != this.specialSquareRequired && this.state.levelMistakes < 3 && this.state.lives > 0) {
       this.buttonsEnabled = true;
     }
-    if (this.specialSquarePushed == this.specialSquareRequired) {
-      this.willPassLevel = true;
-    }
-
 
     Animated.timing(this.state.squares[index].animation, {
       toValue: 1,

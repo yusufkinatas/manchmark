@@ -85,7 +85,7 @@ export const user = {
     user.getAllRanks();
     user.getGlobalAverages();
     user.getGlobalHighscores();
-    user.getSettings();
+    user.getSettings();    
   },
 
   getFromStore: () => {
@@ -164,7 +164,6 @@ export const user = {
       api.getRank(_user.nickname, game)
         .then(res => {
           user.set({ ranks: { ..._user.ranks, userCount: res.data.userCount, [game]: res.data.rank } }, true);
-          console.log("get rank", game, _user);
           resolve(res.data);
         })
         .catch(err => {
@@ -292,6 +291,17 @@ export const user = {
         .then(res => {
           console.log("New unfollow:", res)
           user.set({ follows: res.follows }, true);
+          resolve();
+        })
+        .catch(err => reject(err));
+
+    });
+  },
+
+  updateStatistics: () => {
+    return new Promise((resolve, reject) => {
+      api.updateStatistics(_user.authToken, _user.statistics)
+        .then(res => {
           resolve();
         })
         .catch(err => reject(err));

@@ -119,7 +119,7 @@ export default class CalculationSpeedGame extends Component {
         }
       }
     }, true);
-
+    user.updateStatistics();
     this.setState({ gameStatus: "finished" });
   }
 

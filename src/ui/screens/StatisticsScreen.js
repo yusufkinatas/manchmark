@@ -76,8 +76,6 @@ export default class StatisticsScreen extends Component {
 
   renderStatisticForGame = (data) => {
     const game = data.item;
-    console.log("buradayimmmmmmmmmmmmmm");
-    console.log(data);
     return (
       <ScrollView style={{ width: _SCREEN.width }} >
 
@@ -121,15 +119,12 @@ export default class StatisticsScreen extends Component {
     let count = user.get().ranks.userCount;
     let userPercent;
 
-    console.log(count);
-    console.log(rank);
     if (_.isInteger(count) && _.isInteger(rank)) {
-      userPercent = utils.truncateFloatingNumber(100 - (rank / count * 100), 3);
-      console.log(userPercent);
+      userPercent = utils.truncateFloatingNumber((rank / count * 100), 3);
       userPercent = _.isNaN(userPercent) ? "- " : userPercent + "%";
     }
     else {
-      userPercent = "- "
+      userPercent = "- ";
     }
 
 
@@ -142,7 +137,7 @@ export default class StatisticsScreen extends Component {
   }
 
   selectGame = (index, scrollFlatlist) => {
-    this.setState({ selectedGameIndex: index }, () => console.log("SET STATE", index))
+    this.setState({ selectedGameIndex: index });
     if (scrollFlatlist) {
       this.flatList.scrollToIndex({ animated: false, index });
     }

@@ -97,7 +97,7 @@ export default class VerbalMemoryGame extends Component {
         }
       }
     }, true);
-
+    user.updateStatistics();
     this.setState({ gameStatus: "finished" });
   }
 

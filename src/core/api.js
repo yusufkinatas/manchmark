@@ -144,4 +144,12 @@ export const api = {
     });
   },
 
+  updateStatistics: (token, statistics) => {
+    return new Promise((resolve, reject) => {
+      axios.post(`${API_URL}/statistics`, { statistics }, { headers: { "x-auth": token } })
+        .then(res => resolve(res.data))
+        .catch(err => reject(err));
+    });
+  },
+
 };

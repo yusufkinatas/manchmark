@@ -85,7 +85,7 @@ export default class NumberMemoryGame extends Component {
         }
       }
     }, true);
-
+    user.updateStatistics();
     this.setState({ gameStatus: "finished" });
   }
 

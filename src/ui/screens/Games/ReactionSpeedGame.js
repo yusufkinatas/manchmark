@@ -141,7 +141,7 @@ export default class ReactionSpeedGame extends Component {
         this.extraData.push({ data: [`Phase ${index + 1}`, "-"] });
       }
     });
-
+    user.updateStatistics();
     this.setState({ gameStatus: "finished" });
   }
 
