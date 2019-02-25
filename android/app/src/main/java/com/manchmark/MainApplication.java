@@ -1,5 +1,6 @@
 package com.manchmark;
 
+import com.sbugert.rnadmob.RNAdMobPackage;
 import com.rt2zz.reactnativecontacts.ReactNativeContacts;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -45,6 +46,7 @@ public class MainApplication extends NavigationApplication {
             new RNLocalizePackage(),
             new ReactNativeContacts(),
             new RNAccountKitPackage(),
+            new RNAdMobPackage(),
             new RNRootViewBackgroundPackage()
         );
     }
