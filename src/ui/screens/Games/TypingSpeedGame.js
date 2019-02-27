@@ -58,6 +58,7 @@ export default class TypingSpeedGame extends Component {
     this.usedWords = [];
     this.keyPressCount = 0;
     clearTimeout(this.endGameTimeout);
+    this.endGameTimeout = null;
 
     this.setState({
       gameStatus: "info",
@@ -210,7 +211,7 @@ export default class TypingSpeedGame extends Component {
           }}
           underlineColorAndroid={"transparent"}
         />
-        
+
       </KeyboardAvoidingView>
     );
   }
