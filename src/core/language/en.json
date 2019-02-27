@@ -28,7 +28,7 @@
   "findYourFriends": "Find Your Friends",
   "friend": "Friend",
   "add": "Add",
-  "getNumbersInfo": "To add friends from your contacts, you must verify your phone number and grant access to contacts.\n\nYour phone number and contacts are required to recommend your friends in your contacts.\n\nYour personal information will not be shared with any business partner, company, organization or other organization.",
+  "getNumbersInfo": "To add friends from your contacts, you must verify your phone number and grant access to your contacts.\n\nYour contacts will not be shared or stored in any way.",
   "findFriends": "Find Friends",
   "searchUser": "Search User",
 
@@ -118,7 +118,7 @@
 
   "youHaventAddedFriendsYet": "You haven't added friends yet",
   "addFriends": "Add Friends",
-  "average": "Average",
+  "average": "Average"
 
 
 }

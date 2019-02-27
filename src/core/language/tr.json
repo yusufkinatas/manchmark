@@ -28,7 +28,7 @@
   "findYourFriends": "Arkadaşlarını Bul",
   "friend": "Arkadaş",
   "add": "Ekle",
-  "getNumbersInfo": "Rehberindeki kişileri arkadaş eklemek için, numaranı doğrulaman ve kişilere erişim izni vermen gerekir.\n\nTelefon numaranız ve rehber bilginiz rehberinizdeki arkadaşlarınızı önerebilmemiz için gereklidir.\n\nKişisel bilgileriniz hiçbir iş ortağı, şirket, kurum ya da başka bir kuruluşla paylaşılmayacaktır.",
+  "getNumbersInfo": "Rehberindeki kişileri arkadaş eklemek için, numaranı doğrulaman ve kişilere erişim izni vermen gerekir.\n\nKişisel bilgileriniz hiçbir iş ortağı, şirket, kurum ya da başka bir kuruluşla paylaşılmayacaktır.",
   "findFriends": "Arkadaşlarını Bul",
   "searchUser": "Kullanıcı Ara",
 
@@ -119,7 +119,7 @@
 
   "youHaventAddedFriendsYet": "Henüz kimseyi arkadaş olarak eklemediniz.",
   "addFriends": "Arkadaş Ekle",
-  "average": "Ortalama",
+  "average": "Ortalama"
 
 
 }
