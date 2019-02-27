@@ -142,7 +142,7 @@ var styles = StyleSheet.create({
     fontSize: 10,
     fontFamily: "roboto",
     color: colors.secondaryLight,
-    textAlign: "left",
+    textAlign: "center",
     paddingLeft: 5,
     marginBottom: 10
   }

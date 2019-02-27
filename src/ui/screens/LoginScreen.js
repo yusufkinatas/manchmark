@@ -35,10 +35,7 @@ export default class MainScreen extends Component {
       errorText: "",
       nickname: ""
     }
-
   }
-
-
 
   componentDidMount() {
 
@@ -49,7 +46,6 @@ export default class MainScreen extends Component {
       if (state == "active") {
         NetInfo.isConnected.fetch().then(isConnected => {
           user.set({ isConnected });
-          console.log("isConnected", isConnected)
         })
       }
     });
@@ -70,39 +66,35 @@ export default class MainScreen extends Component {
                   this.startGame();
                 })
                 .catch(err => {
-                  console.log("cannot login", err);
                   this.setState({ isLoading: false });
                 });
             }
-          }).catch(err => console.log(err));
+          }).catch(err => { });
       }
       else {
         user.getFromStore()
           .then(_user => {
             this.startGame();
-          }).catch(err => console.log(err));
+          }).catch(err => { });
       }
 
-    }).catch(err => console.log(err))
+    }).catch(err => { })
 
   }
 
   addConnectionChangeListener = () => {
     NetInfo.addEventListener("connectionChange", (res) => {
       if (res && res.type != "none") {
-        console.log("isConnected", true);
         user.set({ isConnected: true });
         user.compareLocalHighscores();
       }
       else {
-        console.log("isConnected", false);
         user.set({ isConnected: false });
       }
     });
   }
 
   startGame = () => {
-    console.log("USER", user.get());
     if (user.get().isConnected) {
       user.initialize();
     }
@@ -124,13 +116,10 @@ export default class MainScreen extends Component {
         .then((res) => {
           var tmpUser = _.omit(res.data, ["tokens", "__v", "_id"]);
           tmpUser.authToken = res.headers["x-auth"];
-          console.log("saving user", tmpUser);
           user.set(tmpUser, true);
           this.startGame();
         })
         .catch(err => {
-          console.log("err", JSON.stringify(err, undefined, 2));
-          console.log("err", err);
           this.setState({ errorText: translate("errUsernameAlreadyInUse"), isLoading: false });
         });
     }
@@ -168,7 +157,7 @@ export default class MainScreen extends Component {
           underlineColorAndroid={"transparent"}
         />
         <Text style={Generics.errorText} >{this.state.errorText}</Text>
-        <CustomButton text="CHOOSE" onPress={this.onChooseNickname} />
+        <CustomButton text={translate("choose")} onPress={this.onChooseNickname} />
       </View>
     );
   }

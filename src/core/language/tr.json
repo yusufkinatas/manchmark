@@ -28,7 +28,7 @@
   "findYourFriends": "Arkadaşlarını Bul",
   "friend": "Arkadaş",
   "add": "Ekle",
-  "getNumbersInfo": "Rehberindeki kişileri arkadaş eklemek için, numaranı doğrulaman ve kişilere erişim izni vermen gerekir",
+  "getNumbersInfo": "Rehberindeki kişileri arkadaş eklemek için, numaranı doğrulaman ve kişilere erişim izni vermen gerekir.\n\nTelefon numaranız ve rehber bilginiz rehberinizdeki arkadaşlarınızı önerebilmemiz için gereklidir.\n\nKişisel bilgileriniz hiçbir iş ortağı, şirket, kurum ya da başka bir kuruluşla paylaşılmayacaktır.",
   "findFriends": "Arkadaşlarını Bul",
   "searchUser": "Kullanıcı Ara",
 
@@ -114,6 +114,12 @@
   "XmistakesAllowed": "Her seviyede 2 hata hakkın vardır!",
   "levelX": "Seviye 2",
   "lives": "Can",
-  "level": "Seviye"
+  "level": "Seviye",
+  "choose": "Seç",
+
+  "youHaventAddedFriendsYet": "Henüz kimseyi arkadaş olarak eklemediniz.",
+  "addFriends": "Arkadaş Ekle",
+  "average": "Ortalama",
+
 
 }

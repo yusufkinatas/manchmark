@@ -68,12 +68,7 @@ export default class TypingSpeedGame extends Component {
     });
   }
 
-  componentWillMount() {
-    console.log("componentWillMount");
-  }
-
   componentWillUnmount() {
-    console.log('componentWillUnmount');
     clearTimeout(this.endGameTimeout);
     clearTimeout(this.keyboardTimer);
   }
@@ -144,8 +139,6 @@ export default class TypingSpeedGame extends Component {
     this.keyPressCount++;
     let ans = text.toLowerCase().trim();
     this.onAnswer(ans);
-
-
   }
 
   onAnswer = (answer) => {
@@ -217,8 +210,7 @@ export default class TypingSpeedGame extends Component {
           }}
           underlineColorAndroid={"transparent"}
         />
-
-
+        
       </KeyboardAvoidingView>
     );
   }

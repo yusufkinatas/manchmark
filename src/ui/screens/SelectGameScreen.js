@@ -62,8 +62,6 @@ export default class SelectGameScreen extends Component {
   render() {
     return (
 
-
-
       <ScrollView style={{flex:1, backgroundColor: _APP_SETTINGS.colors.secondary}}  contentContainerStyle={{ width: _SCREEN.width, minHeight: _SCREEN.height - 80, alignItems: "center", justifyContent: "center", paddingTop: 10, }} >
 
         {_APP_SETTINGS.games.map(g => {
@@ -75,4 +73,5 @@ export default class SelectGameScreen extends Component {
       </ScrollView>
     )
   }
+  
 }

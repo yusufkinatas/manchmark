@@ -21,12 +21,6 @@ import SwappingText from "../../../components/SwappingText";
 import BouncingText from "../../../components/BouncingText";
 import GameResult from '../../../components/GameResult';
 import Numpad from '../../../components/Numpad';
-import {
-  AdMobBanner,
-  AdMobInterstitial,
-  PublisherBanner,
-  AdMobRewarded
-} from 'react-native-admob'
 
 const TIMEOUT_MS = 30000;
 const QUESTION_FUNCTIONS = [
@@ -98,12 +92,7 @@ export default class CalculationSpeedGame extends Component {
     clearTimeout(this.endGameTimeout);
   }
 
-  componentWillMount() {
-    console.log("componentWillMount");
-  }
-
   componentWillUnmount() {
-    console.log('componentWillUnmount');
     clearTimeout(this.endGameTimeout);
   }
 

@@ -102,8 +102,8 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         missingDimensionStrategy "RNN.reactNativeVersion", "reactNative57"
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -163,7 +163,6 @@ configurations.all {
 }
 
 dependencies {
-    compile project(':react-native-admob')
     implementation project(':react-native-localize')
     implementation project(':react-native-facebook-account-kit')
     implementation project(':react-native-contacts')

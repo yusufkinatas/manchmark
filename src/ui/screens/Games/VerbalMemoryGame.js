@@ -56,14 +56,6 @@ export default class VerbalMemoryGame extends Component {
     });
   }
 
-  componentWillMount() {
-    console.log("componentWillMount");
-  }
-
-  componentWillUnmount() {
-    console.log('componentWillUnmount');
-  }
-
   generateNewWord = () => {
     let randomWord;
     do {

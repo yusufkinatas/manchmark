@@ -26,6 +26,7 @@ const CustomButton = ({ onPress, text, icon, backgroundColor }) => {
       <Text style={styles.text} >{text}</Text>
     </TouchableOpacity>
   )
+
 };
 
 CustomButton.propTypes = {
@@ -34,6 +35,7 @@ CustomButton.propTypes = {
   icon: PropTypes.string,
   backgroundColor: PropTypes.string
 };
+
 CustomButton.defaultProps = {
   onPress: () => { },
   text: 'Button Text',

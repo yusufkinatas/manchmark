@@ -42,7 +42,7 @@ export default class VisualMemoryGame extends Component {
 
   constructor(props) {
     super(props);
-    
+
     this.wrongTileCount = 0;
     this.isAnimating = false;
     this.levelAnim = new Animated.Value(0);
@@ -120,7 +120,7 @@ export default class VisualMemoryGame extends Component {
         }
       }
     }, true);
-    
+
     let tmp = user.get().statistics;
     user.updateStatistics();
     this.setState({ gameStatus: "finished" });
@@ -303,7 +303,6 @@ export default class VisualMemoryGame extends Component {
         }
       }
     });
-
 
   }
 

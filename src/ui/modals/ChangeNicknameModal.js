@@ -81,7 +81,6 @@ export default class ChangeNicknameModal extends Component {
       user.changeNickname(_nickname)
         .then(() => { this.dissmissModal() })
         .catch(err => {
-          console.log(err);
           this.setState({ errorText: translate("errUsernameAlreadyInUse"), isLoading: false });
         });
     }

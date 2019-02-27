@@ -84,7 +84,6 @@ export default class FollowsScreen extends Component {
       }
       else {
         this.setState({ renderStatus: "search", searchText: _text, errorText: "" });
-        console.log(this.state.follows)
         api.search(_text).then(res => {
           let clone = []
           res.forEach(_user => {

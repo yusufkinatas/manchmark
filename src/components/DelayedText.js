@@ -11,7 +11,6 @@ export default class DelayedText extends Component {
 
   constructor(props) {
     super(props);
-
     this.fadeInAnim = new Animated.Value(0);
   }
 

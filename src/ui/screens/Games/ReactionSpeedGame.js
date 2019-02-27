@@ -83,13 +83,6 @@ export default class ReactionSpeedGame extends Component {
     this.setState({ gameStatus: "info", playingState: "waiting" });
   }
 
-  componentWillUpdate() {
-  }
-
-  componentWillMount() {
-    console.log("componentWillMount");
-  }
-
   componentWillUnmount() {
     clearTimeout(this.timer);
   }
@@ -104,17 +97,12 @@ export default class ReactionSpeedGame extends Component {
     let averageReaction = this.findAverage();
     let fastest = this.findFastestReaction();
 
-    console.log("fastest", fastest)
-    console.log("old fastest", reactionStats.fastestReaction)
-
     let currentStats = {}
 
     if (fastest != 0 && (reactionStats.fastestReaction == 0 || reactionStats.fastestReaction > fastest)) {
-      console.log("geldim1");
       currentStats.fastestReaction = fastest;
     }
     else {
-      console.log("geldim2");
       currentStats.fastestReaction = reactionStats.fastestReaction;
     }
 
@@ -132,13 +120,13 @@ export default class ReactionSpeedGame extends Component {
     }, true);
 
 
-    this.extraData = [{ data: ["Average", this.findAverage(true)], important: true }];
+    this.extraData = [{ data: [translate("average"), this.findAverage(true)], important: true }];
     this.reactionTime.forEach((time, index) => {
       if (time) {
-        this.extraData.push({ data: [`Phase ${index + 1}`, time + "ms"] });
+        this.extraData.push({ data: [`${translate("phase")} ${index + 1}`, time + "ms"] });
       }
       else {
-        this.extraData.push({ data: [`Phase ${index + 1}`, "-"] });
+        this.extraData.push({ data: [`${translate("phase")} ${index + 1}`, "-"] });
       }
     });
     user.updateStatistics();
@@ -185,7 +173,6 @@ export default class ReactionSpeedGame extends Component {
   }
 
   renderAnswerPhase = () => {
-    // Ekran griyken x saniye sonra yesil olacak
     this.startTime = (new Date()).getTime();
     return (
       <View style={{ ...Generics.container, width: _SCREEN.width }}>
@@ -250,7 +237,6 @@ export default class ReactionSpeedGame extends Component {
         case "betweenPhases":
           return (this.betweenPhases());
           break;
-        // code block
         default:
       }
     }

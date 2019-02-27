@@ -22,7 +22,6 @@ export default class GameResult extends Component {
     super(props);
 
     this.game = _APP_SETTINGS.games[_APP_SETTINGS.games.findIndex(g => g.name == props.game)];
-
     this.state = {
       isLoading: true,
       highScore: user.get()[this.game.hsName],
@@ -32,12 +31,10 @@ export default class GameResult extends Component {
       userCount: 1,
       rank: 0,
     };
-
   }
 
   componentDidMount() {
     if (this.state.highScore == null || this.state.highScore < this.state.currentScore) {
-
       user.updateHighscore(this.state.currentScore, this.game.hsName).then(() => {
         user.getRank(this.game.hsName).then(res => {
           this.setState({ isLoading: false, userCount: res.userCount, rank: res.rank });
@@ -45,15 +42,10 @@ export default class GameResult extends Component {
       }).catch(() => {
         this.setState({ isLoading: false, errorText: translate("cantUpdateHighscore") });
       });
-
     }
     else {
       this.setState({ isLoading: false });
     }
-  }
-
-  componentWillUnmount() {
-
   }
 
   isHighScore = () => {
@@ -100,8 +92,6 @@ export default class GameResult extends Component {
             </View>
           </DelayedView>
 
-
-
           <DelayedView delay={200} style={{ ...styles.infoContainer, borderRadius: 5, borderWidth: 2, borderColor: this.game.backgroundColor }} >
             <Text style={{ ...Generics.bigText, fontWeight: "bold", flex: 1, textAlign: "left" }} >{translate("highscore")}</Text>
             <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{this.isHighScore() ? this.state.currentScore : this.state.highScore}</Text>
@@ -122,8 +112,6 @@ export default class GameResult extends Component {
           <DelayedView delay={600} >
             <CustomButton backgroundColor={this.game.backgroundColor} style={Generics.container} text={translate("restart")} onPress={this.props.onRestart} />
           </DelayedView>
-
-
 
         </View>
         <DelayedView delay={800} style={{ position: "absolute", bottom: 20 }} >

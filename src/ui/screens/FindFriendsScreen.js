@@ -92,7 +92,7 @@ export default class FindFriendsScreen extends Component {
           var code = payload.code;
           user.changePhoneNumber(code).then(() => {
             this.handleButtonPress();
-          }).catch(err => console.log("err", err));
+          }).catch(err => { });
 
         }
       } catch (err) {
@@ -112,7 +112,7 @@ export default class FindFriendsScreen extends Component {
       if (granted == PermissionsAndroid.RESULTS.GRANTED) {
         Contacts.getAll((err, contacts) => {
           if (err) {
-            console.log(err);
+
           }
           else {
             let nums = [];
@@ -126,28 +126,22 @@ export default class FindFriendsScreen extends Component {
                   }
                 };
               } catch (error) {
-                console.log("err", error);
+
               }
 
 
             });
-            // console.log(nums.length);
-            // console.log(nums);
             api.getContacts(nums).then(res => {
-              // console.log("CONTACTS", res);
-              // console.log("CONTACTS LEN", res.length);
               user.set({ contacts: res }, true);
               this.refreshUserData();
             })
-              .catch(err => console.log("ERR", err));
+              .catch(err => { });
           }
         })
       }
       else {
-        console.log("NOT GRANTED");
       }
     }).catch(err => {
-      console.log("ERR", err)
     })
   }
 
@@ -179,7 +173,6 @@ export default class FindFriendsScreen extends Component {
     );
   }
 
-
   render() {
     return (
       <View style={{ ...Generics.container, justifyContent: "flex-start" }} >
@@ -187,7 +180,7 @@ export default class FindFriendsScreen extends Component {
         <ScrollView style={{ flex: 1, width: _SCREEN.width, borderBottomWidth: 1, elevation: 2, marginBottom: 0 }} contentContainerStyle={{ alignItems: "center", paddingTop: 10 }} >
           <View style={{ alignItems: "center" }} >
             {this.state.showInfoText &&
-              <Text style={{ ...Generics.text, fontSize: 12, color: colors.secondaryLight2, textAlign: "center", marginBottom: 10 }} >{translate("getNumbersInfo")}</Text>
+              <Text style={{ ...Generics.text, fontSize: 15, color: colors.secondaryLight2, textAlign: "center", marginBottom: 10, paddingHorizontal: 10 }} >{translate("getNumbersInfo")}</Text>
             }
             <CustomButton text={translate("findFriends")} onPress={this.handleButtonPress} />
           </View>
@@ -202,7 +195,3 @@ export default class FindFriendsScreen extends Component {
 }
 
 const colors = _APP_SETTINGS.colors;
-
-var styles = StyleSheet.create({
-
-});

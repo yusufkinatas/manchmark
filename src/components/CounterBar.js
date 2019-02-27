@@ -14,7 +14,6 @@ import { store, _APP_SETTINGS, _SCREEN, nav } from "../core"
 
 export default class CounterBar extends Component {
 
-
   constructor(props) {
     super(props);
     this.width = new Animated.Value(0);
@@ -72,13 +71,11 @@ CounterBar.propsTypes = {
   color: PropTypes.string,
 }
 
-
 CounterBar.defaultProps = {
   width: 200,
   height: 40,
   color: "gray",
 }
-
 
 const colors = _APP_SETTINGS.colors;
 var styles = StyleSheet.create({

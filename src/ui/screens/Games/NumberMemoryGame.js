@@ -59,12 +59,7 @@ export default class NumberMemoryGame extends Component {
     clearTimeout(this.numberTimeout);
   }
 
-  componentWillMount() {
-    console.log("componentWillMount");
-  }
-
   componentWillUnmount() {
-    console.log('componentWillUnmount');
     clearTimeout(this.numberTimeout);
     clearTimeout(this.answerTime);
   }
@@ -207,12 +202,10 @@ export default class NumberMemoryGame extends Component {
     );
   }
 
-
   showError = () => {
     let num = this.state.number;
     let ans = this.state.userAnswer;
     let ansArray = ans.split("");
-    console.log(_SCREEN.height);
 
     return (
       <View style={{ ...Generics.container, flex: 0.25, justifyContent: "center", paddingTop: 10 }}>

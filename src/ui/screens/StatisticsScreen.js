@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
-import { Navigation } from "react-native-navigation";
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
-  ActivityIndicator,
-  ImageBackground,
-  Image,
-  Alert,
-  Linking,
   ScrollView,
   FlatList,
   Platform,
@@ -17,7 +10,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import _ from "lodash";
-import { store, _APP_SETTINGS, _SCREEN, nav, Generics, api, translate, user, utils } from "../../core";
+import { _APP_SETTINGS, _SCREEN, Generics, translate, user, utils } from "../../core";
 import CustomButton from "../../components/CustomButton";
 
 const colors = _APP_SETTINGS.colors;
@@ -126,8 +119,6 @@ export default class StatisticsScreen extends Component {
     else {
       userPercent = "- ";
     }
-
-
 
     return (this.renderInfoField("percentile", userPercent, backgroundColor));
   }

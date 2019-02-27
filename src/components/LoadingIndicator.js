@@ -31,6 +31,4 @@ LoadingIndicator.defaultProps = {
   color: colors.primary
 };
 
-
-
 export default LoadingIndicator;

@@ -54,14 +54,12 @@ export default class TouchSpeedGame extends Component {
       pressCounter: 0,
       gameStatus: "info", // info - active - finished
       remainingTime: TIMEOUT_MS,
-      progress: 1
+      progress: 1,
+      isStarted: false,
     });
     clearInterval(this.tick);
     clearTimeout(this.endGameTimeout);
-  }
-
-  componentWillMount() {
-
+    this.endGameTimeout = null;
   }
 
   componentWillUnmount() {
@@ -131,7 +129,7 @@ export default class TouchSpeedGame extends Component {
 
   pressed = () => {
     if (this.state.gameStatus != "active") return;
-
+    
     if (!this.endGameTimeout) {
       this.counterBarRef.start(TIMEOUT_MS);
       this.setState({ isStarted: true });

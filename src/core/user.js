@@ -75,7 +75,7 @@ export const user = {
     if (saveToStore) {
       store.setItem("user", _user)
         .then(res => { })
-        .catch(err => console.log(err));
+        .catch(err => { });
     }
   },
 
@@ -85,7 +85,7 @@ export const user = {
     user.getAllRanks();
     user.getGlobalAverages();
     user.getGlobalHighscores();
-    user.getSettings();    
+    user.getSettings();
   },
 
   getFromStore: () => {
@@ -93,7 +93,6 @@ export const user = {
       store.getItem("user")
         .then(res => {
           var parsedUser = _.omit(JSON.parse(res), ["isConnected"]);
-          console.log("USER FROM STORE", parsedUser);
           user.set(parsedUser);
           resolve(parsedUser);
         })
@@ -132,7 +131,7 @@ export const user = {
           }
           savedHighscores[highScoreName] = score;
           store.setItem("savedHighscores", savedHighscores);
-        }).catch(err => console.log(err));
+        }).catch(err => { });
         resolve();
       }
 
@@ -142,19 +141,17 @@ export const user = {
   compareLocalHighscores: () => {
     store.getItem("savedHighscores").then(res => {
       var savedHighscores = JSON.parse(res);
-      console.log("savedHighscores", savedHighscores);
       var promises = [];
       if (!savedHighscores) {
         return;
       }
       Object.keys(savedHighscores).forEach(game => {
-        promises.push(user.updateHighscore(savedHighscores[game], game))
-        console.log("updating", game, "to", savedHighscores[game]);
+        promises.push(user.updateHighscore(savedHighscores[game], game));
       })
       Promise.all(promises).then(res => {
         store.removeItem("savedHighscores");
-      }).catch(err => console.log(err))
-    }).catch(err => console.log(err));
+      }).catch(err => { })
+    }).catch(err => { });
   },
 
   getRank: (game) => {
@@ -176,9 +173,7 @@ export const user = {
     _APP_SETTINGS.games.forEach(g => {
       user.getRank(g.hsName)
         .then(res => { })
-        .catch(err => {
-          console.log("ERR", g.hsName, err)
-        });
+        .catch(err => { });
     })
   },
 
@@ -239,7 +234,6 @@ export const user = {
     return new Promise((resolve, reject) => {
       api.changeNickname(_user.authToken, nickname)
         .then(res => {
-          console.log("NICKNAME CHANGED")
           user.set({ nickname }, true);
           resolve();
         })
@@ -263,7 +257,6 @@ export const user = {
   getSettings: () => {
     return new Promise((resolve, reject) => {
       api.getSettings().then((res) => {
-        console.log("SETTIGNS", res);
         user.set({ settings: res.settings }, true);
         resolve();
       }).catch(err => {
@@ -276,7 +269,6 @@ export const user = {
     return new Promise((resolve, reject) => {
       api.follow(_user.authToken, _id)
         .then(res => {
-          console.log("New follow:", res)
           user.set({ follows: res.follows }, true);
           resolve();
         })
@@ -289,7 +281,6 @@ export const user = {
     return new Promise((resolve, reject) => {
       api.unfollow(_user.authToken, _id)
         .then(res => {
-          console.log("New unfollow:", res)
           user.set({ follows: res.follows }, true);
           resolve();
         })

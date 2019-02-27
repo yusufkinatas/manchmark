@@ -10,8 +10,6 @@ import Icon from 'react-native-vector-icons/Feather';
 
 import { store, _APP_SETTINGS, _SCREEN, nav, Generics } from "../core"
 
-
-
 export default class Numpad extends Component {
 
   onPressIn = (name) => {

@@ -276,7 +276,7 @@ export default class LeaderboardScreen extends Component {
   }
 
   selectGame = (index, scrollFlatlist) => {
-    this.setState({ selectedGameIndex: index }, () => console.log("SET STATE", index))
+    this.setState({ selectedGameIndex: index }, () => { })
     if (scrollFlatlist) {
       this.flatList.scrollToIndex({ animated: false, index });
     }
@@ -343,8 +343,8 @@ export default class LeaderboardScreen extends Component {
         {user.get().follows.length == 0
           ?
           <View style={Generics.container} >
-            <Text style={{ ...Generics.bigText, marginBottom: 20 }} >You haven't added friends yet</Text>
-            <CustomButton text="Add Friends" icon="plus" onPress={() => this.pushScreen("FollowsScreen")} />
+            <Text style={{ ...Generics.bigText, marginBottom: 20 }} >{translate("youHaventAddedFriendsYet")}</Text>
+            <CustomButton text={translate("addFriends")} icon="plus" onPress={() => this.pushScreen("FollowsScreen")} />
           </View>
           :
           <View style={Generics.container} >
@@ -383,4 +383,5 @@ export default class LeaderboardScreen extends Component {
   render() {
     return this.state.showGlobal ? this.renderGlobalLeaderboards() : this.renderFriendLeaderboards();
   }
+
 }

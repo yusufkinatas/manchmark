@@ -66,7 +66,6 @@ export const api = {
 
   updateHighscores: (token, highscores) => {
     return new Promise((resolve, reject) => {
-      console.log({ ...highscores }, token);
       axios.patch(`${API_URL}/highscores`, { ...highscores }, {
         headers: { "x-auth": token }
       })
