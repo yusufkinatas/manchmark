@@ -5,4 +5,5 @@ export { utils } from "./utils";
 export { nav } from "./nav";
 export { api } from "./api";
 export { user } from "./user";
+export { audio } from "./audio";
 export { setI18nConfig, translate } from "./language";

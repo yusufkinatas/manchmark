@@ -8,12 +8,13 @@ import {
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Feather';
 
-import { store, _APP_SETTINGS, _SCREEN, nav, Generics } from "../core"
+import { store, _APP_SETTINGS, _SCREEN, nav, Generics, audio } from "../core"
 
 export default class Numpad extends Component {
 
   onPressIn = (name) => {
     this.props.onPress(name);
+    audio.play("click_numpad.wav", 0.2);
   }
 
   renderButton = (name) => {

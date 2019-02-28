@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, utils, Generics, translate, user } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, translate, user, audio } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
 import CounterBar from "../../../components/CounterBar";
 import BouncingText from '../../../components/BouncingText';
@@ -270,10 +270,12 @@ export default class VisualMemoryGame extends Component {
     this.buttonsEnabled = false;
     this.state.squares[index].pushed = true;
     if (this.state.squares[index].special) {
+      audio.play("vm2.wav", 0.5);
       this.specialSquarePushed++;
       this.state.score += 10;
     }
     else {
+      audio.play("vm1.wav", 0.5);
       this.state.levelMistakes++;
       this.wrongTileCount++;
       if (this.state.levelMistakes > 2 && this.state.lives == 1) {

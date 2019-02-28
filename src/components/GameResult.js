@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 
-import { store, _APP_SETTINGS, _SCREEN, nav, user, Generics, utils, translate } from "../core"
+import { store, _APP_SETTINGS, _SCREEN, nav, user, Generics, utils, translate, audio } from "../core"
 import DelayedText from "./DelayedText";
 import DelayedView from "./DelayedView";
 import CustomButton from "./CustomButton";
@@ -45,7 +45,11 @@ export default class GameResult extends Component {
       user.updateHighscore(this.state.currentScore, this.game.hsName).then(() => {
         user.getRank(this.game.hsName).then(res => {
           this.setState({ isLoading: false, userCount: res.userCount, rank: res.rank });
-        }).catch(err => this.setState({ isLoading: false }));
+          audio.play("highscore");
+        }).catch(err => {
+          audio.play("highscore");
+          this.setState({ isLoading: false });
+        });
       }).catch(() => {
         this.setState({ isLoading: false, errorText: translate("cantUpdateHighscore") });
       });
