@@ -10,11 +10,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { store, _APP_SETTINGS, _SCREEN, nav } from "../core"
 
-const HeaderButton = ({ onPress, text, icon, backgroundColor }) => {
+const HeaderButton = ({ onPress, text, icon, backgroundColor, disabled }) => {
 
   return (
     <View style={{ paddingRight: 10, backgroundColor: "transparent" }} >
       <TouchableOpacity
+        disabled={disabled}
         style={{ ...styles.button, backgroundColor: backgroundColor ? backgroundColor : colors.primary }}
         onPress={onPress}
       >
@@ -27,7 +28,8 @@ const HeaderButton = ({ onPress, text, icon, backgroundColor }) => {
 HeaderButton.propTypes = {
   onPress: PropTypes.func.isRequired,
   icon: PropTypes.string,
-  backgroundColor: PropTypes.string
+  backgroundColor: PropTypes.string,
+  disabled: PropTypes.bool
 };
 HeaderButton.defaultProps = {
   onPress: () => { },

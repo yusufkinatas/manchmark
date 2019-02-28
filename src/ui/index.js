@@ -12,6 +12,7 @@ import HeaderButton from '../components/HeaderButton';
 
 import AboutUsModal from './modals/AboutUsModal';
 import ChangeNicknameModal from './modals/ChangeNicknameModal';
+import LeaderboardTutorialModal from './modals/LeaderboardTutorialModal';
 
 import CalculationSpeedGame from './screens/Games/CalculationSpeedGame';
 import NumberMemoryGame from './screens/Games/NumberMemoryGame';
@@ -35,6 +36,7 @@ export function registerScreens() {
 
   Navigation.registerComponent('AboutUsModal', () => AboutUsModal);
   Navigation.registerComponent('ChangeNicknameModal', () => ChangeNicknameModal);
+  Navigation.registerComponent('LeaderboardTutorialModal', () => LeaderboardTutorialModal);
 
   Navigation.registerComponent('CalculationSpeedGame', () => CalculationSpeedGame);
   Navigation.registerComponent('NumberMemoryGame', () => NumberMemoryGame);

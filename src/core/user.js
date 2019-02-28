@@ -21,6 +21,9 @@ var _user = {
   settings: {
     friendsEnabled: false
   },
+  tutorials: {
+    leaderboardTutorial: false
+  },
   statistics: {
     VisualMemoryGame: {
       amountPlayed: 0,

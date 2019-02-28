@@ -116,10 +116,12 @@
   "lives": "Can",
   "level": "Seviye",
   "choose": "Seç",
+  "ok" : "Tamam",
+  "gotIt": "Anladım", 
 
   "youHaventAddedFriendsYet": "Henüz kimseyi arkadaş olarak eklemediniz.",
   "addFriends": "Arkadaş Ekle",
-  "average": "Ortalama"
-
+  "average": "Ortalama",
+  "leaderboardTutorial": "Küre ikonuna tıklayarak global skor tablosuna erişebilirsiniz."
 
 }

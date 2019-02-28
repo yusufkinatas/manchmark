@@ -115,10 +115,13 @@
   "lives": "Lives",
   "level": "Level",
   "choose": "Choose",
+  "ok": "Ok",
+  "gotIt": "Got it!", 
 
   "youHaventAddedFriendsYet": "You haven't added friends yet",
   "addFriends": "Add Friends",
-  "average": "Average"
+  "average": "Average",
 
+  "leaderboardTutorial": "You can press the globe icon for global leaderboard."
 
 }

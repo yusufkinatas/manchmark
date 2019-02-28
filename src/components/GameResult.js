@@ -54,7 +54,7 @@ export default class GameResult extends Component {
       this.setState({ isLoading: false });
     }
     adCounter++;
-    if (adCounter % 5 == 0){
+    if (adCounter % 5 == 0) {
       AdMobInterstitial.setAdUnitID('ca-app-pub-8579542894335012/4831460364');
       AdMobInterstitial.requestAd()
         .then(() => AdMobInterstitial.showAd())
