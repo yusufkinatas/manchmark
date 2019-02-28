@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user, translate } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user, translate, audio } from "../../../core";
 import CounterBar from "../../../components/CounterBar";
 import CustomButton from "../../../components/CustomButton";
 import SwappingText from "../../../components/SwappingText";
@@ -159,6 +159,7 @@ export default class TypingSpeedGame extends Component {
     if (index != -1) {
       this.usedWords.push(answer);
       tmpArray[index] = this.generateNewWord();
+      audio.play("correct.wav", 0.4);
       this.clearText();
       this.keyboardTimer = setTimeout(() => {
         this.setState({ word: tmpArray, score: this.state.score + answer.length * 5 + 10 }, this.clearText);

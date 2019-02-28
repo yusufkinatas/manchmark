@@ -8,7 +8,7 @@ import {
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, nav } from "../core"
+import { store, _APP_SETTINGS, _SCREEN, nav, audio } from "../core"
 
 const HeaderButton = ({ onPress, text, icon, backgroundColor }) => {
 
@@ -16,7 +16,10 @@ const HeaderButton = ({ onPress, text, icon, backgroundColor }) => {
     <View style={{ paddingRight: 10, backgroundColor: "transparent" }} >
       <TouchableOpacity
         style={{ ...styles.button, backgroundColor: backgroundColor ? backgroundColor : colors.primary }}
-        onPress={onPress}
+        onPress={() => {
+          onPress();
+          audio.play("click.wav", 0.15);
+        }}
       >
         <Icon name={icon} size={20} color={colors.secondaryLight3} style={{left:4}} />
       </TouchableOpacity>

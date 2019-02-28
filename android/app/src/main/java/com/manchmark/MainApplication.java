@@ -1,6 +1,7 @@
 package com.manchmark;
 
 import com.rt2zz.reactnativecontacts.ReactNativeContacts;
+import com.zmxv.RNSound.RNSoundPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.reactcommunity.rnlocalize.RNLocalizePackage; 
@@ -42,6 +43,7 @@ public class MainApplication extends NavigationApplication {
             new SplashScreenReactPackage(),
             new VectorIconsPackage(),
             new RNDeviceInfo(),
+            new RNSoundPackage(),
             new RNLocalizePackage(),
             new ReactNativeContacts(),
             new RNAccountKitPackage(),

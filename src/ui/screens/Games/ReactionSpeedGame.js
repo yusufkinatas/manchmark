@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user, translate } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user, translate, audio } from "../../../core";
 import CustomButton from '../../../components/CustomButton';
 import DelayedText from '../../../components/DelayedText';
 import GameResult from '../../../components/GameResult';
@@ -197,6 +197,7 @@ export default class ReactionSpeedGame extends Component {
   }
 
   onAnswer = () => {
+    audio.play("correct.wav", 0.4);
     this.answer = true;
     this.endTime = (new Date()).getTime();
     this.reactionTime.push(this.endTime - this.startTime);
@@ -205,6 +206,7 @@ export default class ReactionSpeedGame extends Component {
   }
 
   onWrongAnswer = () => {
+    audio.play("wrong.wav");
     this.answer = false;
     this.reactionTime.push(0);
     clearTimeout(this.timer);

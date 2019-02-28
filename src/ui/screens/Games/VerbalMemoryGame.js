@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user, translate } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user, translate, audio } from "../../../core";
 import CustomButton from "../../../components/CustomButton";
 import SwappingText from "../../../components/SwappingText";
 import DelayedView from "../../../components/DelayedView";
@@ -104,6 +104,7 @@ export default class VerbalMemoryGame extends Component {
       this.endGame();
     }
     else {
+      audio.play("click_verbal", 0.15);
       if (!usedBefore) {
         this.usedWords.push(this.state.word);
       }

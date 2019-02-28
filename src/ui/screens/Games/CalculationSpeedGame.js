@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user, translate } from "../../../core";
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user, translate, audio } from "../../../core";
 import CounterBar from "../../../components/CounterBar";
 import CustomButton from "../../../components/CustomButton";
 import SwappingText from "../../../components/SwappingText";
@@ -161,12 +161,14 @@ export default class CalculationSpeedGame extends Component {
 
   onAnswer = () => {
     if (this.state.text == this.trueAnswer) {
+      audio.play("correct.wav", 0.4);
       this.setState({ score: this.state.score + 50 });
       this.correctAnswerCount++;
       this.showNewQuestion();
       this.animateBackground("green");
     }
     else {
+      audio.play("wrong.wav");
       this.setState({ score: this.state.score - 20, text: "" });
       this.animateBackground("failure");
     }

@@ -8,14 +8,17 @@ import {
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, nav } from "../core"
+import { store, _APP_SETTINGS, _SCREEN, nav, audio } from "../core"
 
 const CustomButton = ({ onPress, text, icon, backgroundColor }) => {
 
   return (
     <TouchableOpacity
       style={{ ...styles.button, backgroundColor: backgroundColor ? backgroundColor : colors.primary, justifyContent: icon ? "flex-start" : "center" }}
-      onPress={onPress}
+      onPress={() => {
+        onPress();
+        audio.play("click_main.wav", 0.2);
+      }}
     >
       {
         icon &&

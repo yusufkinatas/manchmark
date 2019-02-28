@@ -10,7 +10,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import _ from "lodash";
-import { _APP_SETTINGS, _SCREEN, Generics, translate, user, utils } from "../../core";
+import { _APP_SETTINGS, _SCREEN, Generics, translate, user, utils, audio } from "../../core";
 import CustomButton from "../../components/CustomButton";
 
 const colors = _APP_SETTINGS.colors;
@@ -42,7 +42,10 @@ export default class StatisticsScreen extends Component {
         return (
           <TouchableOpacity
             key={g.name}
-            onPress={() => this.selectGame(index, true)}
+            onPress={() => {
+              this.selectGame(index, true);
+              audio.play("click.wav", 0.15);
+            }}
             style={{ margin: 3, padding: 5, width: squareWidth, height: squareWidth, justifyContent: "center", alignItems: "center", elevation: 5, backgroundColor: this.state.selectedGameIndex == index ? g.backgroundColor : colors.secondaryLight, borderRadius: 5 }}
           >
             <Icon name={g.icon} color={colors.secondaryLight3} size={20} />
