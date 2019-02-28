@@ -122,6 +122,8 @@
   "addFriends": "Add Friends",
   "average": "Average",
 
-  "leaderboardTutorial": "You can press the globe icon for global leaderboard."
+  "leaderboardTutorial": "You can press the globe icon for global leaderboard.",
+  "settings": "Settings",
+  "sounds": "Sounds"
 
 }

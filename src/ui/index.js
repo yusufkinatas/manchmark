@@ -7,6 +7,7 @@ import LeaderboardScreen from './screens/LeaderboardScreen';
 import StatisticsScreen from './screens/StatisticsScreen';
 import FollowsScreen from './screens/FollowsScreen';
 import FindFriendsScreen from './screens/FindFriendsScreen';
+import SettingsScreen from './screens/SettingsScreen';
 
 import HeaderButton from '../components/HeaderButton';
 
@@ -31,6 +32,7 @@ export function registerScreens() {
   Navigation.registerComponent('StatisticsScreen', () => StatisticsScreen);
   Navigation.registerComponent('FollowsScreen', () => FollowsScreen);
   Navigation.registerComponent('FindFriendsScreen', () => FindFriendsScreen);
+  Navigation.registerComponent('SettingsScreen', () => SettingsScreen);
 
   Navigation.registerComponent('HeaderButton', () => HeaderButton);
 

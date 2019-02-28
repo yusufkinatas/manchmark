@@ -21,6 +21,9 @@ var _user = {
   settings: {
     friendsEnabled: false
   },
+  localSettings: {
+    soundEnabled: true
+  },
   tutorials: {
     leaderboardTutorial: false
   },

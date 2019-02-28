@@ -74,7 +74,7 @@ export default class MainScreen extends Component {
 
   renderBottomButton = (icon, text, onPress) => {
     return (
-      <View style={{ flex: 1, borderRadius: 5, overflow: "hidden", marginHorizontal: 10 }} >
+      <View style={{ flex: 1, borderRadius: 5, overflow: "hidden", marginHorizontal: 5 }} >
         <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple(colors.primary, true)} onPress={onPress} >
           <View style={{ paddingHorizontal: 5, justifyContent: "center", alignItems: "center" }} >
             <Icon name={icon} size={20} color={colors.secondaryLight2} />
@@ -128,6 +128,10 @@ export default class MainScreen extends Component {
             audio.play("click.wav", 0.15);
           })}
           {this.renderBottomButton("share-2", translate("invite"), this.shareGame)}
+          {this.renderBottomButton("settings", translate("settings"), () => {
+            this.pushScreen("SettingsScreen");
+            audio.play("click.wav", 0.15);
+          })}
         </View>
 
       </View>
