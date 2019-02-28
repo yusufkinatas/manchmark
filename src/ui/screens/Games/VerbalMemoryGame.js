@@ -19,6 +19,7 @@ import CustomButton from "../../../components/CustomButton";
 import SwappingText from "../../../components/SwappingText";
 import DelayedView from "../../../components/DelayedView";
 import GameResult from '../../../components/GameResult';
+
 const WORDS = require("../../../../assets/wordsEn.json").wordsEn;
 
 const gameColor = _APP_SETTINGS.games.find(g => g.name == "VerbalMemoryGame").backgroundColor;

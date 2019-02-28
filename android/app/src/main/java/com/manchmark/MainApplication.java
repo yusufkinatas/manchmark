@@ -12,6 +12,7 @@ import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.reactnativenavigation.react.ReactGateway;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import com.sbugert.rnadmob.RNAdMobPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -43,6 +44,7 @@ public class MainApplication extends NavigationApplication {
             new VectorIconsPackage(),
             new RNDeviceInfo(),
             new RNLocalizePackage(),
+            new RNAdMobPackage(),
             new ReactNativeContacts(),
             new RNAccountKitPackage(),
             new RNRootViewBackgroundPackage()

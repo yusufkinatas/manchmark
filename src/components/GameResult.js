@@ -13,7 +13,14 @@ import DelayedText from "./DelayedText";
 import DelayedView from "./DelayedView";
 import CustomButton from "./CustomButton";
 import LoadingIndicator from "./LoadingIndicator";
+import {
+  AdMobBanner,
+  AdMobInterstitial,
+  PublisherBanner,
+  AdMobRewarded
+} from 'react-native-admob'
 
+var adCounter = 0;
 const colors = _APP_SETTINGS.colors;
 
 export default class GameResult extends Component {
@@ -45,6 +52,13 @@ export default class GameResult extends Component {
     }
     else {
       this.setState({ isLoading: false });
+    }
+    adCounter++;
+    if (adCounter % 5 == 0){
+      AdMobInterstitial.setAdUnitID('ca-app-pub-8579542894335012/4831460364');
+      AdMobInterstitial.requestAd()
+        .then(() => AdMobInterstitial.showAd())
+        .catch(err => console.log("Hata: ", err));
     }
   }
 
