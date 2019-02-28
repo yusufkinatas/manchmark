@@ -58,7 +58,7 @@ export default class GameResult extends Component {
       AdMobInterstitial.setAdUnitID('ca-app-pub-8579542894335012/4831460364');
       AdMobInterstitial.requestAd()
         .then(() => AdMobInterstitial.showAd())
-        .catch(err => console.log("Hata: ", err));
+        .catch(err => console.log(err));
     }
   }
 

@@ -39,7 +39,7 @@ export default class VerbalMemoryGame extends Component {
   constructor(props) {
     super(props);
     this.usedWords = [];
-
+    this.firstWord = true;
     this.state = {
       word: "",
       gameStatus: "info",
@@ -49,7 +49,7 @@ export default class VerbalMemoryGame extends Component {
 
   reinitialize = () => {
     this.usedWords = [];
-
+    this.firstWord = true;
     this.setState({
       word: "",
       gameStatus: "info",
@@ -100,6 +100,7 @@ export default class VerbalMemoryGame extends Component {
   }
 
   onAnswer = (answer) => {
+    this.firstWord = false;
     let usedBefore = this.state.score == 0 ? false : this.usedWords.indexOf(this.state.word) != -1;
     if ((answer == "seen" && !usedBefore) || (answer == "new" && usedBefore)) {
       this.endGame();
@@ -134,7 +135,7 @@ export default class VerbalMemoryGame extends Component {
           {this.state.word && this.state.word[0].toUpperCase()}{this.state.word.slice(1)}
         </SwappingText>
         <View style={styles.answerButtonsContainer} >
-          <TouchableOpacity onPress={() => this.onAnswer("seen")} style={{ ...styles.answerButton, backgroundColor: gameColor }} >
+          <TouchableOpacity disabled={this.firstWord} onPress={() => this.onAnswer("seen")} style={{ ...styles.answerButton, opacity: this.firstWord ? 0.2 : 1, backgroundColor: gameColor }} >
             <Text style={{ ...Generics.bigText, fontWeight: "bold" }} >{translate("seen")}</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.onAnswer("new")} style={{ ...styles.answerButton, marginLeft: 0, backgroundColor: gameColor }} >
