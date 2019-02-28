@@ -102,7 +102,7 @@ export default class NumberMemoryGame extends Component {
     this.setState({ isGuessing: true });
     this.answerTime = setTimeout(() => {
       this.onAnswer();
-    }, (this.numberLength + 1) * 1000 + 500);
+    }, (this.numberLength + 3) * 1000 + 500);
   }
 
   onAnswer = () => {
