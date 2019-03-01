@@ -2,8 +2,6 @@
 import Sound from "react-native-sound";
 import { user } from "./user";
 
-Sound.setCategory('Playback');
-
 export const audio = {
 
   play: (soundName, volume = 1) => {

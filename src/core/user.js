@@ -14,6 +14,7 @@ var _user = {
   globalAverages: {},
   globalHighscores: {},
   friendHighscores: {},
+  globalLeaderboardSelected: false,
   follows: [],
   contacts: [],
   phone: null,

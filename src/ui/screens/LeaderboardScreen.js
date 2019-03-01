@@ -168,8 +168,44 @@ export default class LeaderboardScreen extends Component {
     super(props);
     this.state = {
       selectedGameIndex: 0,
-      showGlobal: false,
+      showGlobal: user.get().globalLeaderboardSelected,
     };
+
+    this.navOptions = {
+      globalLeaderboardSelectedConfig: {
+        topBar: {
+          title: { text: translate("leaderboard") + `(${translate("global")})` },
+          rightButtons: [{
+            component: {
+              name: "HeaderButton",
+              passProps: {
+                onPress: this.onGlobalPress,
+                icon: "globe",
+              }
+            }
+          }]
+        }
+      },
+      friendLeaderboardSelectedConfig: {
+        topBar: {
+          title: { text: translate("leaderboard") },
+          rightButtons: [{
+            component: {
+              name: "HeaderButton",
+              passProps: {
+                onPress: this.onGlobalPress,
+                icon: "globe",
+                backgroundColor: colors.secondaryLight,
+              }
+            }
+          }]
+        }
+      }
+    };
+    this.averages = {};
+    this.globalHighscores = {};
+    this.friendHighscores = {};
+
     Navigation.events().bindComponent(this);
   }
 
@@ -218,59 +254,28 @@ export default class LeaderboardScreen extends Component {
     if (!user.get().tutorials.leaderboardTutorial) {
       this.showModal("LeaderboardTutorialModal");
     }
-    Navigation.mergeOptions(this.props.componentId, {
-      topBar: {
-        rightButtons: [{
-          component: {
-            name: "HeaderButton",
-            passProps: {
-              onPress: this.onGlobalPress,
-              icon: "globe",
-              backgroundColor: colors.secondaryLight,
-            }
-          }
-        }]
-      }
-    });
+
+    if (this.state.showGlobal) {
+      Navigation.mergeOptions(this.props.componentId, this.navOptions.globalLeaderboardSelectedConfig);
+    }
+    else {
+      Navigation.mergeOptions(this.props.componentId, this.navOptions.friendLeaderboardSelectedConfig);
+    }
+
   }
 
   onGlobalPress = () => {
     if (this.state.showGlobal) {
       this.globalHighscores = user.get().globalHighscores;
+      user.set({ globalLeaderboardSelected: false }, true);
       this.setState({ showGlobal: false, selectedGameIndex: 0 }, () => {
-        Navigation.mergeOptions(this.props.componentId, {
-          topBar: {
-            title: { text: translate("leaderboard") },
-            rightButtons: [{
-              component: {
-                name: "HeaderButton",
-                passProps: {
-                  onPress: this.onGlobalPress,
-                  backgroundColor: colors.secondaryLight,
-                  icon: "globe"
-                }
-              }
-            }]
-          }
-        });
+        Navigation.mergeOptions(this.props.componentId, this.navOptions.friendLeaderboardSelectedConfig);
       });
     }
     else {
+      user.set({ globalLeaderboardSelected: true }, true);
       this.setState({ showGlobal: true, selectedGameIndex: 0 }, () => {
-        Navigation.mergeOptions(this.props.componentId, {
-          topBar: {
-            title: { text: translate("leaderboard") + `(${translate("global")})` },
-            rightButtons: [{
-              component: {
-                name: "HeaderButton",
-                passProps: {
-                  onPress: this.onGlobalPress,
-                  icon: "globe"
-                }
-              }
-            }]
-          }
-        });
+        Navigation.mergeOptions(this.props.componentId, this.navOptions.globalLeaderboardSelectedConfig);
       })
     }
   }
