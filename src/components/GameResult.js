@@ -14,10 +14,7 @@ import DelayedView from "./DelayedView";
 import CustomButton from "./CustomButton";
 import LoadingIndicator from "./LoadingIndicator";
 import {
-  AdMobBanner,
-  AdMobInterstitial,
-  PublisherBanner,
-  AdMobRewarded
+  AdMobInterstitial
 } from 'react-native-admob'
 
 var adCounter = 0;
@@ -27,6 +24,8 @@ export default class GameResult extends Component {
 
   constructor(props) {
     super(props);
+
+    AdMobInterstitial.setAdUnitID('ca-app-pub-8579542894335012/4831460364');
 
     this.game = _APP_SETTINGS.games[_APP_SETTINGS.games.findIndex(g => g.name == props.game)];
     this.state = {
@@ -57,13 +56,22 @@ export default class GameResult extends Component {
     else {
       this.setState({ isLoading: false });
     }
-    adCounter++;
-    if (adCounter % 5 == 0) {
-      AdMobInterstitial.setAdUnitID('ca-app-pub-8579542894335012/4831460364');
-      AdMobInterstitial.requestAd()
-        .then(() => AdMobInterstitial.showAd())
-        .catch(err => console.log(err));
-    }
+    this.adTimer = setTimeout(() => {
+      adCounter++;
+      if (adCounter % 4 == 0) {
+        AdMobInterstitial.requestAd()
+          .then(() => { })
+          .catch(err => console.log(err));
+      }
+      else if (adCounter % 5 == 0) {
+        AdMobInterstitial.showAd();
+      }
+    }, 0);
+
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.adTimer);
   }
 
   isHighScore = () => {
