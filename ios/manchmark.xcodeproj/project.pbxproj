@@ -68,6 +68,7 @@
 		70C2FE11DBB94EC7AB4677E3 /* libRNLanguages.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 944C9F12906340509C886BA8 /* libRNLanguages.a */; };
 		940F6DC4E6C344CF9C169171 /* libRNLanguages-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF01369ED264C1A8E8F1467 /* libRNLanguages-tvOS.a */; };
 		56633724F84D484C93435766 /* libRNAdMobManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6039A1A4FA41BBB0EDFE82 /* libRNAdMobManager.a */; };
+		78DCA909F8BF4C099E7A515F /* libReactNativeHapticView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFCF798F6D514D449913B408 /* libReactNativeHapticView.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -413,6 +414,8 @@
 		ACF01369ED264C1A8E8F1467 /* libRNLanguages-tvOS.a */ = {isa = PBXFileReference; name = "libRNLanguages-tvOS.a"; path = "libRNLanguages-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		8F719A58C7694F449CB9D93D /* RNAdMobManager.xcodeproj */ = {isa = PBXFileReference; name = "RNAdMobManager.xcodeproj"; path = "../node_modules/react-native-admob/ios/RNAdMobManager.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		CD6039A1A4FA41BBB0EDFE82 /* libRNAdMobManager.a */ = {isa = PBXFileReference; name = "libRNAdMobManager.a"; path = "libRNAdMobManager.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		98A0D175075140EC970E5AF7 /* ReactNativeHapticView.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativeHapticView.xcodeproj"; path = "../node_modules/react-native-haptic-view/ios/ReactNativeHapticView.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		FFCF798F6D514D449913B408 /* libReactNativeHapticView.a */ = {isa = PBXFileReference; name = "libReactNativeHapticView.a"; path = "libReactNativeHapticView.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -450,6 +453,7 @@
 				FBD0B97458C64E9FA5D120B8 /* libRNAccountKit.a in Frameworks */,
 				70C2FE11DBB94EC7AB4677E3 /* libRNLanguages.a in Frameworks */,
 				56633724F84D484C93435766 /* libRNAdMobManager.a in Frameworks */,
+				78DCA909F8BF4C099E7A515F /* libReactNativeHapticView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,6 +652,7 @@
 				83DEDABD168A4EDBA0FEFBB8 /* RNAccountKit.xcodeproj */,
 				D72F04BB25DB4D9AAE27FE86 /* RNLanguages.xcodeproj */,
 				8F719A58C7694F449CB9D93D /* RNAdMobManager.xcodeproj */,
+				98A0D175075140EC970E5AF7 /* ReactNativeHapticView.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1321,6 +1326,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1354,6 +1360,7 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/manchmark.app/manchmark";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
@@ -1458,6 +1465,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1500,6 +1508,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1541,6 +1550,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1581,6 +1591,7 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (

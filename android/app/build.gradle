@@ -164,6 +164,7 @@ configurations.all {
 }
 
 dependencies {
+    compile project(':react-native-haptic-view')
     implementation project(':react-native-sound')
     implementation project(':react-native-admob')
     implementation project(':react-native-localize')

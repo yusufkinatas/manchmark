@@ -7,68 +7,77 @@ import {
 } from "react-native";
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Feather';
+import HapticView, { HapticFeedbackConstants } from 'react-native-haptic-view';
 
 import { store, _APP_SETTINGS, _SCREEN, nav, Generics, audio } from "../core"
 
 export default class Numpad extends Component {
 
   onPressIn = (name) => {
+    if (this.hapticView) {
+      this.hapticView.performHaptic({
+        ios: HapticFeedbackConstants.ios.IMPACT_FEEDBACK,
+        android: HapticFeedbackConstants.android.VIRTUAL_KEY
+      });
+    }
     this.props.onPress(name);
     audio.play("click_numpad.wav", 0.2);
   }
 
-  renderButton = (name) => {
-    return (
-      <View style={Generics.container} >
-        <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple(this.props.rippleColor, false)} onPressIn={() => this.onPressIn(name)} >
-          <View style={styles.buttonInnerContainer} >
+renderButton = (name) => {
+  return (
+    <View style={Generics.container} >
+      <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple(this.props.rippleColor, false)} onPressIn={() => this.onPressIn(name)} >
+        <View style={styles.buttonInnerContainer} >
+          <HapticView ref={me => this.hapticView = me}>
             <Text style={styles.buttonText} >{name}</Text>
-          </View>
-        </TouchableNativeFeedback>
+          </HapticView>
+        </View>
+      </TouchableNativeFeedback>
+    </View>
+  );
+}
+
+renderButtonWithIcon = (icon, name) => {
+  return (
+    <View style={Generics.container} >
+      <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple(this.props.rippleColor, false)} onPressIn={() => this.onPressIn(name)} onLongPress={() => { if (name == "del") this.props.deleteAll() }} >
+        <View style={styles.buttonInnerContainer}>
+          <Icon name={icon} color={colors.secondaryLight3} size={30} />
+        </View>
+      </TouchableNativeFeedback>
+    </View>
+  );
+}
+
+render() {
+  return (
+    <View style={styles.container} >
+
+      <View style={styles.horizontalContainer} >
+        {this.renderButton("1")}
+        {this.renderButton("2")}
+        {this.renderButton("3")}
       </View>
-    );
-  }
-
-  renderButtonWithIcon = (icon, name) => {
-    return (
-      <View style={Generics.container} >
-        <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple(this.props.rippleColor, false)} onPressIn={() => this.onPressIn(name)} onLongPress={() => { if (name == "del") this.props.deleteAll() }} >
-          <View style={styles.buttonInnerContainer}>
-            <Icon name={icon} color={colors.secondaryLight3} size={30} />
-          </View>
-        </TouchableNativeFeedback>
+      <View style={styles.horizontalContainer} >
+        {this.renderButton("4")}
+        {this.renderButton("5")}
+        {this.renderButton("6")}
       </View>
-    );
-  }
-
-  render() {
-    return (
-      <View style={styles.container} >
-
-        <View style={styles.horizontalContainer} >
-          {this.renderButton("1")}
-          {this.renderButton("2")}
-          {this.renderButton("3")}
-        </View>
-        <View style={styles.horizontalContainer} >
-          {this.renderButton("4")}
-          {this.renderButton("5")}
-          {this.renderButton("6")}
-        </View>
-        <View style={styles.horizontalContainer} >
-          {this.renderButton("7")}
-          {this.renderButton("8")}
-          {this.renderButton("9")}
-        </View>
-        <View style={styles.horizontalContainer} >
-          {this.renderButtonWithIcon("delete", "del")}
-          {this.renderButton("0")}
-          {this.renderButtonWithIcon("check", "enter")}
-        </View>
-
+      <View style={styles.horizontalContainer} >
+        {this.renderButton("7")}
+        {this.renderButton("8")}
+        {this.renderButton("9")}
       </View>
-    );
-  }
+      <View style={styles.horizontalContainer} >
+        {this.renderButtonWithIcon("delete", "del")}
+        {this.renderButton("0")}
+        {this.renderButtonWithIcon("check", "enter")}
+      </View>
+
+    </View>
+  );
+}
 }
 
 Numpad.propTypes = {
