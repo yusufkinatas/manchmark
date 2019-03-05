@@ -9,15 +9,15 @@ import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Feather';
 import HapticView, { HapticFeedbackConstants } from 'react-native-haptic-view';
 
-import { store, _APP_SETTINGS, _SCREEN, nav, Generics, audio } from "../core"
+import { store, _APP_SETTINGS, _SCREEN, nav, Generics, audio, user } from "../core"
 
 export default class Numpad extends Component {
 
   onPressIn = (name) => {
-    if (this.hapticView) {
+    if (this.hapticView && user.get().localSettings.hapticEnabled) {
       this.hapticView.performHaptic({
         ios: HapticFeedbackConstants.ios.IMPACT_FEEDBACK,
-        android: HapticFeedbackConstants.android.VIRTUAL_KEY
+        android: [HapticFeedbackConstants.android.VIRTUAL_KEY, HapticFeedbackConstants.android.FLAG_IGNORE_GLOBAL_SETTING]
       });
     }
     this.props.onPress(name);

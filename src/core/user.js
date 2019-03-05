@@ -23,7 +23,8 @@ var _user = {
     friendsEnabled: false
   },
   localSettings: {
-    soundEnabled: true
+    soundEnabled: true,
+    hapticEnabled: true
   },
   tutorials: {
     leaderboardTutorial: false
@@ -93,6 +94,14 @@ export const user = {
     user.getGlobalAverages();
     user.getGlobalHighscores();
     user.getSettings();
+
+    if (user.get().localSettings.soundEnabled == undefined) {
+      user.set({ localSettings: { ...user.get().localSettings, soundEnabled: true } }, true);
+    }
+    if (user.get().localSettings.hapticEnabled == undefined) {
+      user.set({ localSettings: { ...user.get().localSettings, hapticEnabled: true } }, true);
+    }
+
   },
 
   getFromStore: () => {
