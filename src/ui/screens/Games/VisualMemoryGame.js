@@ -17,6 +17,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { store, _APP_SETTINGS, _SCREEN, utils, Generics, translate, user, audio } from "../../../core";
+import HapticView, { HapticFeedbackConstants } from 'react-native-haptic-view';
 import CustomButton from "../../../components/CustomButton";
 import CounterBar from "../../../components/CounterBar";
 import BouncingText from '../../../components/BouncingText';
@@ -263,6 +264,12 @@ export default class VisualMemoryGame extends Component {
   }
 
   onSquarePress = (index) => {
+    if (this.hapticView && user.get().localSettings.hapticEnabled) {
+      this.hapticView.performHaptic({
+        ios: HapticFeedbackConstants.ios.IMPACT_FEEDBACK,
+        android: [HapticFeedbackConstants.android.VIRTUAL_KEY, HapticFeedbackConstants.android.FLAG_IGNORE_GLOBAL_SETTING]
+      });
+    }
 
     if (this.isAnimating || this.state.squares[index].pushed || !this.buttonsEnabled || this.state.lives <= 0) {
       return;
@@ -334,7 +341,7 @@ export default class VisualMemoryGame extends Component {
 
   renderGame = () => {
     return (
-      <View style={{ flex: 1 }}>
+      <HapticView style={{ flex: 1 }} ref={me => this.hapticView = me} >
         {
           this.state.isAnimating &&
           <Animated.View
@@ -388,7 +395,7 @@ export default class VisualMemoryGame extends Component {
         >
           {this.renderSquares()}
         </View>
-      </View>
+      </HapticView>
     );
   }
 
