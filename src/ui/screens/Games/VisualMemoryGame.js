@@ -264,15 +264,14 @@ export default class VisualMemoryGame extends Component {
   }
 
   onSquarePress = (index) => {
+    if (this.isAnimating || this.state.squares[index].pushed || !this.buttonsEnabled || this.state.lives <= 0) {
+      return;
+    }
     if (this.hapticView && user.get().localSettings.hapticEnabled) {
       this.hapticView.performHaptic({
         ios: HapticFeedbackConstants.ios.IMPACT_FEEDBACK,
         android: [HapticFeedbackConstants.android.VIRTUAL_KEY, HapticFeedbackConstants.android.FLAG_IGNORE_GLOBAL_SETTING]
       });
-    }
-
-    if (this.isAnimating || this.state.squares[index].pushed || !this.buttonsEnabled || this.state.lives <= 0) {
-      return;
     }
     this.buttonsEnabled = false;
     this.state.squares[index].pushed = true;
