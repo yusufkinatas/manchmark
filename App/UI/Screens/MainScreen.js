@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Navigation } from 'react-native-navigation'
 import {
   View,
   Text,
@@ -19,6 +18,7 @@ import Icon from 'react-native-vector-icons/Feather'
 
 import { store, _APP_SETTINGS, _SCREEN, nav, Generics, user, translate, audio } from '@Core'
 import CustomButton from '@Components/CustomButton'
+import Container from '@Components/Container'
 
 export default class MainScreen extends Component {
   constructor(props) {
@@ -46,33 +46,6 @@ export default class MainScreen extends Component {
     Linking.openURL(_APP_SETTINGS.playstoreLink)
   }
 
-  showModal = (screen, passProps) => {
-    Navigation.showModal({
-      component: {
-        name: screen,
-        passProps,
-        options: {
-          animations: {
-            showModal: {
-              alpha: {
-                from: 0,
-                to: 1,
-                duration: 250,
-              },
-            },
-            dismissModal: {
-              alpha: {
-                from: 1,
-                to: 0,
-                duration: 250,
-              },
-            },
-          },
-        },
-      },
-    })
-  }
-
   renderBottomButton = (icon, text, onPress) => {
     if (Platform.OS == 'android') {
       return (
@@ -93,7 +66,7 @@ export default class MainScreen extends Component {
     } else if (Platform.OS == 'ios') {
       return (
         <View style={{ flex: 1, borderRadius: 5, overflow: 'hidden', marginHorizontal: 5 }}>
-          <TouchableHighlight background={colors.primary} onPress={onPress}>
+          <TouchableHighlight underlayColor={colors.primary} onPress={onPress}>
             <View style={{ paddingHorizontal: 5, justifyContent: 'center', alignItems: 'center' }}>
               <Icon name={icon} size={20} color={colors.secondaryLight2} />
               <Text style={{ ...Generics.text, fontSize: 12, color: colors.secondaryLight2 }}>
@@ -108,7 +81,7 @@ export default class MainScreen extends Component {
 
   render() {
     return (
-      <View style={Generics.container}>
+      <Container>
         <View style={styles.topBarContainer}>
           <Text
             style={Generics.header}
@@ -126,7 +99,7 @@ export default class MainScreen extends Component {
               {translate('welcome') + ' '}
               <Text
                 onPress={() =>
-                  this.showModal('ChangeNicknameModal', { onDismiss: () => this.forceUpdate() })
+                  nav.showModal('ChangeNicknameModal', { onDismiss: () => this.forceUpdate() })
                 }
                 style={{
                   ...Generics.bigText,
@@ -166,7 +139,7 @@ export default class MainScreen extends Component {
         <View style={styles.bottomBarContainer}>
           {this.renderBottomButton('star', translate('rateUs'), this.rateGame)}
           {this.renderBottomButton('info', translate('aboutUs'), () => {
-            this.showModal('AboutUsModal')
+            nav.showModal('AboutUsModal')
             audio.play('click.wav', 0.15)
           })}
           {this.renderBottomButton('share-2', translate('invite'), this.shareGame)}
@@ -175,7 +148,7 @@ export default class MainScreen extends Component {
             audio.play('click.wav', 0.15)
           })}
         </View>
-      </View>
+      </Container>
     )
   }
 }

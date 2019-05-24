@@ -6,10 +6,11 @@ import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
 import _ from 'lodash'
 import { _APP_SETTINGS, _SCREEN, Generics, translate, user, utils, audio } from '@Core'
 import CustomButton from '@Components/CustomButton'
+import Container from '@Components/Container'
 
 const colors = _APP_SETTINGS.colors
 
-export default class StatisticsScreen extends Component {
+export default class SettingsScreen extends Component {
   static options(passProps) {
     return {
       topBar: {
@@ -53,7 +54,7 @@ export default class StatisticsScreen extends Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={Generics.container}>
+      <Container centered="all">
         <View style={{ alignItems: 'center' }}>
           <Text style={Generics.bigText}>{translate('sounds')}</Text>
           <TouchableOpacity
@@ -94,7 +95,7 @@ export default class StatisticsScreen extends Component {
             <Icon2 name={'vibrate'} color={colors.secondaryLight3} size={50} />
           </TouchableOpacity>
         </View>
-      </ScrollView>
+      </Container>
     )
   }
 }

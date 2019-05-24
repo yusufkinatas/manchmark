@@ -41,18 +41,28 @@ export default class AboutUsModal extends Component {
     }).start()
   }
 
-  dissmissModal = () => {
+  dissmissModal = (onDismissed) => {
     Animated.timing(this.anim, {
       duration: 250,
       toValue: 0,
       useNativeDriver: true,
-    }).start()
-    Navigation.dismissModal(this.props.componentId)
+    }).start(() => {
+      Navigation.dismissModal(this.props.componentId)
+    })
   }
 
   render() {
     return (
-      <View style={{ ...Generics.container, backgroundColor: 'rgba(0,0,0,0.6)' }}>
+      <Animated.View
+        style={{
+          ...Generics.container,
+          backgroundColor: 'rgba(0,0,0,0.6)',
+          opacity: this.anim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 1],
+          }),
+        }}
+      >
         <TouchableOpacity
           style={styles.touchableArea}
           activeOpacity={1}
@@ -82,10 +92,7 @@ export default class AboutUsModal extends Component {
                 borderWidth: 1,
               }}
             >
-              <Image
-                source={require('@Assets/icon-low-res.png')}
-                style={styles.imageStyle}
-              />
+              <Image source={require('@Assets/icon-low-res.png')} style={styles.imageStyle} />
             </View>
             <View style={{ paddingLeft: 5 }}>
               <Text style={styles.bigText}>{translate('manchmark')}</Text>
@@ -114,7 +121,7 @@ export default class AboutUsModal extends Component {
           </View>
           <CustomButton text={translate('close')} onPress={this.dissmissModal} />
         </Animated.View>
-      </View>
+      </Animated.View>
     )
   }
 }

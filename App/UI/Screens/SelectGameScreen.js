@@ -32,31 +32,6 @@ export default class SelectGameScreen extends Component {
     nav.pushScreen(this.props.componentId, screen)
   }
 
-  showModal = (screen) => {
-    Navigation.showModal({
-      component: {
-        name: screen,
-        options: {
-          animations: {
-            showModal: {
-              alpha: {
-                from: 0,
-                to: 1,
-                duration: 250,
-              },
-            },
-            dismissModal: {
-              alpha: {
-                from: 1,
-                to: 0,
-                duration: 250,
-              },
-            },
-          },
-        },
-      },
-    })
-  }
 
   render() {
     return (

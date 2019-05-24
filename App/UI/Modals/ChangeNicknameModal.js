@@ -50,14 +50,15 @@ export default class ChangeNicknameModal extends Component {
     }).start()
   }
 
-  dissmissModal = () => {
+  dissmissModal = (onDismissed) => {
     Animated.timing(this.anim, {
       duration: 250,
       toValue: 0,
       useNativeDriver: true,
-    }).start()
-    Navigation.dismissModal(this.props.componentId)
-    this.props.onDismiss()
+    }).start(() => {
+      Navigation.dismissModal(this.props.componentId)
+      this.props.onDismiss()
+    })
   }
 
   onChooseNickname = () => {
@@ -90,67 +91,82 @@ export default class ChangeNicknameModal extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView
-        behavior="padding"
-        style={{ ...Generics.container, backgroundColor: 'rgba(0,0,0,0.6)' }}
+      <Animated.View
+        style={{
+          ...Generics.container,
+          backgroundColor: 'rgba(0,0,0,0.6)',
+          opacity: this.anim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 1],
+          }),
+        }}
       >
-        <TouchableOpacity
-          style={styles.touchableArea}
-          activeOpacity={1}
-          onPressIn={this.dissmissModal}
-        />
-        <Animated.View
-          style={{
-            ...styles.innerContainer,
-            translateY: this.anim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [_SCREEN.height * 0.15, 0],
-            }),
-          }}
+        <KeyboardAvoidingView
+          behavior="padding"
+          style={{ ...Generics.container, backgroundColor: 'transparent' }}
         >
-          {this.state.isLoading ? (
-            <ActivityIndicator size="large" color={colors.primary} />
-          ) : (
-            <View style={{ justifyContent: 'center', alignItems: 'center', zIndex: 10 }}>
-              <Text style={Generics.bigText}>{translate('changeUsername')}</Text>
-              <View style={{ paddingTop: 10 }} />
-              <TextInput
-                onChangeText={this.onChangeText}
-                autoCapitalize={'none'}
-                autoCorrect={false}
-                style={{
-                  width: _SCREEN.width * 0.6,
-                  borderWidth: 1,
-                  borderColor: colors.primary,
-                  borderRadius: 5,
-                  padding: 5,
-                  fontSize: 20,
-                  fontFamily: 'roboto',
-                  color: colors.secondaryLight2,
-                  marginBottom: 5,
-                }}
-                placeholder={translate('typeYourUsername')}
-                placeholderTextColor={colors.secondaryLight2}
-                underlineColorAndroid={'transparent'}
-                value={this.state.nickname}
-              />
-              <Text style={Generics.errorText}>{this.state.errorText}</Text>
-              <CustomButton text={translate('change')} onPress={this.onChooseNickname} />
-              <Text
-                style={{
-                  ...Generics.bigText,
-                  color: colors.secondaryLight2,
-                  fontSize: 15,
-                  textDecorationLine: 'underline',
-                }}
-                onPress={this.dissmissModal}
-              >
-                {translate('close')}
-              </Text>
-            </View>
-          )}
-        </Animated.View>
-      </KeyboardAvoidingView>
+          <TouchableOpacity
+            style={styles.touchableArea}
+            activeOpacity={1}
+            onPressIn={this.dissmissModal}
+          />
+          <Animated.View
+            style={{
+              ...styles.innerContainer,
+              transform: [
+                {
+                  translateY: this.anim.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [_SCREEN.height * 0.15, 0],
+                  }),
+                },
+              ],
+            }}
+          >
+            {this.state.isLoading ? (
+              <ActivityIndicator size="large" color={colors.primary} />
+            ) : (
+              <View style={{ justifyContent: 'center', alignItems: 'center', zIndex: 10 }}>
+                <Text style={Generics.bigText}>{translate('changeUsername')}</Text>
+                <View style={{ paddingTop: 10 }} />
+                <TextInput
+                  onChangeText={this.onChangeText}
+                  autoCapitalize={'none'}
+                  autoCorrect={false}
+                  style={{
+                    width: _SCREEN.width * 0.6,
+                    borderWidth: 1,
+                    borderColor: colors.primary,
+                    borderRadius: 5,
+                    padding: 5,
+                    fontSize: 20,
+                    fontFamily: 'roboto',
+                    color: colors.secondaryLight2,
+                    marginBottom: 5,
+                  }}
+                  placeholder={translate('typeYourUsername')}
+                  placeholderTextColor={colors.secondaryLight2}
+                  underlineColorAndroid={'transparent'}
+                  value={this.state.nickname}
+                />
+                <Text style={Generics.errorText}>{this.state.errorText}</Text>
+                <CustomButton text={translate('change')} onPress={this.onChooseNickname} />
+                <Text
+                  style={{
+                    ...Generics.bigText,
+                    color: colors.secondaryLight2,
+                    fontSize: 15,
+                    textDecorationLine: 'underline',
+                  }}
+                  onPress={this.dissmissModal}
+                >
+                  {translate('close')}
+                </Text>
+              </View>
+            )}
+          </Animated.View>
+        </KeyboardAvoidingView>
+      </Animated.View>
     )
   }
 }

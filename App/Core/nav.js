@@ -1,27 +1,30 @@
-import { Navigation } from "react-native-navigation";
+import { Navigation } from 'react-native-navigation'
+import { StatusBar, Platform } from 'react-native'
 
-import { _APP_SETTINGS, _SCREEN } from './constants';
+import { _APP_SETTINGS, _SCREEN } from './constants'
 
-const pushCooldown = 250;
-var pushAviable = true;
-const colors = _APP_SETTINGS.colors;
+const pushCooldown = 250
+var pushAviable = true
+const colors = _APP_SETTINGS.colors
 
 export const nav = {
-
   pushScreen: (componentId: string, screen: string, passProps) => {
-    if (!pushAviable) return;
+    if (!pushAviable) return
 
     Navigation.push(componentId, {
       component: {
         name: screen,
         options: {
           statusBar: { backgroundColor: colors.secondaryDark },
+          topBar: {},
         },
-        passProps
-      }
-    });
-    pushAviable = false;
-    setTimeout(() => { pushAviable = true; }, pushCooldown)
+        passProps,
+      },
+    })
+    pushAviable = false
+    setTimeout(() => {
+      pushAviable = true
+    }, pushCooldown)
   },
 
   showLoginScreen: () => {
@@ -29,44 +32,50 @@ export const nav = {
       Navigation.setRoot({
         root: {
           component: {
-            name: "LoginScreen",
+            name: 'LoginScreen',
             options: {
               topBar: {
                 height: 0,
-                visible: false
-              }
-            }
-          }
-        }
-      });
+                visible: false,
+              },
+            },
+          },
+        },
+      })
+
       Navigation.setDefaultOptions({
         topBar: {
+          topMargin: StatusBar.currentHeight,
           background: {
             color: colors.secondaryDark,
           },
+
           title: {
             color: colors.secondaryLight3,
           },
           backButton: {
             color: colors.secondaryLight3,
-          }
+            showTitle: false,
+          },
         },
         statusBar: {
-          backgroundColor: colors.secondaryDark,
+          drawBehind: true,
+          backgroundColor: 'transparent',
+          style: 'light',
         },
         navigationBar: {
           backgroundColor: colors.secondaryDark,
         },
         layout: {
-          orientation: ["portrait"],
+          orientation: ['portrait'],
         },
         animations: {
           setRoot: {
             alpha: {
               from: 0,
               to: 1,
-              duration: 250
-            }
+              duration: 250,
+            },
           },
           push: {
             content: {
@@ -74,15 +83,15 @@ export const nav = {
                 from: 0,
                 to: 1,
                 duration: 250,
-                interpolation: 'accelerate'
+                interpolation: 'accelerate',
               },
               y: {
                 from: _SCREEN.height * 0.15,
                 to: 0,
                 duration: 250,
-                interpolation: "accelerate"
-              }
-            }
+                interpolation: 'accelerate',
+              },
+            },
           },
           pop: {
             content: {
@@ -90,20 +99,41 @@ export const nav = {
                 from: 1,
                 to: 0,
                 duration: 250,
-                interpolation: 'decelerate'
+                interpolation: 'decelerate',
               },
               y: {
                 from: 0,
                 to: _SCREEN.height * 0.15,
                 duration: 250,
-                interpolation: "decelerate"
-              }
-            }
-          }
-        }
-      });
+                interpolation: 'decelerate',
+              },
+            },
+          },
+          showModal: {
+            enabled: false,
+          },
+          dismissModal: {
+            enabled: false,
+          },
+        },
+      })
+    })
+  },
 
-    });
+  showModal: (screen, passProps) => {
+    let isAndroid = Platform.OS == 'android'
+    Navigation.showModal({
+      component: {
+        name: screen,
+        passProps,
+        options: {
+          layout: {
+            backgroundColor: 'transparent',
+          },
+          modalPresentationStyle: isAndroid ? 'overCurrentContext' : 'overFullScreen',
+        },
+      },
+    })
   },
 
   showGame: () => {
@@ -113,16 +143,15 @@ export const nav = {
           children: [
             {
               component: {
-                name: "MainScreen",
+                name: 'MainScreen',
                 options: {
                   topBar: { visible: false },
-                }
-              }
-            }
+                },
+              },
+            },
           ],
-        }
-      }
-    });
+        },
+      },
+    })
   },
-
-};
+}

@@ -304,32 +304,6 @@ export default class LeaderboardScreen extends Component {
   globalHighscores = {}
   friendHighscores = {}
 
-  showModal = (screen, passProps) => {
-    Navigation.showModal({
-      component: {
-        name: screen,
-        passProps,
-        options: {
-          animations: {
-            showModal: {
-              alpha: {
-                from: 0,
-                to: 1,
-                duration: 250,
-              },
-            },
-            dismissModal: {
-              alpha: {
-                from: 1,
-                to: 0,
-                duration: 250,
-              },
-            },
-          },
-        },
-      },
-    })
-  }
 
   componentDidMount() {
     this.averages = user.get().globalAverages
@@ -339,7 +313,7 @@ export default class LeaderboardScreen extends Component {
     this.refreshLeaderboards()
 
     if (!user.get().tutorials.leaderboardTutorial) {
-      this.showModal('LeaderboardTutorialModal')
+      nav.showModal('LeaderboardTutorialModal')
     }
 
     if (this.state.showGlobal) {
