@@ -27,11 +27,11 @@ import {
   translate,
   audio,
 } from '@Core'
-import CounterBar from '../../../components/CounterBar'
-import CustomButton from '../../../components/CustomButton'
-import SwappingText from '../../../components/SwappingText'
-import BouncingText from '../../../components/BouncingText'
-import GameResult from '../../../components/GameResult'
+import CounterBar from '@Components/CounterBar'
+import CustomButton from '@Components/CustomButton'
+import SwappingText from '@Components/SwappingText'
+import BouncingText from '@Components/BouncingText'
+import GameResult from '@Components/GameResult'
 
 const TIMEOUT_MS = 30000
 const WORDS = require('../../../../assets/wordsEn.json').wordsEn

@@ -24,10 +24,10 @@ import {
   translate,
   audio,
 } from '@Core'
-import CustomButton from '../../../components/CustomButton'
-import SwappingText from '../../../components/SwappingText'
-import DelayedView from '../../../components/DelayedView'
-import GameResult from '../../../components/GameResult'
+import CustomButton from '@Components/CustomButton'
+import SwappingText from '@Components/SwappingText'
+import DelayedView from '@Components/DelayedView'
+import GameResult from '@Components/GameResult'
 
 const WORDS = require('../../../../assets/wordsEn.json').wordsEn
 

@@ -5,7 +5,7 @@ import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import _ from 'lodash'
 import { _APP_SETTINGS, _SCREEN, Generics, translate, user, utils, audio } from '@Core'
-import CustomButton from '../../components/CustomButton'
+import CustomButton from '@Components/CustomButton'
 
 const colors = _APP_SETTINGS.colors
 

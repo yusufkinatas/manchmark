@@ -24,9 +24,9 @@ import {
   translate,
   audio,
 } from '@Core'
-import CustomButton from '../../../components/CustomButton'
-import DelayedText from '../../../components/DelayedText'
-import GameResult from '../../../components/GameResult'
+import CustomButton from '@Components/CustomButton'
+import DelayedText from '@Components/DelayedText'
+import GameResult from '@Components/GameResult'
 
 const calculatePoint = [
   () => {

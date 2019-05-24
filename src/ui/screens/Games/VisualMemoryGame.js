@@ -27,11 +27,11 @@ import {
   audio,
 } from '@Core'
 import HapticView, { HapticFeedbackConstants } from 'react-native-haptic-view'
-import CustomButton from '../../../components/CustomButton'
-import CounterBar from '../../../components/CounterBar'
-import BouncingText from '../../../components/BouncingText'
-import SwappingText from '../../../components/SwappingText'
-import GameResult from '../../../components/GameResult'
+import CustomButton from '@Components/CustomButton'
+import CounterBar from '@Components/CounterBar'
+import BouncingText from '@Components/BouncingText'
+import SwappingText from '@Components/SwappingText'
+import GameResult from '@Components/GameResult'
 
 const TOP_BAR_HEIGHT = 150
 const gameColor = _APP_SETTINGS.games.find((g) => g.name == 'VisualMemoryGame').backgroundColor

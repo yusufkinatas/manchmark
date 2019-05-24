@@ -25,7 +25,7 @@ import RNAccountKit from 'react-native-facebook-account-kit'
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
 
 import { store, _APP_SETTINGS, _SCREEN, nav, Generics, user, api, translate } from '@Core'
-import CustomButton from '../../components/CustomButton'
+import CustomButton from '@Components/CustomButton'
 
 export default class FindFriendsScreen extends Component {
   static options(passProps) {

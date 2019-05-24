@@ -13,8 +13,8 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { store, _APP_SETTINGS, _SCREEN, Generics, user, api, translate } from '@Core'
-import CustomButton from '../../components/CustomButton'
-import HeaderButton from '../../components/HeaderButton'
+import CustomButton from '@Components/CustomButton'
+import HeaderButton from '@Components/HeaderButton'
 
 export default class LeaderboardTutorialModal extends Component {
   static options(passProps) {

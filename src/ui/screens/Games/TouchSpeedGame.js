@@ -15,11 +15,11 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { store, _APP_SETTINGS, _SCREEN, Generics, user, translate } from '@Core'
-import CustomButton from '../../../components/CustomButton'
-import CounterBar from '../../../components/CounterBar'
-import BouncingText from '../../../components/BouncingText'
-import DelayedText from '../../../components/DelayedText'
-import GameResult from '../../../components/GameResult'
+import CustomButton from '@Components/CustomButton'
+import CounterBar from '@Components/CounterBar'
+import BouncingText from '@Components/BouncingText'
+import DelayedText from '@Components/DelayedText'
+import GameResult from '@Components/GameResult'
 
 const TIMEOUT_MS = 10000
 const gameColor = _APP_SETTINGS.games.find((g) => g.name == 'TouchSpeedGame').backgroundColor

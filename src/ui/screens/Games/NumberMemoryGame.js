@@ -16,10 +16,10 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import _ from 'lodash'
 
 import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user, translate } from '@Core'
-import CounterBar from '../../../components/CounterBar'
-import CustomButton from '../../../components/CustomButton'
-import GameResult from '../../../components/GameResult'
-import Numpad from '../../../components/Numpad'
+import CounterBar from '@Components/CounterBar'
+import CustomButton from '@Components/CustomButton'
+import GameResult from '@Components/GameResult'
+import Numpad from '@Components/Numpad'
 
 const gameColor = _APP_SETTINGS.games.find((g) => g.name == 'NumberMemoryGame').backgroundColor
 

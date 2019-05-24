@@ -22,7 +22,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import validator from 'validator'
 
 import { store, _APP_SETTINGS, _SCREEN, Generics, user, api, translate } from '@Core'
-import CustomButton from '../../components/CustomButton'
+import CustomButton from '@Components/CustomButton'
 
 export default class ChangeNicknameModal extends Component {
   static options(passProps) {

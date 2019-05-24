@@ -23,8 +23,8 @@ import DeviceInfo from 'react-native-device-info'
 import validator from 'validator'
 
 import { store, _APP_SETTINGS, _SCREEN, nav, Generics, user, api, translate } from '@Core'
-import CustomButton from '../../components/CustomButton'
-import LoadingIndicator from '../../components/LoadingIndicator'
+import CustomButton from '@Components/CustomButton'
+import LoadingIndicator from '@Components/LoadingIndicator'
 
 export default class FollowsScreen extends Component {
   static options(passProps) {

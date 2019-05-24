@@ -18,7 +18,7 @@ import {
 import Icon from 'react-native-vector-icons/Feather'
 
 import { store, _APP_SETTINGS, _SCREEN, nav, Generics, user, translate, audio } from '@Core'
-import CustomButton from '../../components/CustomButton'
+import CustomButton from '@Components/CustomButton'
 
 export default class MainScreen extends Component {
   constructor(props) {

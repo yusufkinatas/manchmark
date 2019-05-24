@@ -18,7 +18,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { store, _APP_SETTINGS, _SCREEN, Generics, translate } from '@Core'
-import CustomButton from '../../components/CustomButton'
+import CustomButton from '@Components/CustomButton'
 
 export default class AboutUsModal extends Component {
   static options(passProps) {

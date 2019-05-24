@@ -30,8 +30,8 @@ import {
   translate,
   audio,
 } from '@Core'
-import CustomButton from '../../components/CustomButton'
-import LoadingIndicator from '../../components/LoadingIndicator'
+import CustomButton from '@Components/CustomButton'
+import LoadingIndicator from '@Components/LoadingIndicator'
 
 const colors = _APP_SETTINGS.colors
 
