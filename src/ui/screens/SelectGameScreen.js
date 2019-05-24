@@ -14,7 +14,7 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 
-import { store, _APP_SETTINGS, _SCREEN, nav, Generics, translate } from '@Core'
+import { _APP_SETTINGS, _SCREEN, nav, translate } from '@Core'
 import CustomButton from '@Components/CustomButton'
 
 export default class SelectGameScreen extends Component {

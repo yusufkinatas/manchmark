@@ -1,9 +1,24 @@
-export { _APP_SETTINGS, _SCREEN, Generics } from './constants'
-export { store } from './store'
-export { initialization } from './initialization'
-export { utils } from './utils'
-export { nav } from './nav'
-export { api } from './api'
-export { user } from './user'
-export { audio } from './audio'
-export { setI18nConfig, translate } from './language'
+import { _APP_SETTINGS, _SCREEN, Generics } from './constants'
+import { store } from './store'
+import { initialization } from './initialization'
+import { utils } from './utils'
+import { nav } from './nav'
+import { api } from './api'
+import { user } from './user'
+import { audio } from './audio'
+import { setI18nConfig, translate } from './language'
+
+export {
+  _APP_SETTINGS,
+  _SCREEN,
+  Generics,
+  store,
+  initialization,
+  utils,
+  nav,
+  api,
+  user,
+  audio,
+  setI18nConfig,
+  translate,
+}
