@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import PropTypes from 'prop-types';
 
-import { store, _APP_SETTINGS, _SCREEN, nav, Generics } from "../core"
+import { store, _APP_SETTINGS, _SCREEN, nav, Generics } from "@Core"
 
 const colors = _APP_SETTINGS.colors;
 

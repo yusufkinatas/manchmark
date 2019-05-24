@@ -1,24 +1,18 @@
-import React, { Component } from "react";
-import {
-  View,
-  Text,
-  Animated,
-  Easing,
-} from "react-native";
-import PropTypes from "prop-types";
-import _ from "lodash";
+import React, { Component } from 'react'
+import { View, Text, Animated, Easing } from 'react-native'
+import PropTypes from 'prop-types'
+import _ from 'lodash'
 
 export default class BouncingText extends Component {
-
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.bounceAnim = new Animated.Value(0);
+    this.bounceAnim = new Animated.Value(0)
   }
 
   componentWillReceiveProps(nextProps) {
     if (!_.isEqual(nextProps.children, this.props.children)) {
-      this.bounceText();
+      this.bounceText()
     }
   }
 
@@ -27,32 +21,38 @@ export default class BouncingText extends Component {
       duration: this.props.animationDuration * 0.25,
       toValue: 1,
       easing: Easing.linear,
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start(() => {
       Animated.timing(this.bounceAnim, {
         duration: this.props.animationDuration * 0.75,
         toValue: 0,
         easing: Easing.linear,
-        useNativeDriver: true
-      }).start();
-    });
+        useNativeDriver: true,
+      }).start()
+    })
   }
 
   render() {
     return (
       <Animated.View
         style={{
-          scaleX: this.bounceAnim.interpolate({
-            inputRange: [0, 1],
-            outputRange: [1, this.props.bounceRatio],
-          }),
-          scaleY: this.bounceAnim.interpolate({
-            inputRange: [0, 1],
-            outputRange: [1, this.props.bounceRatio],
-          })
+          transform: [
+            {
+              scaleX: this.bounceAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [1, this.props.bounceRatio],
+              }),
+            },
+            {
+              scaleY: this.bounceAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [1, this.props.bounceRatio],
+              }),
+            },
+          ],
         }}
       >
-        <Text style={this.props.style} >{this.props.children}</Text>
+        <Text style={this.props.style}>{this.props.children}</Text>
       </Animated.View>
     )
   }
@@ -61,10 +61,10 @@ export default class BouncingText extends Component {
 BouncingText.propsTypes = {
   style: PropTypes.object,
   bounceRatio: PropTypes.number,
-  animationDuration: PropTypes.number
+  animationDuration: PropTypes.number,
 }
 
 BouncingText.defaultProps = {
   bounceRatio: 1.3,
-  animationDuration: 200
+  animationDuration: 200,
 }

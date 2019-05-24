@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Feather';
 import HapticView, { HapticFeedbackConstants } from 'react-native-haptic-view';
 
-import { store, _APP_SETTINGS, _SCREEN, nav, Generics, audio, user } from "../core"
+import { store, _APP_SETTINGS, _SCREEN, nav, Generics, audio, user } from "@Core"
 
 export default class Numpad extends Component {
 

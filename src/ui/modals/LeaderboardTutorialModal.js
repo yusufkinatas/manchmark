@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Navigation } from "react-native-navigation";
+import React, { Component } from 'react'
+import { Navigation } from 'react-native-navigation'
 import {
   View,
   Text,
@@ -7,65 +7,74 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   ImageBackground,
-  TouchableWithoutFeedback
-} from 'react-native';
+  TouchableWithoutFeedback,
+} from 'react-native'
 
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import { store, _APP_SETTINGS, _SCREEN, Generics, user, api, translate } from "../../core";
-import CustomButton from '../../components/CustomButton';
-import HeaderButton from '../../components/HeaderButton';
+import { store, _APP_SETTINGS, _SCREEN, Generics, user, api, translate } from '@Core'
+import CustomButton from '../../components/CustomButton'
+import HeaderButton from '../../components/HeaderButton'
 
 export default class LeaderboardTutorialModal extends Component {
-
   static options(passProps) {
     return {
       screenBackgroundColor: 'transparent',
       modalPresentationStyle: 'overCurrentContext',
-    };
+    }
   }
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      isLoading: false
+      isLoading: false,
     }
   }
 
   dissmissModal = () => {
-    let oldTutorials = user.get().tutorials;
+    let oldTutorials = user.get().tutorials
 
-    user.set({
-      tutorials: { ...oldTutorials, leaderboardTutorial: true }
-    }, true);
+    user.set(
+      {
+        tutorials: { ...oldTutorials, leaderboardTutorial: true },
+      },
+      true
+    )
 
-    Navigation.dismissModal(this.props.componentId);
+    Navigation.dismissModal(this.props.componentId)
   }
 
   render() {
     return (
-      <View style={{ ...Generics.container, backgroundColor: "rgba(0,0,0,0.95)" }}>
-        <View style={{ position: "absolute", top: 0, right: 0, height: 56, justifyContent: "center" }}>
-          <HeaderButton disabled icon="globe" backgroundColor={colors.secondary}></HeaderButton>
+      <View style={{ ...Generics.container, backgroundColor: 'rgba(0,0,0,0.95)' }}>
+        <View
+          style={{ position: 'absolute', top: 0, right: 0, height: 56, justifyContent: 'center' }}
+        >
+          <HeaderButton disabled icon="globe" backgroundColor={colors.secondary} />
         </View>
-        <Icon style={{ position: "absolute", top: 65, right: 60 }} name={"near-me"} size={30} color={colors.secondaryLight2} />
-        <Text style={Generics.bigText}>{translate("leaderboardTutorial")}</Text>
-        <View style={{ paddingTop: 10 }}></View>
-        <CustomButton text={translate("gotIt")} onPress={this.dissmissModal}></CustomButton>
+        <Icon
+          style={{ position: 'absolute', top: 65, right: 60 }}
+          name={'near-me'}
+          size={30}
+          color={colors.secondaryLight2}
+        />
+        <Text style={Generics.bigText}>{translate('leaderboardTutorial')}</Text>
+        <View style={{ paddingTop: 10 }} />
+        <CustomButton text={translate('gotIt')} onPress={this.dissmissModal} />
       </View>
-    );
+    )
   }
 }
 
-const colors = _APP_SETTINGS.colors;
+const colors = _APP_SETTINGS.colors
 
 var styles = StyleSheet.create({
   innerContainer: {
     width: _SCREEN.width * 0.8,
     paddingVertical: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "rgba(0,0,0,0.95)"
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.95)',
   },
   touchableArea: {
     zIndex: -1,
@@ -73,7 +82,7 @@ var styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    position: "absolute"
+    position: 'absolute',
   },
   closeButton: {
     paddingVertical: 5,
@@ -81,29 +90,29 @@ var styles = StyleSheet.create({
   },
   bigText: {
     fontSize: 25,
-    fontFamily: "roboto",
+    fontFamily: 'roboto',
     color: colors.secondaryLight3,
-    textAlign: "center",
+    textAlign: 'center',
     paddingTop: 5,
-    paddingLeft: 5
+    paddingLeft: 5,
   },
   imageStyle: {
     height: 50,
-    width: 50
+    width: 50,
   },
   smallText: {
     fontSize: 12,
-    fontFamily: "roboto",
+    fontFamily: 'roboto',
     color: colors.secondaryLight2,
-    textAlign: "left",
-    paddingLeft: 5
+    textAlign: 'left',
+    paddingLeft: 5,
   },
   copyRightText: {
     fontSize: 10,
-    fontFamily: "roboto",
+    fontFamily: 'roboto',
     color: colors.secondaryLight,
-    textAlign: "left",
+    textAlign: 'left',
     paddingLeft: 5,
-    marginBottom: 10
-  }
+    marginBottom: 10,
+  },
 })

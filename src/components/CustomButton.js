@@ -8,7 +8,7 @@ import {
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { store, _APP_SETTINGS, _SCREEN, nav, audio } from "../core"
+import { store, _APP_SETTINGS, _SCREEN, nav, audio } from "@Core"
 
 const CustomButton = ({ onPress, text, icon, backgroundColor }) => {
 

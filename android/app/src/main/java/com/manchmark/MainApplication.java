@@ -13,7 +13,6 @@ import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.reactnativenavigation.react.ReactGateway;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
-import com.sbugert.rnadmob.RNAdMobPackage;
 import com.hamidhadi.reactnativehapticview.HapticViewPackage;
 
 import java.util.Arrays;
@@ -38,16 +37,12 @@ public class MainApplication extends NavigationApplication {
     }
 
     protected List<ReactPackage> getPackages() {
-        // Add additional packages you require here
-        // No need to add RnnPackage and MainReactPackage
         return Arrays.<ReactPackage>asList(
-            // eg. new VectorIconsPackage()
             new SplashScreenReactPackage(),
             new VectorIconsPackage(),
             new RNDeviceInfo(),
             new RNSoundPackage(),
             new RNLocalizePackage(),
-            new RNAdMobPackage(),
             new ReactNativeContacts(),
             new HapticViewPackage(),
             new RNAccountKitPackage(),

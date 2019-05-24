@@ -1,22 +1,14 @@
-import React, { Component } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Animated,
-  Easing,
-} from "react-native";
-import PropTypes from "prop-types";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { Component } from 'react'
+import { View, Text, TouchableOpacity, StyleSheet, Animated, Easing } from 'react-native'
+import PropTypes from 'prop-types'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
-import { store, _APP_SETTINGS, _SCREEN, nav } from "../core"
+import { store, _APP_SETTINGS, _SCREEN, nav } from '@Core'
 
 export default class CounterBar extends Component {
-
   constructor(props) {
-    super(props);
-    this.width = new Animated.Value(0);
+    super(props)
+    this.width = new Animated.Value(0)
   }
 
   componentDidMount() {
@@ -26,7 +18,7 @@ export default class CounterBar extends Component {
         toValue: 1,
         useNativeDriver: true,
         easing: Easing.linear,
-      }).start();
+      }).start()
     }
   }
 
@@ -36,31 +28,38 @@ export default class CounterBar extends Component {
       toValue: 1,
       useNativeDriver: true,
       easing: Easing.linear,
-    }).start();
+    }).start()
   }
 
   render() {
-    const { width, height, color, increasing } = this.props;
+    const { width, height, color, increasing } = this.props
     return (
       <View
         style={{
           ...styles.container,
           width,
           height,
-          borderColor: color
-        }} >
-        <Animated.View style={{
-          flex: 1,
-          backgroundColor: color,
-          translateX: this.width.interpolate({
-            inputRange: [0, 1],
-            outputRange: increasing ? [-width, 0] : [0, -width],
-            extrapolateLeft: 'clamp',
-            extrapolateRight: 'clamp'
-          }),
-        }} />
+          borderColor: color,
+        }}
+      >
+        <Animated.View
+          style={{
+            flex: 1,
+            backgroundColor: color,
+            transform: [
+              {
+                translateX: this.width.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: increasing ? [-width, 0] : [0, -width],
+                  extrapolateLeft: 'clamp',
+                  extrapolateRight: 'clamp',
+                }),
+              },
+            ],
+          }}
+        />
       </View>
-    );
+    )
   }
 }
 
@@ -74,16 +73,16 @@ CounterBar.propsTypes = {
 CounterBar.defaultProps = {
   width: 200,
   height: 40,
-  color: "gray",
+  color: 'gray',
 }
 
-const colors = _APP_SETTINGS.colors;
+const colors = _APP_SETTINGS.colors
 var styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flexDirection: 'row',
     borderWidth: 2,
     borderRadius: 10,
     marginBottom: 10,
-    overflow: "hidden"
-  }
-});
+    overflow: 'hidden',
+  },
+})

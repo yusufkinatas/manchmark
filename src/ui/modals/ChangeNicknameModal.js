@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Navigation } from "react-native-navigation";
+import React, { Component } from 'react'
+import { Navigation } from 'react-native-navigation'
 import {
   View,
   Text,
@@ -16,30 +16,29 @@ import {
   Easing,
   FlatList,
   TouchableWithoutFeedback,
-  TextInput
-} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import validator from "validator";
+  TextInput,
+} from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import validator from 'validator'
 
-import { store, _APP_SETTINGS, _SCREEN, Generics, user, api, translate } from "../../core";
-import CustomButton from '../../components/CustomButton';
+import { store, _APP_SETTINGS, _SCREEN, Generics, user, api, translate } from '@Core'
+import CustomButton from '../../components/CustomButton'
 
 export default class ChangeNicknameModal extends Component {
-
   static options(passProps) {
     return {
       screenBackgroundColor: 'transparent',
       modalPresentationStyle: 'overCurrentContext',
-    };
+    }
   }
 
   constructor(props) {
-    super(props);
-    this.anim = new Animated.Value(0);
+    super(props)
+    this.anim = new Animated.Value(0)
     this.state = {
-      nickname: "",
+      nickname: '',
       isLoading: false,
-      errorText: "",
+      errorText: '',
     }
   }
 
@@ -47,53 +46,54 @@ export default class ChangeNicknameModal extends Component {
     Animated.timing(this.anim, {
       duration: 250,
       toValue: 1,
-      useNativeDriver: true
-    }).start();
+      useNativeDriver: true,
+    }).start()
   }
 
   dissmissModal = () => {
     Animated.timing(this.anim, {
       duration: 250,
       toValue: 0,
-      useNativeDriver: true
-    }).start();
-    Navigation.dismissModal(this.props.componentId);
-    this.props.onDismiss();
+      useNativeDriver: true,
+    }).start()
+    Navigation.dismissModal(this.props.componentId)
+    this.props.onDismiss()
   }
 
   onChooseNickname = () => {
-    let _nickname = this.state.nickname.trim().toLocaleLowerCase();
+    let _nickname = this.state.nickname.trim().toLocaleLowerCase()
     if (_nickname.length < 3 || _nickname.length > 20) {
-      this.setState({ errorText: translate("errMustBetween3and20") });
+      this.setState({ errorText: translate('errMustBetween3and20') })
+    } else if (_nickname == user.get().nickname) {
+      this.dissmissModal()
+      return
+    } else if (!validator.isAlphanumeric(_nickname)) {
+      this.setState({ errorText: translate('errOnlyEngLetters') })
+    } else if (!user.get().isConnected) {
+      this.setState({ errorText: translate('errNoConnection') })
+    } else {
+      this.setState({ isLoading: true })
+      user
+        .changeNickname(_nickname)
+        .then(() => {
+          this.dissmissModal()
+        })
+        .catch((err) => {
+          this.setState({ errorText: translate('errUsernameAlreadyInUse'), isLoading: false })
+        })
     }
-    else if (_nickname == user.get().nickname) {
-      this.dissmissModal();
-      return;
-    }
-    else if (!validator.isAlphanumeric(_nickname)) {
-      this.setState({ errorText: translate("errOnlyEngLetters") });
-    }
-    else if (!user.get().isConnected) {
-      this.setState({ errorText: translate("errNoConnection") });
-    }
-    else {
-      this.setState({ isLoading: true });
-      user.changeNickname(_nickname)
-        .then(() => { this.dissmissModal() })
-        .catch(err => {
-          this.setState({ errorText: translate("errUsernameAlreadyInUse"), isLoading: false });
-        });
-    }
-
   }
 
   onChangeText = (text) => {
-    this.setState({ nickname: text });
+    this.setState({ nickname: text })
   }
 
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding" style={{ ...Generics.container, backgroundColor: "rgba(0,0,0,0.6)" }}>
+      <KeyboardAvoidingView
+        behavior="padding"
+        style={{ ...Generics.container, backgroundColor: 'rgba(0,0,0,0.6)' }}
+      >
         <TouchableOpacity
           style={styles.touchableArea}
           activeOpacity={1}
@@ -104,60 +104,69 @@ export default class ChangeNicknameModal extends Component {
             ...styles.innerContainer,
             translateY: this.anim.interpolate({
               inputRange: [0, 1],
-              outputRange: [_SCREEN.height * 0.15, 0]
-            })
-          }}>
-          {
-            this.state.isLoading ?
-              <ActivityIndicator size="large" color={colors.primary} />
-              :
-              <View style={{ justifyContent: "center", alignItems: "center", zIndex: 10 }} >
-                <Text style={Generics.bigText}>{translate("changeUsername")}</Text>
-                <View style={{ paddingTop: 10 }}></View>
-                <TextInput
-                  onChangeText={this.onChangeText}
-                  autoCapitalize={"none"}
-                  autoCorrect={false}
-                  style={{
-                    width: _SCREEN.width * 0.6,
-                    borderWidth: 1,
-                    borderColor: colors.primary,
-                    borderRadius: 5,
-                    padding: 5,
-                    fontSize: 20,
-                    fontFamily: "roboto",
-                    color: colors.secondaryLight2,
-                    marginBottom: 5
-                  }}
-                  placeholder={translate("typeYourUsername")}
-                  placeholderTextColor={colors.secondaryLight2}
-                  underlineColorAndroid={"transparent"}
-                  value={this.state.nickname}
-                />
-                <Text style={Generics.errorText} >{this.state.errorText}</Text>
-                <CustomButton text={translate("change")} onPress={this.onChooseNickname} />
-                <Text style={{ ...Generics.bigText, color: colors.secondaryLight2, fontSize: 15, textDecorationLine: "underline" }} onPress={this.dissmissModal}>{translate("close")}</Text>
-
-              </View>
-          }
+              outputRange: [_SCREEN.height * 0.15, 0],
+            }),
+          }}
+        >
+          {this.state.isLoading ? (
+            <ActivityIndicator size="large" color={colors.primary} />
+          ) : (
+            <View style={{ justifyContent: 'center', alignItems: 'center', zIndex: 10 }}>
+              <Text style={Generics.bigText}>{translate('changeUsername')}</Text>
+              <View style={{ paddingTop: 10 }} />
+              <TextInput
+                onChangeText={this.onChangeText}
+                autoCapitalize={'none'}
+                autoCorrect={false}
+                style={{
+                  width: _SCREEN.width * 0.6,
+                  borderWidth: 1,
+                  borderColor: colors.primary,
+                  borderRadius: 5,
+                  padding: 5,
+                  fontSize: 20,
+                  fontFamily: 'roboto',
+                  color: colors.secondaryLight2,
+                  marginBottom: 5,
+                }}
+                placeholder={translate('typeYourUsername')}
+                placeholderTextColor={colors.secondaryLight2}
+                underlineColorAndroid={'transparent'}
+                value={this.state.nickname}
+              />
+              <Text style={Generics.errorText}>{this.state.errorText}</Text>
+              <CustomButton text={translate('change')} onPress={this.onChooseNickname} />
+              <Text
+                style={{
+                  ...Generics.bigText,
+                  color: colors.secondaryLight2,
+                  fontSize: 15,
+                  textDecorationLine: 'underline',
+                }}
+                onPress={this.dissmissModal}
+              >
+                {translate('close')}
+              </Text>
+            </View>
+          )}
         </Animated.View>
       </KeyboardAvoidingView>
-    );
+    )
   }
 }
 
-const colors = _APP_SETTINGS.colors;
+const colors = _APP_SETTINGS.colors
 
 var styles = StyleSheet.create({
   innerContainer: {
     width: _SCREEN.width * 0.8,
     paddingVertical: 10,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: colors.secondary,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: colors.primary
+    borderColor: colors.primary,
   },
   touchableArea: {
     zIndex: -1,
@@ -165,7 +174,7 @@ var styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    position: "absolute"
+    position: 'absolute',
   },
   closeButton: {
     paddingVertical: 5,
@@ -173,29 +182,29 @@ var styles = StyleSheet.create({
   },
   bigText: {
     fontSize: 25,
-    fontFamily: "roboto",
+    fontFamily: 'roboto',
     color: colors.secondaryLight3,
-    textAlign: "center",
+    textAlign: 'center',
     paddingTop: 5,
-    paddingLeft: 5
+    paddingLeft: 5,
   },
   imageStyle: {
     height: 50,
-    width: 50
+    width: 50,
   },
   smallText: {
     fontSize: 12,
-    fontFamily: "roboto",
+    fontFamily: 'roboto',
     color: colors.secondaryLight2,
-    textAlign: "left",
-    paddingLeft: 5
+    textAlign: 'left',
+    paddingLeft: 5,
   },
   copyRightText: {
     fontSize: 10,
-    fontFamily: "roboto",
+    fontFamily: 'roboto',
     color: colors.secondaryLight,
-    textAlign: "left",
+    textAlign: 'left',
     paddingLeft: 5,
-    marginBottom: 10
-  }
+    marginBottom: 10,
+  },
 })

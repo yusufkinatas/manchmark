@@ -1,6 +1,6 @@
-import { registerScreens } from "./src/ui";
-import { initialization, nav } from "./src/core";
+import { registerScreens } from './src/ui'
+import { initialization, nav } from '@Core'
 
-registerScreens();
-nav.showLoginScreen();
-initialization.init();
+registerScreens()
+nav.showLoginScreen()
+initialization.init()
