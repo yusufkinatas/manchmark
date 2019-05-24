@@ -29,7 +29,7 @@ import SwappingText from '@Components/SwappingText'
 import DelayedView from '@Components/DelayedView'
 import GameResult from '@Components/GameResult'
 
-const WORDS = require('../../../../assets/wordsEn.json').wordsEn
+const WORDS = require('@Assets/wordsEn.json').wordsEn
 
 const gameColor = _APP_SETTINGS.games.find((g) => g.name == 'VerbalMemoryGame').backgroundColor
 

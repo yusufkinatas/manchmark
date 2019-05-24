@@ -83,7 +83,7 @@ export default class AboutUsModal extends Component {
               }}
             >
               <Image
-                source={require('../../../assets/icon-low-res.png')}
+                source={require('@Assets/icon-low-res.png')}
                 style={styles.imageStyle}
               />
             </View>

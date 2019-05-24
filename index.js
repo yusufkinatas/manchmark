@@ -1,4 +1,4 @@
-import { registerScreens } from './src/ui'
+import { registerScreens } from './App/UI'
 import { initialization, nav } from '@Core'
 
 registerScreens()

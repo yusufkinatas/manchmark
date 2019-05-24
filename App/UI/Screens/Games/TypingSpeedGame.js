@@ -34,7 +34,7 @@ import BouncingText from '@Components/BouncingText'
 import GameResult from '@Components/GameResult'
 
 const TIMEOUT_MS = 30000
-const WORDS = require('../../../../assets/wordsEn.json').wordsEn
+const WORDS = require('@Assets/wordsEn.json').wordsEn
 const gameColor = _APP_SETTINGS.games.find((g) => g.name == 'TypingSpeedGame').backgroundColor
 
 export default class TypingSpeedGame extends Component {
