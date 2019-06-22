@@ -32,6 +32,7 @@ import {
 } from '@Core'
 import CustomButton from '@Components/CustomButton'
 import LoadingIndicator from '@Components/LoadingIndicator'
+import Container from '@Components/Container'
 
 const colors = _APP_SETTINGS.colors
 
@@ -260,6 +261,7 @@ export default class LeaderboardScreen extends Component {
           title: { text: translate('leaderboard') + `(${translate('global')})` },
           rightButtons: [
             {
+              id: "button1",
               component: {
                 name: 'HeaderButton',
                 passProps: {
@@ -276,6 +278,7 @@ export default class LeaderboardScreen extends Component {
           title: { text: translate('leaderboard') },
           rightButtons: [
             {
+              id: "button1",
               component: {
                 name: 'HeaderButton',
                 passProps: {
@@ -303,7 +306,6 @@ export default class LeaderboardScreen extends Component {
   averages = {}
   globalHighscores = {}
   friendHighscores = {}
-
 
   componentDidMount() {
     this.averages = user.get().globalAverages
@@ -437,7 +439,7 @@ export default class LeaderboardScreen extends Component {
 
   renderGlobalLeaderboards = () => {
     return (
-      <View style={Generics.container}>
+      <Container centered="all" androidPadStatusBar>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -468,13 +470,13 @@ export default class LeaderboardScreen extends Component {
           maxToRenderPerBatch={1}
           initialNumToRender={2}
         />
-      </View>
+      </Container>
     )
   }
 
   renderFriendLeaderboards = () => {
     return (
-      <View style={Generics.container}>
+      <Container centered="all" androidPadStatusBar>
         {user.get().follows.length == 0 ? (
           <View style={Generics.container}>
             <Text style={{ ...Generics.bigText, marginBottom: 20 }}>
@@ -520,7 +522,7 @@ export default class LeaderboardScreen extends Component {
             />
           </View>
         )}
-      </View>
+      </Container>
     )
   }
 

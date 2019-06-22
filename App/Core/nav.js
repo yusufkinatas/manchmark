@@ -8,6 +8,22 @@ var pushAviable = true
 const colors = _APP_SETTINGS.colors
 
 export const nav = {
+  showModal: (screen, passProps) => {
+    let isAndroid = Platform.OS == 'android'
+    Navigation.showModal({
+      component: {
+        name: screen,
+        passProps,
+        options: {
+          layout: {
+            backgroundColor: 'transparent',
+          },
+          modalPresentationStyle: isAndroid ? 'overCurrentContext' : 'overFullScreen',
+        },
+      },
+    })
+  },
+
   pushScreen: (componentId: string, screen: string, passProps) => {
     if (!pushAviable) return
 
@@ -16,7 +32,6 @@ export const nav = {
         name: screen,
         options: {
           statusBar: { backgroundColor: colors.secondaryDark },
-          topBar: {},
         },
         passProps,
       },
@@ -33,12 +48,6 @@ export const nav = {
         root: {
           component: {
             name: 'LoginScreen',
-            options: {
-              topBar: {
-                height: 0,
-                visible: false,
-              },
-            },
           },
         },
       })
@@ -49,7 +58,6 @@ export const nav = {
           background: {
             color: colors.secondaryDark,
           },
-
           title: {
             color: colors.secondaryLight3,
           },
@@ -77,38 +85,38 @@ export const nav = {
               duration: 250,
             },
           },
-          push: {
-            content: {
-              alpha: {
-                from: 0,
-                to: 1,
-                duration: 250,
-                interpolation: 'accelerate',
-              },
-              y: {
-                from: _SCREEN.height * 0.15,
-                to: 0,
-                duration: 250,
-                interpolation: 'accelerate',
-              },
-            },
-          },
-          pop: {
-            content: {
-              alpha: {
-                from: 1,
-                to: 0,
-                duration: 250,
-                interpolation: 'decelerate',
-              },
-              y: {
-                from: 0,
-                to: _SCREEN.height * 0.15,
-                duration: 250,
-                interpolation: 'decelerate',
-              },
-            },
-          },
+          // push: {
+          //   content: {
+          //     alpha: {
+          //       from: 0,
+          //       to: 1,
+          //       duration: 250,
+          //       interpolation: 'accelerate',
+          //     },
+          //     y: {
+          //       from: _SCREEN.height * 0.15,
+          //       to: 0,
+          //       duration: 250,
+          //       interpolation: 'accelerate',
+          //     },
+          //   },
+          // },
+          // pop: {
+          //   content: {
+          //     alpha: {
+          //       from: 1,
+          //       to: 0,
+          //       duration: 250,
+          //       interpolation: 'decelerate',
+          //     },
+          //     y: {
+          //       from: 0,
+          //       to: _SCREEN.height * 0.15,
+          //       duration: 250,
+          //       interpolation: 'decelerate',
+          //     },
+          //   },
+          // },
           showModal: {
             enabled: false,
           },
@@ -120,22 +128,6 @@ export const nav = {
     })
   },
 
-  showModal: (screen, passProps) => {
-    let isAndroid = Platform.OS == 'android'
-    Navigation.showModal({
-      component: {
-        name: screen,
-        passProps,
-        options: {
-          layout: {
-            backgroundColor: 'transparent',
-          },
-          modalPresentationStyle: isAndroid ? 'overCurrentContext' : 'overFullScreen',
-        },
-      },
-    })
-  },
-
   showGame: () => {
     Navigation.setRoot({
       root: {
@@ -144,9 +136,6 @@ export const nav = {
             {
               component: {
                 name: 'MainScreen',
-                options: {
-                  topBar: { visible: false },
-                },
               },
             },
           ],

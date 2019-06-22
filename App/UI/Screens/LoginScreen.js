@@ -21,22 +21,21 @@ import { setRootViewBackgroundColor } from 'react-native-root-view-background'
 import validator from 'validator'
 import _ from 'lodash'
 
-import {
-  store,
-  _APP_SETTINGS,
-  _SCREEN,
-  nav,
-  api,
-  utils,
-  user,
-  Generics,
-  translate,
-} from '@Core'
+import { store, _APP_SETTINGS, _SCREEN, nav, api, utils, user, Generics, translate } from '@Core'
 import CustomButton from '@Components/CustomButton'
 import LoadingIndicator from '@Components/LoadingIndicator'
 import SplashScreen from 'react-native-splash-screen'
 
 export default class MainScreen extends Component {
+  static options() {
+    return {
+      topBar: {
+        height: 0,
+        visible: false,
+      },
+    }
+  }
+
   constructor(props) {
     super(props)
     this.state = {

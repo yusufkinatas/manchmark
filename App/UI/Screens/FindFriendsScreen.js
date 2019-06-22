@@ -12,6 +12,7 @@ import {
   Alert,
   Linking,
   PermissionsAndroid,
+  Platform,
   ScrollView,
   TextInput,
   TouchableWithoutFeedback,
@@ -21,11 +22,42 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Contacts from 'react-native-contacts'
 import DeviceInfo from 'react-native-device-info'
-import RNAccountKit from 'react-native-facebook-account-kit'
+import RNAccountKit, { Color, StatusBarStyle } from 'react-native-facebook-account-kit'
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
 
 import { store, _APP_SETTINGS, _SCREEN, nav, Generics, user, api, translate } from '@Core'
 import CustomButton from '@Components/CustomButton'
+import Container from '@Components/Container'
+
+RNAccountKit.configure({
+  theme: {
+    // Background
+    backgroundColor: Color.rgba(0, 120, 0, 0.1),
+    backgroundImage: 'background.png',
+    // Button
+    buttonBackgroundColor: Color.rgba(0, 153, 0, 1.0),
+    buttonBorderColor: Color.rgba(0, 255, 0, 1),
+    buttonTextColor: Color.rgba(0, 255, 0, 1),
+    // Button disabled
+    buttonDisabledBackgroundColor: Color.rgba(100, 153, 0, 0.5),
+    buttonDisabledBorderColor: Color.rgba(100, 153, 0, 0.5),
+    buttonDisabledTextColor: Color.rgba(100, 153, 0, 0.5),
+    // Header
+    headerBackgroundColor: Color.rgba(0, 153, 0, 1.0),
+    headerButtonTextColor: Color.rgba(0, 153, 0, 0.5),
+    headerTextColor: Color.rgba(0, 255, 0, 1),
+    // Input
+    inputBackgroundColor: Color.rgba(0, 255, 0, 1),
+    inputBorderColor: Color.hex('#ccc'),
+    inputTextColor: Color.hex('#0f0'),
+    // Others
+    iconColor: Color.rgba(0, 255, 0, 1),
+    textColor: Color.hex('#0f0'),
+    titleColor: Color.hex('#0f0'),
+    // Header
+    statusBarStyle: StatusBarStyle.LightContent, // or StatusBarStyle.Default
+  },
+})
 
 export default class FindFriendsScreen extends Component {
   static options(passProps) {
@@ -40,6 +72,9 @@ export default class FindFriendsScreen extends Component {
 
   constructor(props) {
     super(props)
+    if (Platform.OS == 'ios') {
+    }
+
     this.state = {
       contacts: user.get().contacts,
       follows: user.get().follows,
@@ -49,6 +84,14 @@ export default class FindFriendsScreen extends Component {
   }
 
   componentWillMount() {
+    if (Platform.OS == 'ios') {
+      if (user.get().phone) {
+        this.setState({ showInfoText: false })
+        this.tryToGetContacts()
+      }
+      return
+    }
+
     PermissionsAndroid.check('android.permission.READ_CONTACTS').then((granted) => {
       if (granted && user.get().phone) {
         this.setState({ showInfoText: false })
@@ -93,7 +136,9 @@ export default class FindFriendsScreen extends Component {
             .then(() => {
               this.handleButtonPress()
             })
-            .catch((err) => {})
+            .catch((err) => {
+              console.log(err)
+            })
         }
       } catch (err) {
         console.warn('Error', err.message)
@@ -104,6 +149,33 @@ export default class FindFriendsScreen extends Component {
   }
 
   tryToGetContacts = () => {
+    if (Platform.OS == 'ios') {
+      return Contacts.getAll((err, contacts) => {
+        if (err) {
+        } else {
+          console.log('CONTACTS', contacts)
+          let nums = []
+          let country = DeviceInfo.getDeviceCountry()
+          contacts.forEach((contact) => {
+            try {
+              if (contact.phoneNumbers.length > 0 && contact.phoneNumbers[0].number) {
+                let num = parsePhoneNumberFromString(contact.phoneNumbers[0].number, country).number
+                if (num != user.get().phone) {
+                  nums.push(num)
+                }
+              }
+            } catch (error) {}
+          })
+          api
+            .getContacts(nums)
+            .then((res) => {
+              user.set({ contacts: res }, true)
+              this.refreshUserData()
+            })
+            .catch((err) => {})
+        }
+      })
+    }
     PermissionsAndroid.request('android.permission.READ_CONTACTS')
       .then((granted) => {
         if (granted == PermissionsAndroid.RESULTS.GRANTED) {
@@ -197,7 +269,7 @@ export default class FindFriendsScreen extends Component {
 
   render() {
     return (
-      <View style={{ ...Generics.container, justifyContent: 'flex-start' }}>
+      <Container androidPadStatusBar>
         <ScrollView
           style={{
             flex: 1,
@@ -227,7 +299,7 @@ export default class FindFriendsScreen extends Component {
           </View>
           {this.state.contacts.map((user) => this.renderUser(user))}
         </ScrollView>
-      </View>
+      </Container>
     )
   }
 }

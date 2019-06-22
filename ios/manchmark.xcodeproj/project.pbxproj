@@ -1796,12 +1796,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(SRCROOT)/../node_modules/react-native-facebook-account-kit/ios\n",
-					"$(SRCROOT)/../node_modules/react-native-facebook-account-kit/ios\n",
-					"$(SRCROOT)/../node_modules/react-native-facebook-account-kit/ios\n",
-					"$(SRCROOT)/../node_modules/react-native-facebook-account-kit/ios\n",
-					"$(SRCROOT)/../node_modules/react-native-facebook-account-kit/ios\n",
-					"$(SRCROOT)/../node_modules/react-native-facebook-account-kit/ios\n$(SRCROOT)/../node_modules/react-native-facebook-account-kit/ios",
+					"$(SRCROOT)/../node_modules/react-native-facebook-account-kit/ios/**",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1838,12 +1833,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(SRCROOT)/../node_modules/react-native-facebook-account-kit/ios\n",
-					"$(SRCROOT)/../node_modules/react-native-facebook-account-kit/ios\n",
-					"$(SRCROOT)/../node_modules/react-native-facebook-account-kit/ios\n",
-					"$(SRCROOT)/../node_modules/react-native-facebook-account-kit/ios\n",
-					"$(SRCROOT)/../node_modules/react-native-facebook-account-kit/ios\n",
-					"$(SRCROOT)/../node_modules/react-native-facebook-account-kit/ios\n$(SRCROOT)/../node_modules/react-native-facebook-account-kit/ios",
+					"$(SRCROOT)/../node_modules/react-native-facebook-account-kit/ios/**",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

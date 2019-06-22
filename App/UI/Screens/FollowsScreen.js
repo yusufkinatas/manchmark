@@ -11,7 +11,6 @@ import {
   Image,
   Alert,
   Linking,
-  PermissionsAndroid,
   ScrollView,
   TextInput,
   TouchableWithoutFeedback,
@@ -25,6 +24,7 @@ import validator from 'validator'
 import { store, _APP_SETTINGS, _SCREEN, nav, Generics, user, api, translate } from '@Core'
 import CustomButton from '@Components/CustomButton'
 import LoadingIndicator from '@Components/LoadingIndicator'
+import Container from '@Components/Container'
 
 export default class FollowsScreen extends Component {
   static options(passProps) {
@@ -205,7 +205,7 @@ export default class FollowsScreen extends Component {
 
   render() {
     return (
-      <View style={{ ...Generics.container, justifyContent: 'flex-start' }}>
+      <Container androidPadStatusBar>
         {(this.state.renderStatus == 'follows' || this.state.renderStatus == 'search') && (
           <View>
             <View
@@ -316,7 +316,7 @@ export default class FollowsScreen extends Component {
             />
           </View>
         )}
-      </View>
+      </Container>
     )
   }
 }

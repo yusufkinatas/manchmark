@@ -176,21 +176,26 @@ export default class NumberMemoryGame extends Component {
             color={gameColor}
           />
           <Text style={Generics.bigText}>{translate('whatWasTheNumber')}</Text>
-          <Text
+          <View
             style={{
               minWidth: _SCREEN.width * 0.3,
               borderBottomWidth: 1,
-              borderColor: gameColor,
-              padding: 5,
-              textAlign: 'center',
-              fontSize: 25,
-              fontFamily: 'roboto',
-              color: colors.secondaryLight3,
+              borderBottomColor: gameColor,
               marginBottom: 20,
+              padding: 5,
             }}
           >
-            {this.state.userAnswer}
-          </Text>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 25,
+                fontFamily: 'roboto',
+                color: colors.secondaryLight3,
+              }}
+            >
+              {this.state.userAnswer || ' '}
+            </Text>
+          </View>
         </View>
 
         <View style={{ height: _SCREEN.height * 0.4, width: _SCREEN.width }}>

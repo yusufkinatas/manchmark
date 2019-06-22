@@ -14,16 +14,7 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-import {
-  store,
-  _APP_SETTINGS,
-  _SCREEN,
-  utils,
-  Generics,
-  user,
-  translate,
-  audio,
-} from '@Core'
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, user, translate, audio } from '@Core'
 import CounterBar from '@Components/CounterBar'
 import CustomButton from '@Components/CustomButton'
 import SwappingText from '@Components/SwappingText'
@@ -233,21 +224,26 @@ export default class CalculationSpeedGame extends Component {
           </View>
           <View style={{ height: 10 }} />
           <SwappingText style={Generics.questionText}>{this.state.question}</SwappingText>
-
-          <Text
+          <View
             style={{
               minWidth: _SCREEN.width * 0.3,
               borderBottomWidth: 1,
-              borderColor: gameColor,
-              padding: 5,
-              textAlign: 'center',
-              fontSize: 25,
-              color: colors.secondaryLight3,
+              borderBottomColor: gameColor,
               marginBottom: 20,
+              padding: 5,
             }}
           >
-            {this.state.text}
-          </Text>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 25,
+                fontFamily: 'roboto',
+                color: colors.secondaryLight3,
+              }}
+            >
+              {this.state.text || ' '}
+            </Text>
+          </View>
         </View>
 
         <View style={{ height: _SCREEN.height * 0.4, width: _SCREEN.width }}>

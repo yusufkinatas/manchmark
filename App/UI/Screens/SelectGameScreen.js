@@ -16,9 +16,10 @@ import Icon from 'react-native-vector-icons/Feather'
 
 import { _APP_SETTINGS, _SCREEN, nav, translate } from '@Core'
 import CustomButton from '@Components/CustomButton'
+import Container from '@Components/Container'
 
 export default class SelectGameScreen extends Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
         title: {
@@ -32,19 +33,9 @@ export default class SelectGameScreen extends Component {
     nav.pushScreen(this.props.componentId, screen)
   }
 
-
   render() {
     return (
-      <ScrollView
-        style={{ flex: 1, backgroundColor: _APP_SETTINGS.colors.secondary }}
-        contentContainerStyle={{
-          width: _SCREEN.width,
-          minHeight: _SCREEN.height - 80,
-          alignItems: 'center',
-          justifyContent: 'center',
-          paddingTop: 10,
-        }}
-      >
+      <Container androidPadStatusBar centered="all">
         {_APP_SETTINGS.games.map((g) => {
           return (
             <CustomButton
@@ -56,7 +47,7 @@ export default class SelectGameScreen extends Component {
             />
           )
         })}
-      </ScrollView>
+      </Container>
     )
   }
 }

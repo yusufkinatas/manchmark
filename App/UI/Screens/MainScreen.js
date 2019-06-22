@@ -21,6 +21,15 @@ import CustomButton from '@Components/CustomButton'
 import Container from '@Components/Container'
 
 export default class MainScreen extends Component {
+  static options() {
+    return {
+      topBar: {
+        visible: false,
+        heigth: 0,
+      },
+    }
+  }
+
   constructor(props) {
     super(props)
     this.wololoCounter = 0
@@ -66,7 +75,11 @@ export default class MainScreen extends Component {
     } else if (Platform.OS == 'ios') {
       return (
         <View style={{ flex: 1, borderRadius: 5, overflow: 'hidden', marginHorizontal: 5 }}>
-          <TouchableHighlight underlayColor={colors.primary} onPress={onPress}>
+          <TouchableHighlight
+            underlayColor={'#333333'}
+            style={{ backgroundColor: colors.secondaryLight, paddingVertical: 5 }}
+            onPress={onPress}
+          >
             <View style={{ paddingHorizontal: 5, justifyContent: 'center', alignItems: 'center' }}>
               <Icon name={icon} size={20} color={colors.secondaryLight2} />
               <Text style={{ ...Generics.text, fontSize: 12, color: colors.secondaryLight2 }}>

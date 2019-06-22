@@ -10,7 +10,7 @@ const Container = ({ children, style, centered, androidPadStatusBar }) => {
     justifyContent: centered == 'all' || centered == 'vertical' ? 'center' : undefined,
     alignItems: centered == 'all' || centered == 'horizontal' ? 'center' : undefined,
     paddingTop:
-      androidPadStatusBar && Platform.OS == 'android' ? StatusBar.currentHeight / 2 : undefined,
+      androidPadStatusBar && Platform.OS == 'android' ? StatusBar.currentHeight : undefined,
     ...style,
   }
   return <SafeAreaView style={containerStyle}>{children}</SafeAreaView>
