@@ -9,13 +9,14 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import Icon from 'react-native-vector-icons/Feather'
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback'
 
 import { store, _APP_SETTINGS, _SCREEN, nav, Generics, audio, user } from '@Core'
 
 export default class Numpad extends Component {
   onPressIn = (name) => {
-    if (this.hapticView && user.get().localSettings.hapticEnabled) {
-      //PERFORM HAPTIC
+    if (user.get().localSettings.hapticEnabled) {
+      ReactNativeHapticFeedback.trigger('impactLight', _APP_SETTINGS.hapticOptions)
     }
     this.props.onPress(name)
     audio.play('click_numpad.wav', 0.2)
@@ -29,7 +30,7 @@ export default class Numpad extends Component {
           onPressIn={() => this.onPressIn(name)}
         >
           <View style={styles.buttonInnerContainer}>
-              <Text style={styles.buttonText}>{name}</Text>
+            <Text style={styles.buttonText}>{name}</Text>
           </View>
         </TouchableNativeFeedback>
       </View>
@@ -40,7 +41,7 @@ export default class Numpad extends Component {
           style={styles.buttonInnerContainer}
           onPressIn={() => this.onPressIn(name)}
         >
-            <Text style={styles.buttonText}>{name}</Text>
+          <Text style={styles.buttonText}>{name}</Text>
         </TouchableHighlight>
       </View>
     )
@@ -57,7 +58,7 @@ export default class Numpad extends Component {
           }}
         >
           <View style={styles.buttonInnerContainer}>
-              <Icon name={icon} color={colors.secondaryLight3} size={30} />
+            <Icon name={icon} color={colors.secondaryLight3} size={30} />
           </View>
         </TouchableNativeFeedback>
       </View>
@@ -71,7 +72,7 @@ export default class Numpad extends Component {
             if (name == 'del') this.props.deleteAll()
           }}
         >
-            <Icon name={icon} color={colors.secondaryLight3} size={30} />
+          <Icon name={icon} color={colors.secondaryLight3} size={30} />
         </TouchableHighlight>
       </View>
     )

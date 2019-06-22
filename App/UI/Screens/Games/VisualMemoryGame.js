@@ -15,6 +15,7 @@ import {
   PanResponder,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback'
 
 import {
   store,
@@ -277,8 +278,8 @@ export default class VisualMemoryGame extends Component {
     ) {
       return
     }
-    if (this.hapticView && user.get().localSettings.hapticEnabled) {
-      //PERFORM HAPTIC
+    if (user.get().localSettings.hapticEnabled) {
+      ReactNativeHapticFeedback.trigger('impactLight', _APP_SETTINGS.hapticOptions)
     }
     this.buttonsEnabled = false
     this.state.squares[index].pushed = true
