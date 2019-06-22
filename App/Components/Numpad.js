@@ -9,20 +9,13 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import Icon from 'react-native-vector-icons/Feather'
-import HapticView, { HapticFeedbackConstants } from 'react-native-haptic-view'
 
 import { store, _APP_SETTINGS, _SCREEN, nav, Generics, audio, user } from '@Core'
 
 export default class Numpad extends Component {
   onPressIn = (name) => {
     if (this.hapticView && user.get().localSettings.hapticEnabled) {
-      this.hapticView.performHaptic({
-        ios: HapticFeedbackConstants.ios.IMPACT_FEEDBACK,
-        android: [
-          HapticFeedbackConstants.android.VIRTUAL_KEY,
-          HapticFeedbackConstants.android.FLAG_IGNORE_GLOBAL_SETTING,
-        ],
-      })
+      //PERFORM HAPTIC
     }
     this.props.onPress(name)
     audio.play('click_numpad.wav', 0.2)
@@ -36,9 +29,7 @@ export default class Numpad extends Component {
           onPressIn={() => this.onPressIn(name)}
         >
           <View style={styles.buttonInnerContainer}>
-            <HapticView ref={(me) => (this.hapticView = me)}>
               <Text style={styles.buttonText}>{name}</Text>
-            </HapticView>
           </View>
         </TouchableNativeFeedback>
       </View>
@@ -49,9 +40,7 @@ export default class Numpad extends Component {
           style={styles.buttonInnerContainer}
           onPressIn={() => this.onPressIn(name)}
         >
-          <HapticView ref={(me) => (this.hapticView = me)}>
             <Text style={styles.buttonText}>{name}</Text>
-          </HapticView>
         </TouchableHighlight>
       </View>
     )
@@ -68,9 +57,7 @@ export default class Numpad extends Component {
           }}
         >
           <View style={styles.buttonInnerContainer}>
-            <HapticView ref={(me) => (this.hapticView = me)}>
               <Icon name={icon} color={colors.secondaryLight3} size={30} />
-            </HapticView>
           </View>
         </TouchableNativeFeedback>
       </View>
@@ -84,9 +71,7 @@ export default class Numpad extends Component {
             if (name == 'del') this.props.deleteAll()
           }}
         >
-          <HapticView ref={(me) => (this.hapticView = me)}>
             <Icon name={icon} color={colors.secondaryLight3} size={30} />
-          </HapticView>
         </TouchableHighlight>
       </View>
     )

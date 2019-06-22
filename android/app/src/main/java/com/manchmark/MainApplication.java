@@ -13,7 +13,6 @@ import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.reactnativenavigation.react.ReactGateway;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
-import com.hamidhadi.reactnativehapticview.HapticViewPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -44,7 +43,6 @@ public class MainApplication extends NavigationApplication {
             new RNSoundPackage(),
             new RNLocalizePackage(),
             new ReactNativeContacts(),
-            new HapticViewPackage(),
             new RNAccountKitPackage(),
             new RNRootViewBackgroundPackage()
         );

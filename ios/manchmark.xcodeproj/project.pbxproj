@@ -45,7 +45,6 @@
 		58B50DA3B62245E489D8E3E0 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B7211518D844E19B80FCECD /* Feather.ttf */; };
 		5CD6ADA028BB475AB9905EA8 /* ReactNativeNavigationTests.xctest in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E444D20A6724AE9B26EF28F /* ReactNativeNavigationTests.xctest */; };
 		74DB509FB7114D8CA1354A3A /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FF7D7CE01B54F749E63E7A4 /* MaterialIcons.ttf */; };
-		78DCA909F8BF4C099E7A515F /* libReactNativeHapticView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFCF798F6D514D449913B408 /* libReactNativeHapticView.a */; };
 		7BA298AFDEA840D3BB7D4920 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31F6F7DF0BB042B9B1CA8E4B /* Octicons.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8D6517E5484446F294CB748A /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07AC4CCF9E2644C8A4F746A4 /* Zocial.ttf */; };
@@ -372,13 +371,6 @@
 			remoteGlobalIDString = 1441618E1BD0A79300FA4F59;
 			remoteInfo = RCTContacts;
 		};
-		E0E3440622412679007D1CC6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 98A0D175075140EC970E5AF7 /* ReactNativeHapticView.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0386971121EF2B67004E09A2;
-			remoteInfo = ReactNativeHapticView;
-		};
 		E0E3440A22412679007D1CC6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A090244C9C4B42A99F774F59 /* ReactNativeNavigation.xcodeproj */;
@@ -509,7 +501,6 @@
 		852233273A954817BFACF46C /* libSplashScreen.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSplashScreen.a; sourceTree = "<group>"; };
 		944C9F12906340509C886BA8 /* libRNLanguages.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNLanguages.a; sourceTree = "<group>"; };
 		96848418E1A04A7DB13FC2A4 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
-		98A0D175075140EC970E5AF7 /* ReactNativeHapticView.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeHapticView.xcodeproj; path = "../node_modules/react-native-haptic-view/ios/ReactNativeHapticView.xcodeproj"; sourceTree = "<group>"; };
 		A014333F6723482CA87C4FDB /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		A090244C9C4B42A99F774F59 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		A925CA731A264645A0706320 /* libRNRootViewBackground.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNRootViewBackground.a; sourceTree = "<group>"; };
@@ -580,7 +571,6 @@
 				E12CC2244C854107BAC4436F /* libRNVectorIcons.a in Frameworks */,
 				FED5EDB3F85A48049C46CBEE /* libRCTContacts.a in Frameworks */,
 				FBD0B97458C64E9FA5D120B8 /* libRNAccountKit.a in Frameworks */,
-				78DCA909F8BF4C099E7A515F /* libReactNativeHapticView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -805,7 +795,6 @@
 				6A58AE7653AA485581C9AFB5 /* RNVectorIcons.xcodeproj */,
 				5F5E2BFE632A415B88B006F3 /* RCTContacts.xcodeproj */,
 				83DEDABD168A4EDBA0FEFBB8 /* RNAccountKit.xcodeproj */,
-				98A0D175075140EC970E5AF7 /* ReactNativeHapticView.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -961,14 +950,6 @@
 			isa = PBXGroup;
 			children = (
 				E0E3441022412679007D1CC6 /* libRNAccountKit.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		E0E3440022412678007D1CC6 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E0E3440722412679007D1CC6 /* libReactNativeHapticView.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1148,10 +1129,6 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
-				},
-				{
-					ProductGroup = E0E3440022412678007D1CC6 /* Products */;
-					ProjectRef = 98A0D175075140EC970E5AF7 /* ReactNativeHapticView.xcodeproj */;
 				},
 				{
 					ProductGroup = E0E343F422412678007D1CC6 /* Products */;
@@ -1468,13 +1445,6 @@
 			fileType = archive.ar;
 			path = libRCTContacts.a;
 			remoteRef = E0E3440322412679007D1CC6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E0E3440722412679007D1CC6 /* libReactNativeHapticView.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libReactNativeHapticView.a;
-			remoteRef = E0E3440622412679007D1CC6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		E0E3440B22412679007D1CC6 /* libReactNativeNavigation.a */ = {
