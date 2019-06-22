@@ -17,16 +17,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback'
 
-import {
-  store,
-  _APP_SETTINGS,
-  _SCREEN,
-  utils,
-  Generics,
-  translate,
-  user,
-  audio,
-} from '@Core'
+import { store, _APP_SETTINGS, _SCREEN, utils, Generics, translate, user, audio } from '@Core'
 import CustomButton from '@Components/CustomButton'
 import CounterBar from '@Components/CounterBar'
 import BouncingText from '@Components/BouncingText'
@@ -278,6 +269,7 @@ export default class VisualMemoryGame extends Component {
     ) {
       return
     }
+
     if (user.get().localSettings.hapticEnabled) {
       ReactNativeHapticFeedback.trigger('impactLight', _APP_SETTINGS.hapticOptions)
     }
