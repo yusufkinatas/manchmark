@@ -82,7 +82,6 @@ configurations.all {
 dependencies {
     implementation project(':react-native-sound')
     implementation project(':react-native-localize')
-    implementation project(':react-native-facebook-account-kit')
     implementation project(':react-native-contacts')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-splash-screen')

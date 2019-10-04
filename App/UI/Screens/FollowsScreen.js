@@ -274,48 +274,6 @@ export default class FollowsScreen extends Component {
         )}
 
         {this.renderContent()}
-
-        {user.get().settings.friendsEnabled && (
-          <View
-            style={{
-              alignItems: 'center',
-              backgroundColor: colors.secondaryDark2,
-              width: _SCREEN.width,
-            }}
-          >
-            <View
-              style={{
-                width: _SCREEN.width,
-                backgroundColor: colors.secondaryDark + '55',
-                height: 1,
-              }}
-            />
-            <View
-              style={{
-                width: _SCREEN.width,
-                backgroundColor: colors.secondaryDark,
-                height: 1,
-                marginBottom: 8,
-              }}
-            />
-            <CustomButton
-              text={translate('findYourFriends')}
-              onPress={() =>
-                this.pushScreen('FindFriendsScreen', { onClose: () => this.refreshUserData(true) })
-              }
-            />
-            <View
-              style={{
-                width: _SCREEN.width,
-                backgroundColor: colors.secondaryDark + '55',
-                height: 1,
-              }}
-            />
-            <View
-              style={{ width: _SCREEN.width, backgroundColor: colors.secondaryDark, height: 1 }}
-            />
-          </View>
-        )}
       </Container>
     )
   }

@@ -16,7 +16,6 @@
     "react-native": "0.57.8",
     "react-native-contacts": "^3.1.2",
     "react-native-device-info": "^0.25.1",
-    "react-native-facebook-account-kit": "^1.1.0",
     "react-native-haptic-feedback": "^1.8.0",
     "react-native-localize": "^1.0.3",
     "react-native-navigation": "^2.0.2641",

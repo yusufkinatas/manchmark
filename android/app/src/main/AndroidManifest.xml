@@ -13,17 +13,6 @@
       android:allowBackup="false"
       android:theme="@style/AppTheme">
 
-
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/fb_app_id" />
-        <meta-data
-            android:name="com.facebook.accountkit.ApplicationName"
-            android:value="@string/app_name" />
-        <meta-data
-            android:name="com.facebook.accountkit.ClientToken"
-            android:value="@string/ak_client_token" />
-
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme"
@@ -34,11 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-         <activity
-            tools:replace="android:theme"
-            android:name="com.facebook.accountkit.ui.AccountKitActivity"
-            android:theme="@style/AccountKitTheme" />
 
         <activity
         android:name=".MainActivity"

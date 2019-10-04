@@ -5,7 +5,6 @@ import com.zmxv.RNSound.RNSoundPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.reactcommunity.rnlocalize.RNLocalizePackage; 
-import io.underscope.react.fbak.RNAccountKitPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.reactlibrary.RNRootViewBackgroundPackage;
@@ -44,7 +43,6 @@ public class MainApplication extends NavigationApplication {
             new RNSoundPackage(),
             new RNLocalizePackage(),
             new ReactNativeContacts(),
-            new RNAccountKitPackage(),
             new RNRootViewBackgroundPackage(),
             new RNReactNativeHapticFeedbackPackage()
         );

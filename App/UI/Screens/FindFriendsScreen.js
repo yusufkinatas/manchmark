@@ -22,42 +22,12 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Contacts from 'react-native-contacts'
 import DeviceInfo from 'react-native-device-info'
-import RNAccountKit, { Color, StatusBarStyle } from 'react-native-facebook-account-kit'
+
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
 
 import { store, _APP_SETTINGS, _SCREEN, nav, Generics, user, api, translate } from '@Core'
 import CustomButton from '@Components/CustomButton'
 import Container from '@Components/Container'
-
-RNAccountKit.configure({
-  theme: {
-    // Background
-    backgroundColor: Color.rgba(0, 120, 0, 0.1),
-    backgroundImage: 'background.png',
-    // Button
-    buttonBackgroundColor: Color.rgba(0, 153, 0, 1.0),
-    buttonBorderColor: Color.rgba(0, 255, 0, 1),
-    buttonTextColor: Color.rgba(0, 255, 0, 1),
-    // Button disabled
-    buttonDisabledBackgroundColor: Color.rgba(100, 153, 0, 0.5),
-    buttonDisabledBorderColor: Color.rgba(100, 153, 0, 0.5),
-    buttonDisabledTextColor: Color.rgba(100, 153, 0, 0.5),
-    // Header
-    headerBackgroundColor: Color.rgba(0, 153, 0, 1.0),
-    headerButtonTextColor: Color.rgba(0, 153, 0, 0.5),
-    headerTextColor: Color.rgba(0, 255, 0, 1),
-    // Input
-    inputBackgroundColor: Color.rgba(0, 255, 0, 1),
-    inputBorderColor: Color.hex('#ccc'),
-    inputTextColor: Color.hex('#0f0'),
-    // Others
-    iconColor: Color.rgba(0, 255, 0, 1),
-    textColor: Color.hex('#0f0'),
-    titleColor: Color.hex('#0f0'),
-    // Header
-    statusBarStyle: StatusBarStyle.LightContent, // or StatusBarStyle.Default
-  },
-})
 
 export default class FindFriendsScreen extends Component {
   static options(passProps) {
@@ -107,11 +77,6 @@ export default class FindFriendsScreen extends Component {
   }
 
   componentDidMount() {
-    RNAccountKit.configure({
-      responseType: 'code',
-      initialPhoneCountryPrefix: '+90',
-      defaultCountry: DeviceInfo.getDeviceCountry() || 'TR',
-    })
   }
 
   refreshUserData = () => {
@@ -124,7 +89,6 @@ export default class FindFriendsScreen extends Component {
   handleButtonPress = async () => {
     if (!user.get().phone) {
       try {
-        const payload = await RNAccountKit.loginWithPhone()
 
         if (!payload) {
           console.warn('Login cancelled', payload)
