@@ -76,11 +76,9 @@
 		E0C40CF5224243C300B362D8 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0C40CE7224243C300B362D8 /* Roboto-Regular.ttf */; };
 		E0C40CF6224243C300B362D8 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0C40CE8224243C300B362D8 /* Roboto-BoldItalic.ttf */; };
 		E0E344392241409D007D1CC6 /* libRNLocalize.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E3443622414009007D1CC6 /* libRNLocalize.a */; };
-		E0E3443B22414104007D1CC6 /* AccountKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E3443A22414104007D1CC6 /* AccountKit.framework */; };
 		E12CC2244C854107BAC4436F /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76EDB0C0ECAE4094AC9B2E83 /* libRNVectorIcons.a */; };
 		E285EE5264D343EEB2C39E3A /* libRNVectorIcons-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D00FE5127043F3995F8612 /* libRNVectorIcons-tvOS.a */; };
 		F378B6C42A0840B89589ACEE /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8C606EB6B3C49DFA5B86A9D /* SimpleLineIcons.ttf */; };
-		FBD0B97458C64E9FA5D120B8 /* libRNAccountKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 690396A0299F437A8DCCB0D2 /* libRNAccountKit.a */; };
 		FED5EDB3F85A48049C46CBEE /* libRCTContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B02F730BFF4E59896A0961 /* libRCTContacts.a */; };
 /* End PBXBuildFile section */
 
@@ -567,7 +565,6 @@
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
-				E0E3443B22414104007D1CC6 /* AccountKit.framework in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
@@ -580,7 +577,6 @@
 				33C2588F8F994C14B843DA04 /* libSplashScreen.a in Frameworks */,
 				E12CC2244C854107BAC4436F /* libRNVectorIcons.a in Frameworks */,
 				FED5EDB3F85A48049C46CBEE /* libRCTContacts.a in Frameworks */,
-				FBD0B97458C64E9FA5D120B8 /* libRNAccountKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
