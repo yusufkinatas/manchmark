@@ -53,6 +53,16 @@
 		9074B0B41710439AB36366B7 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D857CEE48374E1793FFF53D /* FontAwesome5_Regular.ttf */; };
 		9271AB2761714E24B8E736B6 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8EACB83A31A4567A556481D /* Entypo.ttf */; };
 		940F6DC4E6C344CF9C169171 /* libRNLanguages-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF01369ED264C1A8E8F1467 /* libRNLanguages-tvOS.a */; };
+		9789909C238EAFC900FF625D /* click_verbal.wav in Resources */ = {isa = PBXBuildFile; fileRef = 97899092238EAFC700FF625D /* click_verbal.wav */; };
+		9789909D238EAFC900FF625D /* highscore.wav in Resources */ = {isa = PBXBuildFile; fileRef = 97899093238EAFC800FF625D /* highscore.wav */; };
+		9789909E238EAFC900FF625D /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = 97899094238EAFC800FF625D /* correct.wav */; };
+		9789909F238EAFC900FF625D /* click_numpad.wav in Resources */ = {isa = PBXBuildFile; fileRef = 97899095238EAFC800FF625D /* click_numpad.wav */; };
+		978990A0238EAFC900FF625D /* wololo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 97899096238EAFC800FF625D /* wololo.wav */; };
+		978990A1238EAFC900FF625D /* click_main.wav in Resources */ = {isa = PBXBuildFile; fileRef = 97899097238EAFC800FF625D /* click_main.wav */; };
+		978990A2238EAFC900FF625D /* vm1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 97899098238EAFC800FF625D /* vm1.wav */; };
+		978990A3238EAFC900FF625D /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = 97899099238EAFC800FF625D /* click.wav */; };
+		978990A4238EAFC900FF625D /* vm2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9789909A238EAFC900FF625D /* vm2.wav */; };
+		978990A5238EAFC900FF625D /* wrong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9789909B238EAFC900FF625D /* wrong.wav */; };
 		99CDF05B2A9346849D3A3D95 /* libRNRootViewBackground.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A925CA731A264645A0706320 /* libRNRootViewBackground.a */; };
 		9C9BB869A5BB4B0D849B5C37 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74F22DD6F3F146968FC6384D /* Ionicons.ttf */; };
 		9F0D143C0DCD4E02A65718AE /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E94A8C1D44584DFB907AAE34 /* EvilIcons.ttf */; };
@@ -508,6 +518,16 @@
 		88A3FB7F22BE6CF400BD1E31 /* RNReactNativeHapticFeedback.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNReactNativeHapticFeedback.xcodeproj; path = "../node_modules/react-native-haptic-feedback/ios/RNReactNativeHapticFeedback.xcodeproj"; sourceTree = "<group>"; };
 		944C9F12906340509C886BA8 /* libRNLanguages.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNLanguages.a; sourceTree = "<group>"; };
 		96848418E1A04A7DB13FC2A4 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
+		97899092238EAFC700FF625D /* click_verbal.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click_verbal.wav; sourceTree = "<group>"; };
+		97899093238EAFC800FF625D /* highscore.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = highscore.wav; sourceTree = "<group>"; };
+		97899094238EAFC800FF625D /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
+		97899095238EAFC800FF625D /* click_numpad.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click_numpad.wav; sourceTree = "<group>"; };
+		97899096238EAFC800FF625D /* wololo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wololo.wav; sourceTree = "<group>"; };
+		97899097238EAFC800FF625D /* click_main.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click_main.wav; sourceTree = "<group>"; };
+		97899098238EAFC800FF625D /* vm1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = vm1.wav; sourceTree = "<group>"; };
+		97899099238EAFC800FF625D /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
+		9789909A238EAFC900FF625D /* vm2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = vm2.wav; sourceTree = "<group>"; };
+		9789909B238EAFC900FF625D /* wrong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wrong.wav; sourceTree = "<group>"; };
 		A014333F6723482CA87C4FDB /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		A090244C9C4B42A99F774F59 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		A925CA731A264645A0706320 /* libRNRootViewBackground.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNRootViewBackground.a; sourceTree = "<group>"; };
@@ -818,6 +838,16 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				97899097238EAFC800FF625D /* click_main.wav */,
+				97899095238EAFC800FF625D /* click_numpad.wav */,
+				97899092238EAFC700FF625D /* click_verbal.wav */,
+				97899099238EAFC800FF625D /* click.wav */,
+				97899094238EAFC800FF625D /* correct.wav */,
+				97899093238EAFC800FF625D /* highscore.wav */,
+				97899098238EAFC800FF625D /* vm1.wav */,
+				9789909A238EAFC900FF625D /* vm2.wav */,
+				97899096238EAFC800FF625D /* wololo.wav */,
+				9789909B238EAFC900FF625D /* wrong.wav */,
 				E0C40CA62242438300B362D8 /* fonts */,
 				13B07FAE1A68108700A75B9A /* manchmark */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -1564,12 +1594,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9789909F238EAFC900FF625D /* click_numpad.wav in Resources */,
 				E0C40CF6224243C300B362D8 /* Roboto-BoldItalic.ttf in Resources */,
+				978990A1238EAFC900FF625D /* click_main.wav in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				9789909E238EAFC900FF625D /* correct.wav in Resources */,
+				978990A5238EAFC900FF625D /* wrong.wav in Resources */,
+				978990A3238EAFC900FF625D /* click.wav in Resources */,
 				E0C40CEE224243C300B362D8 /* Roboto-MediumItalic.ttf in Resources */,
 				E0C40CE9224243C300B362D8 /* Kanit.ttf in Resources */,
 				ADEFCCF6AC504968AF52697E /* AntDesign.ttf in Resources */,
+				978990A2238EAFC900FF625D /* vm1.wav in Resources */,
+				9789909D238EAFC900FF625D /* highscore.wav in Resources */,
 				E0C40CEF224243C300B362D8 /* Roboto-Bold.ttf in Resources */,
 				E0C40CEA224243C300B362D8 /* Roboto-Thin.ttf in Resources */,
 				9271AB2761714E24B8E736B6 /* Entypo.ttf in Resources */,
@@ -1577,10 +1614,12 @@
 				58B50DA3B62245E489D8E3E0 /* Feather.ttf in Resources */,
 				8E3E3438529D4FE89527D26A /* FontAwesome.ttf in Resources */,
 				CEF710F594684591AA129B85 /* FontAwesome5_Brands.ttf in Resources */,
+				9789909C238EAFC900FF625D /* click_verbal.wav in Resources */,
 				E0C40CF5224243C300B362D8 /* Roboto-Regular.ttf in Resources */,
 				9074B0B41710439AB36366B7 /* FontAwesome5_Regular.ttf in Resources */,
 				E0C40CEB224243C300B362D8 /* Roboto-LightItalic.ttf in Resources */,
 				E0C40CED224243C300B362D8 /* Roboto-Light.ttf in Resources */,
+				978990A4238EAFC900FF625D /* vm2.wav in Resources */,
 				E0C40CEC224243C300B362D8 /* Roboto-ThinItalic.ttf in Resources */,
 				E0C40CF4224243C300B362D8 /* Roboto-Medium.ttf in Resources */,
 				55C9234D66E74AC3868C365D /* FontAwesome5_Solid.ttf in Resources */,
@@ -1594,6 +1633,7 @@
 				7BA298AFDEA840D3BB7D4920 /* Octicons.ttf in Resources */,
 				F378B6C42A0840B89589ACEE /* SimpleLineIcons.ttf in Resources */,
 				8D6517E5484446F294CB748A /* Zocial.ttf in Resources */,
+				978990A0238EAFC900FF625D /* wololo.wav in Resources */,
 				E0C40CF0224243C300B362D8 /* Roboto-Italic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
