@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Navigation } from 'react-native-navigation'
 import {
+  DeviceInfo,
   View,
   Text,
+  SafeAreaView,
   StyleSheet,
   TouchableOpacity,
   ActivityIndicator,
@@ -45,10 +47,12 @@ export default class LeaderboardTutorialModal extends Component {
   }
 
   render() {
+    let marginTop = DeviceInfo.isIPhoneX_deprecated ? 32 : 20;
+    let marginRight = DeviceInfo.isIPhoneX_deprecated ? 20 : 0;
     return (
-      <View style={{ ...Generics.container, backgroundColor: 'rgba(0,0,0,0.95)' }}>
+      <SafeAreaView style={{ ...Generics.container, backgroundColor: 'rgba(0,0,0,0.95)' }}>
         <View
-          style={{ position: 'absolute', top: 0, right: 0, height: 56, justifyContent: 'center' }}
+          style={{ position: 'absolute', top: marginTop, right: marginRight, height: 56, justifyContent: 'center' }}
         >
           <HeaderButton disabled icon="globe" backgroundColor={colors.secondary} />
         </View>
@@ -61,7 +65,7 @@ export default class LeaderboardTutorialModal extends Component {
         <Text style={Generics.bigText}>{translate('leaderboardTutorial')}</Text>
         <View style={{ paddingTop: 10 }} />
         <CustomButton text={translate('gotIt')} onPress={this.dissmissModal} />
-      </View>
+      </SafeAreaView>
     )
   }
 }
