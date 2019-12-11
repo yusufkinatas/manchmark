@@ -1,4 +1,4 @@
-import { Platform, Dimensions, StyleSheet } from 'react-native'
+import { Platform, Dimensions, StyleSheet, DeviceInfo } from 'react-native'
 
 export const _SCREEN = {
   height: Dimensions.get('window').height,
@@ -114,7 +114,7 @@ export const Generics = StyleSheet.create({
     color: colors.secondaryLight2,
     textAlign: 'center',
     paddingHorizontal: 20,
-    bottom: 20,
+    bottom: DeviceInfo.isIPhoneX_deprecated ? 30 : 20,
     width: _SCREEN.width,
   },
   bigText: {
