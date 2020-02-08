@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import _ from 'lodash'
 import { _APP_SETTINGS, _SCREEN, Generics, translate, user, utils, audio } from '@Core'
 import CustomButton from '@Components/CustomButton'
-import Container from '@Components/Container';
+import Container from '@Components/Container'
 
 const colors = _APP_SETTINGS.colors
 
@@ -179,13 +179,11 @@ export default class StatisticsScreen extends Component {
   render() {
     return (
       <Container centered="all" androidPadStatusBar>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ height: _SCREEN.width / _APP_SETTINGS.games.length + 6 }}
+        <View
+          style={{ height: _SCREEN.width / _APP_SETTINGS.games.length + 6, flexDirection: 'row' }}
         >
           {this.renderGames()}
-        </ScrollView>
+        </View>
 
         <FlatList
           ref={(r) => (this.flatList = r)}

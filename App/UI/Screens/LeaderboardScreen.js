@@ -261,7 +261,7 @@ export default class LeaderboardScreen extends Component {
           title: { text: translate('leaderboard') + `(${translate('global')})` },
           rightButtons: [
             {
-              id: "button1",
+              id: 'button1',
               component: {
                 name: 'HeaderButton',
                 passProps: {
@@ -278,7 +278,7 @@ export default class LeaderboardScreen extends Component {
           title: { text: translate('leaderboard') },
           rightButtons: [
             {
-              id: "button1",
+              id: 'button1',
               component: {
                 name: 'HeaderButton',
                 passProps: {
@@ -440,13 +440,11 @@ export default class LeaderboardScreen extends Component {
   renderGlobalLeaderboards = () => {
     return (
       <Container centered="all" androidPadStatusBar>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ height: _SCREEN.width / _APP_SETTINGS.games.length + 6 }}
+        <View
+          style={{ height: _SCREEN.width / _APP_SETTINGS.games.length + 6, flexDirection: 'row' }}
         >
           {this.renderGames()}
-        </ScrollView>
+        </View>
 
         <FlatList
           ref={(r) => (this.flatList = r)}
