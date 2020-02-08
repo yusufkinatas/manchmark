@@ -76,8 +76,7 @@ export default class FindFriendsScreen extends Component {
     }
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   refreshUserData = () => {
     this.setState({
@@ -89,20 +88,14 @@ export default class FindFriendsScreen extends Component {
   handleButtonPress = async () => {
     if (!user.get().phone) {
       try {
-
         if (!payload) {
           console.warn('Login cancelled', payload)
         } else {
           console.warn('Logged with phone. Payload:', payload.code)
           var code = payload.code
-          user
-            .changePhoneNumber(code)
-            .then(() => {
-              this.handleButtonPress()
-            })
-            .catch((err) => {
-              console.log(err)
-            })
+          user.changePhoneNumber(code).then(() => {
+            this.handleButtonPress()
+          })
         }
       } catch (err) {
         console.warn('Error', err.message)
@@ -117,7 +110,6 @@ export default class FindFriendsScreen extends Component {
       return Contacts.getAll((err, contacts) => {
         if (err) {
         } else {
-          console.log('CONTACTS', contacts)
           let nums = []
           let country = DeviceInfo.getDeviceCountry()
           contacts.forEach((contact) => {
