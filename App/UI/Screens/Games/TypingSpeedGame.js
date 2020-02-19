@@ -14,6 +14,8 @@ import {
   Linking,
   TextInput,
   Animated,
+  Button,
+  TouchableNativeFeedback,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -232,30 +234,44 @@ export default class TypingSpeedGame extends Component {
             <SwappingText style={Generics.questionText}>{this.state.word[2]}</SwappingText>
           </View>
         </View>
+        
+        <View style={{flexDirection:'row'}}>
+          <View style={{flex:2, justifyContent:'flex-end', flexDirection:'row'}}>
+            <TextInput
+              ref={(r) => (this.textInputRef = r)}
+              onChangeText={this.onChangeText}
+              autoCapitalize={'none'}
+              autoCorrect={false}
+              spellCheck={false}
+              secureTextEntry={false}
+              bufferDelay={0}
+              textContentType={'none'}
+              autoFocus={true}
+              style={{
+                width: _SCREEN.width / 3,
+                borderBottomWidth: 1,
+                borderColor: gameColor,
+                padding: 5,
+                textAlign: 'center',
+                fontSize: 25,
+                fontFamily: 'roboto',
+                color: colors.secondaryLight3,
+                marginBottom: 20
 
-        <TextInput
-          ref={(r) => (this.textInputRef = r)}
-          onChangeText={this.onChangeText}
-          autoCapitalize={'none'}
-          autoCorrect={false}
-          spellCheck={false}
-          secureTextEntry={false}
-          bufferDelay={0}
-          textContentType={'none'}
-          autoFocus={true}
-          style={{
-            width: _SCREEN.width / 3,
-            borderBottomWidth: 1,
-            borderColor: gameColor,
-            padding: 5,
-            textAlign: 'center',
-            fontSize: 25,
-            fontFamily: 'roboto',
-            color: colors.secondaryLight3,
-            marginBottom: 20,
-          }}
-          underlineColorAndroid={'transparent'}
-        />
+              }}
+              underlineColorAndroid={'transparent'}
+            />
+          </View>
+
+          <View style={{flex:1, justifyContent:'flex-start', flexDirection:'row'}}>
+            <TouchableOpacity 
+              style={{flex:1, flexDirection:'row'}}
+              onPress={() => this.clearText()}>
+              <Text style={{textAlign:'left', color: _APP_SETTINGS.colors.secondaryLight3, backgroundColor:gameColor, borderColor:gameColor, borderStyle:'solid', overflow:'hidden', borderRadius:5, fontWeight:'bold' , borderWidth:5, padding:5, margin:10, marginBottom: 20}}> X </Text>
+
+            </TouchableOpacity>
+          </View>
+        </View>
       </KeyboardAvoidingView>
     )
   }

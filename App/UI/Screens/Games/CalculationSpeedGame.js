@@ -97,9 +97,6 @@ export default class CalculationSpeedGame extends Component {
 
   startGame = () => {
     this.setState({ gameStatus: 'active' })
-    this.endGameTimeout = setTimeout(() => {
-      this.endGame()
-    }, TIMEOUT_MS)
     this.showNewQuestion()
   }
 
@@ -180,13 +177,20 @@ export default class CalculationSpeedGame extends Component {
   }
 
   onPress = (text) => {
-    if (text == 'del') {
-      this.setState({ text: this.state.text.slice(0, this.state.text.length - 1) })
-    } else if (text == 'enter') {
-      this.onAnswer()
-    } else {
-      this.setState({ text: this.state.text + text })
+    if(!this.endGameTimeout){
+      this.counterBarRef.start(TIMEOUT_MS)
+      this.endGameTimeout = setTimeout(() => {
+        this.endGame()
+      }, TIMEOUT_MS)
     }
+      if (text == 'del') {
+        this.setState({ text: this.state.text.slice(0, this.state.text.length - 1) })
+      } else if (text == 'enter') {
+        this.onAnswer()
+      } else {
+        this.setState({ text: this.state.text + text })
+      }
+    
   }
 
   deleteAll = () => {
@@ -202,7 +206,7 @@ export default class CalculationSpeedGame extends Component {
     return (
       <View style={Generics.container}>
         <View style={Generics.container}>
-          <CounterBar time={TIMEOUT_MS} width={_SCREEN.width * 0.8} color={gameColor} />
+          <CounterBar width={_SCREEN.width * 0.8} color={gameColor} ref={(r) => (this.counterBarRef = r)}/>
           <View
             style={{
               paddingVertical: 5,
