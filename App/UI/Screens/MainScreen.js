@@ -43,7 +43,7 @@ export default class MainScreen extends Component {
     audio.play('click.wav', 0.15)
     Share.share(
       {
-        message: translate('invitationMessage') + `\n\nGoogle Play: ${_APP_SETTINGS.playstoreURL}`,
+        message: translate('invitationMessage'),
         title: translate('invitationMessage'),
       },
       {}
@@ -52,7 +52,10 @@ export default class MainScreen extends Component {
 
   rateGame = () => {
     audio.play('click.wav', 0.15)
-    Linking.openURL(_APP_SETTINGS.playstoreLink)
+
+    Linking.openURL(
+      Platform.OS === 'android' ? _APP_SETTINGS.playstoreLink : _APP_SETTINGS.appstoreLink
+    )
   }
 
   renderBottomButton = (icon, text, onPress) => {

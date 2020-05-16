@@ -30,7 +30,7 @@ const gameColor = {
 export const _APP_SETTINGS = {
   version: '0.1.0',
   playstoreLink: 'market://details?id=com.manchmark',
-  playstoreURL: 'https://play.google.com/store/apps/details?id=com.manchmark',
+  appstoreLink: 'itms://itunes.apple.com/tr/app/manchmark/id1111111111?mt=8',
   hapticOptions: {
     enableVibrateFallback: true,
     ignoreAndroidSystemSettings: true,
