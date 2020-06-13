@@ -5,25 +5,25 @@ An ability test for human beings.
 ## Tests
 
 ### Number Memory
-* En uzun sayıyı akılda tutma
+* Remember the longest number
 
 ### Verbal Memory
-* Kısa süre içinde fazla sayıda kelimeyi akılda tutma
+* Short-term memory test
 
 ### Visual Memory
-* Kartlar arasından renkleri farklı olanları akılda tutma
+* Keep in mind the different colors among the cards
 
 ### Reaction Time
-* Ekrandaki görsel değişime en kısa sürede tepki verme
+* Responding to the visual change on the screen as soon as possible
 
 ### Calculation Speed
-* Karşılaşılan matematik işlemlerini en kısa sürede ve doğru şeklide cevaplama
+* Answer the mathematical operations encountered in the shortest time and correctly
 
 ### Touch Speed
-* En kısa sürede ekrana 100 kere dokunma
+* Touch the screen 100 times in a short time
 
 ### Typing Speed
-* Ekranda beliren kelimeleri en kısa sürede ve doğru şeklide yazma
+* Writing the words that appear on the screen as quickly and accurately as possible
 
 ## Developers
 
