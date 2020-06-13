@@ -85,38 +85,6 @@ export const nav = {
               duration: 250,
             },
           },
-          // push: {
-          //   content: {
-          //     alpha: {
-          //       from: 0,
-          //       to: 1,
-          //       duration: 250,
-          //       interpolation: 'accelerate',
-          //     },
-          //     y: {
-          //       from: _SCREEN.height * 0.15,
-          //       to: 0,
-          //       duration: 250,
-          //       interpolation: 'accelerate',
-          //     },
-          //   },
-          // },
-          // pop: {
-          //   content: {
-          //     alpha: {
-          //       from: 1,
-          //       to: 0,
-          //       duration: 250,
-          //       interpolation: 'decelerate',
-          //     },
-          //     y: {
-          //       from: 0,
-          //       to: _SCREEN.height * 0.15,
-          //       duration: 250,
-          //       interpolation: 'decelerate',
-          //     },
-          //   },
-          // },
           showModal: {
             enabled: false,
           },
